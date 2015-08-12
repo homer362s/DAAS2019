@@ -1,0 +1,44 @@
+100.7 MB after 100 x500 array
+
+deleted curves but still the same 100.7 MB 
+
+=>curve deletion does not free up any memory as it should
+
+
+
+Lesha,
+
+
+In DAAS 4.02 I've deleted all channels from "DAAS Channel List", 
+after that the memory went down to 17MB. There were 5336 channels 
+in that list. If we assume all are 1000 points long it's about 
+16.3 bytes per point or about 2 doubles per point.
+
+
+
+I ran the same experiment with the old version: DAAS 4.01 
+It got into 100MB after 16 minutes or 172 channels, so I put it 
+on pause.
+
+
+
+I left both versions of DAAS open, you can see the memory use 
+and can continue running DAAS 4.01 to see it blow up: 
+my estimate is that it would require about 3.4 GB of memory.
+
+
+
+
+At this point I am convinced that the original bug is gone. 
+
+
+
+S
+
+
+
+
+P.S. Note that there are some glitches in the acquired data on 
+DAAS 4.01: it could be some interference from the other instance 
+of DAAS running.
+

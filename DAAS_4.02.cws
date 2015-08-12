@@ -1,0 +1,1032 @@
+[Workspace Header]
+Version = 1302
+Pathname = "/c/Users/user/Desktop/DAAS_2015/DAAS_4.02.cws"
+CVI Dir = "/c/program files (x86)/national instruments/cvi2013"
+CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
+CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2013"
+CVI Pub Global Dir = "/C/ProgramData/National Instruments/CVI"
+IVI Standard Root Dir = "/C/Program Files (x86)/IVI Foundation/IVI"
+IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
+VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
+VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
+Number of Projects = 1
+Active Project = 1
+Project 0001 = "DAAS_4.02.prj"
+Drag Bar Left = 227
+Window Top = 30
+Window Left = 8
+Window Bottom = 720
+Window Right = 1272
+Maximized = False
+Maximized Children = True
+Max32 Number Of Errors = 20
+Track Include File Dependencies = True
+Prompt For Missing Includes = True
+Stop On First Error File = False
+Bring Up Err Win At Start = True
+Bring Up Err Win For Errors = False
+Save Changes Before Running = "Always"
+Save Changes Before Compiling = "Always"
+Hide Windows = False
+Break At First Statement = False
+Sort Type = "File Name"
+Number of Opened Files = 6
+Window Confinement Region Enabled = True
+MainColumnWidth = 210
+FileDateColumnWidth = 70
+FileSizeColumnWidth = 70
+
+[Project Header 0001]
+Version = 1302
+Don't Update DistKit = False
+Platform Code = 4
+Build Configuration = "Debug"
+Warn User If Debugging Release = 1
+Batch Build Release = False
+Batch Build Debug = False
+
+[File 0001]
+Path = "/c/Users/user/Desktop/DAAS_2014/curve.c"
+File Type = "CSource"
+Disk Date = 3294244424
+In Projects = ""
+Window Top = 32
+Window Left = 10
+Window Z-Order = 3
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,25,60,0,0,0,349,683,1,0,"
+
+[File 0002]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acqchan.c"
+File Type = "CSource"
+Disk Date = 3519153111
+In Projects = "1,"
+Window Top = 30
+Window Z-Order = 6
+Source Window State = "1,0,0,0,0,0,0,0,0,70,0,0,0,0,0,28,617,0,650,96,400,600,1,0,"
+
+[File 0003]
+Path = "/c/Users/user/Desktop/DAAS_2015/Source.c"
+File Type = "CSource"
+Disk Date = 3314814076
+In Projects = "1,"
+Window Top = 30
+Window Z-Order = 4
+Source Window State = "1,0,0,0,0,0,0,0,0,70,0,0,0,0,0,28,430,0,436,8,400,600,1,0,"
+
+[File 0004]
+Path = "/c/Users/user/Desktop/DAAS_2015/utilu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3519750569
+In Projects = "1,"
+Window Top = 32
+Window Left = 10
+Window Height = 349
+Window Width = 683
+Window Z-Order = 5
+
+[File 0005]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acqcrv.c"
+File Type = "CSource"
+Disk Date = 3519153251
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0006]
+Path = "/c/Users/user/Desktop/DAAS_2015/acquire.c"
+File Type = "CSource"
+Disk Date = 3312918088
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0007]
+Path = "/c/Users/user/Desktop/DAAS_2015/chanfnc.c"
+File Type = "CSource"
+Disk Date = 3267692416
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0008]
+Path = "/c/Users/user/Desktop/DAAS_2015/changen.c"
+File Type = "CSource"
+Disk Date = 3267692416
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0009]
+Path = "/c/Users/user/Desktop/DAAS_2015/Channel.c"
+File Type = "CSource"
+Disk Date = 3269328270
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0010]
+Path = "/c/Users/user/Desktop/DAAS_2015/chanops.c"
+File Type = "CSource"
+Disk Date = 3267692416
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0011]
+Path = "/c/Users/user/Desktop/DAAS_2015/curve.c"
+File Type = "CSource"
+Disk Date = 3520423821
+In Projects = "1,"
+Window Z-Order = 1
+Source Window State = "1,0,0,0,0,0,0,0,0,125,0,0,0,0,0,22,333,0,355,1,400,600,0,0,"
+
+[File 0012]
+Path = "/c/Users/user/Desktop/DAAS_2015/curveop.c"
+File Type = "CSource"
+Disk Date = 3269426920
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0013]
+Path = "/c/Users/user/Desktop/DAAS_2015/DAAS3010.c"
+File Type = "CSource"
+Disk Date = 3458917405
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0014]
+Path = "/c/Users/user/Desktop/DAAS_2015/DAS-1602.c"
+File Type = "CSource"
+Disk Date = 3300213324
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0015]
+Path = "/c/Users/user/Desktop/DAAS_2015/DAS-6036.c"
+File Type = "CSource"
+Disk Date = 3294695928
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0016]
+Path = "/c/Users/user/Desktop/DAAS_2015/DDA08.c"
+File Type = "CSource"
+Disk Date = 3281709006
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0017]
+Path = "/c/Users/user/Desktop/DAAS_2015/digitalSource.c"
+File Type = "CSource"
+Disk Date = 3281710030
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0018]
+Path = "/c/Users/user/Desktop/DAAS_2015/gpibio.c"
+File Type = "CSource"
+Disk Date = 3312908938
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0019]
+Path = "/c/Users/user/Desktop/DAAS_2015/graph.c"
+File Type = "CSource"
+Disk Date = 3519153414
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0020]
+Path = "/c/Users/user/Desktop/DAAS_2015/HP33120A.c"
+File Type = "CSource"
+Disk Date = 3337861576
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0021]
+Path = "/c/Users/user/Desktop/DAAS_2015/HP4156.c"
+File Type = "CSource"
+Disk Date = 3270129860
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0022]
+Path = "/c/Users/user/Desktop/DAAS_2015/itc4.c"
+File Type = "CSource"
+Disk Date = 3315329754
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0023]
+Path = "/c/Users/user/Desktop/DAAS_2015/K2000.c"
+File Type = "CSource"
+Disk Date = 3280949738
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0024]
+Path = "/c/Users/user/Desktop/DAAS_2015/K213.c"
+File Type = "CSource"
+Disk Date = 3270120288
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0025]
+Path = "/c/Users/user/Desktop/DAAS_2015/K236.c"
+File Type = "CSource"
+Disk Date = 3270037488
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0026]
+Path = "/c/Users/user/Desktop/DAAS_2015/List.c"
+File Type = "CSource"
+Disk Date = 3268984360
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0027]
+Path = "/c/Users/user/Desktop/DAAS_2015/LS335.c"
+File Type = "CSource"
+Disk Date = 3458930758
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0028]
+Path = "/c/Users/user/Desktop/DAAS_2015/LS340.c"
+File Type = "CSource"
+Disk Date = 3270037370
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0029]
+Path = "/c/Users/user/Desktop/DAAS_2015/MCCdevices.c"
+File Type = "CSource"
+Disk Date = 3314642090
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0030]
+Path = "/c/Users/user/Desktop/DAAS_2015/rs232.c"
+File Type = "CSource"
+Disk Date = 3314820646
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0031]
+Path = "/c/Users/user/Desktop/DAAS_2015/Sr830.c"
+File Type = "CSource"
+Disk Date = 3314034862
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0032]
+Path = "/c/Users/user/Desktop/DAAS_2015/Sr844.c"
+File Type = "CSource"
+Disk Date = 3270037356
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0033]
+Path = "/c/Users/user/Desktop/DAAS_2015/USB-PMD1208LS.c"
+File Type = "CSource"
+Disk Date = 3314215016
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0034]
+Path = "/c/Users/user/Desktop/DAAS_2015/util.c"
+File Type = "CSource"
+Disk Date = 3519240680
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0035]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acqchan.h"
+File Type = "Include"
+Disk Date = 3519153505
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0036]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acqchanu.h"
+File Type = "Include"
+Disk Date = 3266311976
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0037]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acqcrv.h"
+File Type = "Include"
+Disk Date = 3269341664
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0038]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acqcrvu.h"
+File Type = "Include"
+Disk Date = 3266310658
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0039]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acquire.h"
+File Type = "Include"
+Disk Date = 3265035690
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0040]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acquireu.h"
+File Type = "Include"
+Disk Date = 3312840766
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0041]
+Path = "/c/Users/user/Desktop/DAAS_2015/cbw.h"
+File Type = "Include"
+Disk Date = 3243595296
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0042]
+Path = "/c/Users/user/Desktop/DAAS_2015/Chanfnc.h"
+File Type = "Include"
+Disk Date = 2880836496
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0043]
+Path = "/c/Users/user/Desktop/DAAS_2015/Chanfncu.h"
+File Type = "Include"
+Disk Date = 2880909332
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0044]
+Path = "/c/Users/user/Desktop/DAAS_2015/Changen.h"
+File Type = "Include"
+Disk Date = 2880809428
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0045]
+Path = "/c/Users/user/Desktop/DAAS_2015/Changenu.h"
+File Type = "Include"
+Disk Date = 2880823462
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0046]
+Path = "/c/Users/user/Desktop/DAAS_2015/Channel.h"
+File Type = "Include"
+Disk Date = 2892930392
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0047]
+Path = "/c/Users/user/Desktop/DAAS_2015/Channelu.h"
+File Type = "Include"
+Disk Date = 2892912820
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0048]
+Path = "/c/Users/user/Desktop/DAAS_2015/Chanops.h"
+File Type = "Include"
+Disk Date = 2880912908
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0049]
+Path = "/c/Users/user/Desktop/DAAS_2015/Chanopsu.h"
+File Type = "Include"
+Disk Date = 2880916522
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0050]
+Path = "/c/Users/user/Desktop/DAAS_2015/Curve.h"
+File Type = "Include"
+Disk Date = 3269426682
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0051]
+Path = "/c/Users/user/Desktop/DAAS_2015/Curveop.h"
+File Type = "Include"
+Disk Date = 2881710418
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0052]
+Path = "/c/Users/user/Desktop/DAAS_2015/Curveopu.h"
+File Type = "Include"
+Disk Date = 2882979634
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0053]
+Path = "/c/Users/user/Desktop/DAAS_2015/Curveu.h"
+File Type = "Include"
+Disk Date = 3415211802
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0054]
+Path = "/c/Users/user/Desktop/DAAS_2015/DAS-1602.h"
+File Type = "Include"
+Disk Date = 3268999362
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0055]
+Path = "/c/Users/user/Desktop/DAAS_2015/DAS-1602u.h"
+File Type = "Include"
+Disk Date = 3269434726
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0056]
+Path = "/c/Users/user/Desktop/DAAS_2015/DAS-6036.h"
+File Type = "Include"
+Disk Date = 3268636808
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0057]
+Path = "/c/Users/user/Desktop/DAAS_2015/DAS-6036u.h"
+File Type = "Include"
+Disk Date = 3294700834
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0058]
+Path = "/c/Users/user/Desktop/DAAS_2015/DDA08.h"
+File Type = "Include"
+Disk Date = 3269006772
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0059]
+Path = "/c/Users/user/Desktop/DAAS_2015/DDA08u.h"
+File Type = "Include"
+Disk Date = 3269432066
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0060]
+Path = "/c/Users/user/Desktop/DAAS_2015/digitalSource.h"
+File Type = "Include"
+Disk Date = 3294669918
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0061]
+Path = "/c/Users/user/Desktop/DAAS_2015/digitalSourceu.h"
+File Type = "Include"
+Disk Date = 3313169172
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0062]
+Path = "/c/Users/user/Desktop/DAAS_2015/gpibio.h"
+File Type = "Include"
+Disk Date = 3267609328
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0063]
+Path = "/c/Users/user/Desktop/DAAS_2015/Gpibiou.h"
+File Type = "Include"
+Disk Date = 3266309828
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0064]
+Path = "/c/Users/user/Desktop/DAAS_2015/Graph.h"
+File Type = "Include"
+Disk Date = 3269334042
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0065]
+Path = "/c/Users/user/Desktop/DAAS_2015/Graphu.h"
+File Type = "Include"
+Disk Date = 3313434834
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0066]
+Path = "/c/Users/user/Desktop/DAAS_2015/HP33120A.h"
+File Type = "Include"
+Disk Date = 3267001902
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0067]
+Path = "/c/Users/user/Desktop/DAAS_2015/HP33120Au.h"
+File Type = "Include"
+Disk Date = 3267007632
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0068]
+Path = "/c/Users/user/Desktop/DAAS_2015/HP4156.h"
+File Type = "Include"
+Disk Date = 3269436150
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0069]
+Path = "/c/Users/user/Desktop/DAAS_2015/HP4156u.h"
+File Type = "Include"
+Disk Date = 3270020670
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0070]
+Path = "/c/Users/user/Desktop/DAAS_2015/itc4.h"
+File Type = "Include"
+Disk Date = 3268119614
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0071]
+Path = "/c/Users/user/Desktop/DAAS_2015/ITC4u.h"
+File Type = "Include"
+Disk Date = 3315322734
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0072]
+Path = "/c/Users/user/Desktop/DAAS_2015/K2000.h"
+File Type = "Include"
+Disk Date = 2888364138
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0073]
+Path = "/c/Users/user/Desktop/DAAS_2015/K2000u.h"
+File Type = "Include"
+Disk Date = 3269324230
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0074]
+Path = "/c/Users/user/Desktop/DAAS_2015/K213.h"
+File Type = "Include"
+Disk Date = 2893284544
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0075]
+Path = "/c/Users/user/Desktop/DAAS_2015/K213u.h"
+File Type = "Include"
+Disk Date = 3267617348
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0076]
+Path = "/c/Users/user/Desktop/DAAS_2015/K236.h"
+File Type = "Include"
+Disk Date = 2882747764
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0077]
+Path = "/c/Users/user/Desktop/DAAS_2015/K236u.h"
+File Type = "Include"
+Disk Date = 3269324308
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0078]
+Path = "/c/Users/user/Desktop/DAAS_2015/K2400.h"
+File Type = "Include"
+Disk Date = 0
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0079]
+Path = "/c/Users/user/Desktop/DAAS_2015/K2400u.h"
+File Type = "Include"
+Disk Date = 0
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0080]
+Path = "/c/Users/user/Desktop/DAAS_2015/List.h"
+File Type = "Include"
+Disk Date = 2881009834
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0081]
+Path = "/c/Users/user/Desktop/DAAS_2015/Listu.h"
+File Type = "Include"
+Disk Date = 2880755068
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0082]
+Path = "/c/Users/user/Desktop/DAAS_2015/LS335.h"
+File Type = "Include"
+Disk Date = 3458064066
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0083]
+Path = "/c/Users/user/Desktop/DAAS_2015/LS335u.h"
+File Type = "Include"
+Disk Date = 3458664246
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0084]
+Path = "/c/Users/user/Desktop/DAAS_2015/LS340.h"
+File Type = "Include"
+Disk Date = 3267182646
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0085]
+Path = "/c/Users/user/Desktop/DAAS_2015/LS340u.h"
+File Type = "Include"
+Disk Date = 3267525640
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0086]
+Path = "/c/Users/user/Desktop/DAAS_2015/MCCdevices.h"
+File Type = "Include"
+Disk Date = 3314036052
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0087]
+Path = "/c/Users/user/Desktop/DAAS_2015/rs232u.h"
+File Type = "Include"
+Disk Date = 3268134864
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0088]
+Path = "/c/Users/user/Desktop/DAAS_2015/rs232util.h"
+File Type = "Include"
+Disk Date = 3269948512
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0089]
+Path = "/c/Users/user/Desktop/DAAS_2015/RUO_HIGH.H"
+File Type = "Include"
+Disk Date = 2894393506
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0090]
+Path = "/c/Users/user/Desktop/DAAS_2015/RUO_LOW.H"
+File Type = "Include"
+Disk Date = 2894392688
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0091]
+Path = "/c/Users/user/Desktop/DAAS_2015/Source.h"
+File Type = "Include"
+Disk Date = 3270134494
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0092]
+Path = "/c/Users/user/Desktop/DAAS_2015/sourceu.h"
+File Type = "Include"
+Disk Date = 3270114430
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0093]
+Path = "/c/Users/user/Desktop/DAAS_2015/Sr830.h"
+File Type = "Include"
+Disk Date = 2882564670
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0094]
+Path = "/c/Users/user/Desktop/DAAS_2015/Sr830u.h"
+File Type = "Include"
+Disk Date = 3274368970
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0095]
+Path = "/c/Users/user/Desktop/DAAS_2015/Sr844.h"
+File Type = "Include"
+Disk Date = 3265114772
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0096]
+Path = "/c/Users/user/Desktop/DAAS_2015/sr844u.h"
+File Type = "Include"
+Disk Date = 3269974452
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0097]
+Path = "/c/Users/user/Desktop/DAAS_2015/USB-PMD1208LS.h"
+File Type = "Include"
+Disk Date = 3269611306
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0098]
+Path = "/c/Users/user/Desktop/DAAS_2015/Util.h"
+File Type = "Include"
+Disk Date = 3269248682
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0099]
+Path = "/c/Users/user/Desktop/DAAS_2015/utilu.h"
+File Type = "Include"
+Disk Date = 3519750569
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0100]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acqchanu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3266311976
+In Projects = "1,"
+
+[File 0101]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acqcrvu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3270041366
+In Projects = "1,"
+
+[File 0102]
+Path = "/c/Users/user/Desktop/DAAS_2015/Acquireu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3312918434
+In Projects = "1,"
+
+[File 0103]
+Path = "/c/Users/user/Desktop/DAAS_2015/Chanfncu.uir"
+File Type = "User Interface Resource"
+Disk Date = 2880910120
+In Projects = "1,"
+
+[File 0104]
+Path = "/c/Users/user/Desktop/DAAS_2015/Changenu.uir"
+File Type = "User Interface Resource"
+Disk Date = 2880823722
+In Projects = "1,"
+
+[File 0105]
+Path = "/c/Users/user/Desktop/DAAS_2015/Channelu.uir"
+File Type = "User Interface Resource"
+Disk Date = 2892912820
+In Projects = "1,"
+
+[File 0106]
+Path = "/c/Users/user/Desktop/DAAS_2015/Chanopsu.uir"
+File Type = "User Interface Resource"
+Disk Date = 2880916522
+In Projects = "1,"
+
+[File 0107]
+Path = "/c/Users/user/Desktop/DAAS_2015/Curveopu.uir"
+File Type = "User Interface Resource"
+Disk Date = 2882979634
+In Projects = "1,"
+
+[File 0108]
+Path = "/c/Users/user/Desktop/DAAS_2015/Curveu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3415211800
+In Projects = "1,"
+
+[File 0109]
+Path = "/c/Users/user/Desktop/DAAS_2015/DAS-1602u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3269434726
+In Projects = "1,"
+
+[File 0110]
+Path = "/c/Users/user/Desktop/DAAS_2015/DAS-6036u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3294700834
+In Projects = "1,"
+
+[File 0111]
+Path = "/c/Users/user/Desktop/DAAS_2015/DDA08u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3269432066
+In Projects = "1,"
+
+[File 0112]
+Path = "/c/Users/user/Desktop/DAAS_2015/digitalSourceu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3313169172
+In Projects = "1,"
+
+[File 0113]
+Path = "/c/Users/user/Desktop/DAAS_2015/Gpibiou.uir"
+File Type = "User Interface Resource"
+Disk Date = 3266310022
+In Projects = "1,"
+
+[File 0114]
+Path = "/c/Users/user/Desktop/DAAS_2015/Graphu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3519240680
+In Projects = "1,"
+
+[File 0115]
+Path = "/c/Users/user/Desktop/DAAS_2015/HP33120Au.uir"
+File Type = "User Interface Resource"
+Disk Date = 3267075348
+In Projects = "1,"
+
+[File 0116]
+Path = "/c/Users/user/Desktop/DAAS_2015/HP4156u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3270026188
+In Projects = "1,"
+
+[File 0117]
+Path = "/c/Users/user/Desktop/DAAS_2015/ITC4u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3315329018
+In Projects = "1,"
+
+[File 0118]
+Path = "/c/Users/user/Desktop/DAAS_2015/K2000u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3269324230
+In Projects = "1,"
+
+[File 0119]
+Path = "/c/Users/user/Desktop/DAAS_2015/K213u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3269355298
+In Projects = "1,"
+
+[File 0120]
+Path = "/c/Users/user/Desktop/DAAS_2015/K236u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3269324308
+In Projects = "1,"
+
+[File 0121]
+Path = "/c/Users/user/Desktop/DAAS_2015/Listu.uir"
+File Type = "User Interface Resource"
+Disk Date = 2881788336
+In Projects = "1,"
+
+[File 0122]
+Path = "/c/Users/user/Desktop/DAAS_2015/LS335u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3458664246
+In Projects = "1,"
+
+[File 0123]
+Path = "/c/Users/user/Desktop/DAAS_2015/rs232u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3268134864
+In Projects = "1,"
+
+[File 0124]
+Path = "/c/Users/user/Desktop/DAAS_2015/sourceu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3281368224
+In Projects = "1,"
+
+[File 0125]
+Path = "/c/Users/user/Desktop/DAAS_2015/Sr830u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3274368970
+In Projects = "1,"
+
+[File 0126]
+Path = "/c/Users/user/Desktop/DAAS_2015/sr844u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3269974452
+In Projects = "1,"
+
+[File 0127]
+Path = "/c/Users/user/Desktop/DAAS_2015/USB-1208LSu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3313169172
+In Projects = "1,"
+
+[File 0128]
+Path = "/c/Users/Public/Documents/Measurement Computing/DAQ/C/cbw32.lib"
+File Type = "Library"
+Disk Date = 3468325902
+In Projects = "1,"
+
+[File 0129]
+Path = "/c/Users/user/Desktop/DAAS/curve.c"
+File Type = "CSource"
+Disk Date = 3415218846
+In Projects = ""
+Window Top = 62
+Window Left = 26
+Window Z-Order = 2
+Source Window State = "1,271,310,271,0,18,0,0,3,80,0,0,0,0,0,25,277,0,310,18,349,683,1,0,"
+
+[Tab Order]
+Tab 0001 = "/c/Users/user/Desktop/DAAS_2015/Acqchan.c"
+Tab 0002 = "/c/Users/user/Desktop/DAAS_2015/utilu.uir"
+Tab 0003 = "/c/Users/user/Desktop/DAAS_2015/Source.c"
+Tab 0004 = "/c/Users/user/Desktop/DAAS_2014/curve.c"
+Tab 0005 = "/c/Users/user/Desktop/DAAS/curve.c"
+Tab 0006 = "/c/Users/user/Desktop/DAAS_2015/curve.c"
+
+[Default Build Config 0001 Debug]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Default Build Config 0001 Release]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Default Build Config 0001 Debug64]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Default Build Config 0001 Release64]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Batch Build = False
+Profile = "Disabled"
+Debugging Level = "Standard"
+Execution Trace = "Disabled"
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+External Process Path = ""
+
+[Build Dependencies 0001]
+Number of Dependencies = 0
+
+[Build Options 0001]
+Generate Browse Info = True
+Enable Uninitialized Locals Runtime Warning = True
+Execution Trace = "Disabled"
+Profile = "Disabled"
+Debugging Level = "Standard"
+Break On Library Errors = True
+Break On First Chance Exceptions = False
+
+[Execution Target 0001]
+Execution Target Address = "Local desktop computer"
+Execution Target Port = 0
+Execution Target Type = 0
+
+[SCC Options 0001]
+Use global settings = True
+SCC Provider = ""
+SCC Project = ""
+Local Path = ""
+Auxiliary Path = ""
+Perform Same Action For .h File As For .uir File = "Ask"
+Perform Same Action For .cds File As For .prj File = "Ask"
+Username = ""
+Comment = ""
+Use Default Username = False
+Use Default Comment = False
+Suppress CVI Error Messages = False
+Always show confirmation dialog = True
+
+[DLL Debugging Support 0001]
+External Process Path = ""
+
+[Command Line Args 0001]
+Command Line Args = ""
+Working Directory = ""
+Environment Options = ""
+
