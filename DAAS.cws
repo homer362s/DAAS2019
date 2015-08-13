@@ -12,8 +12,6 @@ VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "DAAS.prj"
-Project 0001 Folder Source Files Collapsed = True
-Project 0001 FolderId 0 Collapsed = True
 Project 0001 Folder Include Files Collapsed = True
 Project 0001 FolderId 1 Collapsed = True
 Project 0001 Folder User Interface Files Collapsed = True
@@ -36,7 +34,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 0
+Number of Opened Files = 3
 Window Confinement Region Enabled = True
 MainColumnWidth = 263
 FileDateColumnWidth = 70
@@ -46,7 +44,7 @@ FileSizeColumnWidth = 70
 Version = 1302
 Don't Update DistKit = False
 Platform Code = 4
-Build Configuration = "Release"
+Build Configuration = "Debug"
 Warn User If Debugging Release = 1
 Batch Build Release = False
 Batch Build Debug = False
@@ -231,7 +229,10 @@ Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 62
+Window Left = 26
+Window Z-Order = 2
+Source Window State = "1,31,31,31,16,25,25,0,3,80,0,0,0,0,0,20,6,0,31,16,284,683,1,0,"
 
 [File 0027]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Source.c"
@@ -273,7 +274,10 @@ Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchan.h"
 File Type = "Include"
 Disk Date = 3522269161
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 32
+Window Left = 10
+Window Z-Order = 3
+Source Window State = "1,6,6,6,16,26,26,0,3,80,0,0,0,0,0,21,0,0,6,16,297,683,1,0,"
 
 [File 0033]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchanu.h"
@@ -581,7 +585,8 @@ Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/List.h"
 File Type = "Include"
 Disk Date = 3522269161
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Z-Order = 1
+Source Window State = "1,21,21,21,4,9,9,0,0,160,0,0,0,0,0,32,4,0,29,89,400,600,0,0,"
 
 [File 0077]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Listu.h"
@@ -899,7 +904,7 @@ In Projects = "1,"
 [File 0126]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAAS_main.c"
 File Type = "CSource"
-Disk Date = 3522269170
+Disk Date = 3522282726
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
@@ -909,6 +914,38 @@ File Type = "Include"
 Disk Date = 3514311340
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0128]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DEMO-BOARD.c"
+File Type = "CSource"
+Disk Date = 3522102549
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0129]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DEMO-BOARD.h"
+File Type = "Include"
+Disk Date = 3522100693
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0130]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DEMO-BOARDu.h"
+File Type = "Include"
+Disk Date = 3522101451
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0131]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DEMO-BOARDu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522101451
+In Projects = "1,"
+
+[Tab Order]
+Tab 0001 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchan.h"
+Tab 0002 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232.c"
+Tab 0003 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/List.h"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
