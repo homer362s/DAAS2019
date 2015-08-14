@@ -206,6 +206,8 @@ void utilG_Init (void (*DiscardPanels)(void))
     utilG.DiscardPanels = DiscardPanels;
 
 	SetPanelAttribute (utilG.p, ATTR_WINDOW_ZOOM, VAL_MAXIMIZE);
+	// Commenting-out next line causes the minimization bug
+    SetPanelAttribute (utilG.p, ATTR_MOVABLE, FALSE);
     DisplayPanel (utilG.p);
 	
 	GetCtrlAttribute(utilG.p, BG_GRAPHS, ATTR_WIDTH, &grw);
