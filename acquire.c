@@ -51,6 +51,7 @@ void acquire_DataFileMakePath (void);
 
 
 int  AcqSetupCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+void exp_StartDaq();
 
 
 
@@ -115,11 +116,11 @@ int exp_Begin (void)
     //updateGraphSource();
 	if (!acqchanlist_AllocMemory()) return FALSE;
 
-    utilG.acq.status = ACQ_BUSY;
 
     utilG.acq.pt = 0;
     expG.InitExp();
     acqchanlist_InitDataFile(dataFile.path);
+    exp_StartDaq();
 
     return TRUE;
 }
@@ -269,7 +270,7 @@ void ExpStatusCallback(int menubar, int menuItem, void *callbackData, int panel)
             utilG.acq.status = ACQ_PAUSED;
             break;
         case ACQMENUS_EXP_CONTINUE:
-            utilG.acq.status = ACQ_BUSY;
+            exp_StartDaq();
             break;
         case ACQMENUS_EXP_END:
             utilG.acq.status = ACQ_TERMINATE;
@@ -414,3 +415,62 @@ int CVICALLBACK BeepCallback (int panel, int control, int event, void *callbackD
 	return 0;
 }
 
+
+//void acq_TimerInit(){
+//  ACQSETUP, ACQSETUP_ACQ_TIMER    
+//}
+
+//void acq_TimerStart(){
+//    
+//}
+
+double acqTimerGetInterval(){
+    double delay;
+    int err = GetCtrlAttribute (acqG.p.setup, ACQSETUP_ACQ_TIMER, ATTR_INTERVAL, &delay);
+    return delay;
+}
+
+void acqTimerReset( ){
+    
+    // If the timer has already started, setting ATTR_INTERVAL resets the timer.    
+    int err = ResetTimer(acqG.p.setup, ACQSETUP_ACQ_TIMER);    
+}
+
+
+void acqTimerSetInterval( double delay_sec ){
+    double curr_delay = acqTimerGetInterval();
+    
+    // we will set the interval only if it differs by the timer resolution ~1ms
+    if( fabs(curr_delay - delay_sec) < 5e-4) return;
+    
+    // If the timer has already started, setting ATTR_INTERVAL resets the timer.    
+    int err = SetCtrlAttribute(acqG.p.setup, ACQSETUP_ACQ_TIMER, ATTR_INTERVAL, delay_sec);    
+}
+
+extern void exp_StartDaq(){
+    // first point will be collected in 10ms
+    acqTimerReset();
+    acqTimerSetInterval(0.01); 
+    utilG.acq.status = ACQ_BUSY;
+}
+
+
+int acquire_Point(){
+    expG.DoExp();
+    acquire_UpdateDataInfoPanel();
+    util_IncAcqPt();
+    return 0;
+}
+
+
+int CVICALLBACK acq_timerCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2){
+    
+    if( utilG.acq.status == ACQ_BUSY ){
+      acquire_Point();   
+    }
+    if (utilG.acq.pt == utilG.acq.nPts)
+        utilG.acq.status = ACQ_TERMINATE;
+   
+    
+    return 0;
+}

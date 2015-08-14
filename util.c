@@ -10,6 +10,7 @@
 
 #include "util.h"
 #include "utilu.h"
+#include "Acquire.h" // we need a timer
 
 #define TRUE 1
 #define FALSE 0
@@ -176,9 +177,11 @@ void util_OutofMemory(char *header)
 
 void util_Delay (double sec)
 {
-    double time;
-    time = Timer();
-    while ((Timer()-time) < sec) ProcessSystemEvents();
+//    double time;
+//    time = Timer();
+//    while ((Timer()-time) < sec) ProcessSystemEvents();
+    // set next timer callback delay
+    acqTimerSetInterval(sec);    
 }
 
 int util_TakingData (void)

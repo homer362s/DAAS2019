@@ -1,6 +1,5 @@
 /**************************************************************************/
 /* LabWindows/CVI User Interface Resource (UIR) Include File              */
-/* Copyright (c) National Instruments 2008. All Rights Reserved.          */
 /*                                                                        */
 /* WARNING: Do not add to, delete from, or otherwise modify the contents  */
 /*          of this include file.                                         */
@@ -15,30 +14,36 @@
      /* Panels and Controls: */
 
 #define  ACQINFO                          1       /* callback function: RemoveAcqInfoCallback */
-#define  ACQINFO_PTS2GO                   2
-#define  ACQINFO_TIMEPERPT                3
-#define  ACQINFO_TIME2GO                  4
-#define  ACQINFO_ELAPSEDTIME              5
+#define  ACQINFO_PTS2GO                   2       /* control type: numeric, callback function: (none) */
+#define  ACQINFO_TIMEPERPT                3       /* control type: numeric, callback function: (none) */
+#define  ACQINFO_TIME2GO                  4       /* control type: numeric, callback function: (none) */
+#define  ACQINFO_ELAPSEDTIME              5       /* control type: numeric, callback function: (none) */
 
 #define  ACQSETUP                         2       /* callback function: util_HidePanelCallback */
-#define  ACQSETUP_STATUS                  2
-#define  ACQSETUP_FILENAME                3       /* callback function: DataFileControlCallback */
-#define  ACQSETUP_FILEEXT                 4       /* callback function: DataFileControlCallback */
-#define  ACQSETUP_FILEPATH                5
-#define  ACQSETUP_GEN_POINTS              6       /* callback function: GenExpControlCallback */
-#define  ACQSETUP_GEN_DELAY               7       /* callback function: GenExpControlCallback */
-#define  ACQSETUP_GEN_TIME                8
-#define  ACQSETUP_SRC_LIST                9
-#define  ACQSETUP_SRC_POINTS              10
-#define  ACQSETUP_SRC_TIME                11
-#define  ACQSETUP_BEEP                    12      /* callback function: BeepCallback */
-#define  ACQSETUP_EXPTITLE                13
-#define  ACQSETUP_SRC_MOVEUP              14
-#define  ACQSETUP_SRC_MOVEDOWN            15
-#define  ACQSETUP_SRC_REMOVE              16
-#define  ACQSETUP_SAVEAS                  17      /* callback function: DataFileSaveAsCallback */
-#define  ACQSETUP_DECORATION              18
-#define  ACQSETUP_BOX_1                   19
+#define  ACQSETUP_STATUS                  2       /* control type: string, callback function: (none) */
+#define  ACQSETUP_FILENAME                3       /* control type: string, callback function: DataFileControlCallback */
+#define  ACQSETUP_FILEEXT                 4       /* control type: numeric, callback function: DataFileControlCallback */
+#define  ACQSETUP_FILEPATH                5       /* control type: string, callback function: (none) */
+#define  ACQSETUP_GEN_POINTS              6       /* control type: numeric, callback function: GenExpControlCallback */
+#define  ACQSETUP_GEN_DELAY               7       /* control type: numeric, callback function: GenExpControlCallback */
+#define  ACQSETUP_GEN_TIME                8       /* control type: numeric, callback function: (none) */
+#define  ACQSETUP_SRC_LIST                9       /* control type: listBox, callback function: (none) */
+#define  ACQSETUP_SRC_POINTS              10      /* control type: numeric, callback function: (none) */
+#define  ACQSETUP_SRC_TIME                11      /* control type: numeric, callback function: (none) */
+#define  ACQSETUP_BEEP                    12      /* control type: textButton, callback function: BeepCallback */
+#define  ACQSETUP_EXPTITLE                13      /* control type: textMsg, callback function: (none) */
+#define  ACQSETUP_SRC_MOVEUP              14      /* control type: command, callback function: (none) */
+#define  ACQSETUP_SRC_MOVEDOWN            15      /* control type: command, callback function: (none) */
+#define  ACQSETUP_SRC_REMOVE              16      /* control type: command, callback function: (none) */
+#define  ACQSETUP_SAVEAS                  17      /* control type: command, callback function: DataFileSaveAsCallback */
+#define  ACQSETUP_DECORATION              18      /* control type: deco, callback function: (none) */
+#define  ACQSETUP_BOX_1                   19      /* control type: deco, callback function: (none) */
+#define  ACQSETUP_ACQ_TIMER               20      /* control type: timer, callback function: acq_timerCallback */
+
+
+     /* Control Arrays: */
+
+          /* (no control arrays in the resource file) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -71,6 +76,7 @@
 
      /* Callback Prototypes: */
 
+int  CVICALLBACK acq_timerCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK AcqInfoCallback(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK BeepCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK DataFileControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

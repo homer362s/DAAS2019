@@ -194,7 +194,7 @@ void exp_UpdateBiasLevels (void)
 
     for (src_index = 0; src_index <= sourceL.sources.nItems; src_index++) {
         if (src_index == sourceL.sources.nItems) {
-            utilG.acq.status = ACQ_TERMINATE;
+            utilG.acq.status = ACQ_TERMINATE;   //TODO: what is this for?
             break;
         }
 

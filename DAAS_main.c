@@ -78,7 +78,7 @@ main (void)
 	demo_board_Init();
 	init_MCCdevices();
 /***********************************************************************************/    
-    SetIdleEventRate (0);
+    SetIdleEventRate (40);  // 40ms time, 25Hz rate
     InstallMainCallback (AcquireData, 0, 1);
 	
 	utilG.err = 0;
@@ -92,18 +92,10 @@ int AcquireData (int panel, int control, int event, void *callbackData, int even
 
         devPanel_UpdateReadings();
 
-        if (utilG.acq.pt == utilG.acq.nPts)
-            utilG.acq.status = ACQ_TERMINATE;
-
         switch (utilG.acq.status) {
             case ACQ_BEGIN:
                 if (!exp_Begin()) utilG.acq.status = ACQ_STOPPED;
                 acquire_UpdatePanel();
-                break;
-            case ACQ_BUSY:
-                expG.DoExp();
-                acquire_UpdateDataInfoPanel();
-                util_IncAcqPt();
                 break;
             case ACQ_TERMINATE:
                 acqchanlist_CloseFile();

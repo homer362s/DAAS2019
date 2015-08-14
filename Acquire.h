@@ -19,4 +19,7 @@ extern void acquire_UpdatePanelExp (void);
 extern void acquire_UpdateDataInfoPanel (void);
 extern void acquire_IncDataFileExt(void);
 
+extern void acqTimerSetInterval(double delay);
+extern void acqTimerReset( );
+
 extern int exp_Begin(void);

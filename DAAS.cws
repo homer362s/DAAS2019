@@ -12,15 +12,13 @@ VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
 Project 0001 = "DAAS.prj"
-Project 0001 Folder Include Files Collapsed = True
-Project 0001 FolderId 1 Collapsed = True
-Project 0001 Folder User Interface Files Collapsed = True
-Project 0001 FolderId 2 Collapsed = True
+Project 0001 Folder Source Files Collapsed = True
+Project 0001 FolderId 0 Collapsed = True
 Drag Bar Left = 280
-Window Top = 65
-Window Left = 26
-Window Bottom = 567
-Window Right = 816
+Window Top = 38
+Window Left = 197
+Window Bottom = 1169
+Window Right = 1236
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -34,7 +32,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 3
+Number of Opened Files = 13
 Window Confinement Region Enabled = True
 MainColumnWidth = 263
 FileDateColumnWidth = 70
@@ -50,902 +48,1002 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/acquire.c"
+File Type = "CSource"
+Disk Date = 3522388209
+In Projects = "1,"
+Window Top = 272
+Window Left = 138
+Window Z-Order = 4
+Source Window State = "1,443,443,443,26,31,31,0,0,80,0,0,0,0,0,25,401,0,446,89,349,683,1,0,"
+
+[File 0002]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/gpibio.c"
+File Type = "CSource"
+Disk Date = 3522269170
+In Projects = "1,"
+Window Top = 152
+Window Left = 74
+Window Z-Order = 13
+Source Window State = "1,712,712,712,5,21,5,0,0,80,0,0,0,0,0,25,701,30,713,89,349,683,1,0,"
+
+[File 0003]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/util.c"
+File Type = "CSource"
+Disk Date = 3522385614
+In Projects = "1,"
+Window Top = 122
+Window Left = 58
+Window Z-Order = 6
+Source Window State = "1,182,182,182,28,29,28,0,0,80,0,0,0,0,0,25,171,0,183,4,349,683,1,0,"
+
+[File 0004]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Util.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Window Top = 92
+Window Left = 42
+Window Z-Order = 9
+Source Window State = "1,18,18,18,4,9,9,0,0,80,0,0,0,0,0,25,6,0,6,27,349,683,1,0,"
+
+[File 0005]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acquireu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522383646
+In Projects = "1,"
+Window Top = 242
+Window Left = 122
+Window Height = 349
+Window Width = 683
+Window Z-Order = 11
+
+[File 0006]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAAS_main.c"
+File Type = "CSource"
+Disk Date = 3522389976
+In Projects = "1,"
+Window Top = 62
+Window Left = 18
+Window Z-Order = 2
+Source Window State = "1,94,96,94,0,0,0,0,0,80,0,0,0,0,0,25,83,0,94,0,349,683,1,0,"
+
+[File 0007]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchan.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 662
+Window Left = 346
+Window Z-Order = 7
+Source Window State = "1,373,373,373,5,35,35,0,0,80,0,0,0,0,0,25,663,0,675,21,349,683,1,0,"
 
-[File 0002]
+[File 0008]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DEMO-BOARD.c"
+File Type = "CSource"
+Disk Date = 3522356573
+In Projects = "1,"
+Window Top = 542
+Window Left = 282
+Source Window State = "1,149,149,149,89,99,89,0,0,80,0,0,0,0,0,25,0,0,9,90,349,683,1,0,"
+
+[File 0009]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/MCCdevices.c"
+File Type = "CSource"
+Disk Date = 3522269170
+In Projects = "1,"
+Window Top = 92
+Window Left = 42
+Window Z-Order = 12
+Source Window State = "1,120,120,120,5,16,16,0,0,80,0,0,0,0,0,25,18,0,58,4,349,683,1,0,"
+
+[File 0010]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Source.c"
+File Type = "CSource"
+Disk Date = 3522390003
+In Projects = "1,"
+Window Top = 182
+Window Left = 90
+Window Z-Order = 1
+Source Window State = "1,189,189,189,5,25,5,0,0,160,0,0,0,0,0,81,177,0,196,73,349,683,1,0,"
+
+[File 0011]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acquire.h"
+File Type = "Include"
+Disk Date = 3522385427
+In Projects = "1,"
+Window Top = 212
+Window Left = 106
+Window Z-Order = 10
+Source Window State = "1,21,21,21,12,31,31,0,0,80,0,0,0,0,0,25,0,0,21,53,349,683,1,0,"
+
+[File 0012]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqcrv.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0003]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/acquire.c"
-File Type = "CSource"
-Disk Date = 3522269170
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0004]
+[File 0013]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/chanfnc.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0005]
+[File 0014]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/changen.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0006]
+[File 0015]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Channel.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 92
+Window Left = 42
+Window Z-Order = 8
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,25,430,0,468,8,349,683,1,0,"
 
-[File 0007]
+[File 0016]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/chanops.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0008]
+[File 0017]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/curve.c"
 File Type = "CSource"
-Disk Date = 0
+Disk Date = 3519240857
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0009]
+[File 0018]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/curveop.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0010]
+[File 0019]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-1602.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 452
+Window Left = 234
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,349,683,0,0,"
 
-[File 0011]
+[File 0020]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-6036.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 482
+Window Left = 250
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,349,683,0,0,"
 
-[File 0012]
+[File 0021]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DDA08.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 512
+Window Left = 266
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,349,683,0,0,"
 
-[File 0013]
+[File 0022]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/digitalSource.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0014]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/gpibio.c"
-File Type = "CSource"
-Disk Date = 3522269170
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0015]
+[File 0023]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/graph.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0016]
+[File 0024]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP33120A.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0017]
+[File 0025]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP4156.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0018]
+[File 0026]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/itc4.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0019]
+[File 0027]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2000.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0020]
+[File 0028]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K213.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 692
+Window Left = 362
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,349,683,0,0,"
 
-[File 0021]
+[File 0029]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K236.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 152
+Window Left = 74
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,25,645,0,685,17,349,683,1,0,"
 
-[File 0022]
+[File 0030]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/List.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0023]
+[File 0031]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS335.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 32
+Window Left = 10
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,349,683,0,0,"
 
-[File 0024]
+[File 0032]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS340.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 62
+Window Left = 26
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,349,683,0,0,"
 
-[File 0025]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/MCCdevices.c"
-File Type = "CSource"
-Disk Date = 3522269170
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0026]
+[File 0033]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
-Window Z-Order = 2
-Source Window State = "1,31,31,31,16,25,25,0,3,80,0,0,0,0,0,20,6,0,31,16,284,683,1,0,"
+Window Z-Order = 3
+Source Window State = "1,31,31,31,16,25,25,0,0,80,0,0,0,0,0,20,575,0,613,136,284,683,1,0,"
 
-[File 0027]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Source.c"
-File Type = "CSource"
-Disk Date = 3522269170
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0028]
+[File 0034]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr830.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0029]
+[File 0035]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr844.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0030]
+[File 0036]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/USB-PMD1208LS.c"
 File Type = "CSource"
 Disk Date = 3522269170
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 152
+Window Left = 74
+Source Window State = "1,618,618,618,8,26,26,0,0,0,0,0,0,0,0,0,320,0,508,101,349,683,1,0,"
 
-[File 0031]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/util.c"
-File Type = "CSource"
-Disk Date = 3522269170
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0032]
+[File 0037]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchan.h"
 File Type = "Include"
 Disk Date = 3522269161
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 3
-Source Window State = "1,6,6,6,16,26,26,0,3,80,0,0,0,0,0,21,0,0,6,16,297,683,1,0,"
+Source Window State = "1,6,6,6,16,26,26,0,3,0,0,0,0,0,0,0,0,0,6,16,297,683,1,0,"
 
-[File 0033]
+[File 0038]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchanu.h"
 File Type = "Include"
 Disk Date = 3522269161
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0034]
+[File 0039]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqcrv.h"
 File Type = "Include"
 Disk Date = 3522269161
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0035]
+[File 0040]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqcrvu.h"
 File Type = "Include"
 Disk Date = 3522269161
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0036]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acquire.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0037]
+[File 0041]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acquireu.h"
 File Type = "Include"
-Disk Date = 3522269161
+Disk Date = 3522355664
 In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0038]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanfnc.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0039]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanfncu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0040]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Changen.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0041]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Changenu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+Window Top = 212
+Window Left = 106
+Source Window State = "1,21,21,21,9,17,9,0,3,80,0,0,0,0,0,25,4,0,21,17,349,683,1,0,"
 
 [File 0042]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Channel.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0043]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Channelu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0044]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanops.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0045]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanopsu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0046]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curve.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0047]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveop.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0048]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveopu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0049]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0050]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-1602.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0051]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-1602u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0052]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-6036.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0053]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-6036u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0054]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DDA08.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0055]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DDA08u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0056]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/digitalSource.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0057]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/digitalSourceu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0058]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/gpibio.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0059]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Gpibiou.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0060]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Graph.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0061]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Graphu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0062]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP33120A.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0063]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP33120Au.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0064]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP4156.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0065]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP4156u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0066]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/itc4.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0067]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/ITC4u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0068]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2000.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0069]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2000u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0070]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K213.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0071]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K213u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0072]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K236.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0073]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K236u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0074]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2400.h"
-File Type = "Include"
-Disk Date = 0
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0075]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2400u.h"
-File Type = "Include"
-Disk Date = 0
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0076]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/List.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Window Z-Order = 1
-Source Window State = "1,21,21,21,4,9,9,0,0,160,0,0,0,0,0,32,4,0,29,89,400,600,0,0,"
-
-[File 0077]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Listu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0078]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS335.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0079]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS335u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0080]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS340.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0081]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS340u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0082]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/MCCdevices.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0083]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0084]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232util.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0085]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/RUO_HIGH.H"
-File Type = "Include"
-Disk Date = 3522269315
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0086]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/RUO_LOW.H"
-File Type = "Include"
-Disk Date = 3522269315
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0087]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Source.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0088]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/sourceu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0089]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr830.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0090]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr830u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0091]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr844.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0092]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/sr844u.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0093]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/USB-PMD1208LS.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0094]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Util.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0095]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/utilu.h"
-File Type = "Include"
-Disk Date = 3522269161
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0096]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchanu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0097]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqcrvu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0098]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acquireu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0099]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanfncu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0100]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Changenu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0101]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Channelu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0102]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanopsu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0103]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveopu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0104]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0105]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-1602u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0106]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-6036u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0107]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DDA08u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0108]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/digitalSourceu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0109]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Gpibiou.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0110]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Graphu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0111]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP33120Au.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0112]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP4156u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0113]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/ITC4u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0114]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2000u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0115]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K213u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0116]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K236u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0117]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Listu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0118]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS335u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0119]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0120]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/sourceu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267071
-In Projects = "1,"
-
-[File 0121]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr830u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0122]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/sr844u.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267071
-In Projects = "1,"
-
-[File 0123]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/USB-1208LSu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267070
-In Projects = "1,"
-
-[File 0124]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/utilu.uir"
-File Type = "User Interface Resource"
-Disk Date = 3522267071
-In Projects = "1,"
-
-[File 0125]
-Path = "/c/Users/Public/Documents/Measurement Computing/DAQ/C/cbw32.lib"
-File Type = "Library"
-Disk Date = 3516286714
-In Projects = "1,"
-
-[File 0126]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAAS_main.c"
-File Type = "CSource"
-Disk Date = 3522282726
-In Projects = "1,"
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0127]
 Path = "/c/Users/Public/Documents/Measurement Computing/DAQ/C/cbw.h"
 File Type = "Include"
 Disk Date = 3514311340
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0128]
-Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DEMO-BOARD.c"
-File Type = "CSource"
-Disk Date = 3522102549
+[File 0043]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanfnc.h"
+File Type = "Include"
+Disk Date = 3522269161
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0129]
+[File 0044]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanfncu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0045]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Changen.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0046]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Changenu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0047]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Channel.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0048]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Channelu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0049]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanops.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0050]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanopsu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0051]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curve.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0052]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveop.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0053]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveopu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0054]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0055]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-1602.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0056]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-1602u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0057]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-6036.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0058]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-6036u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0059]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DDA08.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0060]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DDA08u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0061]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DEMO-BOARD.h"
 File Type = "Include"
 Disk Date = 3522100693
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0130]
+[File 0062]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DEMO-BOARDu.h"
 File Type = "Include"
 Disk Date = 3522101451
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0131]
+[File 0063]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/digitalSource.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0064]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/digitalSourceu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0065]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/gpibio.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0066]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Gpibiou.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0067]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Graph.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0068]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Graphu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0069]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP33120A.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0070]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP33120Au.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0071]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP4156.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0072]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP4156u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0073]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/itc4.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0074]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/ITC4u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0075]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2000.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0076]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2000u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0077]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K213.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0078]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K213u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0079]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K236.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0080]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K236u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0081]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/List.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Window Top = 92
+Window Left = 42
+Source Window State = "1,21,21,21,4,9,9,0,0,0,0,0,0,0,0,0,4,0,29,89,284,683,1,0,"
+
+[File 0082]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Listu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0083]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS335.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0084]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS335u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0085]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS340.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0086]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS340u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0087]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/MCCdevices.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0088]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0089]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232util.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0090]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/RUO_HIGH.H"
+File Type = "Include"
+Disk Date = 3522269315
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0091]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/RUO_LOW.H"
+File Type = "Include"
+Disk Date = 3522269315
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0092]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Source.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Window Top = 32
+Window Left = 10
+Source Window State = "1,30,30,30,11,19,11,0,3,80,0,0,0,0,0,25,0,0,30,19,349,683,1,0,"
+
+[File 0093]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/sourceu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0094]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr830.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0095]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr830u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0096]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr844.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0097]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/sr844u.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0098]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/USB-PMD1208LS.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0099]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/utilu.h"
+File Type = "Include"
+Disk Date = 3522269161
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0100]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchanu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0101]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqcrvu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0102]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanfncu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0103]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Changenu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0104]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Channelu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0105]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Chanopsu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0106]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveopu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0107]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Curveu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0108]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-1602u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0109]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAS-6036u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0110]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DDA08u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0111]
 Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DEMO-BOARDu.uir"
 File Type = "User Interface Resource"
 Disk Date = 3522101451
 In Projects = "1,"
 
+[File 0112]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/digitalSourceu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+Window Top = 212
+Window Left = 106
+Window Height = 349
+Window Width = 683
+
+[File 0113]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Gpibiou.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+Window Top = 182
+Window Left = 90
+Window Height = 349
+Window Width = 683
+
+[File 0114]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Graphu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0115]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP33120Au.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0116]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/HP4156u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0117]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/ITC4u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0118]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2000u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0119]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K213u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0120]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K236u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0121]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Listu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0122]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/LS335u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0123]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0124]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/sourceu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267071
+In Projects = "1,"
+
+[File 0125]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Sr830u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0126]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/sr844u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267071
+In Projects = "1,"
+
+[File 0127]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/USB-1208LSu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267070
+In Projects = "1,"
+
+[File 0128]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/utilu.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522267071
+In Projects = "1,"
+
+[File 0129]
+Path = "/c/Users/Public/Documents/Measurement Computing/DAQ/C/cbw32.lib"
+File Type = "Library"
+Disk Date = 3516286714
+In Projects = "1,"
+
+[File 0130]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2400.c"
+File Type = "CSource"
+Disk Date = 3522375787
+In Projects = "1,"
+Window Top = 182
+Window Left = 90
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,25,0,0,0,0,349,683,1,0,"
+
+[File 0131]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2400.h"
+File Type = "Include"
+Disk Date = 3522375787
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0132]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2400u.h"
+File Type = "Include"
+Disk Date = 3522375787
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
+[File 0133]
+Path = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/K2400u.uir"
+File Type = "User Interface Resource"
+Disk Date = 3522376318
+In Projects = "1,"
+
+[File 0134]
+Path = "/c/Program Files/National Instruments/CVI2013/include/utility.h"
+File Type = "Include"
+Disk Date = 3486528000
+In Projects = ""
+Window Top = 122
+Window Left = 58
+Window Z-Order = 5
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,25,569,0,581,15,349,683,1,0,"
+
 [Tab Order]
-Tab 0001 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchan.h"
-Tab 0002 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232.c"
-Tab 0003 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/List.h"
+Tab 0001 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/gpibio.c"
+Tab 0002 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Util.h"
+Tab 0003 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/util.c"
+Tab 0004 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/DAAS_main.c"
+Tab 0005 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acquire.h"
+Tab 0006 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/acquire.c"
+Tab 0007 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acquireu.uir"
+Tab 0008 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/MCCdevices.c"
+Tab 0009 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Channel.c"
+Tab 0010 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Acqchan.c"
+Tab 0011 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/Source.c"
+Tab 0012 = "/c/Program Files/National Instruments/CVI2013/include/utility.h"
+Tab 0013 = "/x/work/devel/windows/OrlovLab/DAAS_SOFT_work/rs232.c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
