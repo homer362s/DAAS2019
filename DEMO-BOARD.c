@@ -147,7 +147,7 @@ void demo_board_MenuCallback(int menbar, int menuItem, void *callbackData, int p
 				MCCdevPtr dev = port->port.analogueIOport.IO.acqchan->dev;
 				demo_boardPtr das = dev->device;
 				port->menuitem_id = menuItem;
-				port->measPanel = port->measPanel? port->measPanel : LoadPanel(utilG.p, "DAS-1602u.uir", MEASURE);
+				port->measPanel = port->measPanel? port->measPanel : LoadPanel(utilG.p, "DEMO-BOARDu.uir", MEASURE);
 				SetCtrlAttribute (port->measPanel, MEASURE_RANGE, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
 				SetCtrlAttribute (port->measPanel, MEASURE_LABEL, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
 				SetCtrlAttribute (port->measPanel, MEASURE_COEFF, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
