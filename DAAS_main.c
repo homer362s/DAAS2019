@@ -33,6 +33,7 @@
 #include "HP4156.h"
 #include "DAS-6036.h"
 #include "das-1602.h"
+#include "DEMO-BOARD.h"
 #include "dda08.h"
 #include "USB-PMD1208LS.h"
 
@@ -74,6 +75,7 @@ main (void)
 	das1602_Init();
 	dda08_Init();
 	usb1208ls_Init();
+	demo_board_Init();
 	init_MCCdevices();
 /***********************************************************************************/    
     SetIdleEventRate (0);

@@ -1,5 +1,17 @@
-# Auto detect text files and perform LF normalization
-* text eol=crlf
+# Use CR LF line endings in these text files:
+*.c text eol=crlf
+*.C text eol=crlf
+*.h text eol=crlf
+*.H text eol=crlf
+*.prj text eol=crlf
+*.cws text eol=crlf
+*.md text eol=crlf
+*.txt text eol=crlf
+
+
+# These files are binary:
+*.ico binary
+*.uir binary
 
 # Custom for Visual Studio
 *.cs     diff=csharp
