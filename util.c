@@ -6,6 +6,7 @@
 #include <formatio.h>
 #include <utility.h>
 #include <userint.h>
+#include "toolbox.h"
 
 
 #include "util.h"
@@ -67,42 +68,42 @@ int util_OpenFile(char *path, int action, int ascii)
             ascii = TRUE;
         }
     }
-	if(handle)
+    if(handle)
     {
-		fileP = LoadPanel (0, "utilu.uir", FILESTAT);
+        fileP = LoadPanel (0, "utilu.uir", FILESTAT);
 
-    	
+        
 
-    	if (action == FILE_WRITE) {
-        	Fmt (info, "Saving file: %s", path);
-        	if (ascii) Fmt (info, "%s[a]< (ASCII file...go for coffee!)");
-    	} else {
-        	GetFileSize (path, &size);
-        	Fmt (info, "Loading file: %s (%i kB)", path, size/1000);
-        	if (ascii) Fmt (info, "%s[a]< (ASCII file...take a nap!)");
-    	}
+        if (action == FILE_WRITE) {
+            Fmt (info, "Saving file: %s", path);
+            if (ascii) Fmt (info, "%s[a]< (ASCII file...go for coffee!)");
+        } else {
+            GetFileSize (path, &size);
+            Fmt (info, "Loading file: %s (%i kB)", path, size/1000);
+            if (ascii) Fmt (info, "%s[a]< (ASCII file...take a nap!)");
+        }
 
-    	SetCtrlVal (fileP, FILESTAT_TEXT, info);
-    	GetCtrlAttribute (fileP, FILESTAT_TEXT, ATTR_WIDTH, &width);
-    	SetPanelAttribute (fileP, ATTR_WIDTH, width+12);
-    	SetCtrlAttribute (fileP, FILESTAT_TEXT, ATTR_LEFT, 6);
+        SetCtrlVal (fileP, FILESTAT_TEXT, info);
+        GetCtrlAttribute (fileP, FILESTAT_TEXT, ATTR_WIDTH, &width);
+        SetPanelAttribute (fileP, ATTR_WIDTH, width+12);
+        SetCtrlAttribute (fileP, FILESTAT_TEXT, ATTR_LEFT, 6);
 
-    	SetPanelPos (fileP, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
-    	InstallPopup (fileP);
-	}
-	else
-		handle = 0;
-	return handle;
+        SetPanelPos (fileP, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
+        InstallPopup (fileP);
+    }
+    else
+        handle = 0;
+    return handle;
 }
 
 void util_CloseFile(void)
 {
     if(fileHandle.analysis)
-	{
-		DiscardPanel (fileP);
-    	
-    	CloseFile(fileHandle.analysis);
-	}
+    {
+        DiscardPanel (fileP);
+        
+        CloseFile(fileHandle.analysis);
+    }
 }
 
 void util_SaveNote (char *note)
@@ -139,9 +140,9 @@ int  util_DiscardCallback(int panel, int control, int event, void *callbackData,
 
 int util_HidePanelOnLoseFocus (int panel, int event, void *callbackData, int eventData1, int eventData2)
 {
-	if (event == EVENT_LOST_FOCUS)
-		HidePanel(panel);
-	return 0;
+    if (event == EVENT_LOST_FOCUS)
+        HidePanel(panel);
+    return 0;
 }
 
 int  util_NoteCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
@@ -158,8 +159,8 @@ int  util_NoteCallback(int panel, int control, int event, void *callbackData, in
 void util_IncAcqPt (void)
 {
     utilG.acq.pt++;
-	if(utilG.beep)
-    	Beep();
+    if(utilG.beep)
+        Beep();
 }
 
 void util_InitClose (int panel, int control, int visible)
@@ -191,11 +192,24 @@ int util_TakingData (void)
             (utilG.acq.status == ACQ_TERMINATE));
 }
 
+
+char * util_GetProgInfoStr(){
+   static char *strRet; 
+   strRet = StrDup("DAAS ( Ver. ");
+   AppendString(&strRet, _TARGET_PRODUCT_VERSION_, -1);  
+   AppendString(&strRet, " ", -1);  
+   AppendString(&strRet, _CVI_CONFIGURATION_NAME_, -1);  
+//   AppendString(&strRet, _TARGET_PRODUCT_VERSION_, -1);  
+   AppendString(&strRet, " )", -1);   
+                                      
+   return strRet; 
+}
+
 void utilG_Init (void (*DiscardPanels)(void))
 {
     int p, control, top, height, width;
-	int grw, chw, asw, acw;
-    
+    int grw, chw, asw, acw;
+    char * strVersion;
 
     utilG.acq.pt = 0;
     utilG.acq.nPts = 0;
@@ -205,26 +219,29 @@ void utilG_Init (void (*DiscardPanels)(void))
     
     utilG.DiscardPanels = DiscardPanels;
 
-	SetPanelAttribute (utilG.p, ATTR_WINDOW_ZOOM, VAL_MAXIMIZE);
-	// Commenting-out next line causes the minimization bug
+    SetPanelAttribute (utilG.p, ATTR_WINDOW_ZOOM, VAL_MAXIMIZE);
+    // Commenting-out next line causes the minimization bug
     SetPanelAttribute (utilG.p, ATTR_MOVABLE, FALSE);
     DisplayPanel (utilG.p);
-	
-	GetCtrlAttribute(utilG.p, BG_GRAPHS, ATTR_WIDTH, &grw);
-	GetCtrlAttribute(utilG.p, BG_CHANNELS, ATTR_WIDTH, &chw);
-	GetCtrlAttribute(utilG.p, BG_ACQSETUP, ATTR_WIDTH, &asw);
-	GetCtrlAttribute(utilG.p, BG_ACQCHANNELS, ATTR_WIDTH, &acw);
-	GetPanelAttribute(utilG.p, ATTR_WIDTH, &width);
-	
-	SetCtrlAttribute(utilG.p, BG_GRAPHS, ATTR_LEFT,			(3*width/20) - grw);
-	SetCtrlAttribute(utilG.p, BG_CHANNELS, ATTR_LEFT, 		(7*width/20) - chw);
-	SetCtrlAttribute(utilG.p, BG_ACQSETUP, ATTR_LEFT, 		(9*width/15) - asw);
-	SetCtrlAttribute(utilG.p, BG_ACQCHANNELS, ATTR_LEFT, 	(9*width/10) - acw);
-	
-	initP = LoadPanel (utilG.p, "utilu.uir", INIT);
+    
+    GetCtrlAttribute(utilG.p, BG_GRAPHS, ATTR_WIDTH, &grw);
+    GetCtrlAttribute(utilG.p, BG_CHANNELS, ATTR_WIDTH, &chw);
+    GetCtrlAttribute(utilG.p, BG_ACQSETUP, ATTR_WIDTH, &asw);
+    GetCtrlAttribute(utilG.p, BG_ACQCHANNELS, ATTR_WIDTH, &acw);
+    GetPanelAttribute(utilG.p, ATTR_WIDTH, &width);
+    
+    SetCtrlAttribute(utilG.p, BG_GRAPHS, ATTR_LEFT,         (3*width/20) - grw);
+    SetCtrlAttribute(utilG.p, BG_CHANNELS, ATTR_LEFT,       (7*width/20) - chw);
+    SetCtrlAttribute(utilG.p, BG_ACQSETUP, ATTR_LEFT,       (9*width/15) - asw);
+    SetCtrlAttribute(utilG.p, BG_ACQCHANNELS, ATTR_LEFT,    (9*width/10) - acw);
+    
+    initP = LoadPanel (utilG.p, "utilu.uir", INIT);
     
     SetPanelPos (initP, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
-
+    strVersion = util_GetProgInfoStr();
+    SetCtrlVal (initP, INIT_TEXT_3, strVersion);
+    SetPanelAttribute(utilG.p, ATTR_TITLE, strVersion );
+    SetSystemAttribute (ATTR_TASKBAR_BUTTON_TEXT, strVersion);
     SetCtrlAttribute (initP, INIT_TEXT, ATTR_VISIBLE, FALSE);
     DisplayPanel (initP);
 
@@ -261,14 +278,14 @@ void utilG_Exit(void)
 int  util_HidePanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2)
 {
     if (((event == EVENT_KEYPRESS) && (eventData1 == VAL_ESC_VKEY)) || (event == EVENT_RIGHT_DOUBLE_CLICK))
-		HidePanel (panel);
-	return 0;
+        HidePanel (panel);
+    return 0;
 }
 int  util_DiscardPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2)
 {
     if (((event == EVENT_KEYPRESS) && (eventData1 == VAL_ESC_VKEY)) || (event == EVENT_RIGHT_DOUBLE_CLICK))
-		HidePanel (panel);
-	return 0;
+        HidePanel (panel);
+    return 0;
 }
 
 void util_ChangeInitMessage (char *msg)
@@ -306,68 +323,68 @@ example:
 rs232Write(rs232Ptr dev, char *format, ...);
 
 rs232Write(dev, "i think i'll [write [this %s][ and ][that %s]]\n",
-				cond1, cond2, msg1, (cond2 && cond3), cond3, msg2);
+                cond1, cond2, msg1, (cond2 && cond3), cond3, msg2);
 
-				
+                
 is the same as writing out:
 
 Fmt(msg, "i think i'll ");
 if(cond1)
 {
-	Fmt(msg, "%swrite ", msg)
-	if(cond2 && !cond3)
-		Fmt(msg, "%s this %s", msg, msg1);
-	if(cond2 && cond3)
-		Fmt(msg, "%s this %s and that %s", msg, msg1, msg2);
-	if(!cond2 && cond3)
-		Fmt(msg, "%s that %s", msg, msg2);
+    Fmt(msg, "%swrite ", msg)
+    if(cond2 && !cond3)
+        Fmt(msg, "%s this %s", msg, msg1);
+    if(cond2 && cond3)
+        Fmt(msg, "%s this %s and that %s", msg, msg1, msg2);
+    if(!cond2 && cond3)
+        Fmt(msg, "%s that %s", msg, msg2);
 }
 ComWrt(dev->COM->port, msg, StringLength(msg));
 */
 
 void *util_formatParse(char *format, va_list *list, char *msg, int index)
 {
-	void *arg;
-	char *temp = calloc(1024, sizeof(char));
-	int i, cond;
-	if(index < StringLength(format))
-	{
-		if (format[index] == '%')
-		{
-			index++;
-			arg = va_arg(*list, void*);
-			switch(format[index])
-			{
-				case 'i':Fmt(msg, "%s%i", msg, *((int *)   arg));break;
-				case 'f':Fmt(msg, "%s%f", msg, *((double*) arg));break;
-				case 's':Fmt(msg, "%s%s", msg, (char*)  arg);break;
-			}
-		}//*
-		else if(format[index] == '[')
-		{
-			cond = va_arg(*list, int);
-			index++;
-			temp = util_formatParse(format, list, temp, index);
-			Scan(temp, "%i,%s[t59]", &index, temp);
-			if(cond)
-			{
-				Fmt(msg, "%s%s", msg, temp);
-			}
-		}//*/
-		else if(format[index] == ']')
-		{
-			Fmt(temp, "%s<%i,%s;", index, msg);
-			Fmt(msg, "%s", temp);
-			return msg;
-		}
-		else
-			Fmt(msg, "%s%c", msg, format[index]);
-		index++;
-		util_formatParse(format, list, msg, index);
-	}	
-	va_end(*list);
-	free(temp);
-	return msg;
+    void *arg;
+    char *temp = calloc(1024, sizeof(char));
+    int i, cond;
+    if(index < StringLength(format))
+    {
+        if (format[index] == '%')
+        {
+            index++;
+            arg = va_arg(*list, void*);
+            switch(format[index])
+            {
+                case 'i':Fmt(msg, "%s%i", msg, *((int *)   arg));break;
+                case 'f':Fmt(msg, "%s%f", msg, *((double*) arg));break;
+                case 's':Fmt(msg, "%s%s", msg, (char*)  arg);break;
+            }
+        }//*
+        else if(format[index] == '[')
+        {
+            cond = va_arg(*list, int);
+            index++;
+            temp = util_formatParse(format, list, temp, index);
+            Scan(temp, "%i,%s[t59]", &index, temp);
+            if(cond)
+            {
+                Fmt(msg, "%s%s", msg, temp);
+            }
+        }//*/
+        else if(format[index] == ']')
+        {
+            Fmt(temp, "%s<%i,%s;", index, msg);
+            Fmt(msg, "%s", temp);
+            return msg;
+        }
+        else
+            Fmt(msg, "%s%c", msg, format[index]);
+        index++;
+        util_formatParse(format, list, msg, index);
+    }   
+    va_end(*list);
+    free(temp);
+    return msg;
 }
 /*
 formatParseRead() recognizes %i, %f, and %s. % cannot have whitespace, so for something like "two words"
@@ -376,60 +393,60 @@ formatParseRead() recognizes %i, %f, and %s. % cannot have whitespace, so for so
 
 void util_formatParseRead(char *format, va_list *list, char *msg, int index)
 {
-	void *arg;
-	int i, cond;
-	char temp;
-	while(index < StringLength(format))
-	{
-		if (format[index] == '%')
-		{
-			index++;
-			arg = va_arg(*list, void*);
-			switch(format[index])
-			{
-				case 'i':Scan(msg, "%i%s[t59y]", (int*)		arg, msg);break;
-				case 'f':Scan(msg, "%f%s[t59y]", (double*)	arg, msg);break;
-				case 's':Scan(msg, "%s%s[t59y]", (char*)	arg, msg);break;
-			}
-			index++;
-		}
-		else
-			Scan(msg, "%c%s[t59y]", &temp, msg);
-		Fmt(msg, "%s;", msg);
-		index++;
-	}	
-	va_end(*list);
+    void *arg;
+    int i, cond;
+    char temp;
+    while(index < StringLength(format))
+    {
+        if (format[index] == '%')
+        {
+            index++;
+            arg = va_arg(*list, void*);
+            switch(format[index])
+            {
+                case 'i':Scan(msg, "%i%s[t59y]", (int*)     arg, msg);break;
+                case 'f':Scan(msg, "%f%s[t59y]", (double*)  arg, msg);break;
+                case 's':Scan(msg, "%s%s[t59y]", (char*)    arg, msg);break;
+            }
+            index++;
+        }
+        else
+            Scan(msg, "%c%s[t59y]", &temp, msg);
+        Fmt(msg, "%s;", msg);
+        index++;
+    }   
+    va_end(*list);
 }
 
 void util_MessagePopup(char* Title, char* Message, ...)
 {
-	va_list list;
-	char msg[1024] = "";
-	int width, pwidth, textX, okwidth, okx;
-	va_start(list, Message);
-	util_formatParse(Message, &list, msg, 0);
-	utilG.err = LoadPanel(utilG.p, "utilu.uir", ERROR);
-	SetPanelAttribute(utilG.err, ATTR_TITLE, Title);
-	SetCtrlVal(utilG.err, ERROR_TEXT, msg);
-	
-	GetCtrlAttribute(utilG.err, ERROR_TEXT, ATTR_WIDTH, &width);
-	GetCtrlAttribute(utilG.err, ERROR_TEXT, ATTR_LEFT, &textX);
-	GetCtrlAttribute(utilG.err, ERROR_OK, ATTR_WIDTH, &okwidth);
-	GetCtrlAttribute(utilG.err, ERROR_OK, ATTR_LEFT, &okx);
+    va_list list;
+    char msg[1024] = "";
+    int width, pwidth, textX, okwidth, okx;
+    va_start(list, Message);
+    util_formatParse(Message, &list, msg, 0);
+    utilG.err = LoadPanel(utilG.p, "utilu.uir", ERROR);
+    SetPanelAttribute(utilG.err, ATTR_TITLE, Title);
+    SetCtrlVal(utilG.err, ERROR_TEXT, msg);
+    
+    GetCtrlAttribute(utilG.err, ERROR_TEXT, ATTR_WIDTH, &width);
+    GetCtrlAttribute(utilG.err, ERROR_TEXT, ATTR_LEFT, &textX);
+    GetCtrlAttribute(utilG.err, ERROR_OK, ATTR_WIDTH, &okwidth);
+    GetCtrlAttribute(utilG.err, ERROR_OK, ATTR_LEFT, &okx);
 
-	pwidth = (width + textX * 2);
-	SetPanelAttribute(utilG.err, ATTR_WIDTH, pwidth);
-	SetCtrlAttribute(utilG.err, ERROR_OK, ATTR_LEFT, (pwidth/2 - okwidth/2));
-	
-	SetPanelPos (utilG.err, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
-	DisplayPanel(utilG.err);
-	
+    pwidth = (width + textX * 2);
+    SetPanelAttribute(utilG.err, ATTR_WIDTH, pwidth);
+    SetCtrlAttribute(utilG.err, ERROR_OK, ATTR_LEFT, (pwidth/2 - okwidth/2));
+    
+    SetPanelPos (utilG.err, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
+    DisplayPanel(utilG.err);
+    
 }
 
 int util_ErrorCloseCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
-	if (event == EVENT_COMMIT)
-		DiscardPanel(panel);
-	return 0;
+    if (event == EVENT_COMMIT)
+        DiscardPanel(panel);
+    return 0;
 }
 
