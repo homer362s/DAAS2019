@@ -16,9 +16,12 @@
 #define TRUE 1
 #define FALSE 0
 
+#define LOG_LEN_MAX 10000
+
 struct utilStruct utilG;
 struct fileStruct fileHandle = {0, 0};
 static int initP, fileP;
+static int x_logP;
 
 void *util_formatParse(char *format, va_list *list, char *msg, int index);
 void util_formatParseRead(char *format, va_list *list, char *msg, int index);
@@ -101,7 +104,6 @@ void util_CloseFile(void)
     if(fileHandle.analysis)
     {
         DiscardPanel (fileP);
-        
         CloseFile(fileHandle.analysis);
     }
 }
@@ -220,8 +222,9 @@ void utilG_Init (void (*DiscardPanels)(void))
     utilG.DiscardPanels = DiscardPanels;
 
     SetPanelAttribute (utilG.p, ATTR_WINDOW_ZOOM, VAL_MAXIMIZE);
-    // Commenting-out next line causes the minimization bug
+    // next two lines are a hack to avoid the minimization bug
     SetPanelAttribute (utilG.p, ATTR_MOVABLE, FALSE);
+    SetPanelAttribute (utilG.p, ATTR_MOVABLE, TRUE);
     DisplayPanel (utilG.p);
     
     GetCtrlAttribute(utilG.p, BG_GRAPHS, ATTR_WIDTH, &grw);
@@ -253,7 +256,6 @@ void utilG_Init (void (*DiscardPanels)(void))
             utilG_Exit();
             QuitUserInterface(0);
             exit (EXIT_SUCCESS);
-            break;
     }
     SetMouseCursor (VAL_HOUR_GLASS_CURSOR);
 
@@ -266,7 +268,11 @@ void utilG_Init (void (*DiscardPanels)(void))
     GetCtrlAttribute (initP, INIT_TEXT, ATTR_TOP, &top);
     GetCtrlAttribute (initP, INIT_TEXT, ATTR_HEIGHT, &height);
     SetPanelAttribute (initP, ATTR_HEIGHT, top+height+6);
+    
+    x_logP = LoadPanel(utilG.p, "utilu.uir", LOG_PANEL);
+    DisplayPanel (x_logP);
     util_ChangeInitMessage ("DAAS Utilities...");
+
 }
 
 void utilG_Exit(void)
@@ -293,7 +299,13 @@ void util_ChangeInitMessage (char *msg)
     int width;
 
     SetCtrlVal (initP, INIT_TEXT, msg);
+    util_WriteLog( msg);   util_WriteLog( "\n"); 
 }
+
+void util_WriteLog( char * txt){
+    SetCtrlVal(x_logP, LOG_PANEL_TEXT, txt);
+}
+    
 
 void util_RemoveInitMessage (void)
 {
@@ -450,3 +462,20 @@ int util_ErrorCloseCallback (int panel, int control, int event, void *callbackDa
     return 0;
 }
 
+int CVICALLBACK util_LogPanelCallback (int panel, int event, void *callbackData,
+                                        int eventData1, int eventData2)
+{
+    int width, height;
+    switch (event)
+    {
+        case EVENT_PANEL_SIZE:
+
+            GetPanelAttribute (panel, ATTR_WIDTH, &width);
+            GetPanelAttribute (panel, ATTR_HEIGHT, &height);
+            SetCtrlAttribute(panel, LOG_PANEL_TEXT, ATTR_WIDTH, width-20);
+            SetCtrlAttribute(panel, LOG_PANEL_TEXT, ATTR_HEIGHT, height-20);
+            
+            break;
+    }
+    return 0;
+}

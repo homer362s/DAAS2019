@@ -36,6 +36,9 @@
 #define  INIT_ANALYSIS                    8       /* control type: command, callback function: (none) */
 #define  INIT_CONTROL                     9       /* control type: command, callback function: (none) */
 
+#define  LOG_PANEL                        5       /* callback function: util_LogPanelCallback */
+#define  LOG_PANEL_TEXT                   2       /* control type: textBox, callback function: (none) */
+
 
      /* Control Arrays: */
 
@@ -77,6 +80,7 @@
 int  CVICALLBACK BGDoneCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK util_ErrorCloseCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK util_HidePanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK util_LogPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

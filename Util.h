@@ -37,6 +37,7 @@ extern int  util_NoteCallback(int panel, int control, int event, void *callbackD
 extern int  util_DiscardCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 extern void util_RemoveInitMessage (void);
 extern void util_ChangeInitMessage (char *msg);
+extern void util_WriteLog( char * txt);
 extern void util_MessagePopup(char* Title, char* Message, ...);
 
 extern int  util_OpenFile(char *path, int action, int ascii);

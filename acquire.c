@@ -2,7 +2,9 @@
 #include <userint.h>
 #include <utility.h>
 #include <formatio.h>
+#include "toolbox.h"
 
+#include "Acquireu.h"
 #include "util.h"
 #include "utilu.h"
 #include "list.h"
@@ -18,18 +20,21 @@
 #include "graphu.h"
 #include "curveop.h"
 #include "acquire.h"
-#include "acquireu.h"
 #include "source.h"
 
 #define TRUE 1
 #define FALSE 0
 
+#define DFLT_FILE_SUFFIX "NanoSilicon"
+#define DFLT_DATA_DIR "C:\\Data"
+
 struct acquireStruct acqG;
 struct expStruct expG = {NULL, NULL, NULL, 0, ACQ_DONE};
 
 static struct datafileStruct {
-    char dir[260], name[10], path[260];
-    unsigned short ext;
+    char filePath[260];
+    char dataDir[MAX_PATHNAME_LEN];
+    char fileSuffix[MAX_PATHNAME_LEN];
 }   dataFile;
 
 static int acqinfoP = 0;
@@ -39,7 +44,6 @@ void acquire_Exit(void);
 int  acquire_GetMenuBar (void);
 void acquire_UpdatePanel(void);
 void acquire_UpdatePanelExp (void);
-void acquire_UpdateDataFileInfo (void);
 
 int  exp_Begin (void);
 
@@ -57,7 +61,7 @@ void exp_StartDaq();
 
 void exp_DoGeneralExp (void)
 {
-	acqchanlist_GetandSaveReadings();
+    acqchanlist_GetandSaveReadings();
     graphlist_PlotReadings ();
     util_Delay (expG.delay);
 }
@@ -74,15 +78,18 @@ void exp_InitGeneralExp (void)
     }
 }
 
+// lock/unlock floating exp n of points
 void exp_UpdateGeneralPanel (void)
 {
     SetInputMode (acqG.p.setup, ACQSETUP_GEN_POINTS, !util_TakingData());
 }
 
+// set experiment to floating; called from the menu experiment->floating
 void GenExpCallback(int menubar, int menuItem, void *callbackData, int panel)
 {
     if (utilG.exp == EXP_SOURCE) {
         utilG.exp = EXP_FLOAT;
+        // shows/hides controls relevant to current experiment (float or source) 
         acquire_UpdatePanelExp();
     }
 
@@ -92,34 +99,42 @@ void GenExpCallback(int menubar, int menuItem, void *callbackData, int panel)
     expG.delay = 0.0;
 
     GetCtrlVal (panel, ACQSETUP_GEN_POINTS, &utilG.acq.nPts);
-            
-    exp_UpdateGeneralPanel();
+    exp_UpdateGeneralPanel(); // lock/unlock floating exp n of points 
 }
 
+// Called from the menu experiment->begin
 int exp_Begin (void)
 {
     int size;
 
-/*    if (GetFileInfo (dataFile.path, &size)) {
-        MessagePopup ("Begin Experiment Message",
-                      "Cannot save data to file w/ duplicate name");
-        return FALSE;
-    }//*/
-
     if (acqchanG.channels.nItems < 1)
     {
-        MessagePopup ("Begin Experiment Message",
-                      "Must select at least one channel for acquisition");
+        MessagePopup ("Begin Experiment Failed:",
+                      "Please select at least one channel for acquisition");
         return FALSE;
     }
-
+    // Check datafile dir exists (in case it was removed after it was set
+    int dirNameLen;
+    if( ! FileExists(dataFile.dataDir, &dirNameLen) ) {
+        MessagePopup ("Begin Experiment Failed:",
+                      "Data dir does not exist! ");
+        return FALSE;
+    }
+    if (!acqchanlist_AllocMemory()) return FALSE;
+        
+    // set filepath from the data dir, timestamp, suffix and extension
+    double dt;
+    GetCurrentDateTime(&dt); // sec from 1900, local time
+    char fname[MAX_PATHNAME_LEN];
+    FormatDateTimeString(dt, "%Y-%m-%d_%H%M%S", fname, MAX_PATHNAME_LEN-1);
+    sprintf(dataFile.filePath,"%s\\%s_%s.daas", dataFile.dataDir, fname, dataFile.fileSuffix);
+    DebugPrintf("File path: %s\n", dataFile.filePath);
+    SetCtrlVal (acqG.p.setup, ACQSETUP_FILEPATH, dataFile.filePath);                      
     //updateGraphSource();
-	if (!acqchanlist_AllocMemory()) return FALSE;
-
 
     utilG.acq.pt = 0;
     expG.InitExp();
-    acqchanlist_InitDataFile(dataFile.path);
+    acqchanlist_InitDataFile(dataFile.filePath);
     exp_StartDaq();
 
     return TRUE;
@@ -141,9 +156,10 @@ void acquire_UpdateDataInfoPanel (void)
     }
 }
 
+// shows/hides controls relevant to current experiment (float or source) 
 void acquire_UpdatePanelExp (void)
 {
-    int bTop, cTop, height, bottom;
+    int bTop, cTop=0, height=0, bottom;
 
 /* Floating experiment */
 
@@ -197,7 +213,7 @@ void acquire_UpdatePanel(void)
     SetMenuBarAttribute (menuBar, ACQMENUS_EXP_CONTINUE, ATTR_DIMMED, !(utilG.acq.status == ACQ_PAUSED));
     SetMenuBarAttribute (menuBar, ACQMENUS_EXP_END, ATTR_DIMMED, !util_TakingData());
 
-    SetMenuBarAttribute (menuBar, ACQMENUS_EXP_INFO, ATTR_DIMMED, !util_TakingData());
+//    SetMenuBarAttribute (menuBar, ACQMENUS_EXP_INFO, ATTR_DIMMED, !util_TakingData());
 
     acqchanlist_Dimmed (util_TakingData());
 
@@ -224,21 +240,28 @@ int acquire_GetMenuBar (void)
 
 void acquire_Init (void)
 {
-    char *date, mon[10], day[10], yr[10];
     if (utilG.acq.status != ACQ_NONE) {
         util_ChangeInitMessage ("Acquisition Utilities...");
-
+        util_WriteLog("acquire_Init()\nStarting...\n");
         acqG.p.setup = LoadPanel (utilG.p, "acquireu.uir", ACQSETUP);
         
         //SetPanelPos (acqG.p.setup, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
+        // Set default data dir and suffix
+        int dirNameLen;
+        if(FileExists(DFLT_DATA_DIR, &dirNameLen) ) {
+            strcpy(dataFile.dataDir, DFLT_DATA_DIR);
+        } else {
+            char msg[MAX_PATHNAME_LEN*2];
+            sprintf(msg, "Default Data Does not exist:\n%s\nUsing application dir.", DFLT_DATA_DIR);
+            MessagePopup ("Acquisition Setup", msg );
 
-        GetProjectDir (dataFile.dir);
-        date = DateStr();
-        Scan (date, "%s>%s[xt45]%s[xt45]%s", mon, day, yr);
-        Fmt (dataFile.name ,"%s<%s[i2]%s%s", yr, mon, day);
-        dataFile.ext = 1;
-        acquire_UpdateDataFileInfo();
+            GetProjectDir (dataFile.dataDir);
+        }
+        SetCtrlVal (acqG.p.setup, ACQSETUP_DATADIR, dataFile.dataDir);
+        strcpy(dataFile.fileSuffix, DFLT_FILE_SUFFIX);
+        SetCtrlVal(acqG.p.setup, ACQSETUP_FILESUFFIX, dataFile.fileSuffix); 
 
+        // This control is a button on startup panel, "control. acquisition, and analysis"
         InstallCtrlCallback (utilG.p, BG_ACQSETUP, AcqSetupCallback, 0);
 
     } else SetCtrlAttribute (utilG.p, BG_ACQSETUP, ATTR_VISIBLE, FALSE);
@@ -248,7 +271,7 @@ void acquire_Exit(void)
 {
     if (utilG.acq.status != ACQ_NONE) {
         
-		DiscardPanel (acqG.p.setup);
+        DiscardPanel (acqG.p.setup);
 
         if (acqinfoP) {
             
@@ -305,8 +328,8 @@ void AcqInfoCallback(int menubar, int menuItem, void *callbackData, int panel)
 int  RemoveAcqInfoCallback(int panel, int event, void *callbackData, int eventData1, int eventData2)
 {
     if (((event == EVENT_KEYPRESS) && (eventData1 == VAL_ESC_VKEY)) || (event == EVENT_RIGHT_DOUBLE_CLICK))
-	{
-		DiscardPanel (panel);
+    {
+        DiscardPanel (panel);
         acqinfoP = 0;
     }
     return 0;
@@ -316,103 +339,40 @@ int  AcqSetupCallback(int panel, int control, int event, void *callbackData, int
 {
     if (event == EVENT_COMMIT) {
         acquire_UpdatePanel();
-        DisplayPanel (acqG.p.setup);
+        DisplayPanel(acqG.p.setup);
     }
     return 0;
 }
 
-int  DataFileControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
+
+int  DirSelCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
-    char name[256];
-    int ext, err, size;
+    char strDir[MAX_PATHNAME_LEN];
+    
+    if (event != EVENT_COMMIT) return 0;
 
-    if (event == EVENT_VAL_CHANGED) {
-        Fmt (name, dataFile.name);
-        ext = dataFile.ext;
-
-        GetCtrlVal (panel, ACQSETUP_FILENAME, dataFile.name);
-        GetCtrlVal (panel, ACQSETUP_FILEEXT, &dataFile.ext);
-
-        acquire_DataFileMakePath();
-        SetCtrlVal (panel, ACQSETUP_FILEPATH, dataFile.path);
+    int ret = DirSelectPopupEx("", "Select Data Directory", strDir);
+    
+    if( ret == VAL_DIRECTORY_SELECTED) {
+        SetCtrlVal (acqG.p.setup, ACQSETUP_DATADIR, strDir);
+        strcpy(dataFile.dataDir,strDir);
     }
+    
     return 0;
 }
 
-int  DataFileSaveAsCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
-{
-    char path[300], path1[300], path2[300], name[300];
-    int i, filestatus;
 
-    if (event == EVENT_COMMIT) {
-        Fmt (name, "%s<%s.%i", dataFile.name, dataFile.ext);
-        filestatus = FileSelectPopup (dataFile.dir, name, "",
-                                      "Save As [file extension must be a #!]:",
-                                      VAL_OK_BUTTON, 0, 0, 1, 1, path);
-        switch (filestatus) {
-            case VAL_EXISTING_FILE_SELECTED:
-                MessagePopup ("Save As Message", "Cannot select duplicate file paths");
-                break;
-            case VAL_NEW_FILE_SELECTED:
-                Fmt (path1, path);
-                while (Scan(path1, "%s>%s[xdt92]%s", path2) == 2)
-                    Fmt (path1, path2);
-                Scan (path2, "%s>%s[t46]", dataFile.name);
-                i = Scan (path2, "%s>%s[xdt46]%i[b2]", &dataFile.ext);
-                if (i != 2)
-                    MessagePopup ("File name error",
-                              "File extension must be a number..."
-                              "extension ignored");
-                Fmt (path1, path);
-                i = FindPattern (path1, 0, StringLength (path1), path2, 0, 0);
-                CopyString (dataFile.dir, 0, path1, 0, i-1);
-                acquire_UpdateDataFileInfo();
-                break;
-        }
-    }
-    return 0;
-}
-
-void acquire_UpdateDataFileInfo (void)
-{
-    SetInputMode (acqG.p.setup, ACQSETUP_FILENAME, !util_TakingData());
-    SetInputMode (acqG.p.setup, ACQSETUP_FILEEXT, !util_TakingData());
-    SetInputMode (acqG.p.setup, ACQSETUP_SAVEAS, !util_TakingData());
-
-    SetCtrlVal (acqG.p.setup, ACQSETUP_FILENAME, dataFile.name);
-    SetCtrlVal (acqG.p.setup, ACQSETUP_FILEEXT, dataFile.ext);
-    acquire_DataFileMakePath();
-    SetCtrlVal (acqG.p.setup, ACQSETUP_FILEPATH, dataFile.path);
-}
-
-
-void acquire_IncDataFileExt(void)
-{
-	dataFile.ext++;
-    acquire_UpdateDataFileInfo ();
-}
-
-void acquire_DataFileMakePath (void)
-{
-   	char name[80], ext[10];
-
-	Fmt (ext, "%s<%f[p3]", (double)dataFile.ext/1000);
-    CopyBytes (ext, 0, ext, 1, 5);
-	
-    Fmt(name, "%s<%s%s", dataFile.name, ext);
-    MakePathname(dataFile.dir, name, dataFile.path);
-}
 int CVICALLBACK BeepCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
-	int b;
-	switch (event)
-	{
-		case EVENT_COMMIT:
-			GetCtrlVal(panel,control, &b);
-			utilG.beep = b;
-		break;
-	}
-	return 0;
+    int b;
+    switch (event)
+    {
+        case EVENT_COMMIT:
+            GetCtrlVal(panel,control, &b);
+            utilG.beep = b;
+        break;
+    }
+    return 0;
 }
 
 
@@ -472,5 +432,39 @@ int CVICALLBACK acq_timerCallback(int panel, int control, int event, void *callb
         utilG.acq.status = ACQ_TERMINATE;
    
     
+    return 0;
+}
+
+int CVICALLBACK DataFileSuffixControlCallback (int panel, int control, int event,
+        void *callbackData, int eventData1, int eventData2)
+{
+    switch (event)
+    {
+        char strSuff[MAX_PATHNAME_LEN];
+        case EVENT_COMMIT:
+            GetCtrlVal(acqG.p.setup, ACQSETUP_FILESUFFIX, strSuff);
+            // validate the filename for valid chars
+            char invChars[] = {'<', '>', ':', '"', '/', '\\', '|', '?', '*'};  
+            int nChars = 9;
+            void * chP;
+            char ch;
+            
+            for( int i = 0; i<nChars; i++){
+                ch = invChars[i];
+                chP = strchr(strSuff, ch);
+
+                if ( chP ) {  
+                    MessagePopup("Invalid filename character in the file suffix",
+                                      "Do not to use <>:\"/\\\|?* characters");
+                    // reverse to previous val
+                    SetCtrlVal(acqG.p.setup, ACQSETUP_FILESUFFIX, dataFile.fileSuffix);
+                    return 0;
+                }
+            }
+            // store validated suffix
+            strcpy(dataFile.fileSuffix, strSuff);
+
+            break;
+    }
     return 0;
 }

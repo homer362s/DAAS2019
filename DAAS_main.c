@@ -4,7 +4,7 @@
 #include <userint.h>
 //password for instacal univ lib .exe is: mcc5_72
 #include "util.h"
-#include "list.h"			    
+#include "list.h"               
 #include "channel.h"
 #include "changen.h"
 #include "chanfnc.h"
@@ -42,7 +42,10 @@ int AcquireData (int panel, int control, int event, void *callbackData, int even
 
 main (void)
 {
+    // we display initial panel choosing daq or analysis-only option
     utilG_Init (gpibio_Exit);
+    // TODO: init what is necessary in anal-only and skip others 
+    // if in analysis-only mode if(utilG.acq.status == ACQ_NONE)
     listG_Init ();
     channelG_Init();
     changen_Init();
@@ -53,35 +56,35 @@ main (void)
     curveop_Init();
     acquire_Init();
     gpibio_Init();
-	rs232_Init();
+    rs232_Init();
     source_Init();
-	
+    
 /*Don't change the order of these because the load function will not work properly*/
     //k2400_Init();
     k2000_Init();
     k213_Init();
-	sr844_Init();
-	sr830_Init();
-	hp33120a_Init();
-	LS335_Init();
-	LS340_Init();
-	hp4156_Init();
+    sr844_Init();
+    sr830_Init();
+    hp33120a_Init();
+    LS335_Init();
+    LS340_Init();
+    hp4156_Init();
 /*rs232 instruments init*/
 
-	itc4_Init();
+    itc4_Init();
 
 /*PCI slot and USB Instacal compatible devices*/
-	das6036_Init();
-	das1602_Init();
-	dda08_Init();
-	usb1208ls_Init();
-	demo_board_Init();
-	init_MCCdevices();
+    das6036_Init();
+    das1602_Init();
+    dda08_Init();
+    usb1208ls_Init();
+    demo_board_Init();
+    init_MCCdevices();
 /***********************************************************************************/    
     SetIdleEventRate (40);  // 40ms time, 25Hz rate
     InstallMainCallback (AcquireData, 0, 1);
-	
-	utilG.err = 0;
+    
+    utilG.err = 0;
     util_RemoveInitMessage();
     RunUserInterface();
 }
@@ -103,7 +106,6 @@ int AcquireData (int panel, int control, int event, void *callbackData, int even
                 graphlist_PlotCurves();
                 graphlist_AutoSave();
                 acqchanlist_CopytoChannelList();
-                acquire_IncDataFileExt();
 
                 if (utilG.acq.pt == utilG.acq.nPts) utilG.acq.status = ACQ_DONE;
                 else utilG.acq.status = ACQ_STOPPED;
@@ -112,11 +114,11 @@ int AcquireData (int panel, int control, int event, void *callbackData, int even
                 break;
         }
     }
-	if(event == EVENT_KEYPRESS && event1 == VAL_F1_VKEY)
-	{
-		InetLaunchDefaultWebBrowser ("help.html");
-	}
+    if(event == EVENT_KEYPRESS && event1 == VAL_F1_VKEY)
+    {
+//        InetLaunchDefaultWebBrowser ("help.html");    // no help yet
+    }
     return 0;
-	
+    
 }
 

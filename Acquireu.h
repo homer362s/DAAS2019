@@ -21,9 +21,9 @@
 
 #define  ACQSETUP                         2       /* callback function: util_HidePanelCallback */
 #define  ACQSETUP_STATUS                  2       /* control type: string, callback function: (none) */
-#define  ACQSETUP_FILENAME                3       /* control type: string, callback function: DataFileControlCallback */
-#define  ACQSETUP_FILEEXT                 4       /* control type: numeric, callback function: DataFileControlCallback */
-#define  ACQSETUP_FILEPATH                5       /* control type: string, callback function: (none) */
+#define  ACQSETUP_FILESUFFIX              3       /* control type: string, callback function: DataFileSuffixControlCallback */
+#define  ACQSETUP_FILEPATH                4       /* control type: string, callback function: (none) */
+#define  ACQSETUP_DATADIR                 5       /* control type: string, callback function: (none) */
 #define  ACQSETUP_GEN_POINTS              6       /* control type: numeric, callback function: GenExpControlCallback */
 #define  ACQSETUP_GEN_DELAY               7       /* control type: numeric, callback function: GenExpControlCallback */
 #define  ACQSETUP_GEN_TIME                8       /* control type: numeric, callback function: (none) */
@@ -31,14 +31,14 @@
 #define  ACQSETUP_SRC_POINTS              10      /* control type: numeric, callback function: (none) */
 #define  ACQSETUP_SRC_TIME                11      /* control type: numeric, callback function: (none) */
 #define  ACQSETUP_BEEP                    12      /* control type: textButton, callback function: BeepCallback */
-#define  ACQSETUP_EXPTITLE                13      /* control type: textMsg, callback function: (none) */
-#define  ACQSETUP_SRC_MOVEUP              14      /* control type: command, callback function: (none) */
-#define  ACQSETUP_SRC_MOVEDOWN            15      /* control type: command, callback function: (none) */
-#define  ACQSETUP_SRC_REMOVE              16      /* control type: command, callback function: (none) */
-#define  ACQSETUP_SAVEAS                  17      /* control type: command, callback function: DataFileSaveAsCallback */
-#define  ACQSETUP_DECORATION              18      /* control type: deco, callback function: (none) */
-#define  ACQSETUP_BOX_1                   19      /* control type: deco, callback function: (none) */
-#define  ACQSETUP_ACQ_TIMER               20      /* control type: timer, callback function: acq_timerCallback */
+#define  ACQSETUP_SRC_MOVEUP              13      /* control type: command, callback function: (none) */
+#define  ACQSETUP_SRC_MOVEDOWN            14      /* control type: command, callback function: (none) */
+#define  ACQSETUP_SRC_REMOVE              15      /* control type: command, callback function: (none) */
+#define  ACQSETUP_DIRSEL                  16      /* control type: command, callback function: DirSelCallback */
+#define  ACQSETUP_DECORATION              17      /* control type: deco, callback function: (none) */
+#define  ACQSETUP_ACQ_TIMER               18      /* control type: timer, callback function: acq_timerCallback */
+#define  ACQSETUP_EXPTITLE                19      /* control type: textMsg, callback function: (none) */
+#define  ACQSETUP_BOX_1                   20      /* control type: deco, callback function: (none) */
 
 
      /* Control Arrays: */
@@ -79,8 +79,8 @@
 int  CVICALLBACK acq_timerCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK AcqInfoCallback(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK BeepCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK DataFileControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK DataFileSaveAsCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DataFileSuffixControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK DirSelCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK ExpStatusCallback(int menubar, int menuItem, void *callbackData, int panel);
 void CVICALLBACK GenExpCallback(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK GenExpControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
