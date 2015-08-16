@@ -62,7 +62,7 @@ void        graphlist_UpdatePanel (void);
 double      graph_XTextOffset (void);
 double      graph_YTextOffset (void);
 graphPtr    graph_Create (char *title);
-void		graph_ReplotCurvesWithConv(graphPtr graph);
+void        graph_ReplotCurvesWithConv(graphPtr graph);
 void        graph_Remove(graphPtr graph);
 void        graph_Save (graphPtr graph);
 graphPtr    graph_Load (void);
@@ -132,8 +132,17 @@ int  LoadGraphCallback(int panel, int control, int event, void *callbackData, in
             else
             {
                 graph = graph_Load();
-                if (graph) graphlist_AddGraph (graph);
-                ReadLine (fileHandle.analysis, info, 255);
+                if (graph){
+                    // use file name as graph title
+                    char fname[MAX_PATHNAME_LEN];
+                    SplitPath (path, 0, 0, fname);
+                    // remove extension
+                    char *dotP = strrchr(fname, '.');
+                    *dotP=0;
+                    strcpy(graph->title, fname);
+                    graphlist_AddGraph (graph);
+                }
+//                ReadLine (fileHandle.analysis, info, 255);   // TODO: what is this?? - Delete?
                 util_CloseFile();
                 graphlist_UpdatePanel();
             }
@@ -147,16 +156,20 @@ int  SaveGraphCallback(int panel, int control, int event, void *callbackData, in
     graphPtr graph;
     int filestatus;
     char path[300];
-
+    char fname[MAX_PATHNAME_LEN];
     if (event == EVENT_COMMIT)
     {
-        filestatus = FileSelectPopup ("", "*.grf", "*.grf", "Save Graph",
+        // Use graph title as file name
+        graph = graphlist_GetSelection();
+        strcpy(fname,graph->title);
+        strcat(fname,".grf");
+        filestatus = FileSelectPopup ("", fname, "*.grf", "Save Graph",
                                       VAL_SAVE_BUTTON, 0, 1, 1, 1, path);
         if ((filestatus == VAL_NEW_FILE_SELECTED) ||
             (filestatus == VAL_EXISTING_FILE_SELECTED)) {
             fileHandle.analysis = util_OpenFile(path, FILE_WRITE, FALSE);
             FmtFile (fileHandle.analysis, "#GRAPHDATA\n");
-            graph_Save (graphlist_GetSelection());
+            graph_Save (graph);
             FmtFile (fileHandle.analysis, "#ENDGRAPHDATA\n");
             util_CloseFile();
         }
@@ -210,6 +223,7 @@ int  SelectGraphCallback(int panel, int control, int event, void *callbackData, 
     {
         graph = graphlist_GetSelection();
         DisplayPanel (graph->p);
+        SetPanelAttribute (graph->p, ATTR_TITLE, graph->title);
     }
     return 0;
 }
@@ -298,7 +312,7 @@ void graphlist_RemoveGraph (graphPtr graph)
 
         
         DiscardPanel (graph->p);
-		graph->p = 0;
+        graph->p = 0;
 
         list_RemoveItem (&graphG.graphs, i, TRUE);
         DeleteListItem (graphG.p, GRAPHS_LIST, i, 1);
@@ -342,7 +356,7 @@ void graphlist_PlotCurves (void)
                 }
             }
         }
-		
+        
     }
 }
 
@@ -378,26 +392,26 @@ void graphlist_Copy (int panel, int control)
 
 void graph_ReplotCurvesWithConv(graphPtr graph)
 {
-	double *xarray, *yarray;
-	int i, limit = graph->curves.list.nItems;
-	nodePtr node;
-	curvePtr curve;
-	limit = (utilG.acq.status != ACQ_BUSY)? limit : limit - 1;
-	for(i = 0; i < limit; i++)
-	{
-		double **xArr, **yArr;
-		node = list_GetNode(graph->curves.list, i);
-		curve = node->item;
-		xArr = acqchan_MeasurementArray (curve->x->readings, graph->acqcurve.x->coeff, graph->x.conversion.val, curve->x->pts);
-		yArr = acqchan_MeasurementArray (curve->y->readings, graph->acqcurve.y->coeff, graph->y.conversion.val, curve->y->pts);
-		DeleteGraphPlot (graph->p, GRAPH_GRAPH, curve->plothandle, 0);
-		curve->plothandle = 
-			PlotXY (graph->p, GRAPH_GRAPH, *xArr, *yArr,
-			curve->pts, VAL_DOUBLE, VAL_DOUBLE, VAL_THIN_LINE, VAL_NO_POINT, VAL_SOLID,
-			graph->acqcurve.ptfreq, graph->acqcurve.color);
-		acqchan_MeasurementArrayFree(xArr);//  free(xArr);
-		acqchan_MeasurementArrayFree(yArr);//  free(yArr);
-	}
+    double *xarray, *yarray;
+    int i, limit = graph->curves.list.nItems;
+    nodePtr node;
+    curvePtr curve;
+    limit = (utilG.acq.status != ACQ_BUSY)? limit : limit - 1;
+    for(i = 0; i < limit; i++)
+    {
+        double **xArr, **yArr;
+        node = list_GetNode(graph->curves.list, i);
+        curve = node->item;
+        xArr = acqchan_MeasurementArray (curve->x->readings, graph->acqcurve.x->coeff, graph->x.conversion.val, curve->x->pts);
+        yArr = acqchan_MeasurementArray (curve->y->readings, graph->acqcurve.y->coeff, graph->y.conversion.val, curve->y->pts);
+        DeleteGraphPlot (graph->p, GRAPH_GRAPH, curve->plothandle, 0);
+        curve->plothandle = 
+            PlotXY (graph->p, GRAPH_GRAPH, *xArr, *yArr,
+            curve->pts, VAL_DOUBLE, VAL_DOUBLE, VAL_THIN_LINE, VAL_NO_POINT, VAL_SOLID,
+            graph->acqcurve.ptfreq, graph->acqcurve.color);
+        acqchan_MeasurementArrayFree(xArr);//  free(xArr);
+        acqchan_MeasurementArrayFree(yArr);//  free(yArr);
+    }
 }
 
 void graph_Save (graphPtr graph)
@@ -489,8 +503,8 @@ graphPtr graph_Create (char *title)
     graph->snap = FALSE;
     graph->cursor = CURSOR_NONE;
     graph->textHandle = 0;
-	graph->axisP = 0;
-	
+    graph->axisP = 0;
+    
     graph->p = LoadPanel (utilG.p, "graphu.uir", GRAPH);
     
     SetPanelPos (graph->p, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
@@ -501,12 +515,12 @@ graphPtr graph_Create (char *title)
     SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_CTRL_MODE, VAL_INDICATOR);
     SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_CALLBACK_DATA, graph);
     SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_NUM_CURSORS, 0);
-	if(utilG.acq.status != ACQ_NONE)
-	{
-		SetCtrlAttribute (acqG.p.setup, ACQSETUP_SRC_MOVEUP, ATTR_CALLBACK_DATA, graph);
-		SetCtrlAttribute (acqG.p.setup, ACQSETUP_SRC_MOVEDOWN, ATTR_CALLBACK_DATA, graph);
-		SetCtrlAttribute (acqG.p.setup, ACQSETUP_SRC_REMOVE, ATTR_CALLBACK_DATA, graph);
-	}
+    if(utilG.acq.status != ACQ_NONE)
+    {
+        SetCtrlAttribute (acqG.p.setup, ACQSETUP_SRC_MOVEUP, ATTR_CALLBACK_DATA, graph);
+        SetCtrlAttribute (acqG.p.setup, ACQSETUP_SRC_MOVEDOWN, ATTR_CALLBACK_DATA, graph);
+        SetCtrlAttribute (acqG.p.setup, ACQSETUP_SRC_REMOVE, ATTR_CALLBACK_DATA, graph);
+    }
     SetCtrlAttribute (graph->p, GRAPH_HOME, ATTR_CALLBACK_DATA, graph);
 
     SetCtrlAttribute (graph->p, GRAPH_UP, ATTR_CALLBACK_DATA, graph);
@@ -562,7 +576,7 @@ int  ShowCurvesPanelCallback(int panel, int event, void *callbackData, int event
     graphPtr graph;
 
     if (((event == EVENT_KEYPRESS) && (eventData1 == VAL_ESC_VKEY)) || (event == EVENT_RIGHT_DOUBLE_CLICK))
-	    HidePanel (panel);
+        HidePanel (panel);
 
     if (event == EVENT_GOT_FOCUS) {
         graph = callbackData;
@@ -578,47 +592,47 @@ int  SelectCursorCallback(int panel, int control, int event, void *callbackData,
     int i;
 
     if (event == EVENT_COMMIT) {
-		GetCtrlVal (panel, control, &i);
-	    if (i) {
-			SetCtrlAttribute (panel, GRAPH_GRAPH, ATTR_NUM_CURSORS, 1);
-			SetCtrlAttribute (panel, control, ATTR_MENU_ARROW_COLOR, VAL_RED);
-			SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CURSOR_MODE,
+        GetCtrlVal (panel, control, &i);
+        if (i) {
+            SetCtrlAttribute (panel, GRAPH_GRAPH, ATTR_NUM_CURSORS, 1);
+            SetCtrlAttribute (panel, control, ATTR_MENU_ARROW_COLOR, VAL_RED);
+            SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CURSOR_MODE,
                                 VAL_FREE_FORM);
-			SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CURSOR_COLOR, VAL_RED);
-			SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CROSS_HAIR_STYLE,
+            SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CURSOR_COLOR, VAL_RED);
+            SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CROSS_HAIR_STYLE,
                             VAL_SHORT_CROSS);
-			SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CURSOR_POINT_STYLE,
+            SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CURSOR_POINT_STYLE,
                             VAL_EMPTY_CIRCLE);
-			SetCtrlAttribute (panel, GRAPH_GRAPH, ATTR_CTRL_MODE, VAL_HOT);
-		} else {
-			SetCtrlAttribute (panel, GRAPH_GRAPH, ATTR_NUM_CURSORS, 0);
-			SetCtrlAttribute (panel, control, ATTR_MENU_ARROW_COLOR, VAL_BLACK);
-			SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_DEFAULT_CURSOR);
-			SetCtrlAttribute (panel, GRAPH_GRAPH, ATTR_CTRL_MODE, VAL_INDICATOR);
-			graph->cursor = CURSOR_NONE;
-			if (graph->textHandle) DeleteGraphPlot (panel, GRAPH_GRAPH, graph->textHandle, VAL_IMMEDIATE_DRAW);
-	            graph->textHandle = 0;
-		}
-		switch (i) {
-			case 1:
-				graph->cursor = CURSOR_SNAP;
-				SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_CROSS_HAIR_CURSOR);
-				SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CURSOR_MODE,
+            SetCtrlAttribute (panel, GRAPH_GRAPH, ATTR_CTRL_MODE, VAL_HOT);
+        } else {
+            SetCtrlAttribute (panel, GRAPH_GRAPH, ATTR_NUM_CURSORS, 0);
+            SetCtrlAttribute (panel, control, ATTR_MENU_ARROW_COLOR, VAL_BLACK);
+            SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_DEFAULT_CURSOR);
+            SetCtrlAttribute (panel, GRAPH_GRAPH, ATTR_CTRL_MODE, VAL_INDICATOR);
+            graph->cursor = CURSOR_NONE;
+            if (graph->textHandle) DeleteGraphPlot (panel, GRAPH_GRAPH, graph->textHandle, VAL_IMMEDIATE_DRAW);
+                graph->textHandle = 0;
+        }
+        switch (i) {
+            case 1:
+                graph->cursor = CURSOR_SNAP;
+                SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_CROSS_HAIR_CURSOR);
+                SetCursorAttribute (panel, GRAPH_GRAPH, 1, ATTR_CURSOR_MODE,
                                 VAL_SNAP_TO_POINT);
-				break;
-			case 2:
-				graph->cursor = CURSOR_PAN;
-				SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_OPEN_HAND_CURSOR);
-				break;
-			case 3:
-				graph->cursor = CURSOR_XY;
-				SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_CROSS_HAIR_CURSOR);
-				break;
-			case 4:
-				graph->cursor = CURSOR_MAGNIFY;
-				SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_BOX_CURSOR);
-				break;
-		}
+                break;
+            case 2:
+                graph->cursor = CURSOR_PAN;
+                SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_OPEN_HAND_CURSOR);
+                break;
+            case 3:
+                graph->cursor = CURSOR_XY;
+                SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_CROSS_HAIR_CURSOR);
+                break;
+            case 4:
+                graph->cursor = CURSOR_MAGNIFY;
+                SetPanelAttribute (panel, ATTR_MOUSE_CURSOR, VAL_BOX_CURSOR);
+                break;
+        }
     }
     return 0;
 }
@@ -627,7 +641,7 @@ int  AcquireCurveControlCallback(int panel, int control, int event, void *callba
 {
     int i;
     graphPtr graph;
-	char label[50];
+    char label[50];
     switch (control) {
         case ACQCURVE_PTFREQ:
         case ACQCURVE_COLOR:
@@ -639,52 +653,52 @@ int  AcquireCurveControlCallback(int panel, int control, int event, void *callba
             }
             break;
         case ACQCURVE_YCHANNEL:
-			if (event == EVENT_LEFT_CLICK)
-				acqchanlist_Copy (panel, ACQCURVE_YCHANNEL);
+            if (event == EVENT_LEFT_CLICK)
+                acqchanlist_Copy (panel, ACQCURVE_YCHANNEL);
             if (event == EVENT_COMMIT) {
                 graph = callbackData;
-        		if(graph)
-					if (graph->acqcurve.y) acqchan_RemoveGraph (graph->acqcurve.y, &graph->acqcurve);
+                if(graph)
+                    if (graph->acqcurve.y) acqchan_RemoveGraph (graph->acqcurve.y, &graph->acqcurve);
                 GetCtrlVal (panel, control, &i);
                 if (i == NOT_IN_LIST) graph->acqcurve.y = NULL;
                 else {
-					GetIndexFromValue (panel, control, &i, i);
-					GetLabelFromIndex (panel, control, i, label);
-					graph->acqcurve.y = acqchanlist_GetItemByTitle(label);
-					if(graph->acqcurve.y)
-					{
-						//graph->acqcurve.y = acqchanlist_GetItem (i);
-                    	acqchan_AddGraph (graph->acqcurve.y, &graph->acqcurve);
-                    	acqcurve_Plot (graph, graph->p, GRAPH_GRAPH, &graph->acqcurve);
-                    	SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_YNAME,
+                    GetIndexFromValue (panel, control, &i, i);
+                    GetLabelFromIndex (panel, control, i, label);
+                    graph->acqcurve.y = acqchanlist_GetItemByTitle(label);
+                    if(graph->acqcurve.y)
+                    {
+                        //graph->acqcurve.y = acqchanlist_GetItem (i);
+                        acqchan_AddGraph (graph->acqcurve.y, &graph->acqcurve);
+                        acqcurve_Plot (graph, graph->p, GRAPH_GRAPH, &graph->acqcurve);
+                        SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_YNAME,
                                       graph->acqcurve.y->channel->label);
-                    	Fmt (graph->y.label, graph->acqcurve.y->channel->label);
-					}
+                        Fmt (graph->y.label, graph->acqcurve.y->channel->label);
+                    }
                 }
             }
             break;
         case ACQCURVE_XCHANNEL:
             if(event == EVENT_LEFT_CLICK)
-				acqchanlist_Copy (panel, ACQCURVE_XCHANNEL);
-			if (event == EVENT_COMMIT) {
+                acqchanlist_Copy (panel, ACQCURVE_XCHANNEL);
+            if (event == EVENT_COMMIT) {
                 graph = callbackData;
-				if(graph)
-					if (graph->acqcurve.x) acqchan_RemoveGraph (graph->acqcurve.x, &graph->acqcurve);
+                if(graph)
+                    if (graph->acqcurve.x) acqchan_RemoveGraph (graph->acqcurve.x, &graph->acqcurve);
                 GetCtrlVal (panel, control, &i);
                 if (i == NOT_IN_LIST) graph->acqcurve.x = NULL;
                 else {
                     GetIndexFromValue (panel, control, &i, i);
-					GetLabelFromIndex (panel, control, i, label);
-					graph->acqcurve.x = acqchanlist_GetItemByTitle(label);
-					if(graph->acqcurve.x)
-					{
-						//graph->acqcurve.x = acqchanlist_GetItem (i);
-                    	acqchan_AddGraph (graph->acqcurve.x, &graph->acqcurve);
-                    	acqcurve_Plot (graph, graph->p, GRAPH_GRAPH, &graph->acqcurve);
-                    	SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_XNAME,
+                    GetLabelFromIndex (panel, control, i, label);
+                    graph->acqcurve.x = acqchanlist_GetItemByTitle(label);
+                    if(graph->acqcurve.x)
+                    {
+                        //graph->acqcurve.x = acqchanlist_GetItem (i);
+                        acqchan_AddGraph (graph->acqcurve.x, &graph->acqcurve);
+                        acqcurve_Plot (graph, graph->p, GRAPH_GRAPH, &graph->acqcurve);
+                        SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_XNAME,
                                       graph->acqcurve.x->channel->label);
-                    	Fmt (graph->x.label, graph->acqcurve.x->channel->label);
-					}
+                        Fmt (graph->x.label, graph->acqcurve.x->channel->label);
+                    }
                 }
             }
             break;
@@ -700,46 +714,46 @@ int  AcquireCurveCallback(int panel, int ctrl, int event, void *callbackData, in
     if (event == EVENT_COMMIT)
     {
         nodePtr node, p;
-		acqcurveGptr acqcrv, temp;
-		graph = callbackData;
-		if(acqcurveL.acqcurves.nItems > 0)
-		{
-			node = list_GetNode(acqcurveL.acqcurves, 0);
-			i = 0;
-    		p = acqcurveL.acqcurves.first;
-			temp = node->item;
-    		while ((p->next) && (temp->graph != graph))
-			{
-				p = p->next; 
-				temp = p->item;
-				i++;
-			}
-			if (temp->graph != graph)
-			{
-				aPanel = LoadPanel (utilG.p, "acqcrvu.uir", ACQCURVE);
-        		acqcrv = malloc(sizeof(acqcurveGs));
-				acqcrv->Apanel = aPanel;
-				acqcrv->graph = graph;
-				list_AddItem(&acqcurveL.acqcurves, acqcrv);
-			}
-			else
-			{
-				node = list_GetNode(acqcurveL.acqcurves, i);
-				acqcrv = node->item;
-				aPanel = acqcrv->Apanel;
-			}
-		}
-		else
-		{
-			aPanel = LoadPanel (utilG.p, "acqcrvu.uir", ACQCURVE);
-        	acqcrv = malloc(sizeof(acqcurveGs));
-			acqcrv->Apanel = aPanel;
-			acqcrv->graph = graph;
-			list_AddItem(&acqcurveL.acqcurves, acqcrv);
-		}
-		acqcrv->InitSourceMarker = sourcelist_InitAcqCurveSourceList;
+        acqcurveGptr acqcrv, temp;
+        graph = callbackData;
+        if(acqcurveL.acqcurves.nItems > 0)
+        {
+            node = list_GetNode(acqcurveL.acqcurves, 0);
+            i = 0;
+            p = acqcurveL.acqcurves.first;
+            temp = node->item;
+            while ((p->next) && (temp->graph != graph))
+            {
+                p = p->next; 
+                temp = p->item;
+                i++;
+            }
+            if (temp->graph != graph)
+            {
+                aPanel = LoadPanel (utilG.p, "acqcrvu.uir", ACQCURVE);
+                acqcrv = malloc(sizeof(acqcurveGs));
+                acqcrv->Apanel = aPanel;
+                acqcrv->graph = graph;
+                list_AddItem(&acqcurveL.acqcurves, acqcrv);
+            }
+            else
+            {
+                node = list_GetNode(acqcurveL.acqcurves, i);
+                acqcrv = node->item;
+                aPanel = acqcrv->Apanel;
+            }
+        }
+        else
+        {
+            aPanel = LoadPanel (utilG.p, "acqcrvu.uir", ACQCURVE);
+            acqcrv = malloc(sizeof(acqcurveGs));
+            acqcrv->Apanel = aPanel;
+            acqcrv->graph = graph;
+            list_AddItem(&acqcurveL.acqcurves, acqcrv);
+        }
+        acqcrv->InitSourceMarker = sourcelist_InitAcqCurveSourceList;
         acqcrv->ControlCallback = AcqCurveSourceMarkerCallback;
-		acqcrv->PanelCallback = AcqCurvePanelCallback;
+        acqcrv->PanelCallback = AcqCurvePanelCallback;
         SetPanelPos (aPanel, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
 
         SetInputMode (acqcrv->Apanel, ACQCURVE_GRAPHFILE, graph->acqcurve.autoattr.save);
@@ -779,22 +793,22 @@ int  AcquireCurveCallback(int panel, int ctrl, int event, void *callbackData, in
         SetCtrlAttribute (aPanel, ACQCURVE_AUTOCOLOR, ATTR_CALLBACK_DATA, &graph->acqcurve);
 
         SetCtrlAttribute (aPanel, ACQCURVE_NOTE, ATTR_CALLBACK_DATA, graph->acqcurve.note);
-		
+        
         InstallCtrlCallback (aPanel, ACQCURVE_MARKER, acqcrv->ControlCallback, graph);
         InstallCtrlCallback (aPanel, ACQCURVE_MARKER_SOURCES, acqcrv->ControlCallback, graph);
         InstallCtrlCallback (aPanel, ACQCURVE_MARKER_TERM, acqcrv->ControlCallback, graph);
-		InstallPanelCallback(aPanel, acqcrv->PanelCallback, graph);
-		
+        InstallPanelCallback(aPanel, acqcrv->PanelCallback, graph);
+        
         InstallCtrlCallback (aPanel, ACQCURVE_XCHANNEL, AcquireCurveControlCallback, graph);
         InstallCtrlCallback (aPanel, ACQCURVE_YCHANNEL, AcquireCurveControlCallback, graph);
         InstallCtrlCallback (aPanel, ACQCURVE_PTFREQ, AcquireCurveControlCallback, graph);
         InstallCtrlCallback (aPanel, ACQCURVE_COLOR, AcquireCurveControlCallback, graph);
 
-		if (acqcrv->InitSourceMarker && (utilG.exp == EXP_SOURCE))
+        if (acqcrv->InitSourceMarker && (utilG.exp == EXP_SOURCE))
             acqcrv->InitSourceMarker(aPanel, graph->acqcurve.marker.source);
 
         DisplayPanel (aPanel);
-		SetPanelAttribute (aPanel, ATTR_TITLE, graph->title);
+        SetPanelAttribute (aPanel, ATTR_TITLE, graph->title);
     }
     return 0;
 }
@@ -983,7 +997,7 @@ int  GraphPanelCallback(int panel, int event, void *callbackData, int eventData1
     graphPtr graph = callbackData;
 
     if (((event == EVENT_KEYPRESS) && (eventData1 == VAL_ESC_VKEY)) || (event == EVENT_RIGHT_DOUBLE_CLICK))
-	    HidePanel (panel);
+        HidePanel (panel);
 
     if (event == EVENT_PANEL_SIZE) {
         GetPanelAttribute (panel, ATTR_HEIGHT, &height);
@@ -1208,8 +1222,8 @@ static void axis_Init (axisType *x, axisType *y)
     x->divisions.val = 10;
     x->grid.attr = ATTR_XGRID_VISIBLE;
     x->grid.val = TRUE;
-	x->conversion.val = 0;
-	
+    x->conversion.val = 0;
+    
     Fmt (y->label, "Y Axis");
     y->autoscale = VAL_AUTOSCALE;
     y->min = -1;
@@ -1220,24 +1234,24 @@ static void axis_Init (axisType *x, axisType *y)
     y->divisions.val = 10;
     y->grid.attr = ATTR_YGRID_VISIBLE;
     y->grid.val = TRUE;
-	y->conversion.val = 0;
+    y->conversion.val = 0;
 }
 
 static void axis_InitControl (graphPtr graph, int y_axis)
 {
     int x1, y1;
-	char name[300];
+    char name[300];
 
     graph->axisP = graph->axisP? graph->axisP : LoadPanel (utilG.p, "graphu.uir", AXIS);
     
-	Fmt(name, "axis control panel: %s", graph->title);
+    Fmt(name, "axis control panel: %s", graph->title);
     SetPanelAttribute (graph->axisP, ATTR_TITLE, name);
-	SetPanelAttribute (graph->axisP, ATTR_CALLBACK_DATA, graph);
+    SetPanelAttribute (graph->axisP, ATTR_CALLBACK_DATA, graph);
     util_InitClose (graph->axisP, AXIS_CLOSE, FALSE);
 
     axis_GetGraphArea (graph);
     if (y_axis) axis_UpdatePanel(graph->axisP, graph->y);
-	else axis_UpdatePanel (graph->axisP, graph->x);
+    else axis_UpdatePanel (graph->axisP, graph->x);
     SetCtrlVal (graph->axisP, AXIS_SELECTION, y_axis);
 
     DisplayPanel (graph->axisP);
@@ -1270,7 +1284,7 @@ static void axis_UpdatePanel (int panel, axisType axis)
     SetCtrlVal (panel, AXIS_SCALE, axis.logscale.val);
     SetInputMode (panel, AXIS_AUTODIV, !axis.logscale.val);
     SetCtrlVal (panel, AXIS_GRID, axis.grid.val);
-	SetCtrlVal (panel, AXIS_CONV, axis.conversion.val);
+    SetCtrlVal (panel, AXIS_CONV, axis.conversion.val);
 }
 
 int  AxisControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
@@ -1371,46 +1385,46 @@ int  AxisControlCallback(int panel, int control, int event, void *callbackData, 
                                   myaxis->divisions.val);
                 axis_UpdatePanel(panel, *myaxis);
                 break;
-			case AXIS_CONV:
-				GetCtrlVal (panel, control, &myaxis->conversion.val);
-				graph_ReplotCurvesWithConv(graph);
-				if(myaxis->conversion.val == 3)
-				{
-					char pathname[260] = "";
-					double res, temp, result, arr[274][2];
-					int i= 0, file;
-					/*
-					double **arr;
-					arr = malloc(sizeof(double*[274]));
-					for(i = 0; i < 274; i++)
-						arr[i] = malloc(sizeof(double) * 2);//*/
-			
-					i = FileSelectPopup ("", "", "*.tbl", "Custom Table", VAL_LOAD_BUTTON,
-								 0, 0, 1, 0, pathname);
-					if(i)
-					{
-						file = OpenFile (pathname, VAL_READ_ONLY, VAL_OPEN_AS_IS,
-								 VAL_ASCII);
-						if(file != -1)
-						{
-							RUO_USR_TABLEITEMS = 0;
-							do{
-								result = ScanFile(file, "%f %f", &res, &temp);
-								arr[RUO_USR_TABLEITEMS][0] = res;
-								arr[RUO_USR_TABLEITEMS][1] = temp;
-								RUO_USR_TABLEITEMS++;
-							}while(result > 0 && RUO_USR_TABLEITEMS < 274);
-							RUO_USR_TABLEITEMS--;
-						}
-						else
-							myaxis->conversion.val = 0;
-					}
-					else
-						myaxis->conversion.val = 0;
-				}
-				acqcurve_Plot(graph, graph->p, GRAPH_GRAPH, &graph->acqcurve);
-				axis_UpdatePanel(panel, *myaxis);
-				break;
+            case AXIS_CONV:
+                GetCtrlVal (panel, control, &myaxis->conversion.val);
+                graph_ReplotCurvesWithConv(graph);
+                if(myaxis->conversion.val == 3)
+                {
+                    char pathname[260] = "";
+                    double res, temp, result, arr[274][2];
+                    int i= 0, file;
+                    /*
+                    double **arr;
+                    arr = malloc(sizeof(double*[274]));
+                    for(i = 0; i < 274; i++)
+                        arr[i] = malloc(sizeof(double) * 2);//*/
+            
+                    i = FileSelectPopup ("", "", "*.tbl", "Custom Table", VAL_LOAD_BUTTON,
+                                 0, 0, 1, 0, pathname);
+                    if(i)
+                    {
+                        file = OpenFile (pathname, VAL_READ_ONLY, VAL_OPEN_AS_IS,
+                                 VAL_ASCII);
+                        if(file != -1)
+                        {
+                            RUO_USR_TABLEITEMS = 0;
+                            do{
+                                result = ScanFile(file, "%f %f", &res, &temp);
+                                arr[RUO_USR_TABLEITEMS][0] = res;
+                                arr[RUO_USR_TABLEITEMS][1] = temp;
+                                RUO_USR_TABLEITEMS++;
+                            }while(result > 0 && RUO_USR_TABLEITEMS < 274);
+                            RUO_USR_TABLEITEMS--;
+                        }
+                        else
+                            myaxis->conversion.val = 0;
+                    }
+                    else
+                        myaxis->conversion.val = 0;
+                }
+                acqcurve_Plot(graph, graph->p, GRAPH_GRAPH, &graph->acqcurve);
+                axis_UpdatePanel(panel, *myaxis);
+                break;
         }
     }
     return 0;
@@ -1432,10 +1446,10 @@ static void axis_SetGraphArea (graphPtr graph)
 
 int CVICALLBACK PanelClose (int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
-	if(event == EVENT_COMMIT)
-	{
-		SetCtrlVal(panel, control, 0);
-		HidePanel(panel);
-	}
-	return 0;
+    if(event == EVENT_COMMIT)
+    {
+        SetCtrlVal(panel, control, 0);
+        HidePanel(panel);
+    }
+    return 0;
 }
