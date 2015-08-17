@@ -48,7 +48,7 @@ typedef struct {
 typedef struct {
     portType port[4];
     int id;
-	rangePtr range[5];
+    rangePtr range[5];
 }   k213Type;
 
 typedef k213Type *k213Ptr;
@@ -112,7 +112,7 @@ static void k213_UpdateReadings (int panel, void *dev)
     k213Ptr quadsrc = my_dev->device;
     unsigned short statusbyte;
     char rsp[256];
-    int control, dim, bg, mode, m, active_panel, port;
+    int control, dim=0, bg, mode, m, active_panel, port;
 
     for (port = 0; port < 4; port++) {
         if (!util_TakingData() || !quadsrc->port[port].src->acqchan->acquire)
@@ -152,30 +152,30 @@ static void *k213_Create (gpibioPtr dev)
 {
     k213Ptr quadsrc;
     int port;
-	quadsrc = malloc (sizeof(k213Type));
-	if (dev) quadsrc->id = dev->id;
-	quadsrc->range[0] = range_Create(0, 0, 0);
-	quadsrc->range[1] = range_Create(1, -1, 0.00025);
-	quadsrc->range[2] = range_Create(5, -5, 0.00125);
-	quadsrc->range[3] = range_Create(10, -10, 0.0025);
+    quadsrc = malloc (sizeof(k213Type));
+    if (dev) quadsrc->id = dev->id;
+    quadsrc->range[0] = range_Create(0, 0, 0);
+    quadsrc->range[1] = range_Create(1, -1, 0.00025);
+    quadsrc->range[2] = range_Create(5, -5, 0.00125);
+    quadsrc->range[3] = range_Create(10, -10, 0.0025);
     quadsrc->range[4] = NULL;
     for (port = 0; port < 4; port++) {
         quadsrc->port[port].autorange = TRUE;
         quadsrc->port[port].range = 0;
     }
-	
+    
     quadsrc->port[0].src = source_Create ("K213 Port 1", dev, k213_SetPort1,
                                  k213_GetPort1);
-	
+    
     quadsrc->port[1].src = source_Create ("K213 Port 2", dev, k213_SetPort2,
                                  k213_GetPort2);
     
-	quadsrc->port[2].src = source_Create ("K213 Port 3", dev, k213_SetPort3,
+    quadsrc->port[2].src = source_Create ("K213 Port 3", dev, k213_SetPort3,
                                  k213_GetPort3);
     
-	quadsrc->port[3].src = source_Create ("K213 Port 4", dev, k213_SetPort4,
+    quadsrc->port[3].src = source_Create ("K213 Port 4", dev, k213_SetPort4,
                                  k213_GetPort4);
-	
+    
     if (dev) dev->device = quadsrc;
     return quadsrc;
 }
@@ -243,7 +243,7 @@ int  K213ControlCallback(int panel, int control, int event, void *callbackData, 
                     if (event == EVENT_COMMIT) {
                         GetCtrlVal (panel, control, &quadsrc->port[port].src->biaslevel);
                         k213_SetPortLevel (port+1, dev);
-						util_Delay(1);
+                        util_Delay(1);
                     }
                     break;
                 case K213PORT_AUTORANGE:
@@ -289,8 +289,8 @@ int  K213ControlPanelCallback(int panel, int event, void *callbackData, int even
             HidePanel (quadsrc->port[port].panel);
         }
         DiscardPanel (panel);
-		dev->iPanel = 0;
-		SetMenuBarAttribute (acquire_GetMenuBar(), dev->menuitem_id, ATTR_DIMMED, FALSE);
+        dev->iPanel = 0;
+        SetMenuBarAttribute (acquire_GetMenuBar(), dev->menuitem_id, ATTR_DIMMED, FALSE);
     }
 
     if (event == EVENT_GOT_FOCUS && panel == dev->iPanel) {
@@ -306,7 +306,7 @@ int  K213ControlPanelCallback(int panel, int event, void *callbackData, int even
 
 static void k213_Operate (int menubar, int menuItem, void *callbackData, int panel)
 {
-    int p, m, port, width, height;
+    int p, m, port, width=0, height=0;
     gpibioPtr dev = callbackData;
     k213Ptr quadsrc = dev->device;
     char label[256];
@@ -315,7 +315,7 @@ static void k213_Operate (int menubar, int menuItem, void *callbackData, int pan
 
     p = dev->iPanel? dev->iPanel: LoadPanel (utilG.p, "k213u.uir", K213);
     dev->iPanel = p;
-	
+    
     Fmt (label, "Keithley 213 : %s", dev->label);
     SetPanelAttribute (p, ATTR_TITLE, label);
 
@@ -342,7 +342,7 @@ static void k213_Operate (int menubar, int menuItem, void *callbackData, int pan
         SetCtrlAttribute (quadsrc->port[port].panel, K213PORT_AUTORANGE, ATTR_CALLBACK_DATA, dev);
         SetCtrlAttribute (quadsrc->port[port].panel, K213PORT_RANGE, ATTR_CALLBACK_DATA, dev);
         SetCtrlAttribute (quadsrc->port[port].panel, K213PORT_SETUP, ATTR_CALLBACK_DATA, dev);
-		SetPanelAttribute(quadsrc->port[port].panel, ATTR_CALLBACK_DATA, dev);
+        SetPanelAttribute(quadsrc->port[port].panel, ATTR_CALLBACK_DATA, dev);
         DisplayPanel (quadsrc->port[port].panel);
     }
 
@@ -369,7 +369,7 @@ static void k213_UpdateControls (int panel, gpibioPtr dev)
         if (quadsrc->port[port].autorange || (quadsrc->port[port].range == 3)) {
             quadsrc->port[port].src->min = -10.0;
             quadsrc->port[port].src->max = 10.0;
-			
+            
         } else {
             switch (quadsrc->port[port].range) {
                 case 0:
@@ -386,16 +386,16 @@ static void k213_UpdateControls (int panel, gpibioPtr dev)
                     break;
             }
         }
-		if (quadsrc->port[port].autorange)
-		{
-			quadsrc->port[port].src->ranges.autoscale = 1;
-			quadsrc->port[port].src->ranges.temprange = quadsrc->range;
-		}
-		else
-		{
-			quadsrc->port[port].src->ranges.autoscale = 0;
-			quadsrc->port[port].src->ranges.temprange[0] = quadsrc->range[quadsrc->port[port].range];
-		}
+        if (quadsrc->port[port].autorange)
+        {
+            quadsrc->port[port].src->ranges.autoscale = 1;
+            quadsrc->port[port].src->ranges.temprange = quadsrc->range;
+        }
+        else
+        {
+            quadsrc->port[port].src->ranges.autoscale = 0;
+            quadsrc->port[port].src->ranges.temprange[0] = quadsrc->range[quadsrc->port[port].range];
+        }
         SetCtrlAttribute (quadsrc->port[port].panel, K213PORT_DISPLAY, ATTR_MIN_VALUE, quadsrc->port[port].src->min);
         SetCtrlAttribute (quadsrc->port[port].panel, K213PORT_DISPLAY, ATTR_MAX_VALUE, quadsrc->port[port].src->max);
     }

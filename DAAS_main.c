@@ -37,6 +37,7 @@
 #include "dda08.h"
 #include "USB-PMD1208LS.h"
 
+#define DFLT_IDLE_EVENT_RATE 40
 
 int AcquireData (int panel, int control, int event, void *callbackData, int event1, int event2);
 
@@ -81,7 +82,8 @@ main (void)
     demo_board_Init();
     init_MCCdevices();
 /***********************************************************************************/    
-    SetIdleEventRate (40);  // 40ms time, 25Hz rate
+    SetIdleEventRate (DFLT_IDLE_EVENT_RATE);  // 40ms time, 25Hz rate
+    util_printfLog("Set idle event rate to %d ms\n", DFLT_IDLE_EVENT_RATE);
     InstallMainCallback (AcquireData, 0, 1);
     
     utilG.err = 0;
@@ -107,8 +109,14 @@ int AcquireData (int panel, int control, int event, void *callbackData, int even
                 graphlist_AutoSave();
                 acqchanlist_CopytoChannelList();
 
-                if (utilG.acq.pt == utilG.acq.nPts) utilG.acq.status = ACQ_DONE;
-                else utilG.acq.status = ACQ_STOPPED;
+                if (utilG.acq.pt == utilG.acq.nPts) {
+                    utilG.acq.status = ACQ_DONE;
+                    util_WriteLogLine("Experiment Done");
+                }
+                else {
+                    utilG.acq.status = ACQ_STOPPED;
+                    util_WriteLogLine("Experiment Stopped");
+                }                    
                 acquire_UpdatePanel();
                 utilG.acq.pt = 0;
                 break;

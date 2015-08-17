@@ -16,12 +16,11 @@
 #define TRUE 1
 #define FALSE 0
 
-#define LOG_LEN_MAX 10000
-
 struct utilStruct utilG;
 struct fileStruct fileHandle = {0, 0};
-static int initP, fileP;
-static int x_logP;
+static int initP;  // inip panel handle
+static int fileP;  // file panel handle
+static int x_logP; // log panel handle
 
 void *util_formatParse(char *format, va_list *list, char *msg, int index);
 void util_formatParseRead(char *format, va_list *list, char *msg, int index);
@@ -271,6 +270,7 @@ void utilG_Init (void (*DiscardPanels)(void))
     
     x_logP = LoadPanel(utilG.p, "utilu.uir", LOG_PANEL);
     DisplayPanel (x_logP);
+    util_WriteLogLine(strVersion);
     util_ChangeInitMessage ("DAAS Utilities...");
 
 }
@@ -299,11 +299,24 @@ void util_ChangeInitMessage (char *msg)
     int width;
 
     SetCtrlVal (initP, INIT_TEXT, msg);
-    util_WriteLog( msg);   util_WriteLog( "\n"); 
+    util_WriteLogLine( msg); 
 }
 
 void util_WriteLog( char * txt){
     SetCtrlVal(x_logP, LOG_PANEL_TEXT, txt);
+}
+
+void util_WriteLogLine( char *txt){
+    util_WriteLog( txt);   util_WriteLog( "\n");
+}
+
+void util_printfLog( const char * format, ... ){
+  char buf[1001];    
+  va_list args;
+  va_start (args, format);
+  vsnprintf(buf, 1000, format, args);
+  va_end (args);
+  util_WriteLog(buf);
 }
     
 

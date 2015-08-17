@@ -128,7 +128,8 @@ int exp_Begin (void)
     char fname[MAX_PATHNAME_LEN];
     FormatDateTimeString(dt, "%Y-%m-%d_%H%M%S", fname, MAX_PATHNAME_LEN-1);
     sprintf(dataFile.filePath,"%s\\%s_%s.daas", dataFile.dataDir, fname, dataFile.fileSuffix);
-    DebugPrintf("File path: %s\n", dataFile.filePath);
+    util_printfLog("Starting Experiment...\n");
+    util_printfLog("Data file path: %s\n", dataFile.filePath);
     SetCtrlVal (acqG.p.setup, ACQSETUP_FILEPATH, dataFile.filePath);                      
     //updateGraphSource();
 

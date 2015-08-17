@@ -38,6 +38,8 @@ extern int  util_DiscardCallback(int panel, int control, int event, void *callba
 extern void util_RemoveInitMessage (void);
 extern void util_ChangeInitMessage (char *msg);
 extern void util_WriteLog( char * txt);
+extern void util_WriteLogLine( char *txt);
+extern void util_printfLog( const char * format, ... );
 extern void util_MessagePopup(char* Title, char* Message, ...);
 
 extern int  util_OpenFile(char *path, int action, int ascii);

@@ -92,123 +92,123 @@ int         gpibio_DeviceMatch (gpibioPtr dev, char *cmd, char *id);
 /**********************************************************************/
 void gpibPrint(gpibioPtr dev, const char *format, ...)
 {
-	va_list List;
-	char buffer[260] = "", tempstr[90];
-	int i, length = StringLength(format), cond;
-	void *arg;
-	
-	va_start(List, format);
-	for (i = 0; i<length; i++)
-	{
-		strcpy(tempstr , "");
-		if(format[i] == '%')
-		{
-			i++;
-			arg = va_arg(List, void*);
-			charRecognition(format[i], arg, buffer);
-		}
-		else if (format[i] == '[') // syntax:[y]:[z]. if((int) x){y}else{z}. can't nest [] ifs.
-		{						   // x does not get passed by reference. it is an int, so pass it as such, damn it!
-			cond = va_arg(List, int);
-			i++;
-			while(format[i] != ']')
-			{
-				if(format[i] == '%')
-				{
-					i++;
-					arg = va_arg(List, void*);
-					if(cond)
-						charRecognition(format[i], arg, tempstr);
-				}
-				else
-					Fmt(tempstr, "%s%c", tempstr, format[i]);
-				i++;
-			}
-			if(cond)
-				Fmt(buffer, "%s%s", buffer, tempstr);
-			i++;
-			strcpy(tempstr , "");
-			if(format[i] == ':')
-			{
-				i++;
-				if(format[i] == '[')
-				{
-					i++;
-					while(format[i] != ']')
-					{
-						if(format[i] == '%')
-						{
-							i++;
-							arg = va_arg(List, void*);
-							if(!cond)
-								charRecognition(format[i], arg, tempstr);
-						}
-						else
-							Fmt(tempstr, "%s%c", tempstr, format[i]);
-						i++;
-					}
-				}
-			}
-			else
-				i--;
-			if(!cond)
-				Fmt(buffer, "%s%s", buffer, tempstr);
-		}
-		else
-			Fmt(buffer, "%s%c", buffer, format[i]);
-	}
-	va_end(List);
-	gpibio_Out(dev, buffer);
+    va_list List;
+    char buffer[260] = "", tempstr[90];
+    int i, length = StringLength(format), cond;
+    void *arg;
+    
+    va_start(List, format);
+    for (i = 0; i<length; i++)
+    {
+        strcpy(tempstr , "");
+        if(format[i] == '%')
+        {
+            i++;
+            arg = va_arg(List, void*);
+            charRecognition(format[i], arg, buffer);
+        }
+        else if (format[i] == '[') // syntax:[y]:[z]. if((int) x){y}else{z}. can't nest [] ifs.
+        {                          // x does not get passed by reference. it is an int, so pass it as such, damn it!
+            cond = va_arg(List, int);
+            i++;
+            while(format[i] != ']')
+            {
+                if(format[i] == '%')
+                {
+                    i++;
+                    arg = va_arg(List, void*);
+                    if(cond)
+                        charRecognition(format[i], arg, tempstr);
+                }
+                else
+                    Fmt(tempstr, "%s%c", tempstr, format[i]);
+                i++;
+            }
+            if(cond)
+                Fmt(buffer, "%s%s", buffer, tempstr);
+            i++;
+            strcpy(tempstr , "");
+            if(format[i] == ':')
+            {
+                i++;
+                if(format[i] == '[')
+                {
+                    i++;
+                    while(format[i] != ']')
+                    {
+                        if(format[i] == '%')
+                        {
+                            i++;
+                            arg = va_arg(List, void*);
+                            if(!cond)
+                                charRecognition(format[i], arg, tempstr);
+                        }
+                        else
+                            Fmt(tempstr, "%s%c", tempstr, format[i]);
+                        i++;
+                    }
+                }
+            }
+            else
+                i--;
+            if(!cond)
+                Fmt(buffer, "%s%s", buffer, tempstr);
+        }
+        else
+            Fmt(buffer, "%s%c", buffer, format[i]);
+    }
+    va_end(List);
+    gpibio_Out(dev, buffer);
 }
 
 void charRecognition(char type, void *arg, void *buffer)
 {
-	int intType, *intPtr, cond;
-	char charType, *string;
-	double doubleType, *doublePtr;
-	switch(type)
-	{
-		case 'i':
-			intPtr = arg;
-			intType = *intPtr;
-			Fmt(buffer, "%s%i", buffer, intType);
-			break;
-		case 'f':
-			doublePtr = arg;
-			doubleType = *doublePtr;
-			Fmt(buffer, "%s%f", buffer, doubleType);
-			break;
-		case 's':
-			string = arg;
-			Fmt(buffer, "%s%s", buffer, string);
-			break;
-		case 'c':
-			string = arg;
-			charType = *string;
-			Fmt(buffer, "%s%c", buffer, charType);
-			break;
-	}
+    int intType, *intPtr, cond;
+    char charType, *string;
+    double doubleType, *doublePtr;
+    switch(type)
+    {
+        case 'i':
+            intPtr = arg;
+            intType = *intPtr;
+            Fmt(buffer, "%s%i", buffer, intType);
+            break;
+        case 'f':
+            doublePtr = arg;
+            doubleType = *doublePtr;
+            Fmt(buffer, "%s%f", buffer, doubleType);
+            break;
+        case 's':
+            string = arg;
+            Fmt(buffer, "%s%s", buffer, string);
+            break;
+        case 'c':
+            string = arg;
+            charType = *string;
+            Fmt(buffer, "%s%c", buffer, charType);
+            break;
+    }
 }
 
 double gpib_GetDoubleVal(gpibioPtr dev, char *msg)
 {
     char cmd[256];
-	double doubVal;
-	gpibio_Out (dev, msg);
+    double doubVal;
+    gpibio_Out (dev, msg);
     gpibio_In (dev, cmd);
     Scan (cmd, "%s>%f", &doubVal);
     return doubVal;
 }
 void gpib_GetCharVal(gpibioPtr dev, char *msg, char *ret)
 {
-	gpibio_Out (dev, msg);
+    gpibio_Out (dev, msg);
     gpibio_In (dev, ret);
-	ret;
+    ret;
 }
 int gpib_GetIntVal(gpibioPtr dev, char *msg)
 {
-	char cmd[256];
-	int intVal;
+    char cmd[256];
+    int intVal;
     gpibio_Out (dev, msg);
     gpibio_In (dev, cmd);
     Scan (cmd, "%s>%i", &intVal);
@@ -247,7 +247,7 @@ void gpibio_ScanforConnectedDevs (void)
     /*unsigned short*/ short devs[32];
     int i;
 
-    for (i = 0; i < 31; i++) { devs[i] = i; devsConnected[i] = 0;}
+    for (i = 0; i < 31; i++) { devs[i] = (short)i; devsConnected[i] = 0;}
     devs[i] = NOADDR;
 
     ibonl (0, 0);
@@ -259,7 +259,7 @@ void gpibio_ScanforConnectedDevs (void)
 int gpibio_DeviceMatch (gpibioPtr dev, char *cmd, char *id)
 {
     char buffer[260];
-    unsigned short addr = gpibio_Addr(dev);
+    unsigned short addr = (unsigned short)gpibio_Addr(dev);
 
     Send (0, addr, cmd, (unsigned long)StringLength (cmd), NLend);
     Receive (0, addr, buffer, (unsigned long)260, STOPend);
@@ -319,8 +319,8 @@ gpibioPtr gpibio_CreateDevice (int id, devTypePtr devType, char *label, unsigned
     dev->logio = logio;
     dev->nIO = 0;
     dev->device = NULL;
-	dev->iPanel = 0;
-	dev->devType = devType;
+    dev->iPanel = 0;
+    dev->devType = devType;
 
     if (!devType->InitDevice(dev)) {
         free (dev);
@@ -353,7 +353,7 @@ int gpibio_GetStatusByte (gpibioPtr dev, /*unsigned*/ short *status)
     char msg[80];
     if (ifc.status == DEV_REMOTE) {
         if (dev->status == DEV_REMOTE) {
-            ReadStatusByte (0, gpibio_Addr(dev), status);
+            ReadStatusByte (0, (short)gpibio_Addr(dev), status);
             dev_CheckforGPIBErrors(dev);
         }
         else *status = 0;
@@ -395,12 +395,12 @@ int gpibio_SRQ (gpibioPtr dev)
 int gpibio_In (gpibioPtr dev, char *msg_in)
 {
     char msg[260];
-	
+    
     FillBytes (msg_in, 0, 255, 0X00);
 
     if (ifc.status == DEV_REMOTE) {
         if (dev->status == DEV_REMOTE) {
-            Receive (0, gpibio_Addr(dev), msg_in, (unsigned long)256, STOPend);
+            Receive (0, (short)gpibio_Addr(dev), msg_in, (unsigned long)256, STOPend);
             dev_CheckforGPIBErrors(dev);
         }
         else Fmt (msg_in, "[DISABLED]");
@@ -417,12 +417,12 @@ int gpibio_In (gpibioPtr dev, char *msg_in)
 int gpibio_Out (gpibioPtr dev, char *cmd)
 {
     char msg[80];
-    unsigned short addr = gpibio_Addr(dev);
+    unsigned short addr = (unsigned short)gpibio_Addr(dev);
 
     if (ifc.status == DEV_REMOTE) {
         if (dev->status == DEV_REMOTE) {
-			Send(0, addr, cmd, (unsigned long)StringLength(cmd), NLend);
-    		dev_CheckforGPIBErrors(dev);
+            Send(0, addr, cmd, (unsigned long)StringLength(cmd), NLend);
+            dev_CheckforGPIBErrors(dev);
         }
 
         if (ifc.logio || dev->logio) {
@@ -439,7 +439,7 @@ int gpibio_Local (int done, gpibioPtr dev)
     Addr4882_t addr[3];
     char msg[80];
 
-    addr[0] = gpibio_Addr(dev);
+    addr[0] = (short)gpibio_Addr(dev);
     addr[1] = NOADDR;
     if (ifc.status == DEV_REMOTE) {
         EnableLocal (0, addr);
@@ -461,7 +461,7 @@ int gpibio_Remote (gpibioPtr dev)
     Addr4882_t addr[3];
     char msg[260];
 
-    addr[0] = gpibio_Addr(dev);
+    addr[0] = (short)gpibio_Addr(dev);
     addr[1] = NOADDR;
 
     if (ifc.status == DEV_REMOTE) {
@@ -481,7 +481,7 @@ int gpibio_Clear (gpibioPtr dev)
 {
     char msg[260];
     if (ifc.status == DEV_REMOTE) {
-        DevClear (0, gpibio_Addr(dev));
+        DevClear (0, (short)gpibio_Addr(dev));
         dev_CheckforGPIBErrors(dev);
         if (ifc.logio || dev->logio) {
             Fmt (msg, "CLEAR : %i", gpibio_Addr(dev));
@@ -584,17 +584,17 @@ int  SaveDeviceSetupCallback(int panel, int control, int event, void *callbackDa
         filestatus = FileSelectPopup ("", "*.cfg", "",
                                       "Save DAAS Instrument Setup",
                                       VAL_SAVE_BUTTON, 0, 1, 1, 1, path);
-		if(filestatus)
-		{
-        	fileHandle.analysis = util_OpenFile (path, FILE_WRITE, FALSE);
-        	FmtFile (fileHandle.analysis, "%s<#DAASDEVICESETUP: %i\n", devList.nItems);
-        	for (i = 0; i < devList.nItems; i++) {
-				dev = devList_GetItem (i);
-				devList_SaveItem (dev);
-			}
-			FmtFile (fileHandle.analysis, "#ENDSETUP\n");
-			util_CloseFile();
-		}
+        if(filestatus)
+        {
+            fileHandle.analysis = util_OpenFile (path, FILE_WRITE, FALSE);
+            FmtFile (fileHandle.analysis, "%s<#DAASDEVICESETUP: %i\n", devList.nItems);
+            for (i = 0; i < devList.nItems; i++) {
+                dev = devList_GetItem (i);
+                devList_SaveItem (dev);
+            }
+            FmtFile (fileHandle.analysis, "#ENDSETUP\n");
+            util_CloseFile();
+        }
     }
     return 0;
 }
@@ -635,22 +635,22 @@ int  AddDeviceControlCallback(int panel, int control, int event, void *callbackD
             break;
         case ADDDEV_CONNECT:
             if (event == EVENT_COMMIT) {
-				GetNumListItems (panel, ADDDEV_ADDRS, &i);
-				if(i)
-				{
-					GetCtrlVal (panel, ADDDEV_ADDRS, &addr);
-                	GetCtrlVal (panel, ADDDEV_LABEL, label);
-                	GetCtrlVal (panel, ADDDEV_LIST, &i);
-                	devType = devTypeList_GetItem (i);
-                	dev = gpibio_CreateDevice (i, devType, label, GetPAD (addr), GetSAD(addr), FALSE);
-                	if (dev) {
-                    	if (devType->CreateDevice) devType->CreateDevice(dev);
-                    	GetCtrlIndex (panel, ADDDEV_ADDRS, &i);
-                    	DeleteListItem (panel, ADDDEV_ADDRS, i, 1);
-                	}
-                	devList_UpdatePanel();
-					HidePanel(panel);
-				}
+                GetNumListItems (panel, ADDDEV_ADDRS, &i);
+                if(i)
+                {
+                    GetCtrlVal (panel, ADDDEV_ADDRS, &addr);
+                    GetCtrlVal (panel, ADDDEV_LABEL, label);
+                    GetCtrlVal (panel, ADDDEV_LIST, &i);
+                    devType = devTypeList_GetItem (i);
+                    dev = gpibio_CreateDevice (i, devType, label, GetPAD (addr), GetSAD(addr), FALSE);
+                    if (dev) {
+                        if (devType->CreateDevice) devType->CreateDevice(dev);
+                        GetCtrlIndex (panel, ADDDEV_ADDRS, &i);
+                        DeleteListItem (panel, ADDDEV_ADDRS, i, 1);
+                    }
+                    devList_UpdatePanel();
+                    HidePanel(panel);
+                }
             }
             break;
     }
@@ -660,7 +660,7 @@ int  AddDeviceControlCallback(int panel, int control, int event, void *callbackD
 int  AddDeviceCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
     int p, i, index;
-    devTypePtr devType;
+    devTypePtr devType=0;
     gpibioPtr dev;
     char item[50];
 
@@ -713,39 +713,39 @@ static devTypePtr devTypeList_GetItem (int i)
 int  DevListCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
     gpibioPtr dev;
-	devTypePtr devType;
-	char name[60] = "";
-	int i;
+    devTypePtr devType;
+    char name[60] = "";
+    int i;
 
     if (event == EVENT_KEYPRESS && eventData1 == VAL_ENTER_VKEY) {
         dev = devList_GetSelection(panel);
         dev_UpdatePanel (dev);
         InstallPopup (dev->panel);
     }
-	if (event == EVENT_LEFT_DOUBLE_CLICK)
-	{
-		GetCtrlIndex(panel, control, &i);
-		dev = devList_GetItem (i);
-		devType = dev->devType;
-		devType->OperateDevice (acquire_GetMenuBar(), dev->menuitem_id, dev, acqG.p.setup);
-	}
-	//*
-	if (event == EVENT_KEYPRESS && (eventData1 == VAL_BACKSPACE_VKEY || eventData1 == VAL_FWD_DELETE_VKEY))
-	{
+    if (event == EVENT_LEFT_DOUBLE_CLICK)
+    {
+        GetCtrlIndex(panel, control, &i);
+        dev = devList_GetItem (i);
+        devType = dev->devType;
+        devType->OperateDevice (acquire_GetMenuBar(), dev->menuitem_id, dev, acqG.p.setup);
+    }
+    //*
+    if (event == EVENT_KEYPRESS && (eventData1 == VAL_BACKSPACE_VKEY || eventData1 == VAL_FWD_DELETE_VKEY))
+    {
         if(((utilG.acq.status == ACQ_BUSY || utilG.acq.status == ACQ_PAUSED)  && ConfirmPopup("Remove device:", "This will stop acquisition. Are you sure?")) || (utilG.acq.status != ACQ_BUSY && utilG.acq.status != ACQ_PAUSED))
-		{
-			if(utilG.acq.status == ACQ_BUSY || utilG.acq.status == ACQ_PAUSED)utilG.acq.status = ACQ_TERMINATE;
-			GetCtrlIndex(panel, control, &i);
-			dev = devList_GetItem (i);
-			if(dev->iPanel){devPanel_Remove(dev->iPanel);DiscardPanel(dev->iPanel);}
-			DiscardMenuItem (acquire_GetMenuBar(), dev->menuitem_id);
-			devType = devTypeList_GetItem(dev->id);
-			if(devType->RemoveDevice) devType->RemoveDevice(dev->device);
-			list_RemoveItem(&devList, i, TRUE);
-			updateGraphSource();
-			devList_UpdatePanel();		
-		}
-	}//*/
+        {
+            if(utilG.acq.status == ACQ_BUSY || utilG.acq.status == ACQ_PAUSED)utilG.acq.status = ACQ_TERMINATE;
+            GetCtrlIndex(panel, control, &i);
+            dev = devList_GetItem (i);
+            if(dev->iPanel){devPanel_Remove(dev->iPanel);DiscardPanel(dev->iPanel);}
+            DiscardMenuItem (acquire_GetMenuBar(), dev->menuitem_id);
+            devType = devTypeList_GetItem(dev->id);
+            if(devType->RemoveDevice) devType->RemoveDevice(dev->device);
+            list_RemoveItem(&devList, i, TRUE);
+            updateGraphSource();
+            devList_UpdatePanel();      
+        }
+    }//*/
     return 0;
 }
 
@@ -753,8 +753,8 @@ int  SetupPanelCallback(int panel, int event, void *callbackData, int eventData1
 {
     if (event == EVENT_GOT_FOCUS) devList_UpdatePanel ();
     if (((event == EVENT_KEYPRESS) && (eventData1 == VAL_ESC_VKEY)) || (event == EVENT_RIGHT_DOUBLE_CLICK))
-		HidePanel (devListp);
-	return 0;
+        HidePanel (devListp);
+    return 0;
 }
 
 static void SetupCallback (int menubar, int menuItem, void *callbackData, int panel)
@@ -776,25 +776,25 @@ static void devList_LoadItem (void)
 
     ScanFile (fileHandle.analysis, "%s>Device ID: %i%s[dw1]", &id);
     if(id < devTypeList.nItems)
-	{
-		devType = devTypeList_GetItem (id);
-		
-    	ScanFile (fileHandle.analysis, "%s>Address  : %i[b2], %i[b2]%s[dw1]", &paddr, &saddr);
-    	ScanFile (fileHandle.analysis, "%s>Label    : %s[xt59]%s[dw1]", label);
-    	ScanFile (fileHandle.analysis, "%s>Log I/O  : %i%s[dw1]", &logio);
+    {
+        devType = devTypeList_GetItem (id);
+        
+        ScanFile (fileHandle.analysis, "%s>Address  : %i[b2], %i[b2]%s[dw1]", &paddr, &saddr);
+        ScanFile (fileHandle.analysis, "%s>Label    : %s[xt59]%s[dw1]", label);
+        ScanFile (fileHandle.analysis, "%s>Log I/O  : %i%s[dw1]", &logio);
 
-    	if (dev_OnBus (paddr, saddr) && !dev_DuplicateAddr (paddr, saddr)) {
-	        dev = gpibio_CreateDevice(id, devType, label, paddr, saddr, logio);
-    	    if (dev && devType->CreateDevice) devType->CreateDevice(dev);
-    	} else {
-        	dev = NULL;
-        	MessagePopup ("Loading DAAS Instrument Setup Message",
+        if (dev_OnBus (paddr, saddr) && !dev_DuplicateAddr (paddr, saddr)) {
+            dev = gpibio_CreateDevice(id, devType, label, paddr, saddr, logio);
+            if (dev && devType->CreateDevice) devType->CreateDevice(dev);
+        } else {
+            dev = NULL;
+            MessagePopup ("Loading DAAS Instrument Setup Message",
                       "Instrument not connected to GPIB or duplicate address found");
-    	}
-    	if (devType->LoadDevice && dev) devType->LoadDevice (dev);
-	}
-	else
-		util_MessagePopup ("Error loading device", "Configuration file not recognized.");
+        }
+        if (devType->LoadDevice && dev) devType->LoadDevice (dev);
+    }
+    else
+        util_MessagePopup ("Error loading device", "Configuration file not recognized.");
 }
 
 static void devList_SaveItem (gpibioPtr dev)
@@ -1229,28 +1229,28 @@ static void dev_CheckforGPIBErrors (gpibioPtr dev)
         ifc_StoreCommand (errormsg);
 
         /*
-		if (!ConfirmPopup ("GPIB Error Message",
+        if (!ConfirmPopup ("GPIB Error Message",
                            "Fatal GPIB error...continuation is not advised.\n"
                            "to continue [yes]     to end program [no]")) 
-		{
+        {
             if (ifc.status == DEV_REMOTE) 
-			{
+            {
                 SendIFC(0);
                 ibonl (0, 0);
             }
             utilG.DiscardPanels();
             exit(0);
         }
-		
+        
 
         ifc_UpdatePanel();
         p = GetActivePanel();
         if (p != ifc.panel) InstallPopup (ifc.panel);
-		//*/
-		DiscardMenuItem (acquire_GetMenuBar(), ACQMENUS_GPIB_SETUP);
-		DiscardMenuItem (acquire_GetMenuBar(), ACQMENUS_GPIB_SEPARATOR);
+        //*/
+        DiscardMenuItem (acquire_GetMenuBar(), ACQMENUS_GPIB_SETUP);
+        DiscardMenuItem (acquire_GetMenuBar(), ACQMENUS_GPIB_SEPARATOR);
         util_MessagePopup("GPIB error", "gpib disabled");
-		list_RemoveAllItems (&devPanelList, TRUE);
+        list_RemoveAllItems (&devPanelList, TRUE);
         if (util_TakingData()) utilG.acq.status = ACQ_TERMINATE;
     }
 }
