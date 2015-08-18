@@ -1,8 +1,9 @@
-#include "Acquireu.h"
 #include <analysis.h>
 #include <formatio.h>
 #include <userint.h>
 #include <ansi_c.h>
+#include <utility.h>
+#include "Acquireu.h"
 
 #include "util.h"
 #include "utilu.h"
@@ -26,6 +27,7 @@ void acqcurve_Plot (void *graphP, int panel, int control, acqcurvePtr acqcurve);
 void        acqcurve_InitPanel (int panel, int control, acqcurvePtr acqcurve);
 static void acqcurve_NextColor (int *color);
 curvePtr    acqcurve_MakeCurve (int n, char *title, acqcurvePtr acqcurve);
+void acqcurve_findGraph(acqcurvePtr acqP, graphPtr * grPP);
 
 
 
@@ -141,11 +143,18 @@ int  AcqCurveControlCallback(int panel, int control, int event, void *callbackDa
             break;
         case ACQCURVE_AUTOSAVE:
             if (event == EVENT_COMMIT) {
-                c = callbackData;
+                c = (acqcurvePtr)callbackData; 
+                graphPtr grP;
+                acqcurve_findGraph(c, &grP );
+                util_printfLog("Graph title: %s\n", grP->title);
                 GetCtrlVal (panel, control, &c->autoattr.save);
                 SetInputMode (panel, ACQCURVE_GRAPHFILE, c->autoattr.save);
                 if (c->autoattr.save) {
-                    filestatus = FileSelectPopup ("", "*.grf", "*.grf",
+                    char fname[MAX_PATHNAME_LEN];
+                    strcpy(fname,grP->title);
+                    strcat(fname,".grf");
+                    util_printfLog("filename+ext: %s\n", fname);
+                    filestatus = FileSelectPopup ("", fname, "*.grf",
                                               "Auto save graph selection",
                                               VAL_SAVE_BUTTON, 0, 1, 1, 1, c->path);
                     if (filestatus != VAL_NEW_FILE_SELECTED) {
@@ -153,7 +162,17 @@ int  AcqCurveControlCallback(int panel, int control, int event, void *callbackDa
                         SetCtrlVal (panel, control, 0);
                         SetInputMode (panel, ACQCURVE_GRAPHFILE, FALSE);
                     }
-                    else SetCtrlVal (panel, ACQCURVE_GRAPHFILE, c->path);
+                    else {
+                        SetCtrlVal (panel, ACQCURVE_GRAPHFILE, c->path);
+                        // Set graph title from filename
+                        SplitPath (c->path, 0, 0, fname);
+                        // remove extension
+                        char *dotP = strrchr(fname, '.');
+                        *dotP=0;
+                        strcpy(grP->title, fname); 
+                        util_printfLog("new title: %s\n", grP->title);
+                        graph_UpdateTitle( grP );
+                    }
                 }
             }
             break;
@@ -163,28 +182,28 @@ int  AcqCurveControlCallback(int panel, int control, int event, void *callbackDa
 
 void acqcurve_Plot (void *graphP, int panel, int control, acqcurvePtr acqcurve)
 {
-	graphPtr graph = graphP;
+    graphPtr graph = graphP;
     int pts;
 
     if (panel) {
-    	acqcurve_Hide(panel, control, acqcurve);
+        acqcurve_Hide(panel, control, acqcurve);
         if (acqcurve->x && acqcurve->y &&
             acqcurve->x->channel->readings &&
             acqcurve->y->channel->readings &&
             (acqcurve->marker.pts > 1))
-		{
+        {
             pts = utilG.acq.pt - acqcurve->marker.offset;
             if (pts > 0) 
-			{
-				double **xArr = acqchan_MeasurementArray(acqcurve->x->channel->readings, acqcurve->x->coeff, graph->x.conversion.val, utilG.acq.pt);
+            {
+                double **xArr = acqchan_MeasurementArray(acqcurve->x->channel->readings, acqcurve->x->coeff, graph->x.conversion.val, utilG.acq.pt);
                 double **yArr = acqchan_MeasurementArray(acqcurve->y->channel->readings, acqcurve->y->coeff, graph->y.conversion.val, utilG.acq.pt);
-				acqcurve->buffer[0] = PlotXY (panel, control, *xArr + acqcurve->marker.offset, *yArr + acqcurve->marker.offset,
+                acqcurve->buffer[0] = PlotXY (panel, control, *xArr + acqcurve->marker.offset, *yArr + acqcurve->marker.offset,
                                               pts, VAL_DOUBLE, VAL_DOUBLE,
                                               VAL_THIN_LINE, VAL_NO_POINT, VAL_SOLID,
                                               acqcurve->ptfreq, acqcurve->color);
                 acqcurve->bufferpts++;
-				acqchan_MeasurementArrayFree(xArr);//  free(xArr);
-				acqchan_MeasurementArrayFree(yArr);//  free(yArr);
+                acqchan_MeasurementArrayFree(xArr);//  free(xArr);
+                acqchan_MeasurementArrayFree(yArr);//  free(yArr);
             }
         }
     }
@@ -194,16 +213,16 @@ void acqcurve_Hide (int panel, int control, acqcurvePtr acqcurve)
 {
     int i;
     for (i = 0; i < acqcurve->bufferpts; i++)
-	{
-		if(acqcurve->buffer[i] > 0)
-			DeleteGraphPlot (panel, control, acqcurve->buffer[i], VAL_DELAYED_DRAW);
-	}
+    {
+        if(acqcurve->buffer[i] > 0)
+            DeleteGraphPlot (panel, control, acqcurve->buffer[i], VAL_DELAYED_DRAW);
+    }
     acqcurve->bufferpts = 0;
 }
 
 void acqcurve_PlotReading (void* graphP, int panel, int control, acqcurvePtr acqcurve)
 {
-	graphPtr graph = graphP;
+    graphPtr graph = graphP;
     if (acqcurve->x && acqcurve->y && (utilG.acq.pt > 0)) {
         if (acqcurve->bufferpts < ACQCURVE_BUFFERSIZE) {
             if (utilG.acq.pt> 0)
@@ -212,8 +231,8 @@ void acqcurve_PlotReading (void* graphP, int panel, int control, acqcurvePtr acq
                       acqchan_Measurement(acqcurve->x->channel->readings[utilG.acq.pt-1], acqcurve->x->coeff, graph->x.conversion.val),
                       acqchan_Measurement(acqcurve->y->channel->readings[utilG.acq.pt-1], acqcurve->y->coeff, graph->y.conversion.val),
                       acqchan_Measurement(acqcurve->x->channel->readings[utilG.acq.pt], acqcurve->x->coeff, graph->x.conversion.val),
-					  acqchan_Measurement(acqcurve->y->channel->readings[utilG.acq.pt], acqcurve->y->coeff, graph->y.conversion.val),
-					  acqcurve->color);//*/
+                      acqchan_Measurement(acqcurve->y->channel->readings[utilG.acq.pt], acqcurve->y->coeff, graph->y.conversion.val),
+                      acqcurve->color);//*/
               }        
             acqcurve->bufferpts++;
         }
@@ -246,6 +265,36 @@ void acqcurve_Init (acqcurvePtr acqcurve)
     Fmt (acqcurve->note, "");
 }
 
-
-
-//*/
+// find the graph in global acqcurveL list given the acqcurve. returns 0 if not found 
+void acqcurve_findGraph(acqcurvePtr acqP, graphPtr * grPP){
+    acqcurveGptr acqGptr;
+    graphPtr graph;
+    nodePtr node;
+    acqcurvePtr curr_acqP;
+    for(int i = 0; i < acqcurveL.acqcurves.nItems; i++)
+    {
+        node = list_GetNode(acqcurveL.acqcurves, i);
+        acqGptr = node->item;
+        graph = acqGptr->graph;
+        if ( &graph->acqcurve == acqP) {
+            *grPP = acqGptr->graph;
+            return;
+        }
+    }
+    *grPP = 0; // not found
+}
+    
+// find panel in global acqcurveL list given the graph. returns -1 if not found 
+int acqcurve_findPanel(void * graphP ){
+    acqcurveGptr acqGptr;
+    nodePtr node;
+    for(int i = 0; i < acqcurveL.acqcurves.nItems; i++)
+    {
+        node = list_GetNode(acqcurveL.acqcurves, i);
+        acqGptr = node->item;
+        if ( acqGptr->graph == graphP) {
+            return acqGptr->Apanel;
+        }
+    }
+    return -1; // not found
+}

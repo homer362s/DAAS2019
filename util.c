@@ -475,6 +475,7 @@ int util_ErrorCloseCallback (int panel, int control, int event, void *callbackDa
     return 0;
 }
 
+// match textbox size to size of the containing panel
 int CVICALLBACK util_LogPanelCallback (int panel, int event, void *callbackData,
                                         int eventData1, int eventData2)
 {

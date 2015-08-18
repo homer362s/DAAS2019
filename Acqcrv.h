@@ -14,18 +14,18 @@ typedef acqcurveType *acqcurvePtr;
 
 typedef struct {
     void *graph;
-	void (*InitSourceMarker) (int, void *);
+    void (*InitSourceMarker) (int, void *);
     CtrlCallbackPtr ControlCallback;
-	PanelCallbackPtr PanelCallback;
-	int Apanel;
-} acqcurveGs;
+    PanelCallbackPtr PanelCallback;
+    int Apanel;
+} acqcurveGs;     
 
 typedef acqcurveGs *acqcurveGptr;
 
 struct acqcurveLStruct{
-	acqcurveGptr aPtr;
-	listType acqcurves;	
-}	acqcurveL;
+    acqcurveGptr aPtr;    
+    listType acqcurves; 
+}   acqcurveL;      // global list of acqcurveGs items
 
 extern void     acqcurve_Init (acqcurvePtr acqcurve);
 extern void     acqcurve_InitPanel (int panel, int control, acqcurvePtr acqcurve);
@@ -33,3 +33,4 @@ extern curvePtr acqcurve_MakeCurve (int n, char *title, acqcurvePtr acqcurve);
 extern void     acqcurve_PlotReading (void* graphP, int panel, int control, acqcurvePtr acqcurve);
 extern void     acqcurve_Plot (void *graphP, int panel, int control, acqcurvePtr acqcurve);
 extern void     acqcurve_Hide (int panel, int control, acqcurvePtr acqcurve);
+extern int      acqcurve_findPanel(void * graph);

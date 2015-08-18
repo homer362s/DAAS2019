@@ -11,11 +11,11 @@ typedef struct
 typedef struct
 {
     char title[260];
-    curvelistType curves;
+    curvelistType curves;  // list of curves: data displayed on screen
     axisType x, y;
     cursorType cursor;
     int p, snap, textHandle, axisP;
-    acqcurveType acqcurve;
+    acqcurveType acqcurve;  // info on collecting curves into the graph
 }   graphType;
 
 typedef graphType *graphPtr;
@@ -24,7 +24,7 @@ extern struct graphGStruct
 {
     int p;
     listType graphs;
-}   graphG;
+}   graphG;   // global list of graphs
 
 extern void graph_ReplotCurvesWithConv(graphPtr graph);
 extern void graph_Save (graphPtr graph);
@@ -36,3 +36,4 @@ extern void graphlist_PlotReadings (void);
 extern void graphlist_RemoveReadings (void);
 extern void graphlist_PlotCurves (void);
 extern void graphlist_AutoSave (void);
+extern void graph_UpdateTitle( graphPtr graph );

@@ -44,6 +44,7 @@ static struct cursorStruct
     int firstPt;
 }   cursor;
 
+int x_renGraphPanel;
 /*******************************************************************/
 
 static void axis_Init (axisType *x, axisType *y);
@@ -92,6 +93,8 @@ void graphG_Init (void)
     
     SetPanelPos (graphG.p, 70, 70);
     InstallCtrlCallback (utilG.p, BG_GRAPHS, ShowGraphsPanelCallback, 0);
+    
+    x_renGraphPanel = LoadPanel (utilG.p, "graphu.uir", REN_GRAPH);
 }
 
 int  PrintGraphCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
@@ -200,23 +203,8 @@ int  SelectGraphCallback(int panel, int control, int event, void *callbackData, 
     if (event == EVENT_RIGHT_CLICK)
     {
         graph = graphlist_GetSelection();
-        Fmt (info, "Enter new graph title:\n[%s]", graph->title);
-        button = GenericMessagePopup ("Edit Graph Title", info, "OK",
-                                      "Cancel", 0, title, 255, 1,
-                                      VAL_GENERIC_POPUP_BTN1,
-                                      VAL_GENERIC_POPUP_BTN1,
-                                      VAL_GENERIC_POPUP_BTN2);
-        if (button == VAL_GENERIC_POPUP_BTN1)
-        {
-            Fmt (graph->title, title);
-            SetPanelAttribute (graph->p, ATTR_TITLE, graph->title);
-            Fmt (info, "curves for [%s]", graph->title);
-            SetPanelAttribute (graph->curves.panel, ATTR_TITLE, info);
-            index = list_FindItem (graphG.graphs, graph);
-            ReplaceListItem (graphG.p, GRAPHS_LIST, index,
-                                 graph->title, index);
-            return 1;
-        }
+        SetCtrlVal(x_renGraphPanel, REN_GRAPH_STRING, graph->title);
+        InstallPopup( x_renGraphPanel);
     }
 
     if (event == EVENT_LEFT_DOUBLE_CLICK)
@@ -1450,6 +1438,54 @@ int CVICALLBACK PanelClose (int panel, int control, int event, void *callbackDat
     {
         SetCtrlVal(panel, control, 0);
         HidePanel(panel);
+    }
+    return 0;
+}
+
+// use after changing graph->title to update controls
+void graph_UpdateTitle( graphPtr graph ){
+    char info[256];
+    int index;
+    
+    SetPanelAttribute (graph->p, ATTR_TITLE, graph->title);
+    Fmt (info, "curves for [%s]", graph->title);
+    SetPanelAttribute (graph->curves.panel, ATTR_TITLE, info); // update curves panel
+    index = list_FindItem (graphG.graphs, graph);
+    ReplaceListItem (graphG.p, GRAPHS_LIST, index, graph->title, index); // update graph list
+    int acqCrvpan = acqcurve_findPanel( graph );
+    SetPanelAttribute (acqCrvpan, ATTR_TITLE, graph->title);
+}
+
+
+void renGraph(){
+    graphPtr graph = graphlist_GetSelection();
+    GetCtrlVal(x_renGraphPanel, REN_GRAPH_STRING, graph->title); 
+    RemovePopup(0);
+    graph_UpdateTitle( graph );
+}        
+int CVICALLBACK RenGraphCallBackOk (int panel, int control, int event,
+                                    void *callbackData, int eventData1, int eventData2)
+{
+    if(event == EVENT_COMMIT) {
+        renGraph();
+    }
+    return 0;
+}
+
+int CVICALLBACK RenGraphEntCallback (int panel, int event, void *callbackData,
+                                     int eventData1, int eventData2)
+{
+    if ((event == EVENT_KEYPRESS) && (eventData1 == VAL_ENTER_VKEY )){
+        renGraph();
+    }
+    return 0;
+}
+
+int CVICALLBACK RenGraphCallBackCancel (int panel, int control, int event,
+                                        void *callbackData, int eventData1, int eventData2)
+{
+    if(event == EVENT_COMMIT){
+        RemovePopup(0);
     }
     return 0;
 }
