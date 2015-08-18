@@ -1,6 +1,9 @@
 # CVI builds
 cvibuild.*/
 
+# CVI workspaces
+*.cws
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
