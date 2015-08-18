@@ -144,20 +144,22 @@ void LS340_UpdateHeaterSettings(int panel, gpibioPtr dev)
     Scan(msg, "%f,%f,%f", &ls->pid.p, &ls->pid.i, &ls->pid.d);
 }
 
-void LS340_UpdateControls(int p, gpibioPtr dev)
+void LS340_InitControls(int p, gpibioPtr dev)
 {
     LS340Ptr ls = dev->device;
-    char msg[260];
+    char msg[260]; int status;
     
     ls->heater.power = gpib_GetIntVal(dev, "RANGE?\n");
     Fmt(msg, "SETP? %i\n", ls->heater.loop);
     ls->heater.setpoint = gpib_GetDoubleVal(dev, msg);
     Fmt(msg, "RAMP? %i\n", ls->heater.loop);
     gpib_GetCharVal(dev, msg, msg);
-    Scan(msg, "%i,%f", &ls->heater.on, &ls->heater.rampspeed);
+    Scan(msg, "%i,%f", &status, &ls->heater.rampspeed);  //needs to be instead of status &ls->heater.ramp_status
     
     SetCtrlVal(p, LS340_CTRL_POWER, ls->heater.power);
-    SetCtrlVal(p, LS340_CTRL_HEATER, ls->heater.on);
+    //SetCtrlVal(p, LS340_CTRL_HEATER, ls->heater.on);
+	
+	//ls->heater.on=0;
     SetCtrlVal(p, LS340_CTRL_SORBTSET, ls->heater.setpoint);
     SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
     SetCtrlVal(p, LS340_CTRL_RAMPSPEED, ls->heater.rampspeed);
@@ -186,6 +188,14 @@ int LS340ControlCallback (int panel, int control, int event, void *callbackData,
     char msg[260];
     switch(control)
     {
+		 case LS340_CTRL_ALARM:
+            if (event == EVENT_COMMIT)
+            {
+                GetCtrlVal(panel, control, &ls->alarm.on);
+                if(!ls->alarm.on)
+                    SetCtrlVal(panel, LS340_CTRL_ALARMLED, 0);
+            }
+            break;	
         case LS340_CTRL_HEATER:
             if (event == EVENT_COMMIT)
             {
@@ -203,7 +213,7 @@ int LS340ControlCallback (int panel, int control, int event, void *callbackData,
                     gpibPrint(dev, "RANGE 0\n");
             }
             break;
-        case LS340_CTRL_HEATER_PROP:
+        case LS340_CTRL_HEAT_PROP:
             if (event == EVENT_COMMIT)
             {
                 int heater = LoadPanel(utilG.p, "LS340u.uir", LS340_HEAT);
@@ -215,6 +225,7 @@ int LS340ControlCallback (int panel, int control, int event, void *callbackData,
                 SetCtrlAttribute(heater, LS340_HEAT_P, ATTR_DIMMED, !ls->pid.pon);
                 SetCtrlAttribute(heater, LS340_HEAT_I, ATTR_DIMMED, !ls->pid.ion);
                 SetCtrlAttribute(heater, LS340_HEAT_D, ATTR_DIMMED, !ls->pid.don);
+				GetCtrlVal(panel, LS340_HEAT_POWERUP, &ls->heater.powerup); 
                 
                 LS340_UpdateHeaterSettings(heater, dev);
                 SetCtrlVal(heater, LS340_HEAT_LOOPNUM,  ls->heater.loop);
@@ -256,14 +267,7 @@ int LS340ControlCallback (int panel, int control, int event, void *callbackData,
                 gpibPrint(dev, "RANGE %i\n", &ls->heater.power);
             }
             break;
-        case LS340_CTRL_ALARM:
-            if (event == EVENT_COMMIT)
-            {
-                GetCtrlVal(panel, control, &ls->alarm.on);
-                if(!ls->alarm.on)
-                    SetCtrlVal(panel, LS340_CTRL_ALARMLED, 0);
-            }
-            break;
+       
         case LS340_CTRL_ALARMLVL:
             if (event == EVENT_COMMIT)
                 GetCtrlVal(panel, control, &ls->alarm.level);
@@ -583,7 +587,7 @@ void OperateLS340(int menubar, int menuItem, void *callbackData, int panel)
     SetMenuBarAttribute(m, LS340_MEASURE_MEAS, ATTR_CALLBACK_DATA, ls);
     
     SetCtrlAttribute(p, LS340_CTRL_HEATER, ATTR_CALLBACK_DATA, dev);
-    SetCtrlAttribute(p, LS340_CTRL_HEATER_PROP, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_HEAT_PROP, ATTR_CALLBACK_DATA, dev);
     SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_CALLBACK_DATA, dev);
     SetCtrlAttribute(p, LS340_CTRL_RAMPSPEED, ATTR_CALLBACK_DATA, dev);
     SetCtrlAttribute(p, LS340_CTRL_POWER, ATTR_CALLBACK_DATA, dev);
@@ -594,7 +598,7 @@ void OperateLS340(int menubar, int menuItem, void *callbackData, int panel)
     SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MIN_VALUE, 0.);
     SetPanelAttribute(p, ATTR_CALLBACK_DATA, dev);
     
-    LS340_UpdateControls(p, dev);
+    LS340_InitControls(p, dev);
     devPanel_Add(p, dev, LS340_UpdateReadings);
     
     DisplayPanel(p);
@@ -697,7 +701,7 @@ void LS340_Init(void)
         devType = malloc(sizeof(devTypeItem));
         if(devType)
         {
-            Fmt(devType->label, "ls 340 tmperature controller");
+            Fmt(devType->label, "LS340 temperature controller");
             Fmt(devType->id, LS340_ID);
             devType->CreateDevice = LS340_Create;
             devType->InitDevice = LS340_InitGPIB;
@@ -707,6 +711,7 @@ void LS340_Init(void)
             devType->LoadDevice = LS340_Load;
             devType->RemoveDevice = LS340_Remove;
             devTypeList_AddItem(devType);
+			
         }
     }
 }
