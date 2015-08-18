@@ -1,5 +1,5 @@
 
-// **************GPIB+USB+PCI+RS232 version************* 11-06-07
+// **************GPIB+USB+PCI+RS232 version************* 
 #include <cvintwrk.h>
 #include <userint.h>
 //password for instacal univ lib .exe is: mcc5_72
@@ -23,7 +23,7 @@
 
 #include "sr830.h"
 #include "sr844.h"
-//#include "k2400.h"
+#include "k2400.h"
 #include "k2000.h"
 #include "k213.h"
 #include "HP33120A.h"
@@ -57,11 +57,11 @@ main (void)
     curveop_Init();
     acquire_Init();
     gpibio_Init();
-    rs232_Init();
+   // rs232_Init();
     source_Init();
     
 /*Don't change the order of these because the load function will not work properly*/
-    //k2400_Init();
+    k2400_Init();
     k2000_Init();
     k213_Init();
     sr844_Init();
@@ -72,7 +72,7 @@ main (void)
     hp4156_Init();
 /*rs232 instruments init*/
 
-    itc4_Init();
+//    itc4_Init();
 
 /*PCI slot and USB Instacal compatible devices*/
     das6036_Init();
