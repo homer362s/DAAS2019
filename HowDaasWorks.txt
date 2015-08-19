@@ -1,0 +1,136 @@
+Warning: read at your own risk.
+ 
+You should assume that info in this document is wrong and incomplete. 
+It does not come from the designers but is the result of 
+quick and dirty reverse engineering.
+
+
+DAAS_main.c
+-----------
+Inits globals
+Inits devices
+Installs MainCallback function: AcquireData
+  this function is called on idle events, their rate is set to 25Hz (40ms)
+  See "Precedence of Callback Functions" in CVI Help for details
+Starts main gui loop
+
+  
+AcquireData():  
+-------------
+Controls experiment flow.
+Experiment can be in of the following states:
+ACQ_NONE - set in utilG_Init()(util.c) when we choose analysis-only option (no DAQ)
+ACQ_BEGIN - set in acquire.c ("begin" menu event)
+ACQ_TERMINATE - set in acquire.c ("end" menu event)
+      set by timer callback when all points are collected
+      set in exp_UpdateBiasLevels() (Source.c) - reason unclear
+      set in dev_CheckforGPIBErrors()(gpibio.c)
+      set in DevListCallback()(gpibio.c) on device removal while exp is in progress or paused
+      It's a transient state which goes into ACQ_DONE (if all points are collected) 
+      or ACQ_STOPPED (if not)
+ACQ_BUSY - active experiment. Set in exp_Begin()(acquire.c) or by "continue" menu event
+ACQ_PAUSED - set in acquire.c ("pause" menu event)
+ACQ_STOPPED - when NOT all points were collected after ACQ_TERMINATE, or when exp_Begin() failed
+ACQ_DONE -  set in utilG_Init()(util.c) when we choose DAQ and analysis option
+         -  set when all points were collected after ACQ_TERMINATE
+
+Status is saved in utilG.acq.status (util.c, Util.h)
+It is set in 17 places, 6 files
+It is checked in 29 places, 13 files
+
+Experiment can be EXP_FLOAT or EXP_SOURCE, it is saved in utilG.exp (util.c, Util.h)
+
+Acquisition happens when utilG.acq.status==ACQ_BUSY
+acquire_Point() is called on timer events.  
+This function calls expG.DoExp() it could be either exp_DoGeneralExp() (acquire.c) 
+or exp_DoSourceExp() (Source.c) depending on the type of the experiment
+
+Timing is provided by the timer events. Timer callback acq_timerCallback() calls acquire_Point()
+When all points are collected the callback sets exp. status to ACQ_TERMINATE
+
+For each data point acquired, util_Delay() (util.c) is called:
+  In floating experiment the delay is called after getting and displaying the channels 
+     exp_DoGeneralExp() (acquire.c)
+  In source experiment the delay is called after setting the output analog value
+     SetAnalogue()(MCCdevices.c or another output device) 
+     the delay depends on the current "segment", i.e scanned channel
+
+util_Delay() only calls acqTimerSetInterval(sec) to set next timer callback delay. 
+
+
+Data Files
+----------
+Data dir is set in the "data acquisition control" panel 
+  it is possible to select only an existing dir (one can create a new dir from the selection dialog)  
+  exp_Begin() (acquire.c) checks if this dir exists 
+
+Data File Name is of form: YYYY-MM-DD_HHMMSS_suffix.daas
+
+The suffix is set in the "data acquisition control" panel and is checked on commit 
+  (e.g. lost focus in textbox, or Enter pressed))
+  Default suffix and dir are set in acquire.c: see DFLT_FILE_SUFFIX and DFLT_DATA_DIR (acquire.c)
+  File extension ".daas" is set in code in exp_Begin() (acquire.c)
+
+Path and suffix are saved to the variable dataFile (acquire.c) in exp_Begin() (acquire.c)
+File is created in acqchanlist_InitDataFile() (Acqchan.c)  
+  there is a single file per "expeiment begin"
+  File name is created at the file creation time using file-creation timestamp
+
+File is closed in acqchanlist_CloseFile() (Acqchan.c) 
+
+File is written to in:
+  acqchanlist_InitDataFile() (Acqchan.c)
+  acqchanlist_GetandSaveReadings() (Acqchan.c) 
+  acqchanlist_CloseFile() (Acqchan.c)
+  
+  
+Log Panel
+--------- 
+It is possible to write to the log panel using 
+  util_WriteLog(), util_printfLog(), util_WriteLogLine() - all in (util.c)
+
+
+Graphs, curves, acquisition curves, and acquisition channels
+------------------------------------------------------------
+Graph is a collection of curves represented in a graph panel
+List of graphs is stored in a global var graphG
+Graph also has an "acquisition curve"  which specifies how data is collected into graph's curves
+
+all curves are stored in global list curveG 
+all acq curves are stored in global list acqcurveL which actually stores graphs 
+  from which the acq curves are available
+  
+There are also acquisition channels which are sources of data, e.g. ADC inputs or timestamps
+They are stored in acqchanG 
+acqchanG.time is set at time of data file creation (acqchanG.time = Timer())
+This time is used as a reference (0-point) for the experiment and for the Time acquisition channel
+
+
+Devices
+-------
+All device interfaces (i.e. functions that are used to communicate with these devices) are 
+initialized in DAAS_main.c
+
+Each device has an init function, e.g. sr830_Init(), das1602_Init(), etc
+
+Each call to this such function adds this device type to the list of available device types.
+Note there could be several devices of the same type, e.g. several DAS1602 boards
+
+There are several device type lists: 
+  MCC devices: boards_DevTypeList (MCCdevices.c)
+  GPIO devices: devTypeList (gpibio.c)
+  RS232 devices: rsDevTypeList (rs232.c)
+And the correspoding device lists  
+
+Important!!!
+The sequence of initialization of the devices matters. 
+Changes in this list, including isertions and deletions will make 
+device configuration files incompatible with previous versions (both ways)
+It is OK do add at the end of the sequence.
+
+
+
+
+Note: in acquireu.uir the menu item "set floating experiment" callback is set in gui, 
+      and the menu item "set source experiment" callback is set in source_Init()(Source.c)
+	  the callback SourceExpCallback() is also in Source.c
