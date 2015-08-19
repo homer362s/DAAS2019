@@ -179,9 +179,6 @@ void util_OutofMemory(char *header)
 
 void util_Delay (double sec)
 {
-//    double time;
-//    time = Timer();
-//    while ((Timer()-time) < sec) ProcessSystemEvents();
     // set next timer callback delay
     acqTimerSetInterval(sec);    
 }
@@ -311,10 +308,11 @@ void util_WriteLogLine( char *txt){
 }
 
 void util_printfLog( const char * format, ... ){
-  char buf[1001];    
+  const int nBuf=1000;  
+  char buf[nBuf+1];    
   va_list args;
   va_start (args, format);
-  vsnprintf(buf, 1000, format, args);
+  vsnprintf(buf, nBuf, format, args);
   va_end (args);
   util_WriteLog(buf);
 }

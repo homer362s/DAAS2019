@@ -45,7 +45,7 @@ void        acqchan_Exit(void);
 acqchanPtr  acqchan_Create (char *label, void *dev, GetReadingPtr GetReading);
 void        acqchan_Remove (acqchanPtr chan);
 double      acqchan_Measurement (double reading, double coeff, int conversion);
-double		**acqchan_MeasurementArray (double *readings, double coeff, int conversion, int pts);
+double      **acqchan_MeasurementArray (double *readings, double coeff, int conversion, int pts);
 void        acqchan_DoMeasurement (acqchanPtr chan);
 void        acqchan_AddGraph (acqchanPtr chan, void *item);
 void        acqchan_RemoveGraph (acqchanPtr chan, void *item);
@@ -359,7 +359,7 @@ void acqchanlist_CopytoChannelList (void)
         Fmt (chan->label, "%s<• %s", label);
         readings = (double *) calloc (utilG.acq.pt, sizeof(double));
         if(utilG.acq.pt)
-			Subset1D (chan->readings, chan->pts, 0, utilG.acq.pt, readings);
+            Subset1D (chan->readings, chan->pts, 0, utilG.acq.pt, readings);
         free (chan->readings);
         chan->readings = readings;
         chan->pts = utilG.acq.pt;
@@ -549,23 +549,23 @@ acqchanPtr acqchanlist_GetItem (int i)
 
 acqchanPtr acqchanlist_GetItemByTitle(char *label)
 {
-	int i = 0;
-	nodePtr node;
-	acqchanPtr acqPtr;
-	do{
-		node = list_GetNode (acqchanG.channels, i);
-		i++;
-		if(node)
-			acqPtr = node->item;
-		else
-			acqPtr = NULL;
-	}while(node && strcmp(acqPtr->channel->label, label));
-	return acqPtr;
+    int i = 0;
+    nodePtr node;
+    acqchanPtr acqPtr;
+    do{
+        node = list_GetNode (acqchanG.channels, i);
+        i++;
+        if(node)
+            acqPtr = node->item;
+        else
+            acqPtr = NULL;
+    }while(node && strcmp(acqPtr->channel->label, label));
+    return acqPtr;
 }
 
 void acqchan_GetTime (acqchanPtr acqchan)
 {
-    acqchan->reading = (Timer() - acqchanG.time)/60.0;
+    acqchan->reading = (Timer() - acqchanG.time);
 /*    (double) rand()/32767;*/
 }
 
@@ -633,11 +633,11 @@ void acqchan_DoMeasurement (acqchanPtr chan)
 {
     double meas;
     if (!chan->newreading) chan->GetReading(chan);
-	chan->reading *= chan->coeff;
+    chan->reading *= chan->coeff;
     //meas = acqchan_Measurement(chan->reading, chan->coeff, chan->conversion); WHY IS IT HERE????
-	meas = acqchan_Measurement(chan->reading, 1.0, chan->conversion);
+    meas = acqchan_Measurement(chan->reading, 1.0, chan->conversion);
     chan->channel->readings[utilG.acq.pt] = meas;
-	chan->channel->readings[utilG.acq.pt] = chan->reading;
+    chan->channel->readings[utilG.acq.pt] = chan->reading;
 }
 
 
@@ -659,33 +659,34 @@ double acqchan_Measurement (double reading, double coeff, int conversion)
                 RuO_Resistance2Temperature (reading,
                                             RUO_LOW_TABLEITEMS, RuO_Low_Table);
             break;
-		case 3:
-		{
-			measurement = RuO_Resistance2Temperature (reading, 
-											RUO_USR_TABLEITEMS, User_Table);//*/
-		}
-			break;
+        case 3:
+        {
+            measurement = RuO_Resistance2Temperature (reading, 
+                                            RUO_USR_TABLEITEMS, User_Table);//*/
+        }
+            break;
     }
     return measurement;
 }
 
+// TODO: make it sane: use double * p, not double ** p
 double **acqchan_MeasurementArray (double *readings, double coeff, int conversion, int pts)
 {
-	int i;
-	double **measurement = malloc(sizeof(double*));
-	measurement[0] = calloc(pts, sizeof(double));
+    int i;
+    double **measurement = malloc(sizeof(double*));
+    measurement[0] = calloc(pts, sizeof(double));
     for(i = 0; i < pts; i++)
-	{
-		measurement[0][i] = acqchan_Measurement (readings[i], 1.0, conversion);
-	}
+    {
+        measurement[0][i] = acqchan_Measurement (readings[i], 1.0, conversion);
+    }
     return measurement;
 }
 
 void acqchan_MeasurementArrayFree( double ** measurement){
-	
-	free(measurement[0]);
-	free(measurement);
-	
+    
+    free(measurement[0]);
+    free(measurement);
+    
 }
 
 acqchanPtr acqchan_Create (char *label, void *dev, GetReadingPtr GetReading)
@@ -714,7 +715,7 @@ acqchanPtr acqchan_Create (char *label, void *dev, GetReadingPtr GetReading)
 
     c->GetReading = GetReading;
     c->p = FALSE;
-	c->menuitem_id = 0;
+    c->menuitem_id = 0;
     c->dev = dev;
 
     return c;
@@ -733,8 +734,10 @@ void acqchan_Init (void)
 
         InstallCtrlCallback (utilG.p, BG_ACQCHANNELS, DAASAcqChannelsCallback, 0);
         acqchanL.index = acqchan_Create ("INDEX", NULL, acqchan_GetIndex);
-        acqchanL.time = acqchan_Create ("Time [min]", NULL, acqchan_GetTime);
-
+        acqchanL.time = acqchan_Create ("Time [sec]", NULL, acqchan_GetTime);
+        acqchanlist_AddChannel (acqchanL.time);  // add time acq channel 
+        SetCtrlVal (acqchanL.p, ACQLIST_TIME, TRUE); // set time acq to ON
+        
         acqchanL.mPanel.width = 0;
         acqchanL.mPanel.height = 0;
         acqchanL.mControl.width = 0;
@@ -750,7 +753,7 @@ void acqchan_Remove (acqchanPtr chan)
     if (chan && chan->p) {
         DiscardPanel (chan->p);
     }
-	acqchanlist_RemoveChannel(chan);
+    acqchanlist_RemoveChannel(chan);
     list_RemoveAllItems (&chan->graphs, FALSE);
     if (chan->channel->readings) free (chan->channel->readings);
     free (chan->channel);
