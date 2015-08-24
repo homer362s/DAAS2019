@@ -459,7 +459,46 @@ int  SaveOriginCurvesCallback(int panel, int control, int event, void *callbackD
     }
     return 0;
 }
+int  SaveIgorCurvesCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
+{
+    int filestatus, c, checked, i;
+    char path[260];
+    curvePtr curve;
 
+    if (event == EVENT_COMMIT)
+    {
+        filestatus = FileSelectPopup ("", "*.dat", "*.dat",
+                          "Save Curve Data for BR", VAL_SAVE_BUTTON, 0,
+                          1, 1, 1, path);
+        if ((filestatus == VAL_NEW_FILE_SELECTED) ||
+            (filestatus == VAL_EXISTING_FILE_SELECTED)) {
+            fileHandle.analysis = util_OpenFile(path, FILE_WRITE, TRUE);
+             FmtFile (fileHandle.analysis, "X\t"); FmtFile (fileHandle.analysis, "Y\t"); FmtFile (fileHandle.analysis, "data\n");
+				
+			for (c = 0; c < curveG.curves->list.nItems; c++) {
+                IsListItemChecked (panel, CURVESAVE_LIST, 0, &checked);
+                DeleteListItem (panel, CURVESAVE_LIST, 0, 1);
+                if (checked) {
+                    curve = curvelist_GetItem (curveG.curves->list, c);
+                    for (i = 0; i < (curve->pts); i++)
+                            FmtFile (fileHandle.analysis,
+                             "%s<%f[e2p5w12] %f[e2p5w12] %f[e2p5w12]\n", 
+							//"%s<%f[e5] %f[e5] %f[e5]\n",  
+                             curve->x->readings[i+curve->offset],
+                             curve->x0.reading,
+							 curve->y->readings[i+curve->offset]  );
+                     //WriteFile (fileHandle.analysis, "\n", 1);
+                }
+                GetNumCheckedItems (panel, CURVESAVE_LIST, &checked);
+                if (!checked) break;
+            }
+            util_CloseFile();
+            
+            DiscardPanel (panel);
+        }
+    }
+    return 0;
+}
 int  SaveCurveSelectAllCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
     int i, check;
@@ -1243,6 +1282,7 @@ curvePtr curvelist_GetItem (listType list, int i)
 curvePtr curvelist_GetSelection (void)
 {
     int i;
+    util_printfLog("selected %d panel\n", curveG.curves->panel); 
     GetCtrlIndex (curveG.curves->panel, CURVES_LIST, &i);
     return curvelist_GetItem (curveG.curves->list, i);
 }
