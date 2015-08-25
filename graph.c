@@ -145,7 +145,7 @@ int  LoadGraphCallback(int panel, int control, int event, void *callbackData, in
                     strcpy(graph->title, fname);
                     graphlist_AddGraph (graph);
                 }
-//                ReadLine (fileHandle.analysis, info, 255);   // TODO: what is this?? - Delete?
+//                ReadLine (fileHandle.analysis, info, 255);   // TODO: what is this?? - Delete?  //it probably was designed to read comments, but comments are loaded anyway 
                 util_CloseFile();
                 graphlist_UpdatePanel();
             }
