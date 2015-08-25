@@ -72,7 +72,7 @@ int util_OpenFile(char *path, int action, int ascii)
     }
     if(handle)
     {
-        fileP = LoadPanel (0, "utilu.uir", FILESTAT);
+        //fileP = LoadPanel (0, "utilu.uir", FILESTAT);
 
         
 
@@ -85,13 +85,15 @@ int util_OpenFile(char *path, int action, int ascii)
             if (ascii) Fmt (info, "%s[a]< (ASCII file...take a nap!)");
         }
 
-        SetCtrlVal (fileP, FILESTAT_TEXT, info);
-        GetCtrlAttribute (fileP, FILESTAT_TEXT, ATTR_WIDTH, &width);
-        SetPanelAttribute (fileP, ATTR_WIDTH, width+12);
-        SetCtrlAttribute (fileP, FILESTAT_TEXT, ATTR_LEFT, 6);
+        //SetCtrlVal (fileP, FILESTAT_TEXT, info);
+        //GetCtrlAttribute (fileP, FILESTAT_TEXT, ATTR_WIDTH, &width);
+        //SetPanelAttribute (fileP, ATTR_WIDTH, width+12);
+        //SetCtrlAttribute (fileP, FILESTAT_TEXT, ATTR_LEFT, 6);
 
-        SetPanelPos (fileP, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
-        InstallPopup (fileP);
+        //SetPanelPos (fileP, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
+        //InstallPopup (fileP);			 //old style before 2015
+		
+		//util_WriteLogLine(info);	  // if enabled slows down interface
     }
     else
         handle = 0;
@@ -102,7 +104,7 @@ void util_CloseFile(void)
 {
     if(fileHandle.analysis)
     {
-        DiscardPanel (fileP);
+        //DiscardPanel (fileP);
         CloseFile(fileHandle.analysis);
     }
 }
