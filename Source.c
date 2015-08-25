@@ -434,7 +434,7 @@ void updateGraphSource()
 		label = x? graph->acqcurve.x->channel->label:"X axis";
 		if(graph->p)SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_XNAME, label);
 		label = y? graph->acqcurve.y->channel->label:"Y axis";
-		SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_YNAME, label);
+		if(graph->p)SetCtrlAttribute (graph->p, GRAPH_GRAPH, ATTR_YNAME, label); //added checking for Y
 		if(src)
 		{
 			pts = src->points;
