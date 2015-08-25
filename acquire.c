@@ -25,8 +25,8 @@
 #define TRUE 1
 #define FALSE 0
 
-#define DFLT_FILE_SUFFIX "NanoSilicon"
-#define DFLT_DATA_DIR "C:\\Data"
+#define DFLT_FILE_SUFFIX "SampleData"
+#define DFLT_DATA_DIR "C:\\DAAS_Data"
 
 struct acquireStruct acqG;
 struct expStruct expG = {NULL, NULL, NULL, 0, ACQ_DONE};
