@@ -150,12 +150,14 @@ void LS340_InitControls(int p, gpibioPtr dev)
     char msg[260]; int status;
     
     ls->heater.power = gpib_GetIntVal(dev, "RANGE?\n");
+	if  (ls->heater.power)  SetCtrlVal(p, LS340_CTRL_HEATER, 1); else SetCtrlVal(p, LS340_CTRL_HEATER, 0);   
     Fmt(msg, "SETP? %i\n", ls->heater.loop);
     ls->heater.setpoint = gpib_GetDoubleVal(dev, msg);
     Fmt(msg, "RAMP? %i\n", ls->heater.loop);
     gpib_GetCharVal(dev, msg, msg);
     Scan(msg, "%i,%f", &status, &ls->heater.rampspeed);  //needs to be instead of status &ls->heater.ramp_status
-    
+    //gpibPrint(dev, "RANGE 0\n");// this  shuts heater off
+	
     SetCtrlVal(p, LS340_CTRL_POWER, ls->heater.power);
     //SetCtrlVal(p, LS340_CTRL_HEATER, ls->heater.on);
 	
