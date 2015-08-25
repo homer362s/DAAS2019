@@ -406,7 +406,8 @@ void graph_Save (graphPtr graph)
 {
     int i;
     curvePtr curve;
-    FmtFile (fileHandle.analysis, "Title       : %s;\n", graph->title);
+    
+	FmtFile (fileHandle.analysis, "Title       : %s;\n", graph->title);
     FmtFile (fileHandle.analysis, "Labels      : %s, %s;\n", graph->x.label, graph->y.label);
     FmtFile (fileHandle.analysis, "Axis Min    : %f, %f\n", graph->x.min, graph->y.min);
     FmtFile (fileHandle.analysis, "Axis Max    : %f, %f\n", graph->x.max, graph->y.max);
