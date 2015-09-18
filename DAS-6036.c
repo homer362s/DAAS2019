@@ -78,7 +78,14 @@ int das6036_ControlCallback (int panel, int control, int event, void *callbackDa
 {
     portPtr port = callbackData;
     switch (control)
-    {
+    {   case DAS_CTRL_AVERAGE:
+			if(event == EVENT_COMMIT && port)
+               GetCtrlVal (panel, control, &port->averaging);
+            break;
+		case DAS_CTRL_RATE:
+			if(event == EVENT_COMMIT && port)
+               GetCtrlVal (panel, control, &port->sample_rate);
+            break;	  
         case DAS_CTRL_RANGE:
             if(event == EVENT_COMMIT && port)
                 GetCtrlVal(panel, control, &port->port.analogueIOport.range);
@@ -99,7 +106,12 @@ int das6036_ControlCallback (int panel, int control, int event, void *callbackDa
                     SetCtrlAttribute (panel, DAS_CTRL_ACQ, ATTR_CALLBACK_DATA, das->Achannels[i]);
                     SetCtrlIndex (panel, DAS_CTRL_RANGE, das6036_IndexFromRange(das->Achannels[i]->port.analogueIOport.range));
                     SetCtrlVal (panel, DAS_CTRL_ACQ, das->Achannels[i]->port.analogueIOport.IO.acqchan->acquire);
+				SetCtrlAttribute (panel, DAS_CTRL_AVERAGE, ATTR_CALLBACK_DATA, das->Achannels[i]);//this is weird because it is the same for all channels  
+					
+					SetCtrlAttribute (panel, DAS_CTRL_RATE, ATTR_CALLBACK_DATA, das->Achannels[i]);  //this is weird because it is the same for all channels
+					SetCtrlVal (panel, DAS_CTRL_RATE, port->sample_rate);    
                 }
+				
                 SetCtrlAttribute (panel, DAS_CTRL_RANGE, ATTR_DIMMED, (i == -1));
                 SetCtrlAttribute (panel, DAS_CTRL_ACQ, ATTR_DIMMED, (i == -1));
                 if(i == -1)SetCtrlVal (panel, DAS_CTRL_ACQ, 0);
@@ -153,6 +165,7 @@ void das6036_MenuCallback(int menbar, int menuItem, void *callbackData, int pane
                 SetCtrlAttribute (port->measPanel, MEASURE_COEFF, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
                 SetCtrlAttribute (port->measPanel, MEASURE_NOTE, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
                 SetCtrlAttribute (port->measPanel, MEASURE_ACQ, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
+				//SetCtrlAttribute (port->measPanel, MEASURE_AVERAGE, ATTR_CALLBACK_DATA, port->averaging);   
                 SetPanelAttribute (port->measPanel, ATTR_TITLE, port->port.analogueIOport.IO.acqchan->channel->label);
                 
                 SetCtrlVal (port->measPanel, MEASURE_LABEL, port->port.analogueIOport.IO.acqchan->channel->label);
@@ -160,6 +173,7 @@ void das6036_MenuCallback(int menbar, int menuItem, void *callbackData, int pane
                 SetCtrlVal (port->measPanel, MEASURE_COEFF, port->port.analogueIOport.IO.acqchan->coeff);
                 SetCtrlVal (port->measPanel, MEASURE_NOTE, port->port.analogueIOport.IO.acqchan->note);
                 SetCtrlVal (port->measPanel, MEASURE_ACQ, port->port.analogueIOport.IO.acqchan->acquire);
+				//SetCtrlVal (port->measPanel, MEASURE_AVERAGE, port->averaging); 
                 DisplayPanel (port->measPanel);
             }
             break;
@@ -232,6 +246,8 @@ int  das6036_MeasureControlCallback (int panel, int control, int event, void *ca
             else if(event == EVENT_COMMIT && utilG.acq.status == ACQ_BUSY)
                 SetCtrlVal (panel, control, acqchan->acquire);
             break;
+		
+            
     }
     return 0;
 }
@@ -272,14 +288,14 @@ void das6036_Create (MCCdevPtr dev)
     for(i = 0; i < 8; i++)
     {
         //portPtr create_Port(*dev, *name, type, direction, GetReading, channel, range)
-        Fmt (name, "PCI-DAS6036 analog in %i", i);
+        Fmt (name, "PCI-DAS6036 AI %i", i);
         das->Achannels[i] = create_Port(dev, name, ANALOGUE, IN_PORT, ReadAnalogue, i, BIP10VOLTS);
         das->Achannels[i]->control = 0;
     }
     for(i = 0; i < 2; i++)
     {
         //portPtr create_Port(*dev, *name, type, direction, GetReading, SetLevel, channel, range)
-        Fmt (name, "PCI-DAS6036 analog out %i", i);
+        Fmt (name, "PCI-DAS6036 AO %i", i);
         das->Achannels[i+8] = create_Port(dev, name, ANALOGUE, OUT_PORT, ReadAnalogueOut, SetAnalogue, i, BIP10VOLTS);
         das->Achannels[i+8]->port.analogueIOport.IO.source->max = 10;
         das->Achannels[i+8]->port.analogueIOport.IO.source->min = -10;

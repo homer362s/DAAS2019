@@ -1,6 +1,5 @@
 /**************************************************************************/
 /* LabWindows/CVI User Interface Resource (UIR) Include File              */
-/* Copyright (c) National Instruments 2008. All Rights Reserved.          */
 /*                                                                        */
 /* WARNING: Do not add to, delete from, or otherwise modify the contents  */
 /*          of this include file.                                         */
@@ -15,20 +14,27 @@
      /* Panels and Controls: */
 
 #define  DAS_CTRL                         1       /* callback function: das6036_PanelCallback */
-#define  DAS_CTRL_ANALOGUE_IN             2
-#define  DAS_CTRL_INPUT                   3       /* callback function: das6036_ControlCallback */
-#define  DAS_CTRL_RANGE                   4       /* callback function: das6036_ControlCallback */
-#define  DAS_CTRL_ACQ                     5       /* callback function: das6036_ControlCallback */
+#define  DAS_CTRL_ANALOGUE_IN             2       /* control type: numeric, callback function: (none) */
+#define  DAS_CTRL_RATE                    3       /* control type: numeric, callback function: das6036_ControlCallback */
+#define  DAS_CTRL_AVERAGE                 4       /* control type: numeric, callback function: das6036_ControlCallback */
+#define  DAS_CTRL_INPUT                   5       /* control type: ring, callback function: das6036_ControlCallback */
+#define  DAS_CTRL_RANGE                   6       /* control type: ring, callback function: das6036_ControlCallback */
+#define  DAS_CTRL_ACQ                     7       /* control type: toggle, callback function: das6036_ControlCallback */
 
 #define  MEASURE                          2       /* callback function: util_HidePanelCallback */
-#define  MEASURE_LABEL                    2       /* callback function: das6036_MeasureControlCallback */
-#define  MEASURE_COEFF                    3       /* callback function: das6036_MeasureControlCallback */
-#define  MEASURE_RANGE                    4       /* callback function: das6036_MeasureControlCallback */
-#define  MEASURE_NOTE                     5       /* callback function: AcqDataNoteCallback */
-#define  MEASURE_ACQ                      6       /* callback function: das6036_MeasureControlCallback */
+#define  MEASURE_LABEL                    2       /* control type: string, callback function: das6036_MeasureControlCallback */
+#define  MEASURE_COEFF                    3       /* control type: numeric, callback function: das6036_MeasureControlCallback */
+#define  MEASURE_RANGE                    4       /* control type: ring, callback function: das6036_MeasureControlCallback */
+#define  MEASURE_NOTE                     5       /* control type: toggle, callback function: AcqDataNoteCallback */
+#define  MEASURE_ACQ                      6       /* control type: toggle, callback function: das6036_MeasureControlCallback */
 
 #define  PANEL                            3
-#define  PANEL_RANGE                      2       /* callback function: das6036_ControlCallback */
+#define  PANEL_RANGE                      2       /* control type: ring, callback function: das6036_ControlCallback */
+
+
+     /* Control Arrays: */
+
+          /* (no control arrays in the resource file) */
 
 
      /* Menu Bars, Menus, and Menu Items: */
@@ -52,7 +58,7 @@
 #define  DASMENU_MEAS_IN_7                17      /* callback function: das6036_MenuCallback */
 
 
-     /* Callback Prototypes: */ 
+     /* Callback Prototypes: */
 
 int  CVICALLBACK AcqDataNoteCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK das6036_ControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
