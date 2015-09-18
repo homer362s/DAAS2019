@@ -105,8 +105,8 @@ int usb1208ls_ControlCallback (int panel, int control, int event, void *callback
                     SetCtrlAttribute (panel, control, ATTR_CALLBACK_DATA, pmd->aiPorts[i]);
                     SetCtrlAttribute (panel, USB1208LS_RANGE, ATTR_CALLBACK_DATA, pmd->aiPorts[i]);
                     SetCtrlAttribute (panel, USB1208LS_ACQ, ATTR_CALLBACK_DATA, pmd->aiPorts[i]);
-                    SetCtrlAttribute (panel, USB1208LS_NUMERIC, ATTR_CALLBACK_DATA, pmd->aiPorts[i]);
-                    SetCtrlVal (panel, USB1208LS_NUMERIC, pmd->aiPorts[i]->averaging);
+                    SetCtrlAttribute (panel, USB1208LS_AVERAGE, ATTR_CALLBACK_DATA, pmd->aiPorts[i]);
+                    SetCtrlVal (panel, USB1208LS_AVERAGE, pmd->aiPorts[i]->averaging);
                     SetCtrlIndex (panel, USB1208LS_RANGE, usb1208ls_IndexFromRange(pmd->aiPorts[i]->port.analogueIOport.range));
                     SetCtrlVal (panel, USB1208LS_ACQ, pmd->aiPorts[i]->port.analogueIOport.IO.acqchan->acquire);
                 }
@@ -160,9 +160,9 @@ int usb1208ls_ControlCallback (int panel, int control, int event, void *callback
                 port->port.digitalIOport.IO.source->SetLevel(port->port.digitalIOport.IO.source);
             }
             break;*/
-        case USB1208LS_NUMERIC:
+        case USB1208LS_AVERAGE:
             if(event == EVENT_COMMIT && port)
-                GetCtrlVal (panel, control, &port->averaging);
+               GetCtrlVal (panel, control, &port->averaging);
             break;
     }
     if (event == EVENT_COMMIT && port)
