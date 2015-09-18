@@ -70,11 +70,11 @@
 typedef enum {X, Y, M, P, ADC1, ADC2, ADC3, ADC4} sr830_channels;
 typedef struct
 {
-    acqchanPtr  channels[8];
-    sourcePtr   sources[5];
+    acqchanPtr  channels[8]; //was 8
+    sourcePtr   sources[7];  //DAC1, DAC2, DAC3, DAC4, Frequency, Amplitude, Phase
     int         sens, inputstatus, autosens, id;
     struct      {int reserve, filter, output;} overload;
-	rangePtr *FREQrange, DACrange;
+	rangePtr *FREQrange, DACrange, AMPLrange, PHASrange;
 }   sr830Type;
 
 typedef sr830Type *sr830Ptr;
@@ -129,7 +129,7 @@ static  void *sr830_Create (gpibioPtr dev);
 static void sr830_Remove (void *ptr);
 
 static  int sr830_InitGPIB (gpibioPtr dev);
-void    OperateSR830 (int menubar, int menuItem, void *callbackData, int panel);
+void    sr830_init_menus_and_controls (int menubar, int menuItem, void *callbackData, int panel);
 
 void sr830_Init (void)
 {
@@ -142,7 +142,7 @@ void sr830_Init (void)
             Fmt (devType->id, SR830_ID);
             devType->CreateDevice = sr830_Create;
             devType->InitDevice = sr830_InitGPIB;
-            devType->OperateDevice = OperateSR830;
+            devType->OperateDevice = sr830_init_menus_and_controls;
             devType->UpdateReadings = sr830_UpdateReadings;
             devType->SaveDevice = sr830_Save;
             devType->LoadDevice = sr830_Load;
@@ -213,7 +213,10 @@ void sr830_Save (gpibioPtr dev)
     source_Save (lia->sources[1]);
     source_Save (lia->sources[2]);
     source_Save (lia->sources[3]);
-	source_Save (lia->sources[4]); 
+	source_Save (lia->sources[4]);
+	source_Save (lia->sources[5]);
+    source_Save (lia->sources[6]);
+	//source_Save (lia->sources[7]); 
 }
 
 void sr830_Load (gpibioPtr dev)
@@ -262,9 +265,16 @@ void sr830_Load (gpibioPtr dev)
     source_Load (dev, lia->sources[1]);
     source_Load (dev, lia->sources[2]);
     source_Load (dev, lia->sources[3]);
-	source_Load (dev, lia->sources[4]);   
+	source_Load (dev, lia->sources[4]);
+	source_Load (dev, lia->sources[5]);
+	source_Load (dev, lia->sources[6]);
 	lia->sources[4]->min = 1.0E-3;
     lia->sources[4]->max = 102e3;
+	lia->sources[5]->min = 4.0E-3;
+    lia->sources[5]->max =5;
+	lia->sources[6]->min = -180;
+    lia->sources[6]->max =180;
+	
     if (!dev) sr830_Remove (lia);
 }
 
@@ -319,9 +329,56 @@ static void sr830_Remove (void *ptr)
     sr830_channels chan;
     int i;
     for (chan = X; chan <= ADC4; chan++) acqchan_Remove(lia->channels[chan]);
-    for (i = 0; i < 5; i ++) source_Remove (lia->sources[i]);
+    for (i = 0; i < 7; i ++) source_Remove (lia->sources[i]); //removes all 7 sources
 
     free (lia);
+}
+void sr830_SetAMP (sourcePtr src)
+{    
+	gpibioPtr dev = src->acqchan->dev;
+    char cmd[256];
+    double dly;
+    Fmt (cmd, "SLVL%f", src->biaslevel);
+    gpibio_Out (dev, cmd);
+    util_Delay (src->segments[src->seg]->delay);
+ }
+
+ double sr830_GetRefAmpl (gpibioPtr dev)
+{
+    char msg[256];
+    double amp;
+    sr830_Out (dev, "SLVL?");
+    sr830_In (dev, msg);
+    Scan (msg, "%s>%f", &amp);
+    return amp;
+}   
+void sr830_GetAMP (acqchanPtr acqchan)
+{
+    gpibioPtr dev = acqchan->dev;
+    sr830Ptr lia = dev->device;
+    sourcePtr src = lia->sources[5];//src 6, goes after DACs  and Frequency
+    char cmd[256], rsp[256];
+    src->acqchan->reading = sr830_GetDoubleVal(dev, "SLVL?"); //acqchan->reading = gpib_GetDoubleVal(acqchan->dev, "SOURCE:VOLTAGE?"); 
+    src->acqchan->newreading = TRUE;
+}
+
+void sr830_SetPHAS (sourcePtr src)
+{    
+	gpibioPtr dev = src->acqchan->dev;
+    char cmd[256];
+    double dly;
+    Fmt (cmd, "PHAS%f", src->biaslevel);
+    gpibio_Out (dev, cmd);
+    util_Delay (src->segments[src->seg]->delay);
+ }
+void sr830_GetPHAS (acqchanPtr acqchan)
+{
+    gpibioPtr dev = acqchan->dev;
+    sr830Ptr lia = dev->device;
+    sourcePtr src = lia->sources[6];//src 7, goes after Frequency and Amplitude
+    char cmd[256], rsp[256];
+    src->acqchan->reading = sr830_GetDoubleVal(dev, "PHAS?"); //acqchan->reading = gpib_GetDoubleVal(acqchan->dev, "SOURCE:VOLTAGE?"); 
+    src->acqchan->newreading = TRUE;
 }
 void sr830_SetFREQ (sourcePtr src)
 {
@@ -336,11 +393,21 @@ void sr830_GetFREQ (acqchanPtr acqchan)
 {
     gpibioPtr dev = acqchan->dev;
     sr830Ptr lia = dev->device;
-    sourcePtr src = lia->sources[4];//last source, goes after DACs
+    sourcePtr src = lia->sources[4];// goes after DACs
     char cmd[256], rsp[256];
     src->acqchan->reading = sr830_GetDoubleVal(dev, "FREQ?");
     src->acqchan->newreading = TRUE;
 }
+double sr830_GetRefFreq (gpibioPtr dev)
+{
+    char msg[256];
+    double freq;
+    sr830_Out (dev, "FREQ?");
+    sr830_In (dev, msg);
+    Scan (msg, "%s>%f", &freq);
+    return freq;
+}
+/****************** create function *****************/
 static void *sr830_Create (gpibioPtr dev)
 {
     sr830Ptr lia;
@@ -351,6 +418,8 @@ static void *sr830_Create (gpibioPtr dev)
     lia->overload.output = FALSE;
     lia->inputstatus = 0;
     lia->autosens = FALSE;
+	
+	/*********** definiton of ranges for sources **********/
 	lia->DACrange = range_Create (10.5, -10.5, 1e-3);
 	lia->FREQrange = calloc(6, sizeof(rangeType));
 	lia->FREQrange[0] = range_Create (19.999, 1e-3, 1e-3);
@@ -359,6 +428,10 @@ static void *sr830_Create (gpibioPtr dev)
 	lia->FREQrange[3] = range_Create (19999.999, 2000, 1);
 	lia->FREQrange[4] = range_Create (102e3, 20000, 10);
 	lia->FREQrange[5] = NULL;
+	lia->AMPLrange = range_Create (5.0, 0.004, 2e-3); //range and increment for amplitude
+	lia->PHASrange = range_Create (180.0, -180.0, 0.01);   //range and increment for phase
+	
+	
 	if (dev) lia->id = dev->id;
 
     lia->channels[X] = acqchan_Create ("SR830 X", dev, sr830_GetLIAReadings);
@@ -372,23 +445,32 @@ static void *sr830_Create (gpibioPtr dev)
     lia->channels[ADC4] = acqchan_Create ("SR830 ADC4", dev, sr830_GetADCReading);
 
     lia->sources[0] = source_Create ("SR830 DAC1", dev, sr830_SetDAC1, sr830_GetDAC1);
-	lia->sources[0]->ranges.temprange[0] = lia->DACrange;
+	//lia->sources[0]->ranges.temprange[0] = lia->DACrange;
     
 	lia->sources[1] = source_Create ("SR830 DAC2", dev, sr830_SetDAC2, sr830_GetDAC2);
-    lia->sources[1]->ranges.temprange[0] = lia->DACrange;
+    //lia->sources[1]->ranges.temprange[0] = lia->DACrange;
 	
 	lia->sources[2] = source_Create ("SR830 DAC3", dev, sr830_SetDAC3, sr830_GetDAC3);
-    lia->sources[2]->ranges.temprange[0] = lia->DACrange;
-	
+    //lia->sources[2]->ranges.temprange[0] = lia->DACrange;
+											    
 	lia->sources[3] = source_Create ("SR830 DAC4", dev, sr830_SetDAC4, sr830_GetDAC4);
-	lia->sources[3]->ranges.temprange[0] = lia->DACrange;
+	//lia->sources[3]->ranges.temprange[0] = lia->DACrange;
 	
 	lia->sources[4] = source_Create ("SR830 Freq", dev, sr830_SetFREQ, sr830_GetFREQ);
-	// similar to : lia->sources[2] = source_Create ("SR844 Freq", dev, sr844_SetFREQ, sr844_GetFREQ);
 	lia->sources[4]->freq = 1;
 	lia->sources[4]->ranges.autoscale = 1;
 	lia->sources[4]->ranges.temprange = lia->FREQrange;
-		
+	
+	lia->sources[5] = source_Create ("SR830 AC ampl", dev, sr830_SetAMP, sr830_GetAMP);
+	lia->sources[5]->freq = 1;  // enables range limitations for source  
+	lia->sources[5]->ranges.autoscale = 1;// enables updates? 
+	//lia->sources[5]->ranges.temprange [0] = lia->AMPLrange;  //[0]
+	
+	lia->sources[6] = source_Create ("SR830 Phase", dev, sr830_SetPHAS, sr830_GetPHAS); 
+	lia->sources[6]->freq = 1;    
+	lia->sources[6]->ranges.autoscale = 1; 
+	//lia->sources[6]->ranges.temprange [0] = lia->PHASrange;  //[0]
+			
     if (dev) dev->device = lia;
     return lia;
 }
@@ -432,32 +514,35 @@ void SaveSR830SetupCallback(int menubar, int menuItem, void *callbackData, int p
     }
 }
 
-void DACCallback(int menubar, int menuItem, void *callbackData, int panel)
+void sr830_MenuCallback(int menubar, int menuItem, void *callbackData, int panel)
 {
     sourcePtr src;
-
-    src = callbackData;
-    src->min = -10.5;
-    src->max = 10.5;
-
-    switch (utilG.exp) {
+	src = callbackData; 
+	switch(menuItem)
+		
+	{	case SR830MENU_SOURCES_DAC1:
+		case SR830MENU_SOURCES_DAC2:
+		case SR830MENU_SOURCES_DAC3:
+		case SR830MENU_SOURCES_DAC4:
+			{
+             src->min = -10.5;
+             src->max = 10.5; break;}
+		case SR830MENU_SOURCES_FREQ:
+			{	src->min = 1e-3;
+    		src->max = 102e3;break;}
+		case SR830MENU_SOURCES_AMPL:
+			{	src->min = 4e-3;
+    		src->max = 5;break;}
+		case SR830MENU_SOURCES_PHAS:
+			{	src->min = -180;
+    		src->max = 180;break;}
+	}
+          switch (utilG.exp) {
         case EXP_SOURCE: source_InitPanel (src); break;
-        case EXP_FLOAT: gensrc_InitPanel (src); break;
-    }
-}
-void FreqCallback(int menubar, int menuItem, void *callbackData, int panel) 
-{
-	sourcePtr src;
+        case EXP_FLOAT:  gensrc_InitPanel (src); break;
+          }
+}		  
 
-    		src = callbackData;
-			src->min = 1e-3;
-    		src->max = 102e3;
-			switch (utilG.exp) {
-        		case EXP_SOURCE: source_InitPanel (src); break;
-        		case EXP_FLOAT: gensrc_InitPanel (src); break;
-    		}
-			
-}
 int  DACControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
     sr830Ptr lia;
@@ -1104,16 +1189,16 @@ int  SR830ControlPanelCallback(int panel, int event, void *callbackData, int eve
         dev = callbackData;
         menubar = GetPanelMenuBar (panel);
         SetPanelAttribute (panel, ATTR_DIMMED, (dev->status != DEV_REMOTE));
-        SetMenuBarAttribute (menubar, SR830MENUS_SOURCES, ATTR_DIMMED, (dev->status != DEV_REMOTE));
-        SetMenuBarAttribute (menubar, SR830MENUS_MEASURE, ATTR_DIMMED, (dev->status != DEV_REMOTE));
-        SetMenuBarAttribute (menubar, SR830MENUS_FILE_SAVE, ATTR_DIMMED, (dev->status != DEV_REMOTE));
-        SetMenuBarAttribute (menubar, SR830MENUS_FILE_LOAD, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, SR830MENU_SOURCES, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, SR830MENU_MEASURE, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, SR830MENU_FILE_SAVE, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, SR830MENU_FILE_LOAD, ATTR_DIMMED, (dev->status != DEV_REMOTE));
         if (!util_TakingData()) sr830_UpdateControls (panel, dev);
     }
     return 0;
 }
 
-void OperateSR830 (int menubar, int menuItem, void *callbackData, int panel)
+void sr830_init_menus_and_controls (int menubar, int menuItem, void *callbackData, int panel)
 {
     int p, m;
     gpibioPtr dev = callbackData;
@@ -1130,24 +1215,25 @@ void OperateSR830 (int menubar, int menuItem, void *callbackData, int panel)
     Fmt (label, "Stanford Research Systems SR830 DSP Lock-in Amplifier: %s", dev->label);
     SetPanelAttribute (p, ATTR_TITLE, label);
 
-    m = LoadMenuBar (p, "sr830u.uir", SR830MENUS);
+    m = LoadMenuBar (p, "sr830u.uir", SR830MENU);
     
     SetPanelMenuBar (p, m);
 
-    SetMenuBarAttribute (m, SR830MENUS_FILE_SAVE, ATTR_CALLBACK_DATA, dev);
-    SetMenuBarAttribute (m, SR830MENUS_FILE_LOAD, ATTR_CALLBACK_DATA, dev);
-    SetMenuBarAttribute (m, SR830MENUS_FILE_GPIB, ATTR_CALLBACK_DATA, dev);
+    SetMenuBarAttribute (m, SR830MENU_FILE_SAVE, ATTR_CALLBACK_DATA, dev);
+    SetMenuBarAttribute (m, SR830MENU_FILE_LOAD, ATTR_CALLBACK_DATA, dev);
+    SetMenuBarAttribute (m, SR830MENU_FILE_GPIB, ATTR_CALLBACK_DATA, dev);
 
-    SetMenuBarAttribute (m, SR830MENUS_SOURCES_DAC1, ATTR_CALLBACK_DATA, lia->sources[0]);
-    SetMenuBarAttribute (m, SR830MENUS_SOURCES_DAC2, ATTR_CALLBACK_DATA, lia->sources[1]);
-    SetMenuBarAttribute (m, SR830MENUS_SOURCES_DAC3, ATTR_CALLBACK_DATA, lia->sources[2]);
-    SetMenuBarAttribute (m, SR830MENUS_SOURCES_DAC4, ATTR_CALLBACK_DATA, lia->sources[3]);
-	SetMenuBarAttribute (m, SR830MENUS_SOURCES_FREQ, ATTR_CALLBACK_DATA, lia->sources[4]); 
-
+    SetMenuBarAttribute (m, SR830MENU_SOURCES_DAC1, ATTR_CALLBACK_DATA, lia->sources[0]); // initializes src DAC1
+    SetMenuBarAttribute (m, SR830MENU_SOURCES_DAC2, ATTR_CALLBACK_DATA, lia->sources[1]); // initializes src DAC2 
+    SetMenuBarAttribute (m, SR830MENU_SOURCES_DAC3, ATTR_CALLBACK_DATA, lia->sources[2]); // initializes src DAC3
+    SetMenuBarAttribute (m, SR830MENU_SOURCES_DAC4, ATTR_CALLBACK_DATA, lia->sources[3]); // initializes src DAC4
+	SetMenuBarAttribute (m, SR830MENU_SOURCES_FREQ, ATTR_CALLBACK_DATA, lia->sources[4]); //initializes src frequency
+	SetMenuBarAttribute (m, SR830MENU_SOURCES_AMPL, ATTR_CALLBACK_DATA, lia->sources[5]); //initializes src amplitude 
+	SetMenuBarAttribute (m, SR830MENU_SOURCES_PHAS, ATTR_CALLBACK_DATA, lia->sources[6]); //initializes src phase   
 	
-    SetMenuBarAttribute (m, SR830MENUS_MEASURE_LIA, ATTR_CALLBACK_DATA, lia);
-    SetMenuBarAttribute (m, SR830MENUS_MEASURE_DACS, ATTR_CALLBACK_DATA, lia);
-    SetMenuBarAttribute (m, SR830MENUS_MEASURE_ADCS, ATTR_CALLBACK_DATA, dev);
+    SetMenuBarAttribute (m, SR830MENU_MEASURE_LIA, ATTR_CALLBACK_DATA, lia);
+    SetMenuBarAttribute (m, SR830MENU_MEASURE_DACS, ATTR_CALLBACK_DATA, lia);
+    SetMenuBarAttribute (m, SR830MENU_MEASURE_ADCS, ATTR_CALLBACK_DATA, dev);
 
     SetPanelAttribute (p, ATTR_CALLBACK_DATA, dev);
 
@@ -1207,8 +1293,8 @@ void sr830_UpdateReadings (int panel, void *dev)
 
     if (expG.acqstatus != utilG.acq.status) {
         m = GetPanelMenuBar (panel);
-        SetMenuBarAttribute (m, SR830MENUS_MEASURE, ATTR_DIMMED, util_TakingData());
-        SetMenuBarAttribute (m, SR830MENUS_FILE_LOAD, ATTR_DIMMED, util_TakingData());
+        SetMenuBarAttribute (m, SR830MENU_MEASURE, ATTR_DIMMED, util_TakingData());
+        SetMenuBarAttribute (m, SR830MENU_FILE_LOAD, ATTR_DIMMED, util_TakingData());
     }
 
     if (lia->autosens) SetCtrlIndex (panel, SR830_CTRL_SENS, sr830_GetSensitivity (dev));
@@ -1310,25 +1396,9 @@ double sr830_Conv2Sensitivity (int i, int inputstatus)
     return sensi;
 }
 
-double sr830_GetRefAmpl (gpibioPtr dev)
-{
-    char msg[256];
-    double amp;
-    sr830_Out (dev, "SLVL?");
-    sr830_In (dev, msg);
-    Scan (msg, "%s>%f", &amp);
-    return amp;
-}
 
-double sr830_GetRefFreq (gpibioPtr dev)
-{
-    char msg[256];
-    double freq;
-    sr830_Out (dev, "FREQ?");
-    sr830_In (dev, msg);
-    Scan (msg, "%s>%f", &freq);
-    return freq;
-}
+
+
 
 double sr830_GetRefPhase (gpibioPtr dev)
 {
