@@ -25,7 +25,9 @@
 
 #define FALSE 0
 #define TRUE 1
-
+//HANDLE MemHandle = 0;
+//WORD DataValue;
+WORD *ADValues; 
 static listType boards_DevList, boards_DevTypeList;
 struct{
     int saveMenu, loadMenu;
@@ -89,6 +91,46 @@ void ReadAnalogue (acqchanPtr acqchan)
     portPtr up = acqchan->upLvl;
     MCCdevPtr dev = acqchan->dev;
     float temp;
+	 
+    unsigned short reading;
+    int j;
+    double Eng_Val = 0;
+	double storage=0;
+	long raw_average=0;  
+	//DWORD raw_average=0;
+	
+	if ((up->averaging)>1) 
+	
+	{	
+		ADValues = cbWinBufAlloc(up->averaging*2+512);
+		cbAInScan (dev->BoardNum, up->port.analogueIOport.channel, up->port.analogueIOport.channel, up->averaging, &up->sample_rate,up->port.analogueIOport.range, ADValues, CONVERTDATA);
+    	for (j=0;j<up->averaging;j++) 
+		{
+			cbToEngUnits32 (dev->BoardNum, up->port.analogueIOport.range, ADValues[j], &Eng_Val);
+			storage = Eng_Val+storage;
+		}
+        //raw_average= storage/up->averaging; 
+		
+		acqchan->reading = storage/up->averaging;;  
+		cbWinBufFree(ADValues);
+     }	
+		
+		
+		
+    
+	else //no averaging
+	{   
+		cbAIn (dev->BoardNum,   up->port.analogueIOport.channel,up->port.analogueIOport.range, &reading);
+        cbToEngUnits (dev->BoardNum, up->port.analogueIOport.range, reading, &temp);
+        acqchan->reading = (double)temp;
+     }
+    acqchan->newreading = TRUE;
+}
+void ReadOldAnalogue (acqchanPtr acqchan)
+{
+    portPtr up = acqchan->upLvl;
+    MCCdevPtr dev = acqchan->dev;
+    float temp;
     unsigned short reading;
     int j;
     double average = 0;
@@ -104,7 +146,6 @@ void ReadAnalogue (acqchanPtr acqchan)
     acqchan->reading = average/(up->averaging);
     acqchan->newreading = TRUE;
 }
-
 void ReadAnalogueOut (acqchanPtr acqchan)
 {
     portPtr up = acqchan->upLvl;
@@ -268,7 +309,9 @@ portPtr create_Port(void *dev, char *name, int type, int direction, GetReadingPt
     port->measPanel = 0;
     port->control = 0;
     port->type = type;
-    port->averaging = 1;
+	port->averaging = 1;
+	port->sample_rate = 1000; //to avoid freezing
+    
     if(type == ANALOGUE)
     {
         if(direction == IN_PORT)
@@ -280,6 +323,7 @@ portPtr create_Port(void *dev, char *name, int type, int direction, GetReadingPt
             arg = va_arg(list, int);
             port->port.analogueIOport.range = arg;
             port->port.analogueIOport.IO.acqchan->upLvl = port;
+			
         }
         else
         {
