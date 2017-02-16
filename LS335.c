@@ -34,7 +34,7 @@
 
 double dl = 0;
 
-typedef enum {SORB, ONEK, HE3P} inputs;
+typedef enum {SENSOR_A, SENSOR_B} inputs;
 typedef enum {KELVIN, CELSIUS, SEN_UNITS} units;
 typedef struct{
     acqchanPtr channels[2];
@@ -101,8 +101,8 @@ void LS335_GetSensor(acqchanPtr acqchan)
     gpibioPtr dev = acqchan->dev;
     LS335Ptr ls = dev->device;
     char *sens_name="", msg[10];
-    if(!strcmp(acqchan->channel->label, ls->channels[SORB]->channel->label)) sens_name = "A"; 
-    if(!strcmp(acqchan->channel->label, ls->channels[ONEK]->channel->label)) sens_name = "B"; 
+    if(!strcmp(acqchan->channel->label, ls->channels[SENSOR_A]->channel->label)) sens_name = "A"; 
+    if(!strcmp(acqchan->channel->label, ls->channels[SENSOR_B]->channel->label)) sens_name = "B"; 
     Fmt(msg, "KRDG? %s", sens_name);
     acqchan->reading = gpib_GetDoubleVal(dev, msg);
     acqchan->newreading = TRUE;
@@ -112,8 +112,8 @@ void LS335_GetSensor(acqchanPtr acqchan)
 void LS335_UpdateSensorReadings (int panel, void *ptr)
 {
     LS335Ptr ls = ptr;
-    SetCtrlVal(panel, LS335_SENS_SORBMEAS, ls->channels[SORB]->reading);
-    SetCtrlVal(panel, LS335_SENS_KPOTMEAS, ls->channels[ONEK]->reading);
+    SetCtrlVal(panel, LS335_SENS_SENSOR_A_MEAS, ls->channels[SENSOR_A]->reading);
+    SetCtrlVal(panel, LS335_SENS_SENSOR_B_MEAS, ls->channels[SENSOR_B]->reading);
     if(utilG.acq.status == ACQ_BUSY)
         HidePanel(panel);
 }
@@ -132,8 +132,26 @@ void LS335_UpdateHeaterSettings(int panel, gpibioPtr dev)
     gpibio_In(dev, msg);
     Scan(msg, "%f,%f,%f", &ls->pid.p, &ls->pid.i, &ls->pid.d);
 }
-
-void LS335_UpdateControls(int p, gpibioPtr dev)
+void LS335_InitControls(int p, gpibioPtr dev)
+{
+    LS335Ptr ls = dev->device;
+    char msg[260]; int status;
+    
+    ls->heater.power = gpib_GetIntVal(dev, "RANGE?2");//status of the heater in second loop
+	if  (ls->heater.power)  SetCtrlVal(p, LS335_CTRL_HEATER, 1); else SetCtrlVal(p, LS335_CTRL_HEATER, 0);   
+    Fmt(msg, "SETP?2 %i", ls->heater.loop);   //status of the setpoint in second loop  
+    ls->heater.setpoint = gpib_GetDoubleVal(dev, msg);
+    Fmt(msg, "RAMP?2 %i", ls->heater.loop);  // status of the Ramp in second loop  
+    gpib_GetCharVal(dev, msg, msg);
+    Scan(msg, "%i,%f", &status, &ls->heater.rampspeed);  
+    //gpibPrint(dev, "RANGE0, loop#");// this  shuts heater off for loop#
+    SetCtrlVal(p, LS335_CTRL_POWER, ls->heater.power);
+    SetCtrlVal(p, LS335_CTRL_SENSOR_A_TSET, ls->heater.setpoint);
+    SetCtrlAttribute(p, LS335_CTRL_SENSOR_A_TSET, ATTR_MAX_VALUE, ls->heater.setplimit);
+    SetCtrlVal(p, LS335_CTRL_RAMPSPEED, ls->heater.rampspeed);
+    
+}
+/*void LS335_UpdateControls(int p, gpibioPtr dev) // not in use anymore
 {
     LS335Ptr ls = dev->device;
     char msg[260];
@@ -147,10 +165,10 @@ void LS335_UpdateControls(int p, gpibioPtr dev)
     
     SetCtrlVal(p, LS335_CTRL_POWER, ls->heater.power);
     SetCtrlVal(p, LS335_CTRL_HEATER, ls->heater.on);
-    SetCtrlVal(p, LS335_CTRL_SORBTSET, ls->heater.setpoint);
-    SetCtrlAttribute(p, LS335_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
+    SetCtrlVal(p, LS335_CTRL_SENSOR_A_TSET, ls->heater.setpoint);
+    SetCtrlAttribute(p, LS335_CTRL_SENSOR_A_TSET, ATTR_MAX_VALUE, ls->heater.setplimit);
     SetCtrlVal(p, LS335_CTRL_RAMPSPEED, ls->heater.rampspeed);
-}
+}  */
 
 int LS335PanelCallback (int panel, int event, void *callbackData, int eventData1, int eventData2)
 {
@@ -180,7 +198,7 @@ int LS335ControlCallback (int panel, int control, int event, void *callbackData,
                 if(ls->heater.on)
                 {
                     GetCtrlVal(panel, LS335_CTRL_POWER, &ls->heater.power);
-                    GetCtrlVal(panel, LS335_CTRL_SORBTSET, &ls->heater.setpoint);
+                    GetCtrlVal(panel, LS335_CTRL_SENSOR_A_TSET, &ls->heater.setpoint);
                     GetCtrlVal(panel, LS335_CTRL_RAMPSPEED, &ls->heater.rampspeed);
                     gpibPrint(dev, "SETP %i, %f\0", &ls->heater.loop, &ls->heater.setpoint);
                     gpibPrint(dev, "RAMP %i, 1, %f\0", &ls->heater.loop, &ls->heater.rampspeed);
@@ -222,7 +240,7 @@ int LS335ControlCallback (int panel, int control, int event, void *callbackData,
                 DisplayPanel(heater);
             }
             break;
-/*      case LS335_CTRL_SORBTSET:
+/*      case LS335_CTRL_SENSOR_A_TSET:
             if (event == EVENT_COMMIT)
             {
                 GetCtrlVal(panel, control, &ls->heater.setpoint);
@@ -286,7 +304,7 @@ int LS335HeatControlCallback (int panel, int control, int event, void *callbackD
                 GetCtrlVal(panel, LS335_HEAT_POWERUP, &ls->heater.powerup);
                 GetCtrlVal(panel, LS335_HEAT_INPUTNM, ls->heater.input);   
                 GetCtrlVal(panel, LS335_HEAT_UNITS,   &ls->heater.units);  //*
-                //SetCtrlAttribute(dev->iPanel, LS335_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
+                //SetCtrlAttribute(dev->iPanel, LS335_CTRL_SENSOR_A_TSET, ATTR_MAX_VALUE, ls->heater.setplimit);
                 gpibPrint(dev, "CSET %i, %s, %i, %i, %i\0", &ls->heater.loop,
                                                             ls->heater.input,
                                                             &ls->heater.units,
@@ -348,23 +366,23 @@ int  LS335SensorControlCallback(int panel, int control, int event, void *callbac
         case LS335_SENS_NOTE_2:
             AcqDataNoteCallback (panel, control, event, callbackData, eventData1, eventData2);
             break;
-        case LS335_SENS_SORBACQ:
-        case LS335_SENS_KPOTACQ:
+        case LS335_SENS_SENSOR_A_ACQ:
+        case LS335_SENS_SENSOR_B_ACQ:
             if (event == EVENT_VAL_CHANGED) {
                 GetCtrlVal (panel, control, &acqchan->acquire);
                 if (acqchan->acquire) acqchanlist_AddChannel (acqchan);
                     else acqchanlist_RemoveChannel (acqchan);
             }
             break;
-        case LS335_SENS_SORBCOEFF:
-        case LS335_SENS_KPOTCOEFF:
+        case LS335_SENS_SENSOR_A_COEFF:
+        case LS335_SENS_SENSOR_B_COEFF:
             if (event == EVENT_COMMIT) {
                 GetCtrlVal (panel, control, &acqchan->coeff);
                 if (acqchan->p) SetCtrlVal (acqchan->p, ACQDATA_COEFF, acqchan->coeff);
             }
             break;
-        case LS335_SENS_SORBLABEL:
-        case LS335_SENS_KPOTLABEL:
+        case LS335_SENS_SENSOR_A_LABEL:
+        case LS335_SENS_SENSOR_B_LABEL:
             if (event == EVENT_COMMIT) {
                 GetCtrlVal (panel, control, acqchan->channel->label);
                 acqchanlist_ReplaceChannel (acqchan);
@@ -373,7 +391,9 @@ int  LS335SensorControlCallback(int panel, int control, int event, void *callbac
             break;
         case LS335_SENS_CLOSE:
             if (event == EVENT_COMMIT) 
-                HidePanel (panel);
+                devPanel_Remove(panel);
+                DiscardPanel (panel);//
+				//HidePanel (panel); if popup is not in use
             break;
     }
     updateGraphSource();
@@ -406,7 +426,7 @@ int LS335SendCurve (int panel, int control, int event, void *callbackData, int e
     return 0;
 }
 
-void LS335menuCallack (int menuBar, int menuItem, void *callbackData, int panel)
+void LS335menuCallback (int menuBar, int menuItem, void *callbackData, int panel)
 {
     switch(menuItem)
     {
@@ -447,35 +467,38 @@ void LS335menuCallack (int menuBar, int menuItem, void *callbackData, int panel)
             LS335Ptr ls = callbackData;
             int p = LoadPanel (utilG.p, "LS335u.uir", LS335_SENS);
             
-            SetCtrlVal (p, LS335_SENS_SORBLABEL, ls->channels[SORB]->channel->label);
-            SetCtrlVal (p, LS335_SENS_SORBCOEFF, ls->channels[SORB]->coeff);
-            SetCtrlVal (p, LS335_SENS_SORBACQ,   ls->channels[SORB]->acquire);
-            SetCtrlVal (p, LS335_SENS_NOTE_1,    ls->channels[SORB]->note);
+            util_InitClose (p, LS335_SENS_CLOSE, FALSE); //needed for popup panel, empty otherwise
+			
+            SetCtrlVal (p, LS335_SENS_SENSOR_A_LABEL, ls->channels[SENSOR_A]->channel->label);
+            SetCtrlVal (p, LS335_SENS_SENSOR_A_COEFF, ls->channels[SENSOR_A]->coeff);
+            SetCtrlVal (p, LS335_SENS_SENSOR_A_ACQ,   ls->channels[SENSOR_A]->acquire);
+            SetCtrlVal (p, LS335_SENS_NOTE_1,    ls->channels[SENSOR_A]->note);
                                   
-            SetCtrlVal (p, LS335_SENS_KPOTLABEL, ls->channels[ONEK]->channel->label);
-            SetCtrlVal (p, LS335_SENS_KPOTCOEFF, ls->channels[ONEK]->coeff);
-            SetCtrlVal (p, LS335_SENS_KPOTACQ,   ls->channels[ONEK]->acquire);
-            SetCtrlVal (p, LS335_SENS_NOTE_2,    ls->channels[ONEK]->note);
+            SetCtrlVal (p, LS335_SENS_SENSOR_B_LABEL, ls->channels[SENSOR_B]->channel->label);
+            SetCtrlVal (p, LS335_SENS_SENSOR_B_COEFF, ls->channels[SENSOR_B]->coeff);
+            SetCtrlVal (p, LS335_SENS_SENSOR_B_ACQ,   ls->channels[SENSOR_B]->acquire);
+            SetCtrlVal (p, LS335_SENS_NOTE_2,    ls->channels[SENSOR_B]->note);
 
-            SetCtrlAttribute(p, LS335_SENS_SORBLABEL,   ATTR_CALLBACK_DATA, ls->channels[SORB]);
-            SetCtrlAttribute(p, LS335_SENS_SORBCOEFF,   ATTR_CALLBACK_DATA, ls->channels[SORB]);
-            SetCtrlAttribute(p, LS335_SENS_SORBACQ,     ATTR_CALLBACK_DATA, ls->channels[SORB]);
-            SetCtrlAttribute(p, LS335_SENS_NOTE_1,      ATTR_CALLBACK_DATA, ls->channels[SORB]);
+            SetCtrlAttribute(p, LS335_SENS_SENSOR_A_LABEL,   ATTR_CALLBACK_DATA, ls->channels[SENSOR_A]);
+            SetCtrlAttribute(p, LS335_SENS_SENSOR_A_COEFF,   ATTR_CALLBACK_DATA, ls->channels[SENSOR_A]);
+            SetCtrlAttribute(p, LS335_SENS_SENSOR_A_ACQ,     ATTR_CALLBACK_DATA, ls->channels[SENSOR_A]);
+            SetCtrlAttribute(p, LS335_SENS_NOTE_1,      ATTR_CALLBACK_DATA, ls->channels[SENSOR_A]);
     
-            SetCtrlAttribute(p, LS335_SENS_KPOTLABEL,   ATTR_CALLBACK_DATA, ls->channels[ONEK]);
-            SetCtrlAttribute(p, LS335_SENS_KPOTCOEFF,   ATTR_CALLBACK_DATA, ls->channels[ONEK]);
-            SetCtrlAttribute(p, LS335_SENS_KPOTACQ,     ATTR_CALLBACK_DATA, ls->channels[ONEK]);
-            SetCtrlAttribute(p, LS335_SENS_NOTE_2,      ATTR_CALLBACK_DATA, ls->channels[ONEK]);
+            SetCtrlAttribute(p, LS335_SENS_SENSOR_B_LABEL,   ATTR_CALLBACK_DATA, ls->channels[SENSOR_B]);
+            SetCtrlAttribute(p, LS335_SENS_SENSOR_B_COEFF,   ATTR_CALLBACK_DATA, ls->channels[SENSOR_B]);
+            SetCtrlAttribute(p, LS335_SENS_SENSOR_B_ACQ,     ATTR_CALLBACK_DATA, ls->channels[SENSOR_B]);
+            SetCtrlAttribute(p, LS335_SENS_NOTE_2,      ATTR_CALLBACK_DATA, ls->channels[SENSOR_B]);
     
             devPanel_Add (p, ls, LS335_UpdateSensorReadings);
-            DisplayPanel (p);
+            //DisplayPanel (p);
+			InstallPopup (p);  // if popup is used
         }
         break;
     }
 }
 
 
-/******************************Init and operation functions**********************************/
+/******************************Initialization **********************************/
 void *LS335_Create(gpibioPtr dev)
 {
     LS335Ptr ls;
@@ -483,8 +506,8 @@ void *LS335_Create(gpibioPtr dev)
     if (dev){ dev->device = ls; ls->id = dev->id;}
     
     ls->source = source_Create("temperature", dev, LS335_SetHeaterLvl, LS335_GetHeaterLvl);
-    ls->channels[SORB] = acqchan_Create("Sensor A", dev, LS335_GetSensor);
-    ls->channels[ONEK] = acqchan_Create("Sensor B", dev, LS335_GetSensor);
+    ls->channels[SENSOR_A] = acqchan_Create("Sensor A", dev, LS335_GetSensor);
+    ls->channels[SENSOR_B] = acqchan_Create("Sensor B", dev, LS335_GetSensor);
     ls->curveload.format = "%s, %s,> %s";
     ls->curveload.serial = "no_number";
     ls->curveload.source = 1;
@@ -543,15 +566,16 @@ void OperateLS335(int menubar, int menuItem, void *callbackData, int panel)
     
     SetCtrlAttribute(p, LS335_CTRL_HEATER, ATTR_CALLBACK_DATA, dev);
     SetCtrlAttribute(p, LS335_CTRL_HEATER_PROP, ATTR_CALLBACK_DATA, dev);
-    SetCtrlAttribute(p, LS335_CTRL_SORBTSET, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS335_CTRL_SENSOR_A_TSET, ATTR_CALLBACK_DATA, dev);
     SetCtrlAttribute(p, LS335_CTRL_RAMPSPEED, ATTR_CALLBACK_DATA, dev);
     SetCtrlAttribute(p, LS335_CTRL_POWER, ATTR_CALLBACK_DATA, dev);
     
-    SetCtrlAttribute(p, LS335_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
-    SetCtrlAttribute(p, LS335_CTRL_SORBTSET, ATTR_MIN_VALUE, 0.);
+    SetCtrlAttribute(p, LS335_CTRL_SENSOR_A_TSET, ATTR_MAX_VALUE, ls->heater.setplimit);
+    SetCtrlAttribute(p, LS335_CTRL_SENSOR_A_TSET, ATTR_MIN_VALUE, 0.);
     SetPanelAttribute(p, ATTR_CALLBACK_DATA, dev);
     
-    LS335_UpdateControls(p, dev);
+    
+	LS335_InitControls(p, dev); 
     devPanel_Add(p, dev, LS335_UpdateReadings);
     
     DisplayPanel(p);
@@ -561,12 +585,12 @@ void LS335_UpdateReadings(int panel, void *ptr)
 {
     gpibioPtr dev = ptr;
     LS335Ptr ls = dev->device;
-    LS335_GetSensor(ls->channels[SORB]);
-    LS335_GetSensor(ls->channels[ONEK]);
-    SetCtrlVal(panel, LS335_CTRL_SORBREAD, ls->channels[SORB]->reading);
-    SetCtrlVal(panel, LS335_CTRL_KPOTREAD, ls->channels[ONEK]->reading);
+    LS335_GetSensor(ls->channels[SENSOR_A]);
+    LS335_GetSensor(ls->channels[SENSOR_B]);
+    SetCtrlVal(panel, LS335_CTRL_SENSOR_A_READ, ls->channels[SENSOR_A]->reading);
+    SetCtrlVal(panel, LS335_CTRL_SENSOR_B_READ, ls->channels[SENSOR_B]->reading);
     LS335_GetHeaterLvl(ls->source->acqchan);
-    SetCtrlVal(panel, LS335_CTRL_SORBTSET, ls->source->acqchan->reading);
+    SetCtrlVal(panel, LS335_CTRL_SENSOR_A_TSET, ls->source->acqchan->reading);
 }
 
 void LS335_Save(gpibioPtr dev)
@@ -636,8 +660,8 @@ void LS335_Load(gpibioPtr dev)
 void LS335_Remove(void *dev)
 {
     LS335Ptr ls = dev;
-    acqchan_Remove(ls->channels[SORB]);
-    acqchan_Remove(ls->channels[ONEK]);
+    acqchan_Remove(ls->channels[SENSOR_A]);
+    acqchan_Remove(ls->channels[SENSOR_B]);
     source_Remove(ls->source);
     free(ls);
 }
@@ -647,11 +671,11 @@ void LS335_Init(void)
     devTypePtr devType;
     if(utilG.acq.status != ACQ_NONE)
     {
-        util_ChangeInitMessage("ls335 control utilities...");
+        util_ChangeInitMessage("LS335 control utilities...");
         devType = malloc(sizeof(devTypeItem));
         if(devType)
         {
-            Fmt(devType->label, "ls 335 tmperature controller");
+            Fmt(devType->label, "LS335 temperature controller");
             Fmt(devType->id, LS335_ID);
             devType->CreateDevice = LS335_Create;
             devType->InitDevice = LS335_InitGPIB;

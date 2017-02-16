@@ -1,3 +1,4 @@
+
 #include <userint.h>
 #include <ansi_c.h>
 #include <cbw.h>
@@ -86,7 +87,7 @@ int cbFromEngUnits  (int BoardNum, int Range, float EngUnits,           unsigned
 int cbToEngUnits    (int BoardNum, int Range, unsigned short DataVal,   float *EngUnits)
 */
 
-void ReadAnalogue (acqchanPtr acqchan)
+void ReadAnalogue (acqchanPtr acqchan)		 //uses cbInScan function
 {
     portPtr up = acqchan->upLvl;
     MCCdevPtr dev = acqchan->dev;
@@ -171,15 +172,14 @@ void SetAnalogue (sourcePtr src)
 }
 
 void ReadDigital (acqchanPtr acqchan)
-{
-    //int cbDIn(int BoardNum, int PortNum, unsigned short *DataValue)
+{   
     portPtr port = acqchan->upLvl;
     MCCdevPtr dev = acqchan->dev;
     unsigned short DataVal;
-    cbDIn (dev->BoardNum, port->port.digitalIOport.port, &DataVal);
-    
+	cbDIn (dev->BoardNum, port->port.digitalIOport.port, &DataVal);   
     acqchan->reading = (double)DataVal;
     acqchan->newreading = TRUE;
+	
 }
 
 void ReadDigitalOut (acqchanPtr acqchan)
@@ -188,11 +188,10 @@ void ReadDigitalOut (acqchanPtr acqchan)
 }
 
 void SetDigital (sourcePtr src)
-{
+{   
     portPtr port = src->acqchan->upLvl;
     MCCdevPtr dev = src->acqchan->dev;
-    
-    cbDOut(dev->BoardNum, port->port.digitalIOport.port, (unsigned short)src->biaslevel);
+	cbDOut(dev->BoardNum, port->port.digitalIOport.port, (unsigned short)src->biaslevel);
     util_Delay (src->segments[src->seg]->delay);
 }
 /**************************^^ I/O functions ^^***************************/
@@ -302,6 +301,7 @@ portPtr create_Port(void *dev, char *name, int type, int direction, GetReadingPt
     SetLevelPtr SetLevel;
     MCCdevPtr devP = dev;
     int arg;
+	
     portPtr port = malloc(sizeof(portType));
     
     va_start(list, GetReading);
@@ -345,8 +345,10 @@ portPtr create_Port(void *dev, char *name, int type, int direction, GetReadingPt
             port->port.digitalIOport.IO.acqchan = acqchan_Create(name, dev, GetReading);
             port->direction = direction;
             arg = va_arg(list, int);
-            port->port.digitalIOport.port = arg;
-            cbDConfigPort(devP->BoardNum, arg, DIGITALIN);
+           
+			//if ( !strcmp( name, "PCI-DAS6036" ) ) {arg=AUXPORT;} else  {port->port.digitalIOport.port = arg;}      
+            //if ( !strcmp( name, "PCI-DAS6036 digital in" ) ) {arg=AUXPORT; }
+			cbDConfigPort(devP->BoardNum, arg, DIGITALIN);
             arg = va_arg(list, int);
             port->port.digitalIOport.devtype = arg;
             arg = va_arg(list, int);
@@ -361,6 +363,8 @@ portPtr create_Port(void *dev, char *name, int type, int direction, GetReadingPt
             port->direction = direction;
             arg = va_arg(list, int);
             port->port.digitalIOport.port = arg;
+			//cbGetBoardName (dev->BoardNum, name);   
+			//if ( !strcmp( name, "PCI-DAS6036 digital out" ) ) {arg=AUXPORT; }// to work with 6036     
             cbDConfigPort(devP->BoardNum, arg, DIGITALOUT);
             arg = va_arg(list, int);
             port->port.digitalIOport.devtype = arg;
@@ -375,7 +379,7 @@ portPtr create_Port(void *dev, char *name, int type, int direction, GetReadingPt
                     port->port.digitalIOport.bitarr[i].bitnum = i;
                     port->port.digitalIOport.bitarr[i].panel = 0;
                     port->port.digitalIOport.bitarr[i].port = port;
-                    port->port.digitalIOport.bitarr[i].val = 0;
+                    port->port.digitalIOport.bitarr[i].val = 0;  //brings sliders to zero
                 }
             }
             port->port.digitalIOport.returnport = 0;

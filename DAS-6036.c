@@ -1,4 +1,4 @@
-
+// AUXPORT needs to be used instead of FIRSTPORTA 
 #include <userint.h>
 #include <ansi_c.h>
 #include <cbw.h>
@@ -301,7 +301,7 @@ void das6036_Create (MCCdevPtr dev)
         das->Achannels[i+8]->port.analogueIOport.IO.source->min = -10;
         das->Achannels[i+8]->port.analogueIOport.IO.source->ranges.temprange[0] = range_Create(10, -10, 0.000305);
     }
-    das->Dchannels[0] = create_Port (dev, "PCI-DAS6036 digital out", DIGITAL, OUT_PORT, ReadDigitalOut, SetDigital, FIRSTPORTA, 0, 8);
+    das->Dchannels[0] = create_Port (dev, "PCI-DAS6036 digital out", DIGITAL, OUT_PORT, ReadDigitalOut, SetDigital, AUXPORT, 0, 8);  //instead of FIRSTPORTA 8 bis 
     das->Achannels[0]->menuitem_id = DASMENU_MEAS_IN_0;
     das->Achannels[1]->menuitem_id = DASMENU_MEAS_IN_1;
     das->Achannels[2]->menuitem_id = DASMENU_MEAS_IN_2;
@@ -423,6 +423,9 @@ void das6036_Init(void)
             devType->SaveDevice     = das6036_Save;
             devType->LoadDevice     = das6036_Load;
             boards_DevTypeList_AddDev(devType);
+			//set all bits to  zero
+			//cbDConfigPort(dev->BoardNum, AUXPORT, DIGITALOUT);
+			//cbDOut(dev->BoardNum, AUXPORT,0); }// all bits to 0 
         }
     }
 }

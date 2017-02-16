@@ -1276,7 +1276,7 @@ void curve_InitViewPanel (int pts2)
 curvePtr curvelist_GetItem (listType list, int i)
 {
     nodePtr node;
-    node = list_GetNode (list, i); return node->item;
+    node = list_GetNode (list, i); return node->item;	   //dereference of null pointer happened here as curves are hidden
 }
 
 curvePtr curvelist_GetSelection (void)

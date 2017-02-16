@@ -216,7 +216,7 @@ void sr830_Save (gpibioPtr dev)
 	source_Save (lia->sources[4]);
 	source_Save (lia->sources[5]);
     source_Save (lia->sources[6]);
-	//source_Save (lia->sources[7]); 
+	 
 }
 
 void sr830_Load (gpibioPtr dev)
@@ -668,6 +668,7 @@ void MeasDACCallback(int menubar, int menuItem, void *callbackData, int panel)
 
     devPanel_Add (p, lia, sr830_DAC_UpdateReadings);
     InstallPopup (p);
+	//DisplayPanel (p);
 }
 
 int  ADCControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
@@ -815,6 +816,7 @@ void MeasADCCallback(int menubar, int menuItem, void *callbackData, int panel)
 	
 	devPanel_Add (p, dev, sr830_ADC_UpdateReadings);
     InstallPopup (p);
+	//DisplayPanel(p);
 }
 
 int  XYMPControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
@@ -864,7 +866,7 @@ int  XYMPControlCallback(int panel, int control, int event, void *callbackData, 
             if (event == EVENT_COMMIT) {
                 lia = callbackData;
                 devPanel_Remove(panel);
-                //util_Discard (panel);
+                //util_Discard (panel);  // this is excessive?
                 DiscardPanel (panel);
             }
             break;
@@ -889,7 +891,6 @@ void MeasXYMPCallback(int menubar, int menuItem, void *callbackData, int panel)
 
     p = LoadPanel (0, "sr830u.uir", SR830_XYMP);
     SetPanelPos (p, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
-    
     util_InitClose (p, SR830_XYMP_CLOSE, FALSE);
 
     lia = callbackData;
@@ -1180,7 +1181,7 @@ int  SR830ControlPanelCallback(int panel, int event, void *callbackData, int eve
         dev = callbackData;
         lia = dev->device;
         devPanel_Remove (panel);
-        HidePanel (panel);
+        DiscardPanel (panel);   //was HidePanel (panel); 
 		dev->iPanel = 0;
 		SetMenuBarAttribute (acquire_GetMenuBar(), dev->menuitem_id, ATTR_DIMMED, FALSE);
     }

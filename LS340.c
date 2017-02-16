@@ -1,3 +1,5 @@
+
+//fixed bug for 1K Pot
 #include <gpib.h>
 #include <formatio.h>
 #include <userint.h>
@@ -31,10 +33,10 @@
 #define FALSE 0
 #define LS340_ID "LSCI"
 
-typedef enum {SORB, ONEK, HE3P} inputs;
+typedef enum {SORB, ONEK, HE3P, SENSOR_D} inputs;
 typedef enum {KELVIN, CELSIUS, SEN_UNITS} units;
 typedef struct{
-    acqchanPtr channels[3];
+    acqchanPtr channels[4];   // 4 sensors
     sourcePtr source;
     int id;
     struct {int loop, units, power, maxpower, powerup, on;
@@ -103,6 +105,7 @@ void GetSensor(acqchanPtr acqchan)
     if(!strcmp(acqchan->channel->label, "sorb")) sens_name = "A";
     if(!strcmp(acqchan->channel->label, "1 k pot")) {sens_name = "B"; alarm = 1;}
     if(!strcmp(acqchan->channel->label, "He 3 pot")) sens_name = "C";
+	if(!strcmp(acqchan->channel->label, "Sensor D")) sens_name = "D";      
     Fmt(msg, "KRDG? %s", sens_name);
     acqchan->reading = gpib_GetDoubleVal(dev, msg);
     acqchan->newreading = TRUE;
@@ -119,14 +122,28 @@ void GetSensor(acqchanPtr acqchan)
 }
 
 /******************************Callback Functions**********************************/
-void LS340_UpdateSensorReadings (int panel, void *ptr)
+void LS340_UpdateSensorTabReadings (int panel, void *ptr)
 {
     LS340Ptr ls = ptr;
     SetCtrlVal(panel, LS340_SENS_SORBMEAS, ls->channels[SORB]->reading);
     SetCtrlVal(panel, LS340_SENS_KPOTMEAS, ls->channels[ONEK]->reading);
     SetCtrlVal(panel, LS340_SENS_HE3PMEAS, ls->channels[HE3P]->reading);
-    if(utilG.acq.status == ACQ_BUSY)
-        HidePanel(panel);
+	SetCtrlVal(panel, LS340_SENS_SENSOR_D_MEAS, ls->channels[SENSOR_D]->reading);
+    //if(utilG.acq.status == ACQ_BUSY)   HidePanel(panel);
+}
+void LS340_UpdateReadings(int panel, void *ptr)
+{   int m;
+    gpibioPtr dev = ptr;
+    LS340Ptr ls = dev->device;
+    GetSensor(ls->channels[SORB]);
+    GetSensor(ls->channels[ONEK]);
+    GetSensor(ls->channels[HE3P]);
+	GetSensor(ls->channels[SENSOR_D]); 
+	
+    SetCtrlVal(panel, LS340_CTRL_SORBREAD, ls->channels[SORB]->reading);
+    SetCtrlVal(panel, LS340_CTRL_KPOTREAD, ls->channels[ONEK]->reading); //error with panel ID here was due to Discard vs Hide
+    SetCtrlVal(panel, LS340_CTRL_HE3PREAD, ls->channels[HE3P]->reading);
+	SetCtrlVal(panel, LS340_CTRL_SENSOR_D_READ, ls->channels[SENSOR_D]->reading);
 }
 
 void LS340_UpdateHeaterSettings(int panel, gpibioPtr dev)
@@ -149,11 +166,11 @@ void LS340_InitControls(int p, gpibioPtr dev)
     LS340Ptr ls = dev->device;
     char msg[260]; int status;
     
-    ls->heater.power = gpib_GetIntVal(dev, "RANGE?\n");
+    ls->heater.power = gpib_GetIntVal(dev, "RANGE?");
 	if  (ls->heater.power)  SetCtrlVal(p, LS340_CTRL_HEATER, 1); else SetCtrlVal(p, LS340_CTRL_HEATER, 0);   
-    Fmt(msg, "SETP? %i\n", ls->heater.loop);
+    Fmt(msg, "SETP? %i", ls->heater.loop);
     ls->heater.setpoint = gpib_GetDoubleVal(dev, msg);
-    Fmt(msg, "RAMP? %i\n", ls->heater.loop);
+    Fmt(msg, "RAMP? %i", ls->heater.loop);
     gpib_GetCharVal(dev, msg, msg);
     Scan(msg, "%i,%f", &status, &ls->heater.rampspeed);  //needs to be instead of status &ls->heater.ramp_status
     //gpibPrint(dev, "RANGE 0\n");// this  shuts heater off
@@ -170,16 +187,20 @@ void LS340_InitControls(int p, gpibioPtr dev)
 }
 
 int LS340PanelCallback (int panel, int event, void *callbackData, int eventData1, int eventData2)
-{
-    gpibioPtr dev = callbackData;
+{  
+   
     if ((event == EVENT_KEYPRESS && eventData1 == VAL_ESC_VKEY) || (event == EVENT_RIGHT_DOUBLE_CLICK))
-    {
+    {   
+		gpibioPtr dev = callbackData; // needs to be here or else hidden panel is constantly updated    
+		//LS340Ptr ls = dev->device;// no need for it, but it does not crash the code
         devPanel_Remove (panel);
-        DiscardPanel (panel);
+        DiscardPanel (panel);  //HidePanel (panel); 
         dev->iPanel = 0;
         SetMenuBarAttribute (acquire_GetMenuBar(), dev->menuitem_id, ATTR_DIMMED, FALSE);
 
     }
+	
+	
     return 0;
 }
 
@@ -373,16 +394,18 @@ int  LS340SensorControlCallback(int panel, int control, int event, void *callbac
 {
     acqchanPtr acqchan;
     acqchan = callbackData;
-
+	 
     switch (control) {
         case LS340_SENS_NOTE_1:
         case LS340_SENS_NOTE_2:
         case LS340_SENS_NOTE_3:
+		case LS340_SENS_NOTE_4:	
             AcqDataNoteCallback (panel, control, event, callbackData, eventData1, eventData2);
             break;
         case LS340_SENS_SORBACQ:
         case LS340_SENS_KPOTACQ:
         case LS340_SENS_HE3PACQ:
+		case LS340_SENS_SENSOR_D_ACQ:	
             if (event == EVENT_VAL_CHANGED) {
                 GetCtrlVal (panel, control, &acqchan->acquire);
                 if (acqchan->acquire) acqchanlist_AddChannel (acqchan);
@@ -392,6 +415,7 @@ int  LS340SensorControlCallback(int panel, int control, int event, void *callbac
         case LS340_SENS_SORBCOEFF:
         case LS340_SENS_KPOTCOEFF:
         case LS340_SENS_HE3PCOEFF:
+		case LS340_SENS_SENSOR_D_COEFF:	
             if (event == EVENT_COMMIT) {
                 GetCtrlVal (panel, control, &acqchan->coeff);
                 if (acqchan->p) SetCtrlVal (acqchan->p, ACQDATA_COEFF, acqchan->coeff);
@@ -400,16 +424,26 @@ int  LS340SensorControlCallback(int panel, int control, int event, void *callbac
         case LS340_SENS_SORBLABEL:
         case LS340_SENS_KPOTLABEL:
         case LS340_SENS_HE3PLABEL:
+		case LS340_SENS_SENSOR_D_LABEL:	 	
+			
             if (event == EVENT_COMMIT) {
                 GetCtrlVal (panel, control, acqchan->channel->label);
                 acqchanlist_ReplaceChannel (acqchan);
                 if (acqchan->p) SetPanelAttribute (acqchan->p, ATTR_TITLE, acqchan->channel->label);
             }
             break;
-        case LS340_SENS_CLOSE:
+        /*case LS340_SENS_CLOSE:
             if (event == EVENT_COMMIT) 
+				
+				
                 HidePanel (panel);
-            break;
+            break;  */
+		case LS340_SENS_CLOSE:
+            if (event == EVENT_COMMIT) {
+                //lia = callbackData;
+                devPanel_Remove(panel);
+                DiscardPanel (panel);
+            }
     }
     updateGraphSource();
     return 0;
@@ -441,7 +475,7 @@ int LS340SendCurve (int panel, int control, int event, void *callbackData, int e
     return 0;
 }
 
-void LS340menuCallack (int menuBar, int menuItem, void *callbackData, int panel)
+void LS340menuCallback (int menuBar, int menuItem, void *callbackData, int panel)
 {
     switch(menuItem)
     {
@@ -450,12 +484,21 @@ void LS340menuCallack (int menuBar, int menuItem, void *callbackData, int panel)
             gpibioPtr dev = callbackData;
             LS340Ptr ls = dev->device;
             char pathname[260];
-            int cPanel, i = FileSelectPopup ("", "*.crv", "*.crv", "Custom Curve", VAL_LOAD_BUTTON,
+            int cPanel, i = FileSelectPopup ("", "*.dat", "*.dat", "Custom Curve", VAL_LOAD_BUTTON,
                                  0, 0, 1, 0, pathname);
             if(i)
             {
                 ls->curveload.file = OpenFile (pathname, VAL_READ_ONLY, VAL_OPEN_AS_IS, VAL_ASCII);
                 cPanel = LoadPanel(utilG.p, "LS340u.uir", LS340CURVE);
+	/*			while (!feof(file_handle) && i < 200) 
+	 	{	
+	 		fscanf (file_handle,"%f %f", &x, &y );
+	 		In_Array[0][i]=x;
+	 		In_Array[1][i]=y;
+	 		i++;
+		}
+		fclose (file_handle);CurveLength = i; 
+	}*/
                 
                 SetCtrlAttribute(cPanel, LS340CURVE_ACCEPT, ATTR_CALLBACK_DATA, dev);
                 
@@ -477,11 +520,14 @@ void LS340menuCallack (int menuBar, int menuItem, void *callbackData, int panel)
             }
         }
         break;
-        case LS340_MEASURE_MEAS:
+        case LS340_MEASURE_SENSOR_SETTINGS:
         {
-            LS340Ptr ls = callbackData;
-            int p = LoadPanel (utilG.p, "LS340u.uir", LS340_SENS);
             
+            int p = LoadPanel (utilG.p, "LS340u.uir", LS340_SENS);
+			SetPanelPos (p, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
+            util_InitClose (p, LS340_SENS_CLOSE, FALSE); //to use a popup
+			LS340Ptr ls = callbackData;   
+			
             SetCtrlVal (p, LS340_SENS_SORBLABEL, ls->channels[SORB]->channel->label);
             SetCtrlVal (p, LS340_SENS_SORBCOEFF, ls->channels[SORB]->coeff);
             SetCtrlVal (p, LS340_SENS_SORBACQ,   ls->channels[SORB]->acquire);
@@ -496,6 +542,11 @@ void LS340menuCallack (int menuBar, int menuItem, void *callbackData, int panel)
             SetCtrlVal (p, LS340_SENS_HE3PCOEFF, ls->channels[HE3P]->coeff);
             SetCtrlVal (p, LS340_SENS_HE3PACQ,   ls->channels[HE3P]->acquire);
             SetCtrlVal (p, LS340_SENS_NOTE_3,    ls->channels[HE3P]->note);
+			
+			SetCtrlVal (p, LS340_SENS_SENSOR_D_LABEL, ls->channels[SENSOR_D]->channel->label);
+            SetCtrlVal (p, LS340_SENS_SENSOR_D_COEFF, ls->channels[SENSOR_D]->coeff);
+            SetCtrlVal (p, LS340_SENS_SENSOR_D_ACQ,   ls->channels[SENSOR_D]->acquire);
+            SetCtrlVal (p, LS340_SENS_NOTE_4,    ls->channels[SENSOR_D]->note);
 
             SetCtrlAttribute(p, LS340_SENS_SORBLABEL,   ATTR_CALLBACK_DATA, ls->channels[SORB]);
             SetCtrlAttribute(p, LS340_SENS_SORBCOEFF,   ATTR_CALLBACK_DATA, ls->channels[SORB]);
@@ -511,16 +562,20 @@ void LS340menuCallack (int menuBar, int menuItem, void *callbackData, int panel)
             SetCtrlAttribute(p, LS340_SENS_HE3PCOEFF,   ATTR_CALLBACK_DATA, ls->channels[HE3P]);
             SetCtrlAttribute(p, LS340_SENS_HE3PACQ,     ATTR_CALLBACK_DATA, ls->channels[HE3P]);
             SetCtrlAttribute(p, LS340_SENS_NOTE_3,      ATTR_CALLBACK_DATA, ls->channels[HE3P]);
+			
+			SetCtrlAttribute(p, LS340_SENS_SENSOR_D_LABEL,   ATTR_CALLBACK_DATA, ls->channels[SENSOR_D]);
+            SetCtrlAttribute(p, LS340_SENS_SENSOR_D_COEFF,   ATTR_CALLBACK_DATA, ls->channels[SENSOR_D]);
+            SetCtrlAttribute(p, LS340_SENS_SENSOR_D_ACQ,     ATTR_CALLBACK_DATA, ls->channels[SENSOR_D]);
+            SetCtrlAttribute(p, LS340_SENS_NOTE_4,      ATTR_CALLBACK_DATA, ls->channels[SENSOR_D]);
     
-            devPanel_Add (p, ls, LS340_UpdateSensorReadings);
-            DisplayPanel (p);
+            devPanel_Add (p, ls, LS340_UpdateSensorTabReadings);
+            InstallPopup (p); //if popup is reqired or DisplayPanel (p);
         }
-        break;
+        break; 
     }
 }
 
-
-/******************************Init and operation functions**********************************/
+/****************************** Initialization **********************************/
 void *LS340_Create(gpibioPtr dev)
 {
     LS340Ptr ls;
@@ -531,6 +586,7 @@ void *LS340_Create(gpibioPtr dev)
     ls->channels[SORB] = acqchan_Create("sorb", dev, GetSensor);
     ls->channels[ONEK] = acqchan_Create("1 k pot", dev, GetSensor);
     ls->channels[HE3P] = acqchan_Create("He 3 pot", dev, GetSensor);
+	ls->channels[SENSOR_D] = acqchan_Create("Sensor D", dev, GetSensor);
     ls->alarm.on = 0;
     ls->alarm.level = 0;
     ls->curveload.format = "%s, %s,> %s";
@@ -573,12 +629,10 @@ void OperateLS340(int menubar, int menuItem, void *callbackData, int panel)
     gpibioPtr dev = callbackData;
     LS340Ptr ls = dev->device;
     int p, m;
-    
+    //SetMenuBarAttribute (menubar, menuItem, ATTR_DIMMED, TRUE);  //
     ls->source->max = ls->heater.setplimit;
     p = dev->iPanel? dev->iPanel: LoadPanel(utilG.p, "LS340u.uir", LS340_CTRL);
     dev->iPanel = p;
-    
-    SetMenuBarAttribute(menubar, menuItem, ATTR_DIMMED, 1);
     SetPanelAttribute(p, ATTR_TITLE, dev->label);
     
     m = LoadMenuBar(p, "LS340u.uir", LS340);
@@ -586,7 +640,7 @@ void OperateLS340(int menubar, int menuItem, void *callbackData, int panel)
     
     SetMenuBarAttribute(m, LS340_CURVES_LOAD, ATTR_CALLBACK_DATA, dev);
     SetMenuBarAttribute(m, LS340_SOURCE_HEATER, ATTR_CALLBACK_DATA, ls->source);
-    SetMenuBarAttribute(m, LS340_MEASURE_MEAS, ATTR_CALLBACK_DATA, ls);
+    SetMenuBarAttribute(m, LS340_MEASURE_SENSOR_SETTINGS, ATTR_CALLBACK_DATA, ls);
     
     SetCtrlAttribute(p, LS340_CTRL_HEATER, ATTR_CALLBACK_DATA, dev);
     SetCtrlAttribute(p, LS340_CTRL_HEAT_PROP, ATTR_CALLBACK_DATA, dev);
@@ -606,17 +660,6 @@ void OperateLS340(int menubar, int menuItem, void *callbackData, int panel)
     DisplayPanel(p);
 }
 
-void LS340_UpdateReadings(int panel, void *ptr)
-{
-    gpibioPtr dev = ptr;
-    LS340Ptr ls = dev->device;
-    GetSensor(ls->channels[SORB]);
-    GetSensor(ls->channels[ONEK]);
-    GetSensor(ls->channels[HE3P]);
-    SetCtrlVal(panel, LS340_CTRL_SORBREAD, ls->channels[SORB]->reading);
-    SetCtrlVal(panel, LS340_CTRL_KPOTREAD, ls->channels[ONEK]->reading);
-    SetCtrlVal(panel, LS340_CTRL_HE3PREAD, ls->channels[HE3P]->reading);
-}
 
 void LS340_Save(gpibioPtr dev)
 {
@@ -644,7 +687,7 @@ void LS340_Save(gpibioPtr dev)
                                                                             ls->pid.d);
     FmtFile(fileHandle.analysis, "%s<Alarm properties    : %i, %f\n", ls->alarm.on, ls->alarm.level);
     
-    for (i = 0; i < 3; i++) acqchan_Save (ls->channels[i]);
+    for (i = 0; i < 4; i++) acqchan_Save (ls->channels[i]);  // 4 sensors
     source_Save (ls->source);
 }
 
@@ -677,7 +720,7 @@ void LS340_Load(gpibioPtr dev)
         ScanFile(fileHandle.analysis, "%s>Alarm properties    : %i, %f",        &ls->alarm.on,
                                                                             &ls->alarm.level);
     
-        for (i = 0; i < 3; i++) acqchan_Load (dev, ls->channels[i]);
+        for (i = 0; i < 4; i++) acqchan_Load (dev, ls->channels[i]); // 4 sensors
         source_Load (dev, ls->source);
         ls->source->max = ls->heater.setplimit;
         ls->source->min = 0;
@@ -690,6 +733,7 @@ void LS340_Remove(void *dev)
     acqchan_Remove(ls->channels[SORB]);
     acqchan_Remove(ls->channels[ONEK]);
     acqchan_Remove(ls->channels[HE3P]);
+	acqchan_Remove(ls->channels[SENSOR_D]);  
     source_Remove(ls->source);
     free(ls);
 }
@@ -699,7 +743,7 @@ void LS340_Init(void)
     devTypePtr devType;
     if(utilG.acq.status != ACQ_NONE)
     {
-        util_ChangeInitMessage("ls340 control utilities...");
+        util_ChangeInitMessage("LS340 control utilities...");
         devType = malloc(sizeof(devTypeItem));
         if(devType)
         {
@@ -717,3 +761,5 @@ void LS340_Init(void)
         }
     }
 }
+
+

@@ -1013,8 +1013,12 @@ void source_InitPanel (sourcePtr src)
 	
 	if(src->freq)
 	{
-		SetCtrlAttribute (panel, SOURCE_FUNCTION, ATTR_CTRL_MODE,
-						  VAL_INDICATOR);
+		  //GetCtrlVal (panel, SOURCE_OUTPUT, &src->biaslevel);
+               // if (src->SetLevel) src->SetLevel (src);
+               // if (src->acqchan->GetReading) src->acqchan->GetReading(src->acqchan);
+				SetCtrlVal (panel, SOURCE_OUTPUT, src->acqchan->reading);
+
+ //SetCtrlAttribute (panel, SOURCE_FUNCTION, ATTR_CTRL_MODE, VAL_INDICATOR); //disables reading
 		SetCtrlAttribute(panel, SOURCE_START, ATTR_MIN_VALUE, src->min);
 		SetCtrlAttribute(panel, SOURCE_START, ATTR_MAX_VALUE, src->max);
 		SetCtrlAttribute(panel, SOURCE_STOP, ATTR_MIN_VALUE, src->min);
@@ -1199,7 +1203,7 @@ sourcePtr   source_Create (char *label, void *dev, SetLevelPtr SetLevel, GetRead
     src->segments[0]->source = src;
 	src->seg = 0;
     src->SetLevel = SetLevel;
-	src->freq = 0;
+	src->freq = 1;	  // was 0 by default 
 	src->sourceOn = 0;
 	src->panel = 0;
 	src->menuitem_id = 0;
@@ -1221,7 +1225,7 @@ int  SegmentControlCallback(int panel, int control, int event, void *callbackDat
     double r;
 
     switch (control) {
-        case SOURCE_RATE:
+        /*case SOURCE_RATE:
             if (event == EVENT_VAL_CHANGED) {
                 sourcePtr src;
 				seg = callbackData;
@@ -1245,7 +1249,7 @@ int  SegmentControlCallback(int panel, int control, int event, void *callbackDat
                     SetCtrlVal (panel, SOURCE_TIME_TOTAL, source_TotalTime(sourceL.src));
                     exp_UpdateSourcePanel();
                 }
-            }
+            }  
 			if(event == EVENT_RIGHT_CLICK)
 			{
 				sourcePtr src;
@@ -1253,7 +1257,7 @@ int  SegmentControlCallback(int panel, int control, int event, void *callbackDat
 				src = seg->source;
 				segment_Notify (src, 0);
 			}
-            break;
+            break; */
         case SOURCE_DELAY:
             if (event == EVENT_VAL_CHANGED) {
                 sourcePtr src;

@@ -106,6 +106,7 @@ void boards_DigitalSourceUpdate (int panel, void *ptr)
 	int i;
 	for (i = 0; i < port->port.digitalIOport.bits; i++)
 	{
+		
 		SetCtrlVal (port->port.digitalIOport.bitarr[i].panel, BITPANEL_BIT, ((int)(port->port.digitalIOport.IO.source->biaslevel / pow(2.0, (double)i)) % 2));
 		SetCtrlVal (port->port.digitalIOport.bitarr[i].panel, BITPANEL_LED, ((int)(port->port.digitalIOport.IO.source->biaslevel / pow(2.0, (double)i)) % 2));
 	}

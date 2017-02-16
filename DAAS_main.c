@@ -20,13 +20,14 @@
 #include "source.h"
 #include "rs232util.h"
 #include "MCCdevices.h"
-
+ // insert headers for instruments below
 #include "sr830.h"
 #include "sr844.h"
 #include "k2400.h"
 #include "k2000.h"
 #include "k213.h"
 #include "HP33120A.h"
+#include "HP3245A.h"   
 #include "LS335.h"
 #include "LS340.h"
 #include "itc4.h"
@@ -67,6 +68,7 @@ main (void)
     sr844_Init();
     sr830_Init();
     hp33120a_Init();
+	hp3245a_Init(); 
     LS335_Init();
     LS340_Init();
     hp4156_Init();
@@ -83,7 +85,8 @@ main (void)
     init_MCCdevices();
 /***********************************************************************************/    
     SetIdleEventRate (DFLT_IDLE_EVENT_RATE);  // 40ms time, 25Hz rate
-    util_printfLog("Set idle event rate to %d ms\n", DFLT_IDLE_EVENT_RATE);
+	if (utilG.acq.status != ACQ_NONE) util_printfLog("Set idle event rate to %d ms\n", DFLT_IDLE_EVENT_RATE);  //if acquisition is enabled the idle rate is shown 
+	else  util_printfLog("Acquisition disabled. Ready to analyze data...", DFLT_IDLE_EVENT_RATE); // analysis only  message
     InstallMainCallback (AcquireData, 0, 1);
     
     utilG.err = 0;

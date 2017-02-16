@@ -1,6 +1,5 @@
 /**************************************************************************/
 /* LabWindows/CVI User Interface Resource (UIR) Include File              */
-/* Copyright (c) National Instruments 2013. All Rights Reserved.          */
 /*                                                                        */
 /* WARNING: Do not add to, delete from, or otherwise modify the contents  */
 /*          of this include file.                                         */
@@ -15,11 +14,11 @@
      /* Panels and Controls: */
 
 #define  LS335_CTRL                       1       /* callback function: LS335PanelCallback */
-#define  LS335_CTRL_KPOTREAD              2       /* control type: numeric, callback function: (none) */
-#define  LS335_CTRL_SORBREAD              3       /* control type: numeric, callback function: (none) */
+#define  LS335_CTRL_SENSOR_B_READ         2       /* control type: numeric, callback function: (none) */
+#define  LS335_CTRL_SENSOR_A_READ         3       /* control type: numeric, callback function: (none) */
 #define  LS335_CTRL_HEATER_PROP           4       /* control type: command, callback function: LS335ControlCallback */
 #define  LS335_CTRL_RAMPSPEED             5       /* control type: numeric, callback function: LS335ControlCallback */
-#define  LS335_CTRL_SORBTSET              6       /* control type: numeric, callback function: LS335ControlCallback */
+#define  LS335_CTRL_SENSOR_A_TSET         6       /* control type: numeric, callback function: LS335ControlCallback */
 #define  LS335_CTRL_POWER                 7       /* control type: ring, callback function: LS335ControlCallback */
 #define  LS335_CTRL_HEATER                8       /* control type: binary, callback function: LS335ControlCallback */
 #define  LS335_CTRL_DECORATION_3          9       /* control type: deco, callback function: (none) */
@@ -46,17 +45,17 @@
 #define  LS335_HEAT_ION                   17      /* control type: radioButton, callback function: LS335HeatControlCallback */
 #define  LS335_HEAT_PON                   18      /* control type: radioButton, callback function: LS335HeatControlCallback */
 
-#define  LS335_SENS                       3       /* callback function: util_HidePanelCallback */
-#define  LS335_SENS_KPOTLABEL             2       /* control type: string, callback function: LS335SensorControlCallback */
+#define  LS335_SENS                       3
+#define  LS335_SENS_SENSOR_B_LABEL        2       /* control type: string, callback function: LS335SensorControlCallback */
 #define  LS335_SENS_NOTE_2                3       /* control type: toggle, callback function: LS335SensorControlCallback */
-#define  LS335_SENS_KPOTCOEFF             4       /* control type: numeric, callback function: LS335SensorControlCallback */
-#define  LS335_SENS_KPOTMEAS              5       /* control type: numeric, callback function: (none) */
-#define  LS335_SENS_KPOTACQ               6       /* control type: toggle, callback function: LS335SensorControlCallback */
+#define  LS335_SENS_SENSOR_B_COEFF        4       /* control type: numeric, callback function: LS335SensorControlCallback */
+#define  LS335_SENS_SENSOR_B_MEAS         5       /* control type: numeric, callback function: (none) */
+#define  LS335_SENS_SENSOR_B_ACQ          6       /* control type: toggle, callback function: LS335SensorControlCallback */
 #define  LS335_SENS_NOTE_1                7       /* control type: toggle, callback function: LS335SensorControlCallback */
-#define  LS335_SENS_SORBLABEL             8       /* control type: string, callback function: LS335SensorControlCallback */
-#define  LS335_SENS_SORBCOEFF             9       /* control type: numeric, callback function: LS335SensorControlCallback */
-#define  LS335_SENS_SORBMEAS              10      /* control type: numeric, callback function: (none) */
-#define  LS335_SENS_SORBACQ               11      /* control type: toggle, callback function: LS335SensorControlCallback */
+#define  LS335_SENS_SENSOR_A_LABEL        8       /* control type: string, callback function: LS335SensorControlCallback */
+#define  LS335_SENS_SENSOR_A_COEFF        9       /* control type: numeric, callback function: LS335SensorControlCallback */
+#define  LS335_SENS_SENSOR_A_MEAS         10      /* control type: numeric, callback function: (none) */
+#define  LS335_SENS_SENSOR_A_ACQ          11      /* control type: toggle, callback function: LS335SensorControlCallback */
 #define  LS335_SENS_CLOSE                 12      /* control type: toggle, callback function: LS335SensorControlCallback */
 #define  LS335_SENS_XTEXT                 13      /* control type: textMsg, callback function: (none) */
 #define  LS335_SENS_YTEXT                 14      /* control type: textMsg, callback function: (none) */
@@ -77,18 +76,18 @@
 
 #define  LS335                            1
 #define  LS335_CURVES                     2
-#define  LS335_CURVES_LOAD                3       /* callback function: LS335menuCallack */
+#define  LS335_CURVES_LOAD                3       /* callback function: LS335menuCallback */
 #define  LS335_SOURCE                     4
-#define  LS335_SOURCE_HEATER              5       /* callback function: LS335menuCallack */
+#define  LS335_SOURCE_HEATER              5       /* callback function: LS335menuCallback */
 #define  LS335_MEASURE                    6
-#define  LS335_MEASURE_MEAS               7       /* callback function: LS335menuCallack */
+#define  LS335_MEASURE_MEAS               7       /* callback function: LS335menuCallback */
 
 
      /* Callback Prototypes: */
 
 int  CVICALLBACK LS335ControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK LS335HeatControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-void CVICALLBACK LS335menuCallack(int menubar, int menuItem, void *callbackData, int panel);
+void CVICALLBACK LS335menuCallback(int menubar, int menuItem, void *callbackData, int panel);
 int  CVICALLBACK LS335PanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK LS335SendCurve(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK LS335SensorControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
