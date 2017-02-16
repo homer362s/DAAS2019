@@ -1,0 +1,82 @@
+# to clone remote repo, e.g <URL>= https://github.com/schacon/ticgit
+git clone <URL> 
+
+# To clone specific remote brunch to local dir
+git init
+git remote add -t refspec remotename host:/dir.git
+git fetch
+
+# create new empty repo
+git init
+
+# Important! What is going on
+git status
+
+# add (stage) files 
+# all changed/new files
+git add .
+
+# a particular file
+git add <file>
+
+# to undo add before commit
+git rm --cached <file>
+
+# to remove file from repo and dir
+git rm <file>
+
+# to commit changes in staging area (created by add/rm command)
+git commit
+
+# to push changes to remote master (mind the branches!) syncs remote to local
+git push
+
+# to push specific branch to remote 
+git push [remote-name] [branch-name]
+
+# e.g.
+git push origin master
+
+# to pull remote changes (mind the branches!), syncs local to remote
+git pull https://github.com/homer362s/DAAS_SOFT.git
+
+# if you want just to update info on remote changes use fetch
+# (it does not merge local and remote)
+git fetch [remote-name]
+
+# list configuration
+ git config -l
+git config --local user.email user@mail.com
+git config --local user.name "John Smith"
+
+# show local branches (current is marked by *)
+git branch
+
+# show remote branches
+git branch -r
+
+# to create a branch
+git branch [new_branch_name]
+
+# to switch to branch, this will update your local dir to the snapshot of that branch
+ git checkout [branch_name]
+
+
+# to create a branch and switch to it
+git checkout -b [branch_name]
+
+
+# to merge changes in [branch] into master
+git checkout master
+git merge [branch]
+
+
+# compare local and remote branches
+git diff master origin/master
+
+
+
+
+
+
+

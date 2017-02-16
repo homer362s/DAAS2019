@@ -1,0 +1,39 @@
+﻿
+Added averaging using cbAInScan to be used with MC devices
+# On branch master
+# Changes to be committed:
+#	modified:   MCCdevices.c
+#	modified:   MCCdevices.h
+#
+# Changes not staged for commit:
+#	modified:   DAAS.prj
+#	modified:   DAAS_main.c
+#	modified:   Gpibiou.h
+#	modified:   Gpibiou.uir
+#	modified:   Graphu.uir
+#	modified:   LS335.c
+#	modified:   LS340.c
+#	modified:   LS340u.uir
+#	modified:   Source.c
+#	modified:   Sr830.c
+#	modified:   Sr830u.h
+#	modified:   Sr830u.uir
+#	modified:   USB-1208LSu.h
+#	modified:   USB-1208LSu.uir
+#	modified:   USB-PMD1208LS.c
+#	modified:   sourceu.h
+#	modified:   sourceu.uir
+#	modified:   utilu.uir
+#
+# Untracked files:
+#	DAAS.exe
+#	DAASdbg.exe
+#	HowDaasWorksOrig.txt
+#	LS335~cvi101736.c
+#	Sr830~cvi120215.c
+#	git_commands.txt
+#	sr830Atest.cfg
+#	sr830_saved.dev
+#	sr830test.cfg
+#
+

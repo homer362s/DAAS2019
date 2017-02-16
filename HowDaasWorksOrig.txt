@@ -1,0 +1,51 @@
+DAAS_main.c
+-----------
+Inits globals
+Inits devices
+Installs MainCallback function: AcquireData
+  this function is called on idle events, their rate is set to the highest possible now: 0
+  See "Precedence of Callback Functions" for details
+Starts main gui loop
+
+  
+AcquireData():  
+-------------
+Controls experiment flow.
+Experiment can be in of the following states:
+ACQ_NONE - initial state set in utilG_Init()(util.c)
+ACQ_BEGIN - set in acquire.c ("begin" menu event)
+ACQ_TERMINATE - set in acquire.c ("end" menu event) or by AcquireData() when all points are collected
+      set in exp_UpdateBiasLevels() (Source.c) - reason unclear
+	  set in dev_CheckforGPIBErrors()(gpibio.c)
+	  set in DevListCallback()(gpibio.c) on device removal while exp is in progress or paused
+      It's a transient state which goes into ACQ_DONE (if all points are collected) 
+	  or ACQ_STOPPED (if not)
+ACQ_BUSY - active experiment. Set in exp_Begin()(acquire.c) or by "continue" menu event
+ACQ_PAUSED - set in acquire.c ("pause" menu event)
+ACQ_STOPPED - when NOT all points were collected after ACQ_TERMINATE, or when exp_Begin() failed
+ACQ_DONE - when all points were collected after ACQ_TERMINATE
+
+Status is saved in utilG.acq.status (util.c, Util.h)
+It is set in 17 places, 6 files
+It is checked in 29 places, 13 files
+
+Experiment can be EXP_FLOAT or EXP_SOURCE, it is saved in utilG.exp (util.c, Util.h)
+
+Acquisition happens in AcquireData() when utilG.acq.status==ACQ_BUSY
+expG.DoExp() is called on idle events 
+   it could be either exp_DoGeneralExp() (acquire.c) 
+                   or exp_DoSourceExp() (Source.c)
+Timing is provided by calling util_Delay() (util.c) 
+  In floating experiment the delay is called after getting and displaying the channels 
+     exp_DoGeneralExp() (acquire.c)
+  In source experiment the delay is called after setting the output analog value
+     SetAnalogue()(MCCdevices.c or another output device) 
+	 the delay depends on the current "segment", i.e scanned channel
+
+util_Delay() uses Timer() to measure the delay. While waitung it calls ProcessSystemEvents(). 
+  Looks like EVENT_IDLE are not processed by ProcessSystemEvents() which makes sense.
+
+
+
+Note: in acquireu.uir the menu item "set floating experiment" callback is set in gui, 
+      and the menu item "set source experiment" callback is set in Source.c in source_Init()
