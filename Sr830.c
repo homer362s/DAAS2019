@@ -67,10 +67,10 @@
 #define TRUE 1
 #define FALSE 0
 
-typedef enum {X, Y, M, P, ADC1, ADC2, ADC3, ADC4} sr830_channels;
+typedef enum {X, Y, M, P, XN, YN, ADC1, ADC2, ADC3, ADC4} sr830_channels;
 typedef struct
 {
-    acqchanPtr  channels[8]; //was 8
+    acqchanPtr  channels[10]; //was 8
     sourcePtr   sources[7];  //DAC1, DAC2, DAC3, DAC4, Frequency, Amplitude, Phase
     int         sens, inputstatus, autosens, id;
     struct      {int reserve, filter, output;} overload;
@@ -100,6 +100,7 @@ double  sr830_GetRefAmpl (gpibioPtr dev);
 
 double  sr830_Conv2Sensitivity (int sens, int inputstatus);
 void    sr830_GetXYMP (gpibioPtr dev);
+void	sr830_GetNoise (gpibioPtr dev);
 void    sr830_GetADCs (gpibioPtr dev);
 void    sr830_SetDAC (gpibioPtr dev, int i, sourcePtr src);
 void    sr830_GetDAC (gpibioPtr dev, int i, sourcePtr src);
@@ -438,6 +439,8 @@ static void *sr830_Create (gpibioPtr dev)
     lia->channels[Y] = acqchan_Create ("SR830 Y", dev, sr830_GetLIAReadings);
     lia->channels[M] = acqchan_Create ("SR830 M", dev, sr830_GetLIAReadings);
     lia->channels[P] = acqchan_Create ("SR830 P", dev, sr830_GetLIAReadings);
+	lia->channels[XN] = acqchan_Create ("SR830 XN", dev, sr830_GetLIAReadings);
+	lia->channels[YN] = acqchan_Create ("SR830 YN", dev, sr830_GetLIAReadings);
 
     lia->channels[ADC1] = acqchan_Create ("SR830 ADC1", dev, sr830_GetADCReading);
     lia->channels[ADC2] = acqchan_Create ("SR830 ADC2", dev, sr830_GetADCReading);
@@ -831,12 +834,16 @@ int  XYMPControlCallback(int panel, int control, int event, void *callbackData, 
         case SR830_XYMP_NOTE_2:
         case SR830_XYMP_NOTE_3:
         case SR830_XYMP_NOTE_4:
+		case SR830_XYMP_XN_NOTE:
+		case SR830_XYMP_YN_NOTE:
             AcqDataNoteCallback (panel, control, event, callbackData, eventData1, eventData2);
             break;
         case SR830_XYMP_XACQ:
         case SR830_XYMP_YACQ:
-        case SR830_XYMP_MACQ:
+        case SR830_XYMP_MACQ:   
         case SR830_XYMP_PACQ:
+		case SR830_XYMP_XNACQ:
+		case SR830_XYMP_YNACQ:
             if (event == EVENT_VAL_CHANGED) {
                 GetCtrlVal (panel, control, &acqchan->acquire);
                 if (acqchan->acquire) acqchanlist_AddChannel (acqchan);
@@ -847,6 +854,8 @@ int  XYMPControlCallback(int panel, int control, int event, void *callbackData, 
         case SR830_XYMP_YCOEFF:
         case SR830_XYMP_MCOEFF:
         case SR830_XYMP_PCOEFF:
+		case SR830_XYMP_XNCOEFF:
+		case SR830_XYMP_YNCOEFF:
             if (event == EVENT_COMMIT) {
                 GetCtrlVal (panel, control, &acqchan->coeff);
                 if (acqchan->p) SetCtrlVal (acqchan->p, ACQDATA_COEFF, acqchan->coeff);
@@ -856,6 +865,8 @@ int  XYMPControlCallback(int panel, int control, int event, void *callbackData, 
         case SR830_XYMP_YLABEL:
         case SR830_XYMP_MLABEL:
         case SR830_XYMP_PLABEL:
+		case SR830_XYMP_XNLABEL:
+		case SR830_XYMP_YNLABEL:
             if (event == EVENT_COMMIT) {
                 GetCtrlVal (panel, control, acqchan->channel->label);
                 acqchanlist_ReplaceChannel (acqchan);
@@ -882,8 +893,11 @@ void sr830_XYMP_UpdateReadings (int panel, void *lia)
     SetCtrlVal (panel, SR830_XYMP_YMEAS, my_lia->channels[Y]->reading*my_lia->channels[Y]->coeff);
     SetCtrlVal (panel, SR830_XYMP_MMEAS, my_lia->channels[M]->reading*my_lia->channels[M]->coeff);
     SetCtrlVal (panel, SR830_XYMP_PMEAS, my_lia->channels[P]->reading*my_lia->channels[P]->coeff);
+	SetCtrlVal (panel, SR830_XYMP_XNMEAS, my_lia->channels[XN]->reading*my_lia->channels[XN]->coeff);
+    SetCtrlVal (panel, SR830_XYMP_YNMEAS, my_lia->channels[YN]->reading*my_lia->channels[YN]->coeff);
 }
 
+// Initialize the LIA Measurement Dialog
 void MeasXYMPCallback(int menubar, int menuItem, void *callbackData, int panel)
 {
     int p;
@@ -914,7 +928,17 @@ void MeasXYMPCallback(int menubar, int menuItem, void *callbackData, int panel)
     SetCtrlVal (p, SR830_XYMP_PCOEFF, lia->channels[P]->coeff);
     SetCtrlVal (p, SR830_XYMP_PACQ, lia->channels[P]->acquire);
     SetCtrlVal (p, SR830_XYMP_NOTE_4, lia->channels[P]->note);
-
+	
+	SetCtrlVal (p, SR830_XYMP_XNLABEL, lia->channels[XN]->channel->label);
+    SetCtrlVal (p, SR830_XYMP_XNCOEFF, lia->channels[XN]->coeff);
+    SetCtrlVal (p, SR830_XYMP_XNACQ, lia->channels[XN]->acquire);
+    SetCtrlVal (p, SR830_XYMP_XN_NOTE, lia->channels[XN]->note);
+	
+	SetCtrlVal (p, SR830_XYMP_YNLABEL, lia->channels[YN]->channel->label);
+    SetCtrlVal (p, SR830_XYMP_YNCOEFF, lia->channels[YN]->coeff);
+    SetCtrlVal (p, SR830_XYMP_YNACQ, lia->channels[YN]->acquire);
+    SetCtrlVal (p, SR830_XYMP_YN_NOTE, lia->channels[YN]->note);
+	
     SetCtrlAttribute(p, SR830_XYMP_CLOSE, ATTR_CALLBACK_DATA, lia);
 
     SetCtrlAttribute(p, SR830_XYMP_XLABEL, ATTR_CALLBACK_DATA, lia->channels[X]);
@@ -936,6 +960,17 @@ void MeasXYMPCallback(int menubar, int menuItem, void *callbackData, int panel)
     SetCtrlAttribute(p, SR830_XYMP_PCOEFF, ATTR_CALLBACK_DATA, lia->channels[P]);
     SetCtrlAttribute(p, SR830_XYMP_PACQ, ATTR_CALLBACK_DATA, lia->channels[P]);
     SetCtrlAttribute(p, SR830_XYMP_NOTE_4, ATTR_CALLBACK_DATA, lia->channels[P]);
+	
+	SetCtrlAttribute(p, SR830_XYMP_XNLABEL, ATTR_CALLBACK_DATA, lia->channels[XN]);
+    SetCtrlAttribute(p, SR830_XYMP_XNCOEFF, ATTR_CALLBACK_DATA, lia->channels[XN]);
+    SetCtrlAttribute(p, SR830_XYMP_XNACQ, ATTR_CALLBACK_DATA, lia->channels[XN]);
+    SetCtrlAttribute(p, SR830_XYMP_XN_NOTE, ATTR_CALLBACK_DATA, lia->channels[XN]);
+	
+	SetCtrlAttribute(p, SR830_XYMP_YNLABEL, ATTR_CALLBACK_DATA, lia->channels[YN]);
+    SetCtrlAttribute(p, SR830_XYMP_YNCOEFF, ATTR_CALLBACK_DATA, lia->channels[YN]);
+    SetCtrlAttribute(p, SR830_XYMP_YNACQ, ATTR_CALLBACK_DATA, lia->channels[YN]);
+    SetCtrlAttribute(p, SR830_XYMP_YN_NOTE, ATTR_CALLBACK_DATA, lia->channels[YN]);
+	
 
     devPanel_Add (p, lia, sr830_XYMP_UpdateReadings);
     InstallPopup (p);
@@ -1290,7 +1325,9 @@ void sr830_UpdateReadings (int panel, void *dev)
         !(lia->channels[X]->acquire ||
           lia->channels[Y]->acquire ||
           lia->channels[M]->acquire ||
-          lia->channels[P]->acquire)) sr830_GetXYMP (my_dev);
+          lia->channels[P]->acquire ||
+		  lia->channels[XN]->acquire ||
+          lia->channels[YN]->acquire)) sr830_GetXYMP (my_dev);
 
     if (expG.acqstatus != utilG.acq.status) {
         m = GetPanelMenuBar (panel);
@@ -1357,15 +1394,17 @@ void sr830_GetXYMP (gpibioPtr dev)
     int sens;
     sr830_channels chan;
 
-    sr830_Out (dev, "SNAP?1,2,3,4");
+    sr830_Out (dev, "SNAP?1,2,3,4,10,11");
     sr830_In (dev, msg);
-    Scan (msg, "%s>%f,%f,%f,%f",
+    Scan (msg, "%s>%f,%f,%f,%f,%f,%f",
           &lia->channels[X]->reading,
           &lia->channels[Y]->reading,
           &lia->channels[M]->reading,
-          &lia->channels[P]->reading);
+          &lia->channels[P]->reading,
+		  &lia->channels[XN]->reading,
+          &lia->channels[YN]->reading);
 
-    for (chan = X; chan <= P; chan++) lia->channels[chan]->newreading = TRUE;
+    for (chan = X; chan <= YN; chan++) lia->channels[chan]->newreading = TRUE;
 
     if (lia->autosens) {
         hi = sr830_Conv2Sensitivity (lia->sens, lia->inputstatus);
