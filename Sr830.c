@@ -826,8 +826,10 @@ int  XYMPControlCallback(int panel, int control, int event, void *callbackData, 
 {
     sr830Ptr lia;
     acqchanPtr acqchan;
+	gpibioPtr dev;
 
     acqchan = callbackData;
+	
 
     switch (control) {
         case SR830_XYMP_NOTE_1:
@@ -843,7 +845,7 @@ int  XYMPControlCallback(int panel, int control, int event, void *callbackData, 
         case SR830_XYMP_MACQ:   
         case SR830_XYMP_PACQ:
 		case SR830_XYMP_XNACQ:
-		case SR830_XYMP_YNACQ:
+		case SR830_XYMP_YNACQ:	
             if (event == EVENT_VAL_CHANGED) {
                 GetCtrlVal (panel, control, &acqchan->acquire);
                 if (acqchan->acquire) acqchanlist_AddChannel (acqchan);
@@ -1393,6 +1395,12 @@ void sr830_GetXYMP (gpibioPtr dev)
     sr830Ptr lia = dev->device;
     int sens;
     sr830_channels chan;
+	
+	// Check and set display to noise if required
+	if (lia->channels[XN]->acquire)
+		sr830_Out (dev, "DDEF1,2,0");
+	if (lia->channels[YN]->acquire)
+		sr830_Out (dev, "DDEF2,2,0");
 
     sr830_Out (dev, "SNAP?1,2,3,4,10,11");
     sr830_In (dev, msg);
