@@ -900,7 +900,7 @@ void sr830_XYMP_UpdateReadings (int panel, void *lia)
 }
 
 // Initialize the LIA Measurement Dialog
-void MeasXYMPCallback(int menubar, int menuItem, void *callbackData, int panel)
+void MeasXYMPCallback(int menubar, int menuItem, void *callbackData, int panel)   //brings panel with sensing channels
 {
     int p;
     sr830Ptr lia;

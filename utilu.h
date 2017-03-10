@@ -30,7 +30,7 @@
 #define  INIT_TEXT                        2       /* control type: string, callback function: (none) */
 #define  INIT_TEXT_2                      3       /* control type: textMsg, callback function: (none) */
 #define  INIT_TEXT_10                     4       /* control type: textMsg, callback function: (none) */
-#define  INIT_TEXT_4                      5       /* control type: textMsg, callback function: (none) */
+#define  INIT_AUTHORS                     5       /* control type: textMsg, callback function: (none) */
 #define  INIT_TEXT_3                      6       /* control type: textMsg, callback function: (none) */
 #define  INIT_EXIT                        7       /* control type: command, callback function: (none) */
 #define  INIT_ANALYSIS                    8       /* control type: command, callback function: (none) */

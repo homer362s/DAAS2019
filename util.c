@@ -223,6 +223,7 @@ void utilG_Init (void (*DiscardPanels)(void))
     // next two lines are a hack to avoid the minimization bug
     SetPanelAttribute (utilG.p, ATTR_MOVABLE, FALSE);
     SetPanelAttribute (utilG.p, ATTR_MOVABLE, TRUE);
+	
     DisplayPanel (utilG.p);
     
     GetCtrlAttribute(utilG.p, BG_GRAPHS, ATTR_WIDTH, &grw);
@@ -244,7 +245,9 @@ void utilG_Init (void (*DiscardPanels)(void))
     SetPanelAttribute(utilG.p, ATTR_TITLE, strVersion );
     SetSystemAttribute (ATTR_TASKBAR_BUTTON_TEXT, strVersion);
     SetCtrlAttribute (initP, INIT_TEXT, ATTR_VISIBLE, FALSE);
+	SetCtrlVal(initP,INIT_AUTHORS,"G.Bazán(1995),G.Orlov(2008),A.Chaney(2013),S.Rebrik(2015),M.Filmer (2017)");            
     DisplayPanel (initP);
+	
 
     GetUserEvent (1, &p, &control);
     switch (control) {

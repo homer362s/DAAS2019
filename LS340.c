@@ -1,5 +1,6 @@
 
 //fixed bug for 1K Pot
+// alarm disabled 3/10/2017
 #include <gpib.h>
 #include <formatio.h>
 #include <userint.h>
@@ -43,7 +44,7 @@ typedef struct{
         char *input;
         double setplimit, pchange, nchange, current, setpoint, rampspeed;} heater;
     struct {double p, i, d; int pon, ion, don;} pid;
-    struct {int on; double level;} alarm;
+    //struct {int on; double level;} alarm;
     struct {char *serial, *format; int source, target, file;} curveload;
 } LS340Type;
     
@@ -100,16 +101,17 @@ void GetSensor(acqchanPtr acqchan)
 {     
     gpibioPtr dev = acqchan->dev;
     LS340Ptr ls = dev->device;
-    int alarm = 0;
+  //  int alarm = 0;
     char *sens_name="", msg[10];
     if(!strcmp(acqchan->channel->label, "sorb")) sens_name = "A";
-    if(!strcmp(acqchan->channel->label, "1 k pot")) {sens_name = "B"; alarm = 1;}
+    if(!strcmp(acqchan->channel->label, "1 k pot")) {sens_name = "B"; //alarm = 1;
+	}
     if(!strcmp(acqchan->channel->label, "He 3 pot")) sens_name = "C";
 	if(!strcmp(acqchan->channel->label, "Sensor D")) sens_name = "D";      
     Fmt(msg, "KRDG? %s", sens_name);
     acqchan->reading = gpib_GetDoubleVal(dev, msg);
     acqchan->newreading = TRUE;
-    if(alarm && ls->alarm.on)
+   /* if(alarm && ls->alarm.on)
     {
         if(acqchan->reading > ls->alarm.level)
         {
@@ -118,11 +120,11 @@ void GetSensor(acqchanPtr acqchan)
         }
         else
             SetCtrlVal(dev->iPanel, LS340_CTRL_ALARMLED, 0);
-    }
+    }  */
 }
 
 /******************************Callback Functions**********************************/
-void LS340_UpdateSensorTabReadings (int panel, void *ptr)
+void LS340_UpdateSensorTabReadings (int panel, void *ptr) // only works when sensor panel is open
 {
     LS340Ptr ls = ptr;
     SetCtrlVal(panel, LS340_SENS_SORBMEAS, ls->channels[SORB]->reading);
@@ -130,6 +132,20 @@ void LS340_UpdateSensorTabReadings (int panel, void *ptr)
     SetCtrlVal(panel, LS340_SENS_HE3PMEAS, ls->channels[HE3P]->reading);
 	SetCtrlVal(panel, LS340_SENS_SENSOR_D_MEAS, ls->channels[SENSOR_D]->reading);
     //if(utilG.acq.status == ACQ_BUSY)   HidePanel(panel);
+}
+void old_LS340_UpdateReadings(int panel, void *ptr)
+{   int m;
+    gpibioPtr dev = ptr;
+    LS340Ptr ls = dev->device;
+    GetSensor(ls->channels[SORB]);
+    GetSensor(ls->channels[ONEK]);
+    GetSensor(ls->channels[HE3P]);
+	GetSensor(ls->channels[SENSOR_D]); 
+	
+    SetCtrlVal(panel, LS340_CTRL_SORBREAD, ls->channels[SORB]->reading);
+    SetCtrlVal(panel, LS340_CTRL_KPOTREAD, ls->channels[ONEK]->reading); //error with panel ID here was due to Discard vs Hide
+    SetCtrlVal(panel, LS340_CTRL_HE3PREAD, ls->channels[HE3P]->reading);
+	SetCtrlVal(panel, LS340_CTRL_SENSOR_D_READ, ls->channels[SENSOR_D]->reading);
 }
 void LS340_UpdateReadings(int panel, void *ptr)
 {   int m;
@@ -145,7 +161,37 @@ void LS340_UpdateReadings(int panel, void *ptr)
     SetCtrlVal(panel, LS340_CTRL_HE3PREAD, ls->channels[HE3P]->reading);
 	SetCtrlVal(panel, LS340_CTRL_SENSOR_D_READ, ls->channels[SENSOR_D]->reading);
 }
+/*void stub_UpdateReadings (int panel, void *dev)
+{
+    gpibioPtr my_dev = dev;
+    sr830Ptr lia = my_dev->device;
+    int m;
 
+    if (!util_TakingData() ||
+        !(lia->channels[X]->acquire ||
+          lia->channels[Y]->acquire ||
+          lia->channels[M]->acquire ||
+          lia->channels[P]->acquire ||
+		  lia->channels[XN]->acquire ||
+          lia->channels[YN]->acquire)) sr830_GetXYMP (my_dev);
+
+    if (expG.acqstatus != utilG.acq.status) {
+        m = GetPanelMenuBar (panel);
+        SetMenuBarAttribute (m, SR830MENU_MEASURE, ATTR_DIMMED, util_TakingData());
+        SetMenuBarAttribute (m, SR830MENU_FILE_LOAD, ATTR_DIMMED, util_TakingData());
+    }
+
+    if (lia->autosens) SetCtrlIndex (panel, SR830_CTRL_SENS, sr830_GetSensitivity (dev));
+
+    SetCtrlVal (panel, SR830_CTRL_XDISP, lia->channels[X]->reading);
+    SetCtrlVal (panel, SR830_CTRL_YDISP, lia->channels[Y]->reading);
+    SetCtrlVal (panel, SR830_CTRL_MAG, lia->channels[M]->reading);
+    SetCtrlVal (panel, SR830_CTRL_PHASE, lia->channels[P]->reading);
+
+    SetCtrlVal (panel, SR830_CTRL_INPUTOVERLOAD, lia->overload.reserve);
+    SetCtrlVal (panel, SR830_CTRL_FILTEROVERLOAD, lia->overload.filter);
+    SetCtrlVal (panel, SR830_CTRL_OUTPUTOVERLOAD, lia->overload.output);
+}   */
 void LS340_UpdateHeaterSettings(int panel, gpibioPtr dev)
 {
     char msg[260];
@@ -182,8 +228,8 @@ void LS340_InitControls(int p, gpibioPtr dev)
     SetCtrlVal(p, LS340_CTRL_SORBTSET, ls->heater.setpoint);
     SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
     SetCtrlVal(p, LS340_CTRL_RAMPSPEED, ls->heater.rampspeed);
-    SetCtrlVal(p, LS340_CTRL_ALARM, ls->alarm.on);
-    SetCtrlVal(p, LS340_CTRL_ALARMLVL, ls->alarm.level);
+    //SetCtrlVal(p, LS340_CTRL_ALARM, ls->alarm.on);
+    //SetCtrlVal(p, LS340_CTRL_ALARMLVL, ls->alarm.level);
 }
 
 int LS340PanelCallback (int panel, int event, void *callbackData, int eventData1, int eventData2)
@@ -211,14 +257,14 @@ int LS340ControlCallback (int panel, int control, int event, void *callbackData,
     char msg[260];
     switch(control)
     {
-		 case LS340_CTRL_ALARM:
+		 /*case LS340_CTRL_ALARM:
             if (event == EVENT_COMMIT)
             {
                 GetCtrlVal(panel, control, &ls->alarm.on);
                 if(!ls->alarm.on)
                     SetCtrlVal(panel, LS340_CTRL_ALARMLED, 0);
             }
-            break;	
+            break;*/	
         case LS340_CTRL_HEATER:
             if (event == EVENT_COMMIT)
             {
@@ -291,10 +337,10 @@ int LS340ControlCallback (int panel, int control, int event, void *callbackData,
             }
             break;
        
-        case LS340_CTRL_ALARMLVL:
+        /*case LS340_CTRL_ALARMLVL:
             if (event == EVENT_COMMIT)
                 GetCtrlVal(panel, control, &ls->alarm.level);
-            break;
+            break;  */
     }
     return 0;
 }
@@ -390,7 +436,7 @@ int LS340HeatControlCallback (int panel, int control, int event, void *callbackD
     return 0;
 }
 
-int  LS340SensorControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
+int  LS340SensorControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2)  // panel where coefficents are set and acq channels chosen
 {
     acqchanPtr acqchan;
     acqchan = callbackData;
@@ -445,7 +491,7 @@ int  LS340SensorControlCallback(int panel, int control, int event, void *callbac
                 DiscardPanel (panel);
             }
     }
-    updateGraphSource();
+   //updateGraphSource();  // what is this for?
     return 0;
 }
 
@@ -587,8 +633,8 @@ void *LS340_Create(gpibioPtr dev)
     ls->channels[ONEK] = acqchan_Create("1 k pot", dev, GetSensor);
     ls->channels[HE3P] = acqchan_Create("He 3 pot", dev, GetSensor);
 	ls->channels[SENSOR_D] = acqchan_Create("Sensor D", dev, GetSensor);
-    ls->alarm.on = 0;
-    ls->alarm.level = 0;
+    //ls->alarm.on = 0;
+    //ls->alarm.level = 0;
     ls->curveload.format = "%s, %s,> %s";
     ls->curveload.serial = "no_number";
     ls->curveload.source = 1;
@@ -647,8 +693,8 @@ void OperateLS340(int menubar, int menuItem, void *callbackData, int panel)
     SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_CALLBACK_DATA, dev);
     SetCtrlAttribute(p, LS340_CTRL_RAMPSPEED, ATTR_CALLBACK_DATA, dev);
     SetCtrlAttribute(p, LS340_CTRL_POWER, ATTR_CALLBACK_DATA, dev);
-    SetCtrlAttribute(p, LS340_CTRL_ALARM, ATTR_CALLBACK_DATA, dev);
-    SetCtrlAttribute(p, LS340_CTRL_ALARMLVL, ATTR_CALLBACK_DATA, dev);
+    //SetCtrlAttribute(p, LS340_CTRL_ALARM, ATTR_CALLBACK_DATA, dev);
+    //SetCtrlAttribute(p, LS340_CTRL_ALARMLVL, ATTR_CALLBACK_DATA, dev);
     
     SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
     SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MIN_VALUE, 0.);
@@ -685,7 +731,7 @@ void LS340_Save(gpibioPtr dev)
                                                                             ls->pid.p,
                                                                             ls->pid.i,
                                                                             ls->pid.d);
-    FmtFile(fileHandle.analysis, "%s<Alarm properties    : %i, %f\n", ls->alarm.on, ls->alarm.level);
+   // FmtFile(fileHandle.analysis, "%s<Alarm properties    : %i, %f\n", ls->alarm.on, ls->alarm.level);
     
     for (i = 0; i < 4; i++) acqchan_Save (ls->channels[i]);  // 4 sensors
     source_Save (ls->source);
@@ -717,8 +763,7 @@ void LS340_Load(gpibioPtr dev)
                                                                             &ls->pid.p,
                                                                             &ls->pid.i,
                                                                             &ls->pid.d);
-        ScanFile(fileHandle.analysis, "%s>Alarm properties    : %i, %f",        &ls->alarm.on,
-                                                                            &ls->alarm.level);
+        //ScanFile(fileHandle.analysis, "%s>Alarm properties    : %i, %f",        &ls->alarm.on,&ls->alarm.level);
     
         for (i = 0; i < 4; i++) acqchan_Load (dev, ls->channels[i]); // 4 sensors
         source_Load (dev, ls->source);

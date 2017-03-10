@@ -38,7 +38,7 @@
 #include "dda08.h"
 #include "USB-PMD1208LS.h"
 
-#define DFLT_IDLE_EVENT_RATE 40 // this is actually a period in ms 40ms = 25Hz
+#define DFLT_IDLE_EVENT_RATE 30 // this is actually a period in ms 40ms = 30Hz
 
 int AcquireData (int panel, int control, int event, void *callbackData, int event1, int event2);
 

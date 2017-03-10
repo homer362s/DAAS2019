@@ -19,19 +19,14 @@
 #define  LS340_CTRL_KPOTREAD              4       /* control type: numeric, callback function: (none) */
 #define  LS340_CTRL_SORBREAD              5       /* control type: numeric, callback function: (none) */
 #define  LS340_CTRL_HEAT_PROP             6       /* control type: command, callback function: LS340ControlCallback */
-#define  LS340_CTRL_ALARMLVL              7       /* control type: numeric, callback function: LS340ControlCallback */
-#define  LS340_CTRL_RAMPSPEED             8       /* control type: numeric, callback function: LS340ControlCallback */
-#define  LS340_CTRL_SORBTSET              9       /* control type: numeric, callback function: LS340ControlCallback */
-#define  LS340_CTRL_POWER                 10      /* control type: ring, callback function: LS340ControlCallback */
-#define  LS340_CTRL_ALARM                 11      /* control type: binary, callback function: LS340ControlCallback */
-#define  LS340_CTRL_HEATER                12      /* control type: binary, callback function: LS340ControlCallback */
-#define  LS340_CTRL_ALARMLED              13      /* control type: LED, callback function: (none) */
-#define  LS340_CTRL_DECORATION_2          14      /* control type: deco, callback function: (none) */
-#define  LS340_CTRL_DECORATION_3          15      /* control type: deco, callback function: (none) */
-#define  LS340_CTRL_TEXTMSG_3             16      /* control type: textMsg, callback function: (none) */
-#define  LS340_CTRL_DECORATION            17      /* control type: deco, callback function: (none) */
-#define  LS340_CTRL_TEXTMSG               18      /* control type: textMsg, callback function: (none) */
-#define  LS340_CTRL_TEXTMSG_2             19      /* control type: textMsg, callback function: (none) */
+#define  LS340_CTRL_RAMPSPEED             7       /* control type: numeric, callback function: LS340ControlCallback */
+#define  LS340_CTRL_SORBTSET              8       /* control type: numeric, callback function: LS340ControlCallback */
+#define  LS340_CTRL_POWER                 9       /* control type: ring, callback function: LS340ControlCallback */
+#define  LS340_CTRL_HEATER                10      /* control type: binary, callback function: LS340ControlCallback */
+#define  LS340_CTRL_DECORATION_3          11      /* control type: deco, callback function: (none) */
+#define  LS340_CTRL_TEXTMSG_3             12      /* control type: textMsg, callback function: (none) */
+#define  LS340_CTRL_DECORATION            13      /* control type: deco, callback function: (none) */
+#define  LS340_CTRL_TEXTMSG               14      /* control type: textMsg, callback function: (none) */
 
 #define  LS340_HEAT                       2       /* callback function: util_HidePanelCallback */
 #define  LS340_HEAT_D                     2       /* control type: numeric, callback function: (none) */
