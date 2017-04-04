@@ -1316,20 +1316,22 @@ void sr830_UpdateControls (int panel, gpibioPtr dev)
     SetCtrlIndex (panel, SR830_CTRL_REJECT, sr830_GetLineReject(dev));
     SetCtrlVal (panel, SR830_CTRL_AUTOSENSE, lia->autosens); 
 }
-
+////////////////////////////////////////////////////
 void sr830_UpdateReadings (int panel, void *dev)
 {
     gpibioPtr my_dev = dev;
     sr830Ptr lia = my_dev->device;
     int m;
-
-    if (!util_TakingData() ||
-        !(lia->channels[X]->acquire ||
-          lia->channels[Y]->acquire ||
-          lia->channels[M]->acquire ||
-          lia->channels[P]->acquire ||
+    if (!util_TakingData()           ||
+        !(
+		  lia->channels[X]->acquire  ||
+          lia->channels[Y]->acquire  ||
+          lia->channels[M]->acquire  ||
+          lia->channels[P]->acquire  ||
 		  lia->channels[XN]->acquire ||
-          lia->channels[YN]->acquire)) sr830_GetXYMP (my_dev);
+          lia->channels[YN]->acquire
+		 )
+	   ) sr830_GetXYMP (my_dev);
 
     if (expG.acqstatus != utilG.acq.status) {
         m = GetPanelMenuBar (panel);
@@ -1341,14 +1343,14 @@ void sr830_UpdateReadings (int panel, void *dev)
 
     SetCtrlVal (panel, SR830_CTRL_XDISP, lia->channels[X]->reading);
     SetCtrlVal (panel, SR830_CTRL_YDISP, lia->channels[Y]->reading);
-    SetCtrlVal (panel, SR830_CTRL_MAG, lia->channels[M]->reading);
+    SetCtrlVal (panel, SR830_CTRL_MAG,   lia->channels[M]->reading);
     SetCtrlVal (panel, SR830_CTRL_PHASE, lia->channels[P]->reading);
 
     SetCtrlVal (panel, SR830_CTRL_INPUTOVERLOAD, lia->overload.reserve);
     SetCtrlVal (panel, SR830_CTRL_FILTEROVERLOAD, lia->overload.filter);
     SetCtrlVal (panel, SR830_CTRL_OUTPUTOVERLOAD, lia->overload.output);
 }
-
+///////////////////////////////////////////////////////
 void sr830_GetDAC (gpibioPtr dev, int i, sourcePtr src)
 {
     char cmd[256], rsp[256];
@@ -1458,7 +1460,7 @@ double sr830_GetRefPhase (gpibioPtr dev)
     return phase;
 }
 
-int sr830_GetInputStatus (gpibioPtr dev)
+int sr830_GetInputStatus (gpibioPtr dev)	  // voltage or current input
 {
     char msg[256];
     int i;

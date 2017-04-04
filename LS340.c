@@ -1,6 +1,5 @@
 
-//fixed bug for 1K Pot
-// alarm disabled 3/10/2017
+//modified 3/10/2017
 #include <gpib.h>
 #include <formatio.h>
 #include <userint.h>
@@ -34,7 +33,7 @@
 #define FALSE 0
 #define LS340_ID "LSCI"
 
-typedef enum {SORB, ONEK, HE3P, SENSOR_D} inputs;
+typedef enum {SEN_A, SEN_B, SEN_C, SEN_D} LS340_inputs;
 typedef enum {KELVIN, CELSIUS, SEN_UNITS} units;
 typedef struct{
     acqchanPtr channels[4];   // 4 sensors
@@ -53,17 +52,21 @@ typedef LS340Type *LS340Ptr;
 /*******************************index*********************************/
 void GetHeaterLvl(acqchanPtr acqchan);
 void SetHeaterLvl(sourcePtr src);
+void LS340_GetABCD (gpibioPtr dev);
+void LS340_GetReadings (acqchanPtr acqchan);    
 void GetSensor(acqchanPtr acqchan);
-
+      
 void LS340_UpdateSensorReadings (int panel, void *ptr);
 void LS340_UpdateHeaterSettings(int panel, gpibioPtr dev);
-void LS340_UpdateControls(int p, gpibioPtr dev);
-int  LS340PanelCallback (int panel, int event, void *callbackData, int eventData1, int eventData2);
+//void LS340_UpdateControls(int p, gpibioPtr dev);
+//int  LS340PanelCallback (int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  LS340ControlCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  LS340HeatControlCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  LS340SensorControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  LS340SendCurve (int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void LS340menuCallack (int menuBar, int menuItem, void *callbackData, int panel);
+
+void   LS340_GetReadings (acqchanPtr acqchan); 
 
 void *LS340_Create(gpibioPtr dev);
 int  LS340_InitGPIB(gpibioPtr dev);
@@ -73,6 +76,7 @@ void LS340_Save(gpibioPtr dev);
 void LS340_Load(gpibioPtr dev);
 void LS340_Remove(void *ptr);
 void LS340_Init(void);
+void LS340_init_menus_and_controls (int menubar, int menuItem, void *callbackData, int panel);
 
 
 /*******************************Communication functions*********************************/
@@ -96,7 +100,13 @@ void SetHeaterLvl(sourcePtr src)
     gpibPrint(dev, "SETP %i, %f", &ls->heater.loop, &src->biaslevel);
     util_Delay(src->segments[src->seg]->delay);
 }
+void LS340_GetReadings (acqchanPtr acqchan)
+{
+    gpibioPtr dev = acqchan->dev;
+    LS340Ptr ls = dev->device;
 
+    LS340_GetABCD (dev);
+}
 void GetSensor(acqchanPtr acqchan)
 {     
     gpibioPtr dev = acqchan->dev;
@@ -123,75 +133,108 @@ void GetSensor(acqchanPtr acqchan)
     }  */
 }
 
+/*void newGetSensor(acqchanPtr acqchan)
+{     
+    gpibioPtr dev = acqchan->dev;
+    LS340Ptr ls = dev->device;
+  //  int alarm = 0;
+    char *sens_name="", msg[10];
+    if(!strcmp(acqchan->channel->label, "sorb")) sens_name = "A";
+    if(!strcmp(acqchan->channel->label, "1 k pot")) {sens_name = "B"; //alarm = 1;
+	}
+    if(!strcmp(acqchan->channel->label, "He 3 pot")) sens_name = "C";
+	if(!strcmp(acqchan->channel->label, "Sensor D")) sens_name = "D";      
+    
+	for (i=0; i<4; i++)
+	  {Fmt(msg, "KRDG? %s", i);
+      acqchan->reading = gpib_GetDoubleVal(dev, msg);
+      acqchan->newreading = TRUE;
+   
+} */
+void LS340_GetABCD(gpibioPtr dev)
+{     
+    char msg[256]; // int i;
+    LS340Ptr ls = dev->device;
+	LS340_inputs chan;
+    for (chan=0; chan<4; chan++) 
+	 {   //i=chan;
+		 Fmt(msg, "KRDG? %i", chan);
+         ls->channels[chan]->reading=gpib_GetDoubleVal(dev, msg);
+	 }   
+     for (chan = 0; chan < 4; chan++) ls->channels[chan]->newreading = TRUE;
+} 
+
+/*void LS340_UpdateReadings(int panel, void *ptr)
+{   int m;
+    gpibioPtr dev = ptr;
+    LS340Ptr ls = dev->device;
+    GetSensor(ls->channels[SEN_A]);
+    GetSensor(ls->channels[SEN_B]);
+    GetSensor(ls->channels[SEN_C]);
+	GetSensor(ls->channels[SEN_D]); 
+	
+    SetCtrlVal(panel, LS340_CTRL_SORBREAD, ls->channels[SEN_A]->reading);
+    SetCtrlVal(panel, LS340_CTRL_KPOTREAD, ls->channels[SEN_B]->reading); //error with panel ID here was due to Discard vs Hide
+    SetCtrlVal(panel, LS340_CTRL_HE3PREAD, ls->channels[SEN_C]->reading);
+	SetCtrlVal(panel, LS340_CTRL_SEN_D_READ,ls->channels[SEN_D]->reading);
+	if(utilG.acq.status == ACQ_BUSY)
+        HidePanel(panel);
+}
+*/
+void LS340_UpdateReadings (int panel, void *dev)
+{
+    gpibioPtr my_dev = dev;
+    LS340Ptr ls = my_dev->device; 
+    int m;
+    if (!util_TakingData()             ||
+        !(
+		  ls->channels[SEN_A]->acquire ||
+          ls->channels[SEN_B]->acquire ||
+          ls->channels[SEN_C]->acquire ||
+          ls->channels[SEN_D]->acquire 
+		 )
+	   ) 
+		LS340_GetABCD (my_dev);
+
+     if (expG.acqstatus != utilG.acq.status) {
+        m = GetPanelMenuBar (panel);
+        SetMenuBarAttribute (m, LS340MENU_MEASURE, ATTR_DIMMED, util_TakingData());
+        //SetMenuBarAttribute (m, LS340MENU_FILE_LOAD, ATTR_DIMMED, util_TakingData());
+    }
+
+    SetCtrlVal(panel, LS340_CTRL_SORBREAD, ls->channels[SEN_A]->reading);
+    SetCtrlVal(panel, LS340_CTRL_KPOTREAD, ls->channels[SEN_B]->reading); //error with panel ID here was due to Discard vs Hide ???
+    SetCtrlVal(panel, LS340_CTRL_HE3PREAD, ls->channels[SEN_C]->reading);
+	SetCtrlVal(panel, LS340_CTRL_SEN_D_READ,ls->channels[SEN_D]->reading);
+	//if(utilG.acq.status == ACQ_BUSY)  HidePanel(panel);
+    
+}   
 /******************************Callback Functions**********************************/
 void LS340_UpdateSensorTabReadings (int panel, void *ptr) // only works when sensor panel is open
 {
     LS340Ptr ls = ptr;
-    SetCtrlVal(panel, LS340_SENS_SORBMEAS, ls->channels[SORB]->reading);
-    SetCtrlVal(panel, LS340_SENS_KPOTMEAS, ls->channels[ONEK]->reading);
-    SetCtrlVal(panel, LS340_SENS_HE3PMEAS, ls->channels[HE3P]->reading);
-	SetCtrlVal(panel, LS340_SENS_SENSOR_D_MEAS, ls->channels[SENSOR_D]->reading);
-    //if(utilG.acq.status == ACQ_BUSY)   HidePanel(panel);
+    SetCtrlVal(panel, LS340_SENS_SORBMEAS, ls->channels[SEN_A]->reading);
+    SetCtrlVal(panel, LS340_SENS_KPOTMEAS, ls->channels[SEN_B]->reading);
+    SetCtrlVal(panel, LS340_SENS_HE3PMEAS, ls->channels[SEN_C]->reading);
+	SetCtrlVal(panel, LS340_SENS_SEN_D_MEAS, ls->channels[SEN_D]->reading);
+if(utilG.acq.status == ACQ_BUSY)   HidePanel(panel);
 }
+
 void old_LS340_UpdateReadings(int panel, void *ptr)
 {   int m;
     gpibioPtr dev = ptr;
     LS340Ptr ls = dev->device;
-    GetSensor(ls->channels[SORB]);
-    GetSensor(ls->channels[ONEK]);
-    GetSensor(ls->channels[HE3P]);
-	GetSensor(ls->channels[SENSOR_D]); 
+    GetSensor(ls->channels[SEN_A]);
+    GetSensor(ls->channels[SEN_B]);
+    GetSensor(ls->channels[SEN_C]);
+	GetSensor(ls->channels[SEN_D]); 
 	
-    SetCtrlVal(panel, LS340_CTRL_SORBREAD, ls->channels[SORB]->reading);
-    SetCtrlVal(panel, LS340_CTRL_KPOTREAD, ls->channels[ONEK]->reading); //error with panel ID here was due to Discard vs Hide
-    SetCtrlVal(panel, LS340_CTRL_HE3PREAD, ls->channels[HE3P]->reading);
-	SetCtrlVal(panel, LS340_CTRL_SENSOR_D_READ, ls->channels[SENSOR_D]->reading);
+    SetCtrlVal(panel, LS340_CTRL_SORBREAD, ls->channels[SEN_A]->reading);
+    SetCtrlVal(panel, LS340_CTRL_KPOTREAD, ls->channels[SEN_B]->reading); //error with panel ID here was due to Discard vs Hide
+    SetCtrlVal(panel, LS340_CTRL_HE3PREAD, ls->channels[SEN_C]->reading);
+	SetCtrlVal(panel, LS340_CTRL_SEN_D_READ, ls->channels[SEN_D]->reading);
 }
-void LS340_UpdateReadings(int panel, void *ptr)
-{   int m;
-    gpibioPtr dev = ptr;
-    LS340Ptr ls = dev->device;
-    GetSensor(ls->channels[SORB]);
-    GetSensor(ls->channels[ONEK]);
-    GetSensor(ls->channels[HE3P]);
-	GetSensor(ls->channels[SENSOR_D]); 
-	
-    SetCtrlVal(panel, LS340_CTRL_SORBREAD, ls->channels[SORB]->reading);
-    SetCtrlVal(panel, LS340_CTRL_KPOTREAD, ls->channels[ONEK]->reading); //error with panel ID here was due to Discard vs Hide
-    SetCtrlVal(panel, LS340_CTRL_HE3PREAD, ls->channels[HE3P]->reading);
-	SetCtrlVal(panel, LS340_CTRL_SENSOR_D_READ, ls->channels[SENSOR_D]->reading);
-}
-/*void stub_UpdateReadings (int panel, void *dev)
-{
-    gpibioPtr my_dev = dev;
-    sr830Ptr lia = my_dev->device;
-    int m;
 
-    if (!util_TakingData() ||
-        !(lia->channels[X]->acquire ||
-          lia->channels[Y]->acquire ||
-          lia->channels[M]->acquire ||
-          lia->channels[P]->acquire ||
-		  lia->channels[XN]->acquire ||
-          lia->channels[YN]->acquire)) sr830_GetXYMP (my_dev);
-
-    if (expG.acqstatus != utilG.acq.status) {
-        m = GetPanelMenuBar (panel);
-        SetMenuBarAttribute (m, SR830MENU_MEASURE, ATTR_DIMMED, util_TakingData());
-        SetMenuBarAttribute (m, SR830MENU_FILE_LOAD, ATTR_DIMMED, util_TakingData());
-    }
-
-    if (lia->autosens) SetCtrlIndex (panel, SR830_CTRL_SENS, sr830_GetSensitivity (dev));
-
-    SetCtrlVal (panel, SR830_CTRL_XDISP, lia->channels[X]->reading);
-    SetCtrlVal (panel, SR830_CTRL_YDISP, lia->channels[Y]->reading);
-    SetCtrlVal (panel, SR830_CTRL_MAG, lia->channels[M]->reading);
-    SetCtrlVal (panel, SR830_CTRL_PHASE, lia->channels[P]->reading);
-
-    SetCtrlVal (panel, SR830_CTRL_INPUTOVERLOAD, lia->overload.reserve);
-    SetCtrlVal (panel, SR830_CTRL_FILTEROVERLOAD, lia->overload.filter);
-    SetCtrlVal (panel, SR830_CTRL_OUTPUTOVERLOAD, lia->overload.output);
-}   */
 void LS340_UpdateHeaterSettings(int panel, gpibioPtr dev)
 {
     char msg[260];
@@ -232,24 +275,60 @@ void LS340_InitControls(int p, gpibioPtr dev)
     //SetCtrlVal(p, LS340_CTRL_ALARMLVL, ls->alarm.level);
 }
 
-int LS340PanelCallback (int panel, int event, void *callbackData, int eventData1, int eventData2)
+int LS340ControlPanelCallback (int panel, int event, void *callbackData, int eventData1, int eventData2)
 {  
-   
+    gpibioPtr dev;
+    LS340Ptr ls; 
+    int menubar;
     if ((event == EVENT_KEYPRESS && eventData1 == VAL_ESC_VKEY) || (event == EVENT_RIGHT_DOUBLE_CLICK))
     {   
 		gpibioPtr dev = callbackData; // needs to be here or else hidden panel is constantly updated    
-		//LS340Ptr ls = dev->device;// no need for it, but it does not crash the code
+		LS340Ptr ls = dev->device;// no need for it, but it does not crash the code
         devPanel_Remove (panel);
         DiscardPanel (panel);  //HidePanel (panel); 
         dev->iPanel = 0;
         SetMenuBarAttribute (acquire_GetMenuBar(), dev->menuitem_id, ATTR_DIMMED, FALSE);
 
     }
-	
-	
+	if (event == EVENT_GOT_FOCUS) {
+        dev = callbackData;
+        menubar = GetPanelMenuBar (panel);
+        SetPanelAttribute (panel, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, LS340MENU_CURVES, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, LS340MENU_SOURCE, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, LS340MENU_MEASURE, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        //SetMenuBarAttribute (menubar, SR830MENU_FILE_LOAD, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        if (!util_TakingData()) LS340_UpdateHeaterSettings (panel, dev);
+    }
+    
     return 0;
 }
+/*int  SR830ControlPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2)
+{
+    gpibioPtr dev;
+    sr830Ptr lia;
+    int menubar;
+    if ((event == EVENT_KEYPRESS) && (eventData1 == VAL_ESC_VKEY) || event == EVENT_RIGHT_DOUBLE_CLICK) {
+        dev = callbackData;
+        lia = dev->device;
+        devPanel_Remove (panel);
+        DiscardPanel (panel);   
+		dev->iPanel = 0;
+		SetMenuBarAttribute (acquire_GetMenuBar(), dev->menuitem_id, ATTR_DIMMED, FALSE);
+    }
 
+    if (event == EVENT_GOT_FOCUS) {
+        dev = callbackData;
+        menubar = GetPanelMenuBar (panel);
+        SetPanelAttribute (panel, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, SR830MENU_SOURCES, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, SR830MENU_MEASURE, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, SR830MENU_FILE_SAVE, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        SetMenuBarAttribute (menubar, SR830MENU_FILE_LOAD, ATTR_DIMMED, (dev->status != DEV_REMOTE));
+        if (!util_TakingData()) sr830_UpdateControls (panel, dev);
+    }
+    return 0;
+}  */
 int LS340ControlCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
     gpibioPtr dev = callbackData;
@@ -257,14 +336,7 @@ int LS340ControlCallback (int panel, int control, int event, void *callbackData,
     char msg[260];
     switch(control)
     {
-		 /*case LS340_CTRL_ALARM:
-            if (event == EVENT_COMMIT)
-            {
-                GetCtrlVal(panel, control, &ls->alarm.on);
-                if(!ls->alarm.on)
-                    SetCtrlVal(panel, LS340_CTRL_ALARMLED, 0);
-            }
-            break;*/	
+		 
         case LS340_CTRL_HEATER:
             if (event == EVENT_COMMIT)
             {
@@ -337,10 +409,7 @@ int LS340ControlCallback (int panel, int control, int event, void *callbackData,
             }
             break;
        
-        /*case LS340_CTRL_ALARMLVL:
-            if (event == EVENT_COMMIT)
-                GetCtrlVal(panel, control, &ls->alarm.level);
-            break;  */
+        
     }
     return 0;
 }
@@ -451,26 +520,18 @@ int  LS340SensorControlCallback(int panel, int control, int event, void *callbac
         case LS340_SENS_SORBACQ:
         case LS340_SENS_KPOTACQ:
         case LS340_SENS_HE3PACQ:
-		case LS340_SENS_SENSOR_D_ACQ:	
+		case LS340_SENS_SEN_D_ACQ:	
             if (event == EVENT_VAL_CHANGED) {
                 GetCtrlVal (panel, control, &acqchan->acquire);
                 if (acqchan->acquire) acqchanlist_AddChannel (acqchan);
                     else acqchanlist_RemoveChannel (acqchan);
             }
             break;
-        case LS340_SENS_SORBCOEFF:
-        case LS340_SENS_KPOTCOEFF:
-        case LS340_SENS_HE3PCOEFF:
-		case LS340_SENS_SENSOR_D_COEFF:	
-            if (event == EVENT_COMMIT) {
-                GetCtrlVal (panel, control, &acqchan->coeff);
-                if (acqchan->p) SetCtrlVal (acqchan->p, ACQDATA_COEFF, acqchan->coeff);
-            }
-            break;
+        
         case LS340_SENS_SORBLABEL:
         case LS340_SENS_KPOTLABEL:
         case LS340_SENS_HE3PLABEL:
-		case LS340_SENS_SENSOR_D_LABEL:	 	
+		case LS340_SENS_SEN_D_LABEL:	 	
 			
             if (event == EVENT_COMMIT) {
                 GetCtrlVal (panel, control, acqchan->channel->label);
@@ -525,7 +586,7 @@ void LS340menuCallback (int menuBar, int menuItem, void *callbackData, int panel
 {
     switch(menuItem)
     {
-        case LS340_CURVES_LOAD:
+        case LS340MENU_CURVES_LOAD:
         {
             gpibioPtr dev = callbackData;
             LS340Ptr ls = dev->device;
@@ -556,7 +617,7 @@ void LS340menuCallback (int menuBar, int menuItem, void *callbackData, int panel
             }
         }
         break;
-        case LS340_SOURCE_HEATER:
+        case LS340MENU_SOURCE_HEATER:
         {
             sourcePtr src = callbackData;
             switch(utilG.exp)
@@ -566,7 +627,7 @@ void LS340menuCallback (int menuBar, int menuItem, void *callbackData, int panel
             }
         }
         break;
-        case LS340_MEASURE_SENSOR_SETTINGS:
+        case LS340MENU_MEASURE_SENSOR_SETTINGS:
         {
             
             int p = LoadPanel (utilG.p, "LS340u.uir", LS340_SENS);
@@ -574,45 +635,45 @@ void LS340menuCallback (int menuBar, int menuItem, void *callbackData, int panel
             util_InitClose (p, LS340_SENS_CLOSE, FALSE); //to use a popup
 			LS340Ptr ls = callbackData;   
 			
-            SetCtrlVal (p, LS340_SENS_SORBLABEL, ls->channels[SORB]->channel->label);
-            SetCtrlVal (p, LS340_SENS_SORBCOEFF, ls->channels[SORB]->coeff);
-            SetCtrlVal (p, LS340_SENS_SORBACQ,   ls->channels[SORB]->acquire);
-            SetCtrlVal (p, LS340_SENS_NOTE_1,    ls->channels[SORB]->note);
+            SetCtrlVal (p, LS340_SENS_SORBLABEL, ls->channels[SEN_A]->channel->label);
+            
+            SetCtrlVal (p, LS340_SENS_SORBACQ,   ls->channels[SEN_A]->acquire);
+            SetCtrlVal (p, LS340_SENS_NOTE_1,    ls->channels[SEN_A]->note);
                                   
-            SetCtrlVal (p, LS340_SENS_KPOTLABEL, ls->channels[ONEK]->channel->label);
-            SetCtrlVal (p, LS340_SENS_KPOTCOEFF, ls->channels[ONEK]->coeff);
-            SetCtrlVal (p, LS340_SENS_KPOTACQ,   ls->channels[ONEK]->acquire);
-            SetCtrlVal (p, LS340_SENS_NOTE_2,    ls->channels[ONEK]->note);
+            SetCtrlVal (p, LS340_SENS_KPOTLABEL, ls->channels[SEN_B]->channel->label);
+            
+            SetCtrlVal (p, LS340_SENS_KPOTACQ,   ls->channels[SEN_B]->acquire);
+            SetCtrlVal (p, LS340_SENS_NOTE_2,    ls->channels[SEN_B]->note);
 
-            SetCtrlVal (p, LS340_SENS_HE3PLABEL, ls->channels[HE3P]->channel->label);
-            SetCtrlVal (p, LS340_SENS_HE3PCOEFF, ls->channels[HE3P]->coeff);
-            SetCtrlVal (p, LS340_SENS_HE3PACQ,   ls->channels[HE3P]->acquire);
-            SetCtrlVal (p, LS340_SENS_NOTE_3,    ls->channels[HE3P]->note);
+            SetCtrlVal (p, LS340_SENS_HE3PLABEL, ls->channels[SEN_C]->channel->label);
+            
+            SetCtrlVal (p, LS340_SENS_HE3PACQ,   ls->channels[SEN_C]->acquire);
+            SetCtrlVal (p, LS340_SENS_NOTE_3,    ls->channels[SEN_C]->note);
 			
-			SetCtrlVal (p, LS340_SENS_SENSOR_D_LABEL, ls->channels[SENSOR_D]->channel->label);
-            SetCtrlVal (p, LS340_SENS_SENSOR_D_COEFF, ls->channels[SENSOR_D]->coeff);
-            SetCtrlVal (p, LS340_SENS_SENSOR_D_ACQ,   ls->channels[SENSOR_D]->acquire);
-            SetCtrlVal (p, LS340_SENS_NOTE_4,    ls->channels[SENSOR_D]->note);
+			SetCtrlVal (p, LS340_SENS_SEN_D_LABEL, ls->channels[SEN_D]->channel->label);
+            
+            SetCtrlVal (p, LS340_SENS_SEN_D_ACQ,   ls->channels[SEN_D]->acquire);
+            SetCtrlVal (p, LS340_SENS_NOTE_4,    ls->channels[SEN_D]->note);
 
-            SetCtrlAttribute(p, LS340_SENS_SORBLABEL,   ATTR_CALLBACK_DATA, ls->channels[SORB]);
-            SetCtrlAttribute(p, LS340_SENS_SORBCOEFF,   ATTR_CALLBACK_DATA, ls->channels[SORB]);
-            SetCtrlAttribute(p, LS340_SENS_SORBACQ,     ATTR_CALLBACK_DATA, ls->channels[SORB]);
-            SetCtrlAttribute(p, LS340_SENS_NOTE_1,      ATTR_CALLBACK_DATA, ls->channels[SORB]);
+            SetCtrlAttribute(p, LS340_SENS_SORBLABEL,   ATTR_CALLBACK_DATA, ls->channels[SEN_A]);
+            
+            SetCtrlAttribute(p, LS340_SENS_SORBACQ,     ATTR_CALLBACK_DATA, ls->channels[SEN_A]);
+            SetCtrlAttribute(p, LS340_SENS_NOTE_1,      ATTR_CALLBACK_DATA, ls->channels[SEN_A]);
     
-            SetCtrlAttribute(p, LS340_SENS_KPOTLABEL,   ATTR_CALLBACK_DATA, ls->channels[ONEK]);
-            SetCtrlAttribute(p, LS340_SENS_KPOTCOEFF,   ATTR_CALLBACK_DATA, ls->channels[ONEK]);
-            SetCtrlAttribute(p, LS340_SENS_KPOTACQ,     ATTR_CALLBACK_DATA, ls->channels[ONEK]);
-            SetCtrlAttribute(p, LS340_SENS_NOTE_2,      ATTR_CALLBACK_DATA, ls->channels[ONEK]);
+            SetCtrlAttribute(p, LS340_SENS_KPOTLABEL,   ATTR_CALLBACK_DATA, ls->channels[SEN_B]);
+            
+            SetCtrlAttribute(p, LS340_SENS_KPOTACQ,     ATTR_CALLBACK_DATA, ls->channels[SEN_B]);
+            SetCtrlAttribute(p, LS340_SENS_NOTE_2,      ATTR_CALLBACK_DATA, ls->channels[SEN_B]);
         
-            SetCtrlAttribute(p, LS340_SENS_HE3PLABEL,   ATTR_CALLBACK_DATA, ls->channels[HE3P]);
-            SetCtrlAttribute(p, LS340_SENS_HE3PCOEFF,   ATTR_CALLBACK_DATA, ls->channels[HE3P]);
-            SetCtrlAttribute(p, LS340_SENS_HE3PACQ,     ATTR_CALLBACK_DATA, ls->channels[HE3P]);
-            SetCtrlAttribute(p, LS340_SENS_NOTE_3,      ATTR_CALLBACK_DATA, ls->channels[HE3P]);
+            SetCtrlAttribute(p, LS340_SENS_HE3PLABEL,   ATTR_CALLBACK_DATA, ls->channels[SEN_C]);
+            
+            SetCtrlAttribute(p, LS340_SENS_HE3PACQ,     ATTR_CALLBACK_DATA, ls->channels[SEN_C]);
+            SetCtrlAttribute(p, LS340_SENS_NOTE_3,      ATTR_CALLBACK_DATA, ls->channels[SEN_C]);
 			
-			SetCtrlAttribute(p, LS340_SENS_SENSOR_D_LABEL,   ATTR_CALLBACK_DATA, ls->channels[SENSOR_D]);
-            SetCtrlAttribute(p, LS340_SENS_SENSOR_D_COEFF,   ATTR_CALLBACK_DATA, ls->channels[SENSOR_D]);
-            SetCtrlAttribute(p, LS340_SENS_SENSOR_D_ACQ,     ATTR_CALLBACK_DATA, ls->channels[SENSOR_D]);
-            SetCtrlAttribute(p, LS340_SENS_NOTE_4,      ATTR_CALLBACK_DATA, ls->channels[SENSOR_D]);
+			SetCtrlAttribute(p, LS340_SENS_SEN_D_LABEL,   ATTR_CALLBACK_DATA, ls->channels[SEN_D]);
+            
+            SetCtrlAttribute(p, LS340_SENS_SEN_D_ACQ,     ATTR_CALLBACK_DATA, ls->channels[SEN_D]);
+            SetCtrlAttribute(p, LS340_SENS_NOTE_4,      ATTR_CALLBACK_DATA, ls->channels[SEN_D]);
     
             devPanel_Add (p, ls, LS340_UpdateSensorTabReadings);
             InstallPopup (p); //if popup is reqired or DisplayPanel (p);
@@ -628,11 +689,13 @@ void *LS340_Create(gpibioPtr dev)
     ls = malloc(sizeof(LS340Type));
     if (dev){ dev->device = ls; ls->id = dev->id;}
     
-    ls->source = source_Create("temperature", dev, SetHeaterLvl, GetHeaterLvl);
-    ls->channels[SORB] = acqchan_Create("sorb", dev, GetSensor);
-    ls->channels[ONEK] = acqchan_Create("1 k pot", dev, GetSensor);
-    ls->channels[HE3P] = acqchan_Create("He 3 pot", dev, GetSensor);
-	ls->channels[SENSOR_D] = acqchan_Create("Sensor D", dev, GetSensor);
+    
+    ls->channels[SEN_A] = acqchan_Create("sens_A", dev, LS340_GetReadings );
+    ls->channels[SEN_B] = acqchan_Create("sens_B", dev, LS340_GetReadings );
+    ls->channels[SEN_C] = acqchan_Create("sens_C", dev, LS340_GetReadings );
+	ls->channels[SEN_D] = acqchan_Create("sens_D", dev, LS340_GetReadings );
+	
+	ls->source = source_Create("temperature", dev, SetHeaterLvl, GetHeaterLvl); 
     //ls->alarm.on = 0;
     //ls->alarm.level = 0;
     ls->curveload.format = "%s, %s,> %s";
@@ -661,7 +724,47 @@ void *LS340_Create(gpibioPtr dev)
     ls->source->min = 0;
     return ls;
 }
-
+void *oldLS340_Create(gpibioPtr dev)
+{
+    LS340Ptr ls;
+    ls = malloc(sizeof(LS340Type));
+    if (dev){ dev->device = ls; ls->id = dev->id;}
+    
+    
+    ls->channels[SEN_A] = acqchan_Create("sorb", dev, GetSensor);
+    ls->channels[SEN_B] = acqchan_Create("1 k pot", dev, GetSensor);
+    ls->channels[SEN_C] = acqchan_Create("He 3 pot", dev, GetSensor);
+	ls->channels[SEN_D] = acqchan_Create("Sensor D", dev, GetSensor);
+	
+	ls->source = source_Create("temperature", dev, SetHeaterLvl, GetHeaterLvl); 
+    //ls->alarm.on = 0;
+    //ls->alarm.level = 0;
+    ls->curveload.format = "%s, %s,> %s";
+    ls->curveload.serial = "no_number";
+    ls->curveload.source = 1;
+    ls->curveload.target = 21;
+    ls->heater.current = 3;
+    ls->heater.input = "A";
+    ls->heater.loop = 1;
+    ls->heater.maxpower = 5;
+    ls->heater.nchange = 0;
+    ls->heater.on = 0;
+    ls->heater.pchange = 10;
+    ls->heater.power = 5;
+    ls->heater.powerup = 0;
+    ls->heater.rampspeed = 150;
+    ls->heater.setplimit = 350;
+    ls->heater.setpoint = 0;
+    ls->heater.units = KELVIN;
+    ls->pid.d = 0;
+    ls->pid.don = 0;
+    ls->pid.i =0;
+    ls->pid.ion = 0;
+    ls->pid.p= 0;
+    ls->pid.pon = 0;
+    ls->source->min = 0;
+    return ls;
+}
 int  LS340_InitGPIB(gpibioPtr dev)
 {
     gpibio_Remote(dev);
@@ -670,41 +773,7 @@ int  LS340_InitGPIB(gpibioPtr dev)
     return FALSE;
 }
 
-void OperateLS340(int menubar, int menuItem, void *callbackData, int panel)
-{
-    gpibioPtr dev = callbackData;
-    LS340Ptr ls = dev->device;
-    int p, m;
-    //SetMenuBarAttribute (menubar, menuItem, ATTR_DIMMED, TRUE);  //
-    ls->source->max = ls->heater.setplimit;
-    p = dev->iPanel? dev->iPanel: LoadPanel(utilG.p, "LS340u.uir", LS340_CTRL);
-    dev->iPanel = p;
-    SetPanelAttribute(p, ATTR_TITLE, dev->label);
-    
-    m = LoadMenuBar(p, "LS340u.uir", LS340);
-    SetPanelMenuBar(p, m);
-    
-    SetMenuBarAttribute(m, LS340_CURVES_LOAD, ATTR_CALLBACK_DATA, dev);
-    SetMenuBarAttribute(m, LS340_SOURCE_HEATER, ATTR_CALLBACK_DATA, ls->source);
-    SetMenuBarAttribute(m, LS340_MEASURE_SENSOR_SETTINGS, ATTR_CALLBACK_DATA, ls);
-    
-    SetCtrlAttribute(p, LS340_CTRL_HEATER, ATTR_CALLBACK_DATA, dev);
-    SetCtrlAttribute(p, LS340_CTRL_HEAT_PROP, ATTR_CALLBACK_DATA, dev);
-    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_CALLBACK_DATA, dev);
-    SetCtrlAttribute(p, LS340_CTRL_RAMPSPEED, ATTR_CALLBACK_DATA, dev);
-    SetCtrlAttribute(p, LS340_CTRL_POWER, ATTR_CALLBACK_DATA, dev);
-    //SetCtrlAttribute(p, LS340_CTRL_ALARM, ATTR_CALLBACK_DATA, dev);
-    //SetCtrlAttribute(p, LS340_CTRL_ALARMLVL, ATTR_CALLBACK_DATA, dev);
-    
-    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
-    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MIN_VALUE, 0.);
-    SetPanelAttribute(p, ATTR_CALLBACK_DATA, dev);
-    
-    LS340_InitControls(p, dev);
-    devPanel_Add(p, dev, LS340_UpdateReadings);
-    
-    DisplayPanel(p);
-}
+
 
 
 void LS340_Save(gpibioPtr dev)
@@ -775,10 +844,10 @@ void LS340_Load(gpibioPtr dev)
 void LS340_Remove(void *dev)
 {
     LS340Ptr ls = dev;
-    acqchan_Remove(ls->channels[SORB]);
-    acqchan_Remove(ls->channels[ONEK]);
-    acqchan_Remove(ls->channels[HE3P]);
-	acqchan_Remove(ls->channels[SENSOR_D]);  
+    acqchan_Remove(ls->channels[SEN_A]);
+    acqchan_Remove(ls->channels[SEN_B]);
+    acqchan_Remove(ls->channels[SEN_C]);
+	acqchan_Remove(ls->channels[SEN_D]);  
     source_Remove(ls->source);
     free(ls);
 }
@@ -796,7 +865,7 @@ void LS340_Init(void)
             Fmt(devType->id, LS340_ID);
             devType->CreateDevice = LS340_Create;
             devType->InitDevice = LS340_InitGPIB;
-            devType->OperateDevice = OperateLS340;
+            devType->OperateDevice = LS340_init_menus_and_controls;//OperateLS340;
             devType->UpdateReadings = LS340_UpdateReadings;
             devType->SaveDevice = LS340_Save;
             devType->LoadDevice = LS340_Load;
@@ -806,5 +875,148 @@ void LS340_Init(void)
         }
     }
 }
+/*void sr830_Init (void)
+{
+    devTypePtr devType;
+    if (utilG.acq.status != ACQ_NONE) {
+        util_ChangeInitMessage ("Stanford SR830 Control Utilities...");
+        devType = malloc (sizeof (devTypeItem));
+        if (devType) {
+            Fmt (devType->label, "Stanford Research SR830");
+            Fmt (devType->id, SR830_ID);
+            devType->CreateDevice = sr830_Create;
+            devType->InitDevice = sr830_InitGPIB;
+            devType->OperateDevice = sr830_init_menus_and_controls;
+            devType->UpdateReadings = sr830_UpdateReadings;
+            devType->SaveDevice = sr830_Save;
+            devType->LoadDevice = sr830_Load;
+            devType->RemoveDevice = sr830_Remove;
+            devTypeList_AddItem (devType);
+        }
+    }
+} */
+/*void OperateLS340(int menubar, int menuItem, void *callbackData, int panel)
+{
+    gpibioPtr dev = callbackData;
+    LS340Ptr ls = dev->device;
+    int p, m;
+    //SetMenuBarAttribute (menubar, menuItem, ATTR_DIMMED, TRUE);  //
+    ls->source->max = ls->heater.setplimit;
+    p = dev->iPanel? dev->iPanel: LoadPanel(utilG.p, "LS340u.uir", LS340_CTRL);
+    dev->iPanel = p;
+    SetPanelAttribute(p, ATTR_TITLE, dev->label);
+    
+    m = LoadMenuBar(p, "LS340u.uir", LS340MENU);
+    SetPanelMenuBar(p, m);
+    
+    SetMenuBarAttribute(m, LS340MENU_CURVES_LOAD, ATTR_CALLBACK_DATA, dev);
+    SetMenuBarAttribute(m, LS340MENU_SOURCE_HEATER, ATTR_CALLBACK_DATA, ls->source);
+    SetMenuBarAttribute(m, LS340MENU_MEASURE_SENSOR_SETTINGS, ATTR_CALLBACK_DATA, ls);
+    
+    SetCtrlAttribute(p, LS340_CTRL_HEATER, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_HEAT_PROP, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_RAMPSPEED, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_POWER, ATTR_CALLBACK_DATA, dev);
+    //SetCtrlAttribute(p, LS340_CTRL_ALARM, ATTR_CALLBACK_DATA, dev);
+    //SetCtrlAttribute(p, LS340_CTRL_ALARMLVL, ATTR_CALLBACK_DATA, dev);
+    
+    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
+    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MIN_VALUE, 0.);
+    SetPanelAttribute(p, ATTR_CALLBACK_DATA, dev);
+    
+    LS340_InitControls(p, dev);
+    devPanel_Add(p, dev, LS340_UpdateReadings);
+    
+    DisplayPanel(p);
+} */
+void LS340_init_menus_and_controls (int menubar, int menuItem, void *callbackData, int panel)
+{
+    int p, m,ramp_speed;//status;
+    gpibioPtr dev = callbackData;
+    LS340Ptr ls =  dev->device;
+    char label[256];
+	char msg[260];
 
+    SetMenuBarAttribute (menubar, menuItem, ATTR_DIMMED, TRUE);
 
+//    p = dev->iPanel? dev->iPanel: LoadPanel (utilG.p, "sr830u.uir", SR830_CTRL);
+//    dev->iPanel = p;
+
+	p = dev->iPanel? dev->iPanel: LoadPanel(utilG.p, "LS340u.uir", LS340_CTRL);
+    dev->iPanel = p;
+    SetPanelAttribute(p, ATTR_TITLE, dev->label);
+    SetPanelPos (p, VAL_AUTO_CENTER, VAL_AUTO_CENTER);
+
+    Fmt (label, "Lakeshore  %s", dev->label);
+    SetPanelAttribute (p, ATTR_TITLE, label);
+
+    //m = LoadMenuBar (p, "sr830u.uir", SR830MENU);
+	m = LoadMenuBar(p, "LS340u.uir", LS340MENU);   
+    SetPanelMenuBar (p, m);
+	SetMenuBarAttribute(m, LS340MENU_CURVES_LOAD, ATTR_CALLBACK_DATA, dev);
+    SetMenuBarAttribute(m, LS340MENU_SOURCE_HEATER, ATTR_CALLBACK_DATA, ls->source);
+    SetMenuBarAttribute(m, LS340MENU_MEASURE_SENSOR_SETTINGS, ATTR_CALLBACK_DATA, ls);
+    
+    SetCtrlAttribute(p, LS340_CTRL_HEATER, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_HEAT_PROP, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_RAMPSPEED, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_POWER, ATTR_CALLBACK_DATA, dev);
+    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
+    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MIN_VALUE, 0.);
+    SetPanelAttribute(p, ATTR_CALLBACK_DATA, dev);
+   
+
+    
+	//LS340_InitControls(p, dev);
+	//LS340Ptr ls = dev->device;
+    //char msg[260]; int status;
+    
+    ls->heater.power = gpib_GetIntVal(dev, "RANGE?");
+	if  (ls->heater.power)  SetCtrlVal(p, LS340_CTRL_HEATER, 1); else SetCtrlVal(p, LS340_CTRL_HEATER, 0);   
+    Fmt(msg, "SETP? %i", ls->heater.loop);
+    ls->heater.setpoint = gpib_GetDoubleVal(dev, msg);
+    Fmt(msg, "RAMP? %i", ls->heater.loop);
+    gpib_GetCharVal(dev, msg, msg);
+    Scan(msg, "%i,%f", &ramp_speed, &ls->heater.rampspeed);  //needs to be instead of status &ls->heater.ramp_status
+    //gpibPrint(dev, "RANGE 0\n");// this  shuts heater off
+	
+    SetCtrlVal(p, LS340_CTRL_POWER, ls->heater.power);
+    //SetCtrlVal(p, LS340_CTRL_HEATER, ls->heater.on);
+	
+	//ls->heater.on=0;
+    SetCtrlVal(p, LS340_CTRL_SORBTSET, ls->heater.setpoint);
+    SetCtrlAttribute(p, LS340_CTRL_SORBTSET, ATTR_MAX_VALUE, ls->heater.setplimit);
+    SetCtrlVal(p, LS340_CTRL_RAMPSPEED, ls->heater.rampspeed);
+	
+    
+	
+	LS340_UpdateHeaterSettings(p,  dev); 
+    devPanel_Add(p, dev, LS340_UpdateReadings);  
+    DisplayPanel(p);
+}	
+/*void sr830_UpdateControls (int panel, gpibioPtr dev)
+{
+    char msg[260];
+    int i = 0, ktest;
+    double r = 0;
+    sr830Ptr lia;
+
+    lia = dev->device;
+   // printf(" Time constant is %d\n", sr830_GetTimeConstant(dev));
+    SetCtrlIndex (panel, SR830_CTRL_TC, sr830_GetTimeConstant(dev));
+
+    SetCtrlIndex (panel, SR830_CTRL_SENS, sr830_GetSensitivity(dev));
+    
+	//printf(" Slope is %d\n", sr830_GetFilterSlope (dev)); 
+    SetCtrlIndex (panel, SR830_CTRL_FILTSLOPE, sr830_GetFilterSlope (dev));
+
+    SetCtrlVal (panel, SR830_CTRL_SYNC, sr830_GetSync(dev));
+
+    SetCtrlIndex (panel, SR830_CTRL_DYNRES, sr830_GetDynReserve (dev));
+
+    SetCtrlIndex (panel, SR830_CTRL_REJECT, sr830_GetLineReject(dev));
+    SetCtrlVal (panel, SR830_CTRL_AUTOSENSE, lia->autosens); 
+}
+*/

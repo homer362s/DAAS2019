@@ -13,8 +13,8 @@
 
      /* Panels and Controls: */
 
-#define  LS340_CTRL                       1       /* callback function: LS340PanelCallback */
-#define  LS340_CTRL_SENSOR_D_READ         2       /* control type: numeric, callback function: (none) */
+#define  LS340_CTRL                       1       /* callback function: LS340ControlPanelCallback */
+#define  LS340_CTRL_SEN_D_READ            2       /* control type: numeric, callback function: (none) */
 #define  LS340_CTRL_HE3PREAD              3       /* control type: numeric, callback function: (none) */
 #define  LS340_CTRL_KPOTREAD              4       /* control type: numeric, callback function: (none) */
 #define  LS340_CTRL_SORBREAD              5       /* control type: numeric, callback function: (none) */
@@ -48,31 +48,27 @@
 #define  LS340_HEAT_PON                   18      /* control type: radioButton, callback function: LS340HeatControlCallback */
 
 #define  LS340_SENS                       3
-#define  LS340_SENS_SENSOR_D_LABEL        2       /* control type: string, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_SEN_D_LABEL           2       /* control type: string, callback function: LS340SensorControlCallback */
 #define  LS340_SENS_HE3PLABEL             3       /* control type: string, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_SENSOR_D_COEFF        4       /* control type: numeric, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_HE3PCOEFF             5       /* control type: numeric, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_NOTE_4                6       /* control type: toggle, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_NOTE_3                7       /* control type: toggle, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_SENSOR_D_MEAS         8       /* control type: numeric, callback function: (none) */
-#define  LS340_SENS_HE3PMEAS              9       /* control type: numeric, callback function: (none) */
-#define  LS340_SENS_SENSOR_D_ACQ          10      /* control type: toggle, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_HE3PACQ               11      /* control type: toggle, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_KPOTLABEL             12      /* control type: string, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_NOTE_2                13      /* control type: toggle, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_KPOTCOEFF             14      /* control type: numeric, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_KPOTMEAS              15      /* control type: numeric, callback function: (none) */
-#define  LS340_SENS_KPOTACQ               16      /* control type: toggle, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_NOTE_1                17      /* control type: toggle, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_SORBLABEL             18      /* control type: string, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_SORBCOEFF             19      /* control type: numeric, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_SORBMEAS              20      /* control type: numeric, callback function: (none) */
-#define  LS340_SENS_SORBACQ               21      /* control type: toggle, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_CLOSE                 22      /* control type: toggle, callback function: LS340SensorControlCallback */
-#define  LS340_SENS_XTEXT                 23      /* control type: textMsg, callback function: (none) */
-#define  LS340_SENS_YTEXT                 24      /* control type: textMsg, callback function: (none) */
-#define  LS340_SENS_RTEXT_2               25      /* control type: textMsg, callback function: (none) */
-#define  LS340_SENS_RTEXT                 26      /* control type: textMsg, callback function: (none) */
+#define  LS340_SENS_NOTE_4                4       /* control type: toggle, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_NOTE_3                5       /* control type: toggle, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_SEN_D_ACQ             6       /* control type: toggle, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_HE3PACQ               7       /* control type: toggle, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_KPOTLABEL             8       /* control type: string, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_NOTE_2                9       /* control type: toggle, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_KPOTACQ               10      /* control type: toggle, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_NOTE_1                11      /* control type: toggle, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_SORBLABEL             12      /* control type: string, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_SORBACQ               13      /* control type: toggle, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_CLOSE                 14      /* control type: toggle, callback function: LS340SensorControlCallback */
+#define  LS340_SENS_SEN_D_MEAS            15      /* control type: numeric, callback function: (none) */
+#define  LS340_SENS_HE3PMEAS              16      /* control type: numeric, callback function: (none) */
+#define  LS340_SENS_KPOTMEAS              17      /* control type: numeric, callback function: (none) */
+#define  LS340_SENS_SORBMEAS              18      /* control type: numeric, callback function: (none) */
+#define  LS340_SENS_XTEXT                 19      /* control type: textMsg, callback function: (none) */
+#define  LS340_SENS_YTEXT                 20      /* control type: textMsg, callback function: (none) */
+#define  LS340_SENS_RTEXT_2               21      /* control type: textMsg, callback function: (none) */
+#define  LS340_SENS_RTEXT                 22      /* control type: textMsg, callback function: (none) */
 
 #define  LS340CURVE                       4       /* callback function: util_HidePanelCallback */
 #define  LS340CURVE_SERIAL                2       /* control type: string, callback function: (none) */
@@ -88,21 +84,21 @@
 
      /* Menu Bars, Menus, and Menu Items: */
 
-#define  LS340                            1
-#define  LS340_CURVES                     2
-#define  LS340_CURVES_LOAD                3       /* callback function: LS340menuCallback */
-#define  LS340_SOURCE                     4
-#define  LS340_SOURCE_HEATER              5       /* callback function: LS340menuCallback */
-#define  LS340_MEASURE                    6
-#define  LS340_MEASURE_SENSOR_SETTINGS    7       /* callback function: LS340menuCallback */
+#define  LS340MENU                        1
+#define  LS340MENU_CURVES                 2
+#define  LS340MENU_CURVES_LOAD            3       /* callback function: LS340menuCallback */
+#define  LS340MENU_SOURCE                 4
+#define  LS340MENU_SOURCE_HEATER          5       /* callback function: LS340menuCallback */
+#define  LS340MENU_MEASURE                6
+#define  LS340MENU_MEASURE_SENSOR_SETTINGS 7      /* callback function: LS340menuCallback */
 
 
      /* Callback Prototypes: */
 
 int  CVICALLBACK LS340ControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK LS340ControlPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK LS340HeatControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 void CVICALLBACK LS340menuCallback(int menubar, int menuItem, void *callbackData, int panel);
-int  CVICALLBACK LS340PanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK LS340SendCurve(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK LS340SensorControlCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK util_HidePanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
