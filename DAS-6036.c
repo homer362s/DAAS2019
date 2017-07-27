@@ -78,14 +78,7 @@ int das6036_ControlCallback (int panel, int control, int event, void *callbackDa
 {
     portPtr port = callbackData;
     switch (control)
-    {   case DAS_CTRL_AVERAGE:
-			if(event == EVENT_COMMIT && port)
-               GetCtrlVal (panel, control, &port->averaging);
-            break;
-		case DAS_CTRL_RATE:
-			if(event == EVENT_COMMIT && port)
-			{GetCtrlVal (panel, control, &port->sample_rate); if ((port->sample_rate)<
-            break;	  
+    {   
         case DAS_CTRL_RANGE:
             if(event == EVENT_COMMIT && port)
                 GetCtrlVal(panel, control, &port->port.analogueIOport.range);
@@ -106,11 +99,7 @@ int das6036_ControlCallback (int panel, int control, int event, void *callbackDa
                     SetCtrlAttribute (panel, DAS_CTRL_ACQ, ATTR_CALLBACK_DATA, das->Achannels[i]);
                     SetCtrlIndex (panel, DAS_CTRL_RANGE, das6036_IndexFromRange(das->Achannels[i]->port.analogueIOport.range));
                     SetCtrlVal (panel, DAS_CTRL_ACQ, das->Achannels[i]->port.analogueIOport.IO.acqchan->acquire);
-			    	SetCtrlAttribute (panel, DAS_CTRL_AVERAGE, ATTR_CALLBACK_DATA, das->Achannels[i]);//this is weird because it is the same for all channels?  
-					
-					SetCtrlAttribute (panel, DAS_CTRL_RATE, ATTR_CALLBACK_DATA, das->Achannels[i]);  //this is weird because it is the same for all channels
-					SetCtrlVal (panel, DAS_CTRL_RATE, port->sample_rate);    
-                }
+			    }
 				
                 SetCtrlAttribute (panel, DAS_CTRL_RANGE, ATTR_DIMMED, (i == -1));
                 SetCtrlAttribute (panel, DAS_CTRL_ACQ, ATTR_DIMMED, (i == -1));
@@ -123,7 +112,7 @@ int das6036_ControlCallback (int panel, int control, int event, void *callbackDa
                 int i;
                 MCCdevPtr dev = port->port.analogueIOport.IO.acqchan->dev;
                 das6036Ptr das = dev->device;
-                GetCtrlIndex (panel, DAS_CTRL_INPUT, &i);
+                GetCtrlIndex (panel, DAS_CTRL_INPUT_NUM, &i);
                 if(i)
                 {
                     GetCtrlVal (panel, control, &port->port.analogueIOport.IO.acqchan->acquire);
@@ -165,7 +154,10 @@ void das6036_MenuCallback(int menbar, int menuItem, void *callbackData, int pane
                 SetCtrlAttribute (port->measPanel, MEASURE_COEFF, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
                 SetCtrlAttribute (port->measPanel, MEASURE_NOTE, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
                 SetCtrlAttribute (port->measPanel, MEASURE_ACQ, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
-				//SetCtrlAttribute (port->measPanel, MEASURE_AVERAGE, ATTR_CALLBACK_DATA, port->averaging);   
+			
+                SetCtrlAttribute (port->measPanel, MEASURE_AVERAGE, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan); 
+				SetCtrlAttribute (port->measPanel, MEASURE_RATE,ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);  
+				
                 SetPanelAttribute (port->measPanel, ATTR_TITLE, port->port.analogueIOport.IO.acqchan->channel->label);
                 
                 SetCtrlVal (port->measPanel, MEASURE_LABEL, port->port.analogueIOport.IO.acqchan->channel->label);
@@ -173,7 +165,9 @@ void das6036_MenuCallback(int menbar, int menuItem, void *callbackData, int pane
                 SetCtrlVal (port->measPanel, MEASURE_COEFF, port->port.analogueIOport.IO.acqchan->coeff);
                 SetCtrlVal (port->measPanel, MEASURE_NOTE, port->port.analogueIOport.IO.acqchan->note);
                 SetCtrlVal (port->measPanel, MEASURE_ACQ, port->port.analogueIOport.IO.acqchan->acquire);
-				//SetCtrlVal (port->measPanel, MEASURE_AVERAGE, port->averaging); 
+				SetCtrlVal (port->measPanel, MEASURE_AVERAGE, port->averaging); 
+				port->sample_rate=200000; //default sampling  rate
+				SetCtrlVal (port->measPanel, MEASURE_RATE, port->sample_rate); //? what does it do?
                 DisplayPanel (port->measPanel);
             }
             break;
@@ -232,6 +226,18 @@ int  das6036_MeasureControlCallback (int panel, int control, int event, void *ca
             if (event == EVENT_COMMIT)
                 GetCtrlVal(panel, control, &acqchan->coeff);
             break;
+			
+		case MEASURE_RATE:
+            if (event == EVENT_COMMIT)
+			{portPtr port = acqchan->upLvl;  
+                GetCtrlVal(panel, control, &port->sample_rate);}
+            break;	
+		case MEASURE_AVERAGE:
+            if (event == EVENT_COMMIT)
+                {portPtr port = acqchan->upLvl; 
+				GetCtrlVal(panel, control, &port->averaging);
+				if ((port->averaging)>(port->sample_rate/2)) port->averaging=1; SetCtrlVal(panel, control,port->averaging);}
+            break;		
         case MEASURE_ACQ:
             if (event == EVENT_COMMIT && utilG.acq.status != ACQ_BUSY)
             {
@@ -355,7 +361,7 @@ void das6036Operate (int menubar, int menuItem, void *callbackData, int panel)
         SetMenuBarAttribute (das->menu, DASMENU_FILE_SAVE, ATTR_CALLBACK_DATA, dev);
         SetMenuBarAttribute (das->menu, DASMENU_FILE_LOAD, ATTR_CALLBACK_DATA, dev);
         
-        SetCtrlAttribute (das->panel, DAS_CTRL_INPUT, ATTR_CALLBACK_DATA, das->Achannels[0]);
+        SetCtrlAttribute (das->panel, DAS_CTRL_INPUT_NUM, ATTR_CALLBACK_DATA, das->Achannels[0]);
         SetPanelAttribute (das->panel, ATTR_CALLBACK_DATA, das);
     }
     SetMenuBarAttribute(menubar, menuItem, ATTR_DIMMED, 1);

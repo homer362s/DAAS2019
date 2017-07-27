@@ -15,21 +15,21 @@
 
 #define  DAS_CTRL                         1       /* callback function: das6036_PanelCallback */
 #define  DAS_CTRL_ANALOGUE_IN             2       /* control type: numeric, callback function: (none) */
-#define  DAS_CTRL_RATE                    3       /* control type: numeric, callback function: das6036_ControlCallback */
-#define  DAS_CTRL_AVERAGE                 4       /* control type: numeric, callback function: das6036_ControlCallback */
-#define  DAS_CTRL_INPUT_NUM               5       /* control type: ring, callback function: das6036_ControlCallback */
-#define  DAS_CTRL_RANGE                   6       /* control type: ring, callback function: das6036_ControlCallback */
-#define  DAS_CTRL_ACQ                     7       /* control type: toggle, callback function: das6036_ControlCallback */
+#define  DAS_CTRL_INPUT_NUM               3       /* control type: ring, callback function: das6036_ControlCallback */
+#define  DAS_CTRL_RANGE                   4       /* control type: ring, callback function: das6036_ControlCallback */
+#define  DAS_CTRL_ACQ                     5       /* control type: toggle, callback function: das6036_ControlCallback */
 
 #define  MEASURE                          2       /* callback function: util_HidePanelCallback */
 #define  MEASURE_LABEL                    2       /* control type: string, callback function: das6036_MeasureControlCallback */
-#define  MEASURE_COEFF                    3       /* control type: numeric, callback function: das6036_MeasureControlCallback */
-#define  MEASURE_RANGE                    4       /* control type: ring, callback function: das6036_MeasureControlCallback */
-#define  MEASURE_NOTE                     5       /* control type: toggle, callback function: AcqDataNoteCallback */
-#define  MEASURE_ACQ                      6       /* control type: toggle, callback function: das6036_MeasureControlCallback */
+#define  MEASURE_AVERAGE                  3       /* control type: numeric, callback function: das6036_MeasureControlCallback */
+#define  MEASURE_RATE                     4       /* control type: numeric, callback function: das6036_MeasureControlCallback */
+#define  MEASURE_COEFF                    5       /* control type: numeric, callback function: das6036_MeasureControlCallback */
+#define  MEASURE_RANGE                    6       /* control type: ring, callback function: das6036_MeasureControlCallback */
+#define  MEASURE_NOTE                     7       /* control type: toggle, callback function: AcqDataNoteCallback */
+#define  MEASURE_ACQ                      8       /* control type: toggle, callback function: das6036_MeasureControlCallback */
 
-#define  PANEL                            3
-#define  PANEL_RANGE                      2       /* control type: ring, callback function: das6036_ControlCallback */
+#define  PANEL_HELL                       3
+#define  PANEL_HELL_RANGE                 2       /* control type: ring, callback function: das6036_ControlCallback */
 
 
      /* Control Arrays: */
