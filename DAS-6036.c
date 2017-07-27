@@ -84,13 +84,13 @@ int das6036_ControlCallback (int panel, int control, int event, void *callbackDa
             break;
 		case DAS_CTRL_RATE:
 			if(event == EVENT_COMMIT && port)
-               GetCtrlVal (panel, control, &port->sample_rate);
+			{GetCtrlVal (panel, control, &port->sample_rate); if ((port->sample_rate)<
             break;	  
         case DAS_CTRL_RANGE:
             if(event == EVENT_COMMIT && port)
                 GetCtrlVal(panel, control, &port->port.analogueIOport.range);
             break;
-        case DAS_CTRL_INPUT:
+        case DAS_CTRL_INPUT_NUM:
             if(event == EVENT_COMMIT && port)
             {
                 int i;
@@ -106,7 +106,7 @@ int das6036_ControlCallback (int panel, int control, int event, void *callbackDa
                     SetCtrlAttribute (panel, DAS_CTRL_ACQ, ATTR_CALLBACK_DATA, das->Achannels[i]);
                     SetCtrlIndex (panel, DAS_CTRL_RANGE, das6036_IndexFromRange(das->Achannels[i]->port.analogueIOport.range));
                     SetCtrlVal (panel, DAS_CTRL_ACQ, das->Achannels[i]->port.analogueIOport.IO.acqchan->acquire);
-				SetCtrlAttribute (panel, DAS_CTRL_AVERAGE, ATTR_CALLBACK_DATA, das->Achannels[i]);//this is weird because it is the same for all channels  
+			    	SetCtrlAttribute (panel, DAS_CTRL_AVERAGE, ATTR_CALLBACK_DATA, das->Achannels[i]);//this is weird because it is the same for all channels?  
 					
 					SetCtrlAttribute (panel, DAS_CTRL_RATE, ATTR_CALLBACK_DATA, das->Achannels[i]);  //this is weird because it is the same for all channels
 					SetCtrlVal (panel, DAS_CTRL_RATE, port->sample_rate);    

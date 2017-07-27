@@ -17,7 +17,7 @@
 #define  DAS_CTRL_ANALOGUE_IN             2       /* control type: numeric, callback function: (none) */
 #define  DAS_CTRL_RATE                    3       /* control type: numeric, callback function: das6036_ControlCallback */
 #define  DAS_CTRL_AVERAGE                 4       /* control type: numeric, callback function: das6036_ControlCallback */
-#define  DAS_CTRL_INPUT                   5       /* control type: ring, callback function: das6036_ControlCallback */
+#define  DAS_CTRL_INPUT_NUM               5       /* control type: ring, callback function: das6036_ControlCallback */
 #define  DAS_CTRL_RANGE                   6       /* control type: ring, callback function: das6036_ControlCallback */
 #define  DAS_CTRL_ACQ                     7       /* control type: toggle, callback function: das6036_ControlCallback */
 

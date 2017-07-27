@@ -1399,10 +1399,10 @@ void sr830_GetXYMP (gpibioPtr dev)
     sr830_channels chan;
 	
 	// Check and set display to noise if required
-	if (lia->channels[XN]->acquire)
-		sr830_Out (dev, "DDEF1,2,0");
-	if (lia->channels[YN]->acquire)
-		sr830_Out (dev, "DDEF2,2,0");
+//	if (lia->channels[XN]->acquire)
+//		sr830_Out (dev, "DDEF1,2,0");
+//	if (lia->channels[YN]->acquire)
+//		sr830_Out (dev, "DDEF2,2,0");
 
     sr830_Out (dev, "SNAP?1,2,3,4,10,11");
     sr830_In (dev, msg);
