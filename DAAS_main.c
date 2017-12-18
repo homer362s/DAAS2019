@@ -32,6 +32,8 @@
 #include "LS340.h"
 #include "itc4.h"
 #include "HP4156.h"
+#include "AFG3252.h"
+#include "AFG3252init.h"
 #include "DAS-6036.h"
 #include "das-1602.h"
 #include "DEMO-BOARD.h"
@@ -72,6 +74,7 @@ main (void)
     LS335_Init();
     LS340_Init();
     hp4156_Init();
+	afg3252_Init();
 /*rs232 instruments init*/
 
 //    itc4_Init();

@@ -610,8 +610,14 @@ void init_MCCdevices (void)
     util_ChangeInitMessage("PCI devices...");
     for(i = 0; i < 100; i++)
     {
-        cbGetBoardName(i, name);
-        if(strcmp(name, ""))
+		// The following line added by Matt Filmer on 04//19//2017
+		// This line replaces the commented out line below it. I don't fully understand
+		// what is going on here, but the program was crashing and this fixed it.
+		// Anyway, it seemed weird to check if the string name was "" and proceed like we found
+		// a board since it seems to me that the board name could very well be not empty.
+        int err = cbGetBoardName(i, name);
+        //if(strcmp(name, ""))
+		if(err==0)
         {
             con = 0;
             devType = boards_getDevice(name);
