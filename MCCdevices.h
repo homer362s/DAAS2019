@@ -18,7 +18,7 @@ typedef struct port{
 		}analogueIOport;
 	}port;
 	int direction, control, menuitem_id, measPanel, type, averaging;
-	long sample_rate;
+	unsigned int sample_rate;
 }portType;
 typedef portType *portPtr;
 

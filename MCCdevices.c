@@ -310,7 +310,7 @@ portPtr create_Port(void *dev, char *name, int type, int direction, GetReadingPt
     port->control = 0;
     port->type = type;
 	port->averaging = 1;
-	port->sample_rate = 1000; //to avoid freezing
+//	port->sample_rate = 1000; //to avoid freezing	 NOT IN USE at least for 6036
     
     if(type == ANALOGUE)
     {
