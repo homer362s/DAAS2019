@@ -170,14 +170,14 @@ void afg3252_UpdateControls(int p, gpibioPtr dev)
 	
 	hp->sources[FREQ1]->min = .001;
 	hp->sources[FREQ2]->min = .001;
-	if(!strcmp(hp->wave1, "SIN"))
-		hp->sources[FREQ1]->max = 120000000;
+	if(strcmp(hp->wave1, "SIN")==0)
+		hp->sources[FREQ1]->max = 240000000.0;
 	else
-		hp->sources[FREQ1]->max = 240000000;
-	if(!strcmp(hp->wave2, "SIN"))
-		hp->sources[FREQ2]->max = 120000000;
+		hp->sources[FREQ1]->max = 120000000.0;
+	if(strcmp(hp->wave2, "SIN")==0)
+		hp->sources[FREQ2]->max = 240000000.0;
 	else
-		hp->sources[FREQ2]->max = 240000000;
+		hp->sources[FREQ2]->max = 120000000.0;
 	hp->sources[FREQ1]->freq = 1;
 	hp->sources[AMPL1]->freq = 1;
 	hp->sources[FREQ2]->freq = 1;
@@ -398,14 +398,14 @@ void afg3252_Load(gpibioPtr dev)
 		source_Load(dev, hp->sources[FREQ2]);
 		source_Load(dev, hp->sources[AMPL2]);
 		
-		if(!strcmp(hp->wave1, "SIN"))
-			hp->sources[FREQ1]->max = 120000000;
+		if(strcmp(hp->wave1, "SIN")==0)
+			hp->sources[FREQ1]->max = 240000000.0;
 		else
-			hp->sources[FREQ1]->max = 240000000;
-		if(!strcmp(hp->wave2, "SIN"))
-			hp->sources[FREQ2]->max = 120000000;
+			hp->sources[FREQ1]->max = 120000000.0;
+		if(!strcmp(hp->wave2, "SIN")==0)
+			hp->sources[FREQ2]->max = 240000000.0;
 		else
-			hp->sources[FREQ2]->max = 240000000;
+			hp->sources[FREQ2]->max = 120000000.0;
 		
 		hp->sources[FREQ1]->min = .001;
 		hp->sources[FREQ2]->min = .001;
