@@ -86,7 +86,8 @@ void SetHP33120aFreqLvl (sourcePtr src)
 	hp33120aPtr hp = dev->device;
 	char cmd[256];
 	
-	Fmt(cmd, "APPLY:%s %f, %f\n", hp->wave, src->biaslevel, hp->sources[AMPL]->acqchan->reading);
+	//Fmt(cmd, "APPLY:%s %f, %f\n", hp->wave, src->biaslevel, hp->sources[AMPL]->acqchan->reading);
+	Fmt(cmd, "FREQ %f\n", src->biaslevel);
 	gpibio_Out (dev, cmd);
     util_Delay (src->segments[src->seg]->delay);
 }								 
@@ -102,7 +103,8 @@ void SetHP33120aAmplLvl (sourcePtr src)
 	hp33120aPtr hp = dev->device;
 	char cmd[256];
 	
-	Fmt(cmd, "APPLY:%s %f,%f\n", hp->wave, hp->sources[FREQ]->acqchan->reading, src->biaslevel);
+	//Fmt(cmd, "APPLY:%s %f,%f\n", hp->wave, hp->sources[FREQ]->acqchan->reading, src->biaslevel);
+	Fmt(cmd, "VOLT %f\n", src->biaslevel);
 	gpibio_Out (dev, cmd);
     util_Delay (src->segments[src->seg]->delay);
 }
