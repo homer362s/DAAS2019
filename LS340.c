@@ -366,7 +366,7 @@ int LS340ControlCallback (int panel, int control, int event, void *callbackData,
                 SetCtrlAttribute(heater, LS340_HEAT_P, ATTR_DIMMED, !ls->pid.pon);
                 SetCtrlAttribute(heater, LS340_HEAT_I, ATTR_DIMMED, !ls->pid.ion);
                 SetCtrlAttribute(heater, LS340_HEAT_D, ATTR_DIMMED, !ls->pid.don);
-				GetCtrlVal(panel, LS340_HEAT_POWERUP, &ls->heater.powerup); 
+				//GetCtrlVal(panel, LS340_HEAT_POWERUP, &ls->heater.powerup);   what is this for?
                 
                 LS340_UpdateHeaterSettings(heater, dev);
                 SetCtrlVal(heater, LS340_HEAT_LOOPNUM,  ls->heater.loop);
