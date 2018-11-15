@@ -28,14 +28,16 @@
 #define TRUE 1
 //HANDLE MemHandle = 0;
 //WORD DataValue;
-WORD *ADValues; 
+//HANDLE MemHandle = 0;
+   // WORD *ADData;
+
 static listType boards_DevList, boards_DevTypeList;
 struct{
     int saveMenu, loadMenu;
 }boards_util;
 
 /*****************************************************/
-void        source_GetRange(sourcePtr src, int rangeInt);
+//void        source_GetRange(sourcePtr src, int rangeInt);
 void        ReadAnalogue (acqchanPtr acqchan);
 void        ReadAnalogueOut (acqchanPtr acqchan);
 void        SetAnalogue (sourcePtr src);          
@@ -53,10 +55,10 @@ void        port_Save (portPtr port);
 void        boards_Load(void *dev, void (*load) (MCCdevPtr));
 void        boards_Save(void *dev, void (*save) (MCCdevPtr));
 void        boards_MenuCallback(int menubar, int menuItem, void *callbackData, int panel);
-MCCdevPtr   boards_Create (MCCdevTypePtr devType, int BoardNum);   
+MCCdevPtr   boards_Create (MCCdevTypePtr devType, int BoardNum); 
 void        init_MCCdevices (void);
 
-/*****************************************************/
+/*****************************************************
 void source_GetRange(sourcePtr src, int rangeInt)
 {
     double range=0;
@@ -89,31 +91,55 @@ int cbToEngUnits    (int BoardNum, int Range, unsigned short DataVal,   float *E
 
 void ReadAnalogue (acqchanPtr acqchan)		 //uses cbInScan function
 {
-    portPtr up = acqchan->upLvl;
+    HANDLE MemHandle = 0;
+    WORD *ADData;
+	DWORD *ADData32;
+	
+	portPtr up = acqchan->upLvl;
     MCCdevPtr dev = acqchan->dev;
     float temp;
-	 
+	
     unsigned short reading;
     int j;
-    double Eng_Val = 0;
+    double Eng_Val = 0, volt_double;
 	double storage=0;
 	long raw_average=0;  
 	//DWORD raw_average=0;
+	 //for(i=0; i<8;i++)
+	cbAInputMode(dev->BoardNum,DIFFERENTIAL); //introduced with USB1808
+	
 	
 	if ((up->averaging)>1) 
 	
-	{	
-		ADValues = cbWinBufAlloc(up->averaging*2+512);
-		cbAInScan (dev->BoardNum, up->port.analogueIOport.channel, up->port.analogueIOport.channel, up->averaging, &up->sample_rate,up->port.analogueIOport.range, ADValues, CONVERTDATA);
+	{	if (dev->resolution)
+
+		{
+		MemHandle = cbWinBufAlloc32(up->averaging);
+		ADData32 = (DWORD*) MemHandle;
+		}
+	else
+		{
+		MemHandle = cbWinBufAlloc(up->averaging);
+		ADData = (WORD*) MemHandle;
+		}
+	//	MemHandle = cbWinBufAlloc32(Count);
+		//ADData32 = (DWORD*) MemHandle;
+		//ADValues = cbWinBufAlloc(up->averaging*2+512);																			
+		//	if (hires)	{ADData32 = cbWinBufAlloc32(up->averaging*2+512);}  else    {ADValues = cbWinBufAlloc(up->averaging*2+512); }    
+
+		//cbAInScan (dev->BoardNum, up->port.analogueIOport.channel, up->port.analogueIOport.channel, up->averaging, &up->sample_rate,up->port.analogueIOport.range, ADValues, CONVERTDATA);
+		{cbAInScan (dev->BoardNum, up->port.analogueIOport.channel, up->port.analogueIOport.channel, up->averaging, &up->sample_rate,up->port.analogueIOport.range, MemHandle, NOCONVERTDATA); }
+		
     	for (j=0;j<up->averaging;j++) 
 		{
-			cbToEngUnits32 (dev->BoardNum, up->port.analogueIOport.range, ADValues[j], &Eng_Val);
+			//cbToEngUnits(dev->BoardNum, up->port.analogueIOport.range, ADValues[j], &Eng_Val);
+			if (dev->resolution) {cbToEngUnits32 (dev->BoardNum, up->port.analogueIOport.range, ADData32[j], &Eng_Val); }else {cbToEngUnits32 (dev->BoardNum, up->port.analogueIOport.range, ADData[j], &Eng_Val); }    
 			storage = Eng_Val+storage;
 		}
         //raw_average= storage/up->averaging; 
 		
-		acqchan->reading = storage/up->averaging;;  
-		cbWinBufFree(ADValues);
+		acqchan->reading = storage/up->averaging; 
+		cbWinBufFree(MemHandle);
      }	
 		
 		
@@ -121,9 +147,13 @@ void ReadAnalogue (acqchanPtr acqchan)		 //uses cbInScan function
     
 	else //no averaging
 	{   
-		cbAIn (dev->BoardNum,   up->port.analogueIOport.channel,up->port.analogueIOport.range, &reading);
+		
+		if (dev->resolution) {cbVIn32 (dev->BoardNum,   up->port.analogueIOport.channel,up->port.analogueIOport.range, &volt_double, 0); 
+		acqchan->reading = volt_double;}
+		else 
+		{cbAIn (dev->BoardNum,   up->port.analogueIOport.channel,up->port.analogueIOport.range, &reading);
         cbToEngUnits (dev->BoardNum, up->port.analogueIOport.range, reading, &temp);
-        acqchan->reading = (double)temp;
+        acqchan->reading = (double)temp; }
      }
     acqchan->newreading = TRUE;
 }
@@ -152,10 +182,14 @@ void ReadAnalogueOut (acqchanPtr acqchan)
     portPtr up = acqchan->upLvl;
     MCCdevPtr dev = acqchan->dev;
     sourcePtr src = up->port.analogueIOport.IO.source;
-    float temp;
+    float  temp;
     unsigned short reading;
+
     cbFromEngUnits(dev->BoardNum, up->port.analogueIOport.range, src->biaslevel, &reading);
-    cbToEngUnits (dev->BoardNum, up->port.analogueIOport.range, reading, &temp);
+   // cbToEngUnits (dev->BoardNum, up->port.analogueIOport.range, reading, &temp);  gives noncense with USB1808
+   //cbToEngUnits (dev->BoardNum, BIP10VOLTS, reading, &temp);   
+   
+    temp=((float) reading -32768 )/65535*20;  
     acqchan->reading = (double)temp;
     acqchan->newreading = TRUE;
 }
@@ -552,7 +586,7 @@ void boards_MenuCallback(int menubar, int menuItem, void *callbackData, int pane
     if (menuItem == boards_util.loadMenu)       /*load PCI source setup*/
     {
         file = FileSelectPopup ("", "*.pcicfg", "*.pcicfg",
-                                               "Load PCI Device Configuration",
+                                               "Load PCI and USB Device Configuration",
                                                VAL_LOAD_BUTTON, 0, 0, 1, 0, pathname);
         if(file)
         {
@@ -583,7 +617,7 @@ MCCdevPtr boards_Create (MCCdevTypePtr devType, int BoardNum)
 {
     MCCdevPtr dev = malloc(sizeof(MCCdevType));
     if(dev)
-    {
+    {   //dev->HiRes=HiRes;
         dev->devType = devType;
         dev->name = malloc(sizeof(devType->label) * StringLength(devType->label));
         Fmt(dev->name, "%s", devType->label);

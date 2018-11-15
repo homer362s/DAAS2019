@@ -23,9 +23,10 @@ typedef struct port{
 typedef portType *portPtr;
 
 typedef struct{
-	int  BoardNum, menuitem_id, baseAddr, iPanel;
+	int  BoardNum, menuitem_id, baseAddr, iPanel; short resolution;
 	void *device, *devType;
-	char *name;
+	char *name; 
+	 
 }MCCdevType;
 
 typedef MCCdevType *MCCdevPtr;
@@ -39,7 +40,7 @@ typedef struct {
 	RemoveDevicePtr 		RemoveDevice;
 	board_DeviceFuncPtr 	SaveDevice, LoadDevice;
 	board_CreateDevicePtr 	CreateDevice;
-	char label[50], id[256];
+	char label[50], id[256]; 
 }MCCdevTypeItem;
 typedef MCCdevTypeItem *MCCdevTypePtr;
 

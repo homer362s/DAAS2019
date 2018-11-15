@@ -20,44 +20,44 @@
 #include "acquireu.h"
 #include "source.h"
 #include "MCCdevices.h"
-#include "das-1602.h"
-#include "das-1602u.h"
+#include "USB-234.h"
+#include "USB-234u.h"
 
 #define TRUE 1
 #define FALSE 0
-#define DAS1602_ID "PCI-DAS1602/16"
+#define BOARD_ID "USB-234"
 
 typedef struct{
     portPtr Achannels[10];
     int panel, menu;
-}das1602Type;
-typedef das1602Type *das1602Ptr;
+}USB_234_boardType;
+typedef USB_234_boardType *USB_234_boardPtr;
 /***********************************************************************************/
-int  das1602_PanelCallback          (int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  das1602_ControlCallback        (int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-void das1602_MenuCallback           (int menbar, int menuItem, void *callbackData, int panel);
-int  das1602_MeasureControlCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  das1602_IndexFromRange         (int val);
+int  USB_234_board_PanelCallback           (int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  USB_234_board_ControlCallback         (int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+void USB_234_board_MenuCallback            (int menbar, int menuItem, void *callbackData, int panel);
+int  USB_234_board_MeasureControlCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  USB_234_board_IndexFromRange      (int val);
 
-void das1602_UpdateMeasurePanel(portPtr port);
+void USB_234_board_UpdateMeasurePanel(portPtr port);
 
-void das1602_Create     (MCCdevPtr dev);
-void das1602_Remove         (void* ptr);
-int  das1602_InitIO         (MCCdevPtr dev);
-void das1602Operate         (int menubar, int menuItem, void *callbackData, int panel);
-void das1602_UpdateReadings (int panel, void *ptr);
-void das1602_Save           (MCCdevPtr dev);
-void das1602_Load           (MCCdevPtr dev);
-void das1602_Init           (void);
+void USB_234_board_Create      (MCCdevPtr dev);
+void USB_234_board_Remove          (void* ptr);
+int  USB_234_board_InitIO          (MCCdevPtr dev);
+void USB_234_boardOperate          (int menubar, int menuItem, void *callbackData, int panel);
+void USB_234_board_UpdateReadings (int panel, void *ptr);
+void USB_234_board_Save            (MCCdevPtr dev);
+void USB_234_board_Load            (MCCdevPtr dev);
+void USB_234_board_Init            (void);
 
 
 
 
 
 /***********************************************************************************/
-int das1602_PanelCallback (int panel, int event, void *callbackData, int eventData1, int eventData2)
+int USB_234_board_PanelCallback (int panel, int event, void *callbackData, int eventData1, int eventData2)
 {
-    das1602Ptr das = callbackData;
+    USB_234_boardPtr das = callbackData;
     if((event == EVENT_KEYPRESS && eventData1 == VAL_ESC_VKEY) || event == EVENT_RIGHT_DOUBLE_CLICK)
     {
         MCCdevPtr dev = das->Achannels[0]->port.analogueIOport.IO.acqchan->dev;
@@ -72,7 +72,7 @@ int das1602_PanelCallback (int panel, int event, void *callbackData, int eventDa
     return 0;
 }
 
-int das1602_ControlCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
+int USB_234_board_ControlCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
     portPtr port = callbackData;
     switch (control)
@@ -86,7 +86,7 @@ int das1602_ControlCallback (int panel, int control, int event, void *callbackDa
             {
                 int i;
                 MCCdevPtr dev = port->port.analogueIOport.IO.acqchan->dev;
-                das1602Ptr das = dev->device;
+                USB_234_boardPtr das = dev->device;
                 GetCtrlVal(panel, control, &i);
                 port->control = 0;
                 if(i != -1)
@@ -95,7 +95,7 @@ int das1602_ControlCallback (int panel, int control, int event, void *callbackDa
                     SetCtrlAttribute (panel, control, ATTR_CALLBACK_DATA, das->Achannels[i]);
                     SetCtrlAttribute (panel, DAS_CTRL_RANGE, ATTR_CALLBACK_DATA, das->Achannels[i]);
                     SetCtrlAttribute (panel, DAS_CTRL_ACQ, ATTR_CALLBACK_DATA, das->Achannels[i]);
-                    SetCtrlIndex (panel, DAS_CTRL_RANGE, das1602_IndexFromRange(das->Achannels[i]->port.analogueIOport.range));
+                    SetCtrlIndex (panel, DAS_CTRL_RANGE, USB_234_board_IndexFromRange(das->Achannels[i]->port.analogueIOport.range));
                     SetCtrlVal (panel, DAS_CTRL_ACQ, das->Achannels[i]->port.analogueIOport.IO.acqchan->acquire);
                 }
                 SetCtrlAttribute (panel, DAS_CTRL_RANGE, ATTR_DIMMED, (i == -1));
@@ -108,7 +108,7 @@ int das1602_ControlCallback (int panel, int control, int event, void *callbackDa
         {
             int i;
             MCCdevPtr dev = port->port.analogueIOport.IO.acqchan->dev;
-            das1602Ptr das = dev->device;
+            USB_234_boardPtr das = dev->device;
             GetCtrlIndex (panel, DAS_CTRL_INPUT, &i);
             if(i)
             {
@@ -126,11 +126,11 @@ int das1602_ControlCallback (int panel, int control, int event, void *callbackDa
         break;
     }
     if(event == EVENT_COMMIT && port)
-        das1602_UpdateMeasurePanel (port);
+        USB_234_board_UpdateMeasurePanel (port);
     return 0;
 }
 
-void das1602_MenuCallback(int menbar, int menuItem, void *callbackData, int panel)
+void USB_234_board_MenuCallback(int menbar, int menuItem, void *callbackData, int panel)
 {
     switch (menuItem)
     {
@@ -145,9 +145,9 @@ void das1602_MenuCallback(int menbar, int menuItem, void *callbackData, int pane
             if(utilG.acq.status != ACQ_BUSY){
                 portPtr port = callbackData;
                 MCCdevPtr dev = port->port.analogueIOport.IO.acqchan->dev;
-                das1602Ptr das = dev->device;
+                USB_234_boardPtr das = dev->device;
                 port->menuitem_id = menuItem;
-                port->measPanel = port->measPanel? port->measPanel : LoadPanel(utilG.p, "DAS-1602u.uir", MEASURE);
+                port->measPanel = port->measPanel? port->measPanel : LoadPanel(utilG.p, "USB-234u.uir", MEASURE);
                 SetCtrlAttribute (port->measPanel, MEASURE_RANGE, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
                 SetCtrlAttribute (port->measPanel, MEASURE_LABEL, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
                 SetCtrlAttribute (port->measPanel, MEASURE_COEFF, ATTR_CALLBACK_DATA, port->port.analogueIOport.IO.acqchan);
@@ -176,7 +176,7 @@ void das1602_MenuCallback(int menbar, int menuItem, void *callbackData, int pane
     }
 }
 
-int  das1602_MeasureControlCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
+int  USB_234_board_MeasureControlCallback (int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
 {
     acqchanPtr acqchan = callbackData;
     switch (control)
@@ -193,7 +193,7 @@ int  das1602_MeasureControlCallback (int panel, int control, int event, void *ca
             {
                 portPtr port = acqchan->upLvl;
                 MCCdevPtr dev = acqchan->dev;
-                das1602Ptr das = dev->device;
+                USB_234_boardPtr das = dev->device;
                 GetCtrlVal(panel, control, acqchan->channel->label);
                 acqchanlist_ReplaceChannel(acqchan);
                 SetPanelAttribute(panel, ATTR_TITLE, acqchan->channel->label);
@@ -210,7 +210,7 @@ int  das1602_MeasureControlCallback (int panel, int control, int event, void *ca
             {
                 portPtr port = acqchan->upLvl;
                 MCCdevPtr dev = acqchan->dev;
-                das1602Ptr das = dev->device;
+                USB_234_boardPtr das = dev->device;
                 GetCtrlVal(panel, control, &acqchan->acquire);
                 if (acqchan->acquire) acqchanlist_AddChannel(acqchan);
                 else acqchanlist_RemoveChannel(acqchan);
@@ -223,7 +223,7 @@ int  das1602_MeasureControlCallback (int panel, int control, int event, void *ca
     return 0;
 }
 
-int  das1602_IndexFromRange (int val)
+int  USB_234_board_IndexFromRange (int val)
 {
     int range=0;
     switch(val)
@@ -234,9 +234,9 @@ int  das1602_IndexFromRange (int val)
         case BIP1PT25VOLTS: range = 3;break;
     }
     return range;
-}                                                                                                                   
+}
 
-void das1602_UpdateMeasurePanel(portPtr port)
+void USB_234_board_UpdateMeasurePanel(portPtr port)
 {
     if(port->measPanel)
     {
@@ -248,25 +248,25 @@ void das1602_UpdateMeasurePanel(portPtr port)
 }
 
 /***********************************************************************************/
-void das1602_Create (MCCdevPtr dev)
+void USB_234_board_Create (MCCdevPtr dev)
 {
     int i;
     char name[50];
-    das1602Ptr das = malloc(sizeof(das1602Type));
-    dev->resolution=0;  //16 bit board
+    USB_234_boardPtr das = malloc(sizeof(USB_234_boardType));
+    
     dev->device = das;
     das->panel = 0;
     for(i = 0; i < 8; i++)
     {
         //portPtr create_Port(*dev, *name, type, direction, GetReading, channel, range)
-        Fmt (name, "PCI-DAS1602 analog in %i", i);
+        Fmt (name, "USB-234 analog in %i", i);
         das->Achannels[i] = create_Port(dev, name, ANALOGUE, IN_PORT, ReadAnalogue, i, BIP10VOLTS);
         das->Achannels[i]->control = 0;
     }
     for(i = 0; i < 2; i++)
     {
         //portPtr create_Port(*dev, *name, type, direction, GetReading, SetLevel, channel, range)
-        Fmt (name, "PCI-DAS1602 analog out %i", i);
+        Fmt (name, "USB-234 analog out %i", i);
         das->Achannels[i+8] = create_Port(dev, name, ANALOGUE, OUT_PORT, ReadAnalogueOut, SetAnalogue, i, BIP10VOLTS);
         das->Achannels[i+8]->port.analogueIOport.IO.source->max = 10;
         das->Achannels[i+8]->port.analogueIOport.IO.source->min = -10;
@@ -282,10 +282,10 @@ void das1602_Create (MCCdevPtr dev)
     das->Achannels[7]->menuitem_id = DASMENU_MEAS_IN_7;
 }
 
-void das1602_Remove (void* ptr)
+void USB_234_board_Remove (void* ptr)
 {
     MCCdevPtr dev = ptr;
-    das1602Ptr das = dev->device;
+    USB_234_boardPtr das = dev->device;
     int i;
     if(das->panel)
     {
@@ -299,16 +299,16 @@ void das1602_Remove (void* ptr)
     free(das);
 }
 
-void das1602Operate (int menubar, int menuItem, void *callbackData, int panel)
+void USB_234_boardOperate (int menubar, int menuItem, void *callbackData, int panel)
 {
     MCCdevPtr dev = callbackData;
-    das1602Ptr das = dev->device;
+    USB_234_boardPtr das = dev->device;
     acqchanPtr acqchan;
     int i, x = 0, m;
     if(!das->panel)
     {
-        das->panel = LoadPanel(utilG.p, "DAS-1602u.uir", DAS_CTRL);
-        das->menu = LoadMenuBar(das->panel, "DAS-1602u.uir", DASMENU);
+        das->panel = LoadPanel(utilG.p, "USB-234u.uir", DAS_CTRL);
+        das->menu = LoadMenuBar(das->panel, "USB-234u.uir", DASMENU);
         SetPanelMenuBar(das->panel, das->menu);
         for(i = 0; i < 8; i ++)
         {
@@ -327,15 +327,15 @@ void das1602Operate (int menubar, int menuItem, void *callbackData, int panel)
         SetPanelAttribute (das->panel, ATTR_CALLBACK_DATA, das);
     }
     SetMenuBarAttribute(menubar, menuItem, ATTR_DIMMED, 1);
-    devPanel_Add (das->panel, dev, das1602_UpdateReadings);
+    devPanel_Add (das->panel, dev, USB_234_board_UpdateReadings);
     DisplayPanel(das->panel);
 }
 
-void das1602_UpdateReadings (int panel, void *ptr)
+void USB_234_board_UpdateReadings (int panel, void *ptr)
 {
     int i;
     MCCdevPtr dev = ptr;
-    das1602Ptr das = dev->device;
+    USB_234_boardPtr das = dev->device;
     acqchanPtr acqchan;
     for(i = 0; i < 8; i++)
     {
@@ -350,18 +350,18 @@ void das1602_UpdateReadings (int panel, void *ptr)
     }
 }
 
-void das1602_Save (MCCdevPtr dev)
+void USB_234_board_Save (MCCdevPtr dev)
 {
     int i;
-    das1602Ptr das = dev->device;
+    USB_234_boardPtr das = dev->device;
     for(i = 0; i < 10; i++)
         port_Save(das->Achannels[i]);
 }
 
-void das1602_Load (MCCdevPtr dev)
+void USB_234_board_Load (MCCdevPtr dev)
 {
     int i;
-    das1602Ptr das = dev->device;
+    USB_234_boardPtr das = dev->device;
     for(i = 0; i < 10; i++)
         port_Load(dev, das->Achannels[i]);
     for(i = 8; i < 10; i++)
@@ -372,22 +372,22 @@ void das1602_Load (MCCdevPtr dev)
     }
 }
 
-void das1602_Init(void)
+void USB_234_board_Init(void)
 {
     MCCdevTypePtr devType = malloc(sizeof(MCCdevTypeItem));
     if(utilG.acq.status != ACQ_NONE)
     {
-        util_ChangeInitMessage ("pci-das1602...");
+        util_ChangeInitMessage ("USB-234...");
         if(devType)
         {
-            Fmt(devType->id, DAS1602_ID);
-            Fmt(devType->label, "pci das1602");
-            devType->CreateDevice   = das1602_Create;
-            devType->RemoveDevice   = das1602_Remove;
-            devType->OperateDevice  = das1602Operate;
-            devType->UpdateReadings = das1602_UpdateReadings;
-            devType->SaveDevice     = das1602_Save;
-            devType->LoadDevice     = das1602_Load;
+            Fmt(devType->id, BOARD_ID);
+            Fmt(devType->label, "USB-234");
+            devType->CreateDevice   = USB_234_board_Create;
+            devType->RemoveDevice   = USB_234_board_Remove;
+            devType->OperateDevice  = USB_234_boardOperate;
+            devType->UpdateReadings = USB_234_board_UpdateReadings;
+            devType->SaveDevice     = USB_234_board_Save;
+            devType->LoadDevice     = USB_234_board_Load;
             boards_DevTypeList_AddDev(devType);
         }
     }

@@ -44,7 +44,7 @@ int  dda08_PanelCallback        (int panel, int event, void *callbackData, int e
 int  dda08_ControlCallback      (int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  dda08_IndexFromRange       (int val);
 
-void ReadAnalogue               (acqchanPtr acqchan);
+//void ReadAnalogue               (acqchanPtr acqchan);
 void ReadAnalogueOut            (acqchanPtr acqchan);
 void SetAnalogue                (sourcePtr src);
 unsigned short DAC_conversion   (double Value);

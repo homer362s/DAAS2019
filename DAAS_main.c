@@ -35,10 +35,12 @@
 #include "DAS-6036.h"
 #include "das-1602.h"
 #include "DEMO-BOARD.h"
+#include "USB-234.h" 
+#include "USB-1808.h"  
 #include "dda08.h"
 #include "USB-PMD1208LS.h"
 
-#define DFLT_IDLE_EVENT_RATE 40// this is actually a period in ms 60ms = 16Hz
+#define DFLT_IDLE_EVENT_RATE 30// this is actually a period in ms 60ms = 16Hz
 
 int AcquireData (int panel, int control, int event, void *callbackData, int event1, int event2);
 
@@ -57,7 +59,7 @@ main (void)
     graphG_Init();
     curveop_Init();
     acquire_Init();
-    gpibio_Init();
+    //gpibio_Init();
    // rs232_Init();
     source_Init();
     
@@ -81,6 +83,8 @@ main (void)
     das1602_Init();
     dda08_Init();
     usb1208ls_Init();
+	USB234_Init();
+	USB1808_Init();
     demo_board_Init();
     init_MCCdevices();
 /***********************************************************************************/    

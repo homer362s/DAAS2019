@@ -288,7 +288,7 @@ void das6036_Create (MCCdevPtr dev)
     int i;
     char name[50];
     das6036Ptr das = malloc(sizeof(das6036Type));
-    
+    dev->resolution=0;  //16 bit board
     dev->device = das;
     das->panel = 0;
     for(i = 0; i < 8; i++)
