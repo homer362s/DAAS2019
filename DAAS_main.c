@@ -61,7 +61,7 @@ main (void)
     graphG_Init();
     curveop_Init();
     acquire_Init();
-    //gpibio_Init();
+    gpibio_Init();
    // rs232_Init();
     source_Init();
     
@@ -76,7 +76,8 @@ main (void)
     LS335_Init();
     LS340_Init();
     hp4156_Init();
-	afg3252_Init();
+	hp8657b_Init();
+	//afg3252_Init();	  // I believe some needed files arent in the git repo for this to work
 /*rs232 instruments init*/
 
 //    itc4_Init();
