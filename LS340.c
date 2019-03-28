@@ -942,7 +942,7 @@ void LS340_init_menus_and_controls (int menubar, int menuItem, void *callbackDat
 
 //    p = dev->iPanel? dev->iPanel: LoadPanel (utilG.p, "sr830u.uir", SR830_CTRL);
 //    dev->iPanel = p;
-
+	ls->source->max = ls->heater.setplimit; 
 	p = dev->iPanel? dev->iPanel: LoadPanel(utilG.p, "LS340u.uir", LS340_CTRL);
     dev->iPanel = p;
     SetPanelAttribute(p, ATTR_TITLE, dev->label);
