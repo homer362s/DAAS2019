@@ -76,8 +76,8 @@ main (void)
     LS335_Init();
     LS340_Init();
     hp4156_Init();
-	hp8657b_Init();
-	//afg3252_Init();	  // I believe some needed files arent in the git repo for this to work
+	//hp8657b_Init();		// Isnt ready for master yet
+	//afg3252_Init();		// I believe some needed files arent in the git repo for this to work
 /*rs232 instruments init*/
 
 //    itc4_Init();

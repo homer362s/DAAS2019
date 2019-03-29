@@ -294,8 +294,13 @@ File Type = "CSource"
 Res Id = 21
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP8657B.c"
 Path = "/c/Users/user/Desktop/daas 2019/HP8657B.c"
+=======
+Path Rel Path = "itc4.c"
+Path = "/c/Users/user/Desktop/daas 2019/itc4.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -307,8 +312,13 @@ File Type = "CSource"
 Res Id = 22
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "itc4.c"
 Path = "/c/Users/user/Desktop/daas 2019/itc4.c"
+=======
+Path Rel Path = "K2000.c"
+Path = "/c/Users/user/Desktop/daas 2019/K2000.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -320,8 +330,13 @@ File Type = "CSource"
 Res Id = 23
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K2000.c"
 Path = "/c/Users/user/Desktop/daas 2019/K2000.c"
+=======
+Path Rel Path = "K213.c"
+Path = "/c/Users/user/Desktop/daas 2019/K213.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -333,8 +348,13 @@ File Type = "CSource"
 Res Id = 24
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K213.c"
 Path = "/c/Users/user/Desktop/daas 2019/K213.c"
+=======
+Path Rel Path = "K236.c"
+Path = "/c/Users/user/Desktop/daas 2019/K236.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -346,8 +366,13 @@ File Type = "CSource"
 Res Id = 25
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K236.c"
 Path = "/c/Users/user/Desktop/daas 2019/K236.c"
+=======
+Path Rel Path = "K2400.c"
+Path = "/c/Users/user/Desktop/daas 2019/K2400.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -359,8 +384,13 @@ File Type = "CSource"
 Res Id = 26
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K2400.c"
 Path = "/c/Users/user/Desktop/daas 2019/K2400.c"
+=======
+Path Rel Path = "List.c"
+Path = "/c/Users/user/Desktop/daas 2019/List.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -372,8 +402,13 @@ File Type = "CSource"
 Res Id = 27
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "List.c"
 Path = "/c/Users/user/Desktop/daas 2019/List.c"
+=======
+Path Rel Path = "LS335.c"
+Path = "/c/Users/user/Desktop/daas 2019/LS335.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -385,8 +420,13 @@ File Type = "CSource"
 Res Id = 28
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "LS335.c"
 Path = "/c/Users/user/Desktop/daas 2019/LS335.c"
+=======
+Path Rel Path = "LS340.c"
+Path = "/c/Users/user/Desktop/daas 2019/LS340.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -398,8 +438,13 @@ File Type = "CSource"
 Res Id = 29
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "LS340.c"
 Path = "/c/Users/user/Desktop/daas 2019/LS340.c"
+=======
+Path Rel Path = "MCCdevices.c"
+Path = "/c/Users/user/Desktop/daas 2019/MCCdevices.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -411,8 +456,13 @@ File Type = "CSource"
 Res Id = 30
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "MCCdevices.c"
 Path = "/c/Users/user/Desktop/daas 2019/MCCdevices.c"
+=======
+Path Rel Path = "rs232.c"
+Path = "/c/Users/user/Desktop/daas 2019/rs232.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -424,8 +474,13 @@ File Type = "CSource"
 Res Id = 31
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "rs232.c"
 Path = "/c/Users/user/Desktop/daas 2019/rs232.c"
+=======
+Path Rel Path = "Source.c"
+Path = "/c/Users/user/Desktop/daas 2019/Source.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -437,8 +492,13 @@ File Type = "CSource"
 Res Id = 32
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Source.c"
 Path = "/c/Users/user/Desktop/daas 2019/Source.c"
+=======
+Path Rel Path = "Sr830.c"
+Path = "/c/Users/user/Desktop/daas 2019/Sr830.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -450,8 +510,13 @@ File Type = "CSource"
 Res Id = 33
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Sr830.c"
 Path = "/c/Users/user/Desktop/daas 2019/Sr830.c"
+=======
+Path Rel Path = "Sr844.c"
+Path = "/c/Users/user/Desktop/daas 2019/Sr844.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -463,8 +528,13 @@ File Type = "CSource"
 Res Id = 34
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Sr844.c"
 Path = "/c/Users/user/Desktop/daas 2019/Sr844.c"
+=======
+Path Rel Path = "USB-1808.c"
+Path = "/c/Users/user/Desktop/daas 2019/USB-1808.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -476,8 +546,13 @@ File Type = "CSource"
 Res Id = 35
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-1808.c"
 Path = "/c/Users/user/Desktop/daas 2019/USB-1808.c"
+=======
+Path Rel Path = "USB-234.c"
+Path = "/c/Users/user/Desktop/daas 2019/USB-234.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -489,8 +564,13 @@ File Type = "CSource"
 Res Id = 36
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-234.c"
 Path = "/c/Users/user/Desktop/daas 2019/USB-234.c"
+=======
+Path Rel Path = "USB-PMD1208LS.c"
+Path = "/c/Users/user/Desktop/daas 2019/USB-PMD1208LS.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -502,8 +582,13 @@ File Type = "CSource"
 Res Id = 37
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-PMD1208LS.c"
 Path = "/c/Users/user/Desktop/daas 2019/USB-PMD1208LS.c"
+=======
+Path Rel Path = "util.c"
+Path = "/c/Users/user/Desktop/daas 2019/util.c"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -515,8 +600,13 @@ File Type = "CSource"
 Res Id = 38
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "util.c"
 Path = "/c/Users/user/Desktop/daas 2019/util.c"
+=======
+Path Rel Path = "Acqchan.h"
+Path = "/c/Users/user/Desktop/daas 2019/Acqchan.h"
+>>>>>>> fixGPIB
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -528,8 +618,13 @@ File Type = "Include"
 Res Id = 39
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Acqchan.h"
 Path = "/c/Users/user/Desktop/daas 2019/Acqchan.h"
+=======
+Path Rel Path = "Acqchanu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Acqchanu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -540,8 +635,13 @@ File Type = "Include"
 Res Id = 40
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Acqchanu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Acqchanu.h"
+=======
+Path Rel Path = "Acqcrv.h"
+Path = "/c/Users/user/Desktop/daas 2019/Acqcrv.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -552,8 +652,13 @@ File Type = "Include"
 Res Id = 41
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Acqcrv.h"
 Path = "/c/Users/user/Desktop/daas 2019/Acqcrv.h"
+=======
+Path Rel Path = "Acqcrvu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Acqcrvu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -564,8 +669,13 @@ File Type = "Include"
 Res Id = 42
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Acqcrvu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Acqcrvu.h"
+=======
+Path Rel Path = "Acquire.h"
+Path = "/c/Users/user/Desktop/daas 2019/Acquire.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -576,8 +686,13 @@ File Type = "Include"
 Res Id = 43
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Acquire.h"
 Path = "/c/Users/user/Desktop/daas 2019/Acquire.h"
+=======
+Path Rel Path = "Acquireu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Acquireu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -588,8 +703,13 @@ File Type = "Include"
 Res Id = 44
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Acquireu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Acquireu.h"
+=======
+Path Rel Path = "cbw.h"
+Path = "/c/Users/user/Desktop/daas 2019/cbw.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -600,8 +720,13 @@ File Type = "Include"
 Res Id = 45
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "cbw.h"
 Path = "/c/Users/user/Desktop/daas 2019/cbw.h"
+=======
+Path Rel Path = "Chanfnc.h"
+Path = "/c/Users/user/Desktop/daas 2019/Chanfnc.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -612,8 +737,13 @@ File Type = "Include"
 Res Id = 46
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Chanfnc.h"
 Path = "/c/Users/user/Desktop/daas 2019/Chanfnc.h"
+=======
+Path Rel Path = "Chanfncu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Chanfncu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -624,8 +754,13 @@ File Type = "Include"
 Res Id = 47
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Chanfncu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Chanfncu.h"
+=======
+Path Rel Path = "Changen.h"
+Path = "/c/Users/user/Desktop/daas 2019/Changen.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -636,8 +771,13 @@ File Type = "Include"
 Res Id = 48
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Changen.h"
 Path = "/c/Users/user/Desktop/daas 2019/Changen.h"
+=======
+Path Rel Path = "Changenu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Changenu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -648,8 +788,13 @@ File Type = "Include"
 Res Id = 49
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Changenu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Changenu.h"
+=======
+Path Rel Path = "Channel.h"
+Path = "/c/Users/user/Desktop/daas 2019/Channel.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -660,8 +805,13 @@ File Type = "Include"
 Res Id = 50
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Channel.h"
 Path = "/c/Users/user/Desktop/daas 2019/Channel.h"
+=======
+Path Rel Path = "Channelu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Channelu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -672,8 +822,13 @@ File Type = "Include"
 Res Id = 51
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Channelu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Channelu.h"
+=======
+Path Rel Path = "Chanops.h"
+Path = "/c/Users/user/Desktop/daas 2019/Chanops.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -684,8 +839,13 @@ File Type = "Include"
 Res Id = 52
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Chanops.h"
 Path = "/c/Users/user/Desktop/daas 2019/Chanops.h"
+=======
+Path Rel Path = "Chanopsu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Chanopsu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -696,8 +856,13 @@ File Type = "Include"
 Res Id = 53
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Chanopsu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Chanopsu.h"
+=======
+Path Rel Path = "Curve.h"
+Path = "/c/Users/user/Desktop/daas 2019/Curve.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -708,8 +873,13 @@ File Type = "Include"
 Res Id = 54
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Curve.h"
 Path = "/c/Users/user/Desktop/daas 2019/Curve.h"
+=======
+Path Rel Path = "Curveop.h"
+Path = "/c/Users/user/Desktop/daas 2019/Curveop.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -720,8 +890,13 @@ File Type = "Include"
 Res Id = 55
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Curveop.h"
 Path = "/c/Users/user/Desktop/daas 2019/Curveop.h"
+=======
+Path Rel Path = "Curveopu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Curveopu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -732,8 +907,13 @@ File Type = "Include"
 Res Id = 56
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Curveopu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Curveopu.h"
+=======
+Path Rel Path = "Curveu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Curveu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -744,8 +924,13 @@ File Type = "Include"
 Res Id = 57
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Curveu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Curveu.h"
+=======
+Path Rel Path = "DAS-1602.h"
+Path = "/c/Users/user/Desktop/daas 2019/DAS-1602.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -756,8 +941,13 @@ File Type = "Include"
 Res Id = 58
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DAS-1602.h"
 Path = "/c/Users/user/Desktop/daas 2019/DAS-1602.h"
+=======
+Path Rel Path = "DAS-1602u.h"
+Path = "/c/Users/user/Desktop/daas 2019/DAS-1602u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -768,8 +958,13 @@ File Type = "Include"
 Res Id = 59
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DAS-1602u.h"
 Path = "/c/Users/user/Desktop/daas 2019/DAS-1602u.h"
+=======
+Path Rel Path = "DAS-6036.h"
+Path = "/c/Users/user/Desktop/daas 2019/DAS-6036.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -780,8 +975,13 @@ File Type = "Include"
 Res Id = 60
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DAS-6036.h"
 Path = "/c/Users/user/Desktop/daas 2019/DAS-6036.h"
+=======
+Path Rel Path = "DAS-6036u.h"
+Path = "/c/Users/user/Desktop/daas 2019/DAS-6036u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -792,8 +992,13 @@ File Type = "Include"
 Res Id = 61
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DAS-6036u.h"
 Path = "/c/Users/user/Desktop/daas 2019/DAS-6036u.h"
+=======
+Path Rel Path = "DDA08.h"
+Path = "/c/Users/user/Desktop/daas 2019/DDA08.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -804,8 +1009,13 @@ File Type = "Include"
 Res Id = 62
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DDA08.h"
 Path = "/c/Users/user/Desktop/daas 2019/DDA08.h"
+=======
+Path Rel Path = "DDA08u.h"
+Path = "/c/Users/user/Desktop/daas 2019/DDA08u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -816,8 +1026,13 @@ File Type = "Include"
 Res Id = 63
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DDA08u.h"
 Path = "/c/Users/user/Desktop/daas 2019/DDA08u.h"
+=======
+Path Rel Path = "DEMO-BOARD.h"
+Path = "/c/Users/user/Desktop/daas 2019/DEMO-BOARD.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -828,8 +1043,13 @@ File Type = "Include"
 Res Id = 64
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DEMO-BOARD.h"
 Path = "/c/Users/user/Desktop/daas 2019/DEMO-BOARD.h"
+=======
+Path Rel Path = "DEMO-BOARDu.h"
+Path = "/c/Users/user/Desktop/daas 2019/DEMO-BOARDu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -840,8 +1060,13 @@ File Type = "Include"
 Res Id = 65
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DEMO-BOARDu.h"
 Path = "/c/Users/user/Desktop/daas 2019/DEMO-BOARDu.h"
+=======
+Path Rel Path = "digitalSource.h"
+Path = "/c/Users/user/Desktop/daas 2019/digitalSource.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -852,8 +1077,13 @@ File Type = "Include"
 Res Id = 66
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "digitalSource.h"
 Path = "/c/Users/user/Desktop/daas 2019/digitalSource.h"
+=======
+Path Rel Path = "digitalSourceu.h"
+Path = "/c/Users/user/Desktop/daas 2019/digitalSourceu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -864,8 +1094,13 @@ File Type = "Include"
 Res Id = 67
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "digitalSourceu.h"
 Path = "/c/Users/user/Desktop/daas 2019/digitalSourceu.h"
+=======
+Path Rel Path = "gpibio.h"
+Path = "/c/Users/user/Desktop/daas 2019/gpibio.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -876,8 +1111,13 @@ File Type = "Include"
 Res Id = 68
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "gpibio.h"
 Path = "/c/Users/user/Desktop/daas 2019/gpibio.h"
+=======
+Path Rel Path = "Gpibiou.h"
+Path = "/c/Users/user/Desktop/daas 2019/Gpibiou.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -888,8 +1128,13 @@ File Type = "Include"
 Res Id = 69
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Gpibiou.h"
 Path = "/c/Users/user/Desktop/daas 2019/Gpibiou.h"
+=======
+Path Rel Path = "Graph.h"
+Path = "/c/Users/user/Desktop/daas 2019/Graph.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -900,8 +1145,13 @@ File Type = "Include"
 Res Id = 70
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Graph.h"
 Path = "/c/Users/user/Desktop/daas 2019/Graph.h"
+=======
+Path Rel Path = "Graphu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Graphu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -912,8 +1162,13 @@ File Type = "Include"
 Res Id = 71
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Graphu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Graphu.h"
+=======
+Path Rel Path = "HP3245A.h"
+Path = "/c/Users/user/Desktop/daas 2019/HP3245A.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -924,8 +1179,13 @@ File Type = "Include"
 Res Id = 72
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP3245A.h"
 Path = "/c/Users/user/Desktop/daas 2019/HP3245A.h"
+=======
+Path Rel Path = "HP33120A.h"
+Path = "/c/Users/user/Desktop/daas 2019/HP33120A.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -936,8 +1196,13 @@ File Type = "Include"
 Res Id = 73
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP33120A.h"
 Path = "/c/Users/user/Desktop/daas 2019/HP33120A.h"
+=======
+Path Rel Path = "HP33120Au.h"
+Path = "/c/Users/user/Desktop/daas 2019/HP33120Au.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -948,8 +1213,13 @@ File Type = "Include"
 Res Id = 74
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP33120Au.h"
 Path = "/c/Users/user/Desktop/daas 2019/HP33120Au.h"
+=======
+Path Rel Path = "HP4156.h"
+Path = "/c/Users/user/Desktop/daas 2019/HP4156.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -960,8 +1230,13 @@ File Type = "Include"
 Res Id = 75
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP4156.h"
 Path = "/c/Users/user/Desktop/daas 2019/HP4156.h"
+=======
+Path Rel Path = "HP4156u.h"
+Path = "/c/Users/user/Desktop/daas 2019/HP4156u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -972,8 +1247,13 @@ File Type = "Include"
 Res Id = 76
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP4156u.h"
 Path = "/c/Users/user/Desktop/daas 2019/HP4156u.h"
+=======
+Path Rel Path = "itc4.h"
+Path = "/c/Users/user/Desktop/daas 2019/itc4.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -984,8 +1264,13 @@ File Type = "Include"
 Res Id = 77
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP8657B.h"
 Path = "/c/Users/user/Desktop/daas 2019/HP8657B.h"
+=======
+Path Rel Path = "ITC4u.h"
+Path = "/c/Users/user/Desktop/daas 2019/ITC4u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -996,8 +1281,13 @@ File Type = "Include"
 Res Id = 78
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "itc4.h"
 Path = "/c/Users/user/Desktop/daas 2019/itc4.h"
+=======
+Path Rel Path = "K2000.h"
+Path = "/c/Users/user/Desktop/daas 2019/K2000.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1008,8 +1298,13 @@ File Type = "Include"
 Res Id = 79
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "ITC4u.h"
 Path = "/c/Users/user/Desktop/daas 2019/ITC4u.h"
+=======
+Path Rel Path = "K2000u.h"
+Path = "/c/Users/user/Desktop/daas 2019/K2000u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1020,8 +1315,13 @@ File Type = "Include"
 Res Id = 80
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K2000.h"
 Path = "/c/Users/user/Desktop/daas 2019/K2000.h"
+=======
+Path Rel Path = "K213.h"
+Path = "/c/Users/user/Desktop/daas 2019/K213.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1032,8 +1332,13 @@ File Type = "Include"
 Res Id = 81
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K2000u.h"
 Path = "/c/Users/user/Desktop/daas 2019/K2000u.h"
+=======
+Path Rel Path = "K213u.h"
+Path = "/c/Users/user/Desktop/daas 2019/K213u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1044,8 +1349,13 @@ File Type = "Include"
 Res Id = 82
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K213.h"
 Path = "/c/Users/user/Desktop/daas 2019/K213.h"
+=======
+Path Rel Path = "K236.h"
+Path = "/c/Users/user/Desktop/daas 2019/K236.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1056,8 +1366,13 @@ File Type = "Include"
 Res Id = 83
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K213u.h"
 Path = "/c/Users/user/Desktop/daas 2019/K213u.h"
+=======
+Path Rel Path = "K236u.h"
+Path = "/c/Users/user/Desktop/daas 2019/K236u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1068,8 +1383,13 @@ File Type = "Include"
 Res Id = 84
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K236.h"
 Path = "/c/Users/user/Desktop/daas 2019/K236.h"
+=======
+Path Rel Path = "K2400.h"
+Path = "/c/Users/user/Desktop/daas 2019/K2400.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1080,8 +1400,13 @@ File Type = "Include"
 Res Id = 85
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K236u.h"
 Path = "/c/Users/user/Desktop/daas 2019/K236u.h"
+=======
+Path Rel Path = "K2400u.h"
+Path = "/c/Users/user/Desktop/daas 2019/K2400u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1092,8 +1417,13 @@ File Type = "Include"
 Res Id = 86
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K2400.h"
 Path = "/c/Users/user/Desktop/daas 2019/K2400.h"
+=======
+Path Rel Path = "List.h"
+Path = "/c/Users/user/Desktop/daas 2019/List.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1104,8 +1434,13 @@ File Type = "Include"
 Res Id = 87
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K2400u.h"
 Path = "/c/Users/user/Desktop/daas 2019/K2400u.h"
+=======
+Path Rel Path = "Listu.h"
+Path = "/c/Users/user/Desktop/daas 2019/Listu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1116,8 +1451,13 @@ File Type = "Include"
 Res Id = 88
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "List.h"
 Path = "/c/Users/user/Desktop/daas 2019/List.h"
+=======
+Path Rel Path = "LS335.h"
+Path = "/c/Users/user/Desktop/daas 2019/LS335.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1128,8 +1468,13 @@ File Type = "Include"
 Res Id = 89
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Listu.h"
 Path = "/c/Users/user/Desktop/daas 2019/Listu.h"
+=======
+Path Rel Path = "LS335u.h"
+Path = "/c/Users/user/Desktop/daas 2019/LS335u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1140,8 +1485,13 @@ File Type = "Include"
 Res Id = 90
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "LS335.h"
 Path = "/c/Users/user/Desktop/daas 2019/LS335.h"
+=======
+Path Rel Path = "LS340.h"
+Path = "/c/Users/user/Desktop/daas 2019/LS340.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1152,8 +1502,13 @@ File Type = "Include"
 Res Id = 91
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "LS335u.h"
 Path = "/c/Users/user/Desktop/daas 2019/LS335u.h"
+=======
+Path Rel Path = "LS340u.h"
+Path = "/c/Users/user/Desktop/daas 2019/LS340u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1164,8 +1519,13 @@ File Type = "Include"
 Res Id = 92
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "LS340.h"
 Path = "/c/Users/user/Desktop/daas 2019/LS340.h"
+=======
+Path Rel Path = "MCCdevices.h"
+Path = "/c/Users/user/Desktop/daas 2019/MCCdevices.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1176,8 +1536,13 @@ File Type = "Include"
 Res Id = 93
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "LS340u.h"
 Path = "/c/Users/user/Desktop/daas 2019/LS340u.h"
+=======
+Path Rel Path = "rs232u.h"
+Path = "/c/Users/user/Desktop/daas 2019/rs232u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1188,8 +1553,13 @@ File Type = "Include"
 Res Id = 94
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "MCCdevices.h"
 Path = "/c/Users/user/Desktop/daas 2019/MCCdevices.h"
+=======
+Path Rel Path = "rs232util.h"
+Path = "/c/Users/user/Desktop/daas 2019/rs232util.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1200,8 +1570,13 @@ File Type = "Include"
 Res Id = 95
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "rs232u.h"
 Path = "/c/Users/user/Desktop/daas 2019/rs232u.h"
+=======
+Path Rel Path = "RUO_HIGH.H"
+Path = "/c/Users/user/Desktop/daas 2019/RUO_HIGH.H"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1212,8 +1587,13 @@ File Type = "Include"
 Res Id = 96
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "rs232util.h"
 Path = "/c/Users/user/Desktop/daas 2019/rs232util.h"
+=======
+Path Rel Path = "RUO_LOW.H"
+Path = "/c/Users/user/Desktop/daas 2019/RUO_LOW.H"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1224,8 +1604,13 @@ File Type = "Include"
 Res Id = 97
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "RUO_HIGH.H"
 Path = "/c/Users/user/Desktop/daas 2019/RUO_HIGH.H"
+=======
+Path Rel Path = "Source.h"
+Path = "/c/Users/user/Desktop/daas 2019/Source.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1236,8 +1621,13 @@ File Type = "Include"
 Res Id = 98
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "RUO_LOW.H"
 Path = "/c/Users/user/Desktop/daas 2019/RUO_LOW.H"
+=======
+Path Rel Path = "sourceu.h"
+Path = "/c/Users/user/Desktop/daas 2019/sourceu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1248,8 +1638,13 @@ File Type = "Include"
 Res Id = 99
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Source.h"
 Path = "/c/Users/user/Desktop/daas 2019/Source.h"
+=======
+Path Rel Path = "Sr830.h"
+Path = "/c/Users/user/Desktop/daas 2019/Sr830.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1260,8 +1655,13 @@ File Type = "Include"
 Res Id = 100
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "sourceu.h"
 Path = "/c/Users/user/Desktop/daas 2019/sourceu.h"
+=======
+Path Rel Path = "Sr830u.h"
+Path = "/c/Users/user/Desktop/daas 2019/Sr830u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1272,8 +1672,13 @@ File Type = "Include"
 Res Id = 101
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Sr830.h"
 Path = "/c/Users/user/Desktop/daas 2019/Sr830.h"
+=======
+Path Rel Path = "Sr844.h"
+Path = "/c/Users/user/Desktop/daas 2019/Sr844.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1284,8 +1689,13 @@ File Type = "Include"
 Res Id = 102
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Sr830u.h"
 Path = "/c/Users/user/Desktop/daas 2019/Sr830u.h"
+=======
+Path Rel Path = "sr844u.h"
+Path = "/c/Users/user/Desktop/daas 2019/sr844u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1296,8 +1706,13 @@ File Type = "Include"
 Res Id = 103
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Sr844.h"
 Path = "/c/Users/user/Desktop/daas 2019/Sr844.h"
+=======
+Path Rel Path = "USB-1808.h"
+Path = "/c/Users/user/Desktop/daas 2019/USB-1808.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1308,8 +1723,13 @@ File Type = "Include"
 Res Id = 104
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "sr844u.h"
 Path = "/c/Users/user/Desktop/daas 2019/sr844u.h"
+=======
+Path Rel Path = "USB-1808u.h"
+Path = "/c/Users/user/Desktop/daas 2019/USB-1808u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1320,8 +1740,13 @@ File Type = "Include"
 Res Id = 105
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-1808.h"
 Path = "/c/Users/user/Desktop/daas 2019/USB-1808.h"
+=======
+Path Rel Path = "USB-234.h"
+Path = "/c/Users/user/Desktop/daas 2019/USB-234.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1332,8 +1757,13 @@ File Type = "Include"
 Res Id = 106
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-1808u.h"
 Path = "/c/Users/user/Desktop/daas 2019/USB-1808u.h"
+=======
+Path Rel Path = "USB-234u.h"
+Path = "/c/Users/user/Desktop/daas 2019/USB-234u.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1344,8 +1774,13 @@ File Type = "Include"
 Res Id = 107
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-234.h"
 Path = "/c/Users/user/Desktop/daas 2019/USB-234.h"
+=======
+Path Rel Path = "USB-PMD1208LS.h"
+Path = "/c/Users/user/Desktop/daas 2019/USB-PMD1208LS.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1356,8 +1791,13 @@ File Type = "Include"
 Res Id = 108
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-234u.h"
 Path = "/c/Users/user/Desktop/daas 2019/USB-234u.h"
+=======
+Path Rel Path = "Util.h"
+Path = "/c/Users/user/Desktop/daas 2019/Util.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1368,8 +1808,13 @@ File Type = "Include"
 Res Id = 109
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-PMD1208LS.h"
 Path = "/c/Users/user/Desktop/daas 2019/USB-PMD1208LS.h"
+=======
+Path Rel Path = "utilu.h"
+Path = "/c/Users/user/Desktop/daas 2019/utilu.h"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1380,8 +1825,13 @@ File Type = "Include"
 Res Id = 110
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Util.h"
 Path = "/c/Users/user/Desktop/daas 2019/Util.h"
+=======
+Path Rel Path = "Acqchanu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Acqchanu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1392,8 +1842,13 @@ File Type = "Include"
 Res Id = 111
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "utilu.h"
 Path = "/c/Users/user/Desktop/daas 2019/utilu.h"
+=======
+Path Rel Path = "Acqcrvu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Acqcrvu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "Include Files"
@@ -1404,8 +1859,13 @@ File Type = "User Interface Resource"
 Res Id = 112
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Acqchanu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Acqchanu.uir"
+=======
+Path Rel Path = "Acquireu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Acquireu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1416,8 +1876,13 @@ File Type = "User Interface Resource"
 Res Id = 113
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Acqcrvu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Acqcrvu.uir"
+=======
+Path Rel Path = "Chanfncu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Chanfncu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1428,8 +1893,13 @@ File Type = "User Interface Resource"
 Res Id = 114
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Acquireu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Acquireu.uir"
+=======
+Path Rel Path = "Changenu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Changenu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1440,8 +1910,13 @@ File Type = "User Interface Resource"
 Res Id = 115
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Chanfncu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Chanfncu.uir"
+=======
+Path Rel Path = "Channelu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Channelu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1452,8 +1927,13 @@ File Type = "User Interface Resource"
 Res Id = 116
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Changenu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Changenu.uir"
+=======
+Path Rel Path = "Chanopsu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Chanopsu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1464,8 +1944,13 @@ File Type = "User Interface Resource"
 Res Id = 117
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Channelu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Channelu.uir"
+=======
+Path Rel Path = "Curveopu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Curveopu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1476,8 +1961,13 @@ File Type = "User Interface Resource"
 Res Id = 118
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Chanopsu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Chanopsu.uir"
+=======
+Path Rel Path = "Curveu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Curveu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1488,8 +1978,13 @@ File Type = "User Interface Resource"
 Res Id = 119
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Curveopu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Curveopu.uir"
+=======
+Path Rel Path = "DAS-1602u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/DAS-1602u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1500,8 +1995,13 @@ File Type = "User Interface Resource"
 Res Id = 120
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Curveu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Curveu.uir"
+=======
+Path Rel Path = "DAS-6036u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/DAS-6036u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1512,8 +2012,13 @@ File Type = "User Interface Resource"
 Res Id = 121
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DAS-1602u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/DAS-1602u.uir"
+=======
+Path Rel Path = "DDA08u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/DDA08u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1524,8 +2029,13 @@ File Type = "User Interface Resource"
 Res Id = 122
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DAS-6036u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/DAS-6036u.uir"
+=======
+Path Rel Path = "DEMO-BOARDu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/DEMO-BOARDu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1536,8 +2046,13 @@ File Type = "User Interface Resource"
 Res Id = 123
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DDA08u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/DDA08u.uir"
+=======
+Path Rel Path = "digitalSourceu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/digitalSourceu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1548,8 +2063,13 @@ File Type = "User Interface Resource"
 Res Id = 124
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "DEMO-BOARDu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/DEMO-BOARDu.uir"
+=======
+Path Rel Path = "Gpibiou.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Gpibiou.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1560,8 +2080,13 @@ File Type = "User Interface Resource"
 Res Id = 125
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "digitalSourceu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/digitalSourceu.uir"
+=======
+Path Rel Path = "Graphu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Graphu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1572,8 +2097,13 @@ File Type = "User Interface Resource"
 Res Id = 126
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Gpibiou.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Gpibiou.uir"
+=======
+Path Rel Path = "HP3245Au.uir"
+Path = "/c/Users/user/Desktop/daas 2019/HP3245Au.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1584,8 +2114,13 @@ File Type = "User Interface Resource"
 Res Id = 127
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Graphu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Graphu.uir"
+=======
+Path Rel Path = "HP33120Au.uir"
+Path = "/c/Users/user/Desktop/daas 2019/HP33120Au.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1596,8 +2131,13 @@ File Type = "User Interface Resource"
 Res Id = 128
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP3245Au.uir"
 Path = "/c/Users/user/Desktop/daas 2019/HP3245Au.uir"
+=======
+Path Rel Path = "HP4156u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/HP4156u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1608,8 +2148,13 @@ File Type = "User Interface Resource"
 Res Id = 129
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP33120Au.uir"
 Path = "/c/Users/user/Desktop/daas 2019/HP33120Au.uir"
+=======
+Path Rel Path = "ITC4u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/ITC4u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1620,8 +2165,13 @@ File Type = "User Interface Resource"
 Res Id = 130
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP4156u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/HP4156u.uir"
+=======
+Path Rel Path = "K2000u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/K2000u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1632,8 +2182,13 @@ File Type = "User Interface Resource"
 Res Id = 131
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "HP8657Bu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/HP8657Bu.uir"
+=======
+Path Rel Path = "K213u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/K213u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1644,8 +2199,13 @@ File Type = "User Interface Resource"
 Res Id = 132
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "ITC4u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/ITC4u.uir"
+=======
+Path Rel Path = "K236u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/K236u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1656,8 +2216,13 @@ File Type = "User Interface Resource"
 Res Id = 133
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K2000u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/K2000u.uir"
+=======
+Path Rel Path = "K2400u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/K2400u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1668,8 +2233,13 @@ File Type = "User Interface Resource"
 Res Id = 134
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K213u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/K213u.uir"
+=======
+Path Rel Path = "Listu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Listu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1680,8 +2250,13 @@ File Type = "User Interface Resource"
 Res Id = 135
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K236u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/K236u.uir"
+=======
+Path Rel Path = "LS335u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/LS335u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1692,8 +2267,13 @@ File Type = "User Interface Resource"
 Res Id = 136
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "K2400u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/K2400u.uir"
+=======
+Path Rel Path = "LS340u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/LS340u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1704,8 +2284,13 @@ File Type = "User Interface Resource"
 Res Id = 137
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Listu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Listu.uir"
+=======
+Path Rel Path = "rs232u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/rs232u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1716,8 +2301,13 @@ File Type = "User Interface Resource"
 Res Id = 138
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "LS335u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/LS335u.uir"
+=======
+Path Rel Path = "sourceu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/sourceu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1728,8 +2318,13 @@ File Type = "User Interface Resource"
 Res Id = 139
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "LS340u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/LS340u.uir"
+=======
+Path Rel Path = "Sr830u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/Sr830u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1740,8 +2335,13 @@ File Type = "User Interface Resource"
 Res Id = 140
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "rs232u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/rs232u.uir"
+=======
+Path Rel Path = "sr844u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/sr844u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1752,8 +2352,13 @@ File Type = "User Interface Resource"
 Res Id = 141
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "sourceu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/sourceu.uir"
+=======
+Path Rel Path = "USB-1208LSu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/USB-1208LSu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1764,8 +2369,13 @@ File Type = "User Interface Resource"
 Res Id = 142
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "Sr830u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/Sr830u.uir"
+=======
+Path Rel Path = "USB-1808u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/USB-1808u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1776,8 +2386,13 @@ File Type = "User Interface Resource"
 Res Id = 143
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "sr844u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/sr844u.uir"
+=======
+Path Rel Path = "USB-234u.uir"
+Path = "/c/Users/user/Desktop/daas 2019/USB-234u.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1788,8 +2403,13 @@ File Type = "User Interface Resource"
 Res Id = 144
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-1208LSu.uir"
 Path = "/c/Users/user/Desktop/daas 2019/USB-1208LSu.uir"
+=======
+Path Rel Path = "utilu.uir"
+Path = "/c/Users/user/Desktop/daas 2019/utilu.uir"
+>>>>>>> fixGPIB
 Exclude = False
 Project Flags = 0
 Folder = "User Interface Files"
@@ -1800,6 +2420,7 @@ File Type = "User Interface Resource"
 Res Id = 145
 Path Is Rel = True
 Path Rel To = "Project"
+<<<<<<< HEAD
 Path Rel Path = "USB-1808u.uir"
 Path = "/c/Users/user/Desktop/daas 2019/USB-1808u.uir"
 Exclude = False
@@ -1836,6 +2457,8 @@ File Type = "Library"
 Res Id = 148
 Path Is Rel = True
 Path Rel To = "Project"
+=======
+>>>>>>> fixGPIB
 Path Rel Path = "../../../Public/Documents/Measurement Computing/DAQ/C/cbw32.lib"
 Path = "/c/Users/Public/Documents/Measurement Computing/DAQ/C/cbw32.lib"
 Exclude = False
