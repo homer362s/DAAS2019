@@ -1,3 +1,29 @@
+/*
+
+#include <ansi_c.h>
+#include <formatio.h>
+#include "hp4156.h"
+
+#include "util.h"
+#include "list.h"
+#include "channel.h"
+#include "changen.h"
+#include "chanfnc.h"
+#include "chanops.h"
+#include "acqchan.h"
+#include "acqchanu.h"
+#include "curve.h"
+#include "acqcrv.h"
+#include "graph.h"
+#include "graphu.h"
+#include "curveop.h"
+#include "acquire.h"
+#include "acquireu.h"
+#include "gpibio.h"
+#include "gpibiou.h"
+#include "source.h"
+#include "sourceu.h"
+
 void hp8657b_Init(void)
 {
     devTypePtr devType;
@@ -33,3 +59,5 @@ void *HP8657B_Create(gpibioPtr dev)
 	
     return hp;
 }
+
+*/
