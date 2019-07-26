@@ -533,12 +533,25 @@ void port_Load (void *dev, portPtr port)
 /**************************vv boards vv ***************************/
 void boards_Save(void *dev, void (*save) (MCCdevPtr))
 {
-    char* path = alloca(sizeof(char)* 20);
+	char* path = malloc(512 * sizeof(char));
+	// 20 characters is not nearly enough space. How did this ever work?
+	// Also modified to use malloc rather than alloca since its now a 
+	// reasonably large array.
+    //char* path = alloca(sizeof(char)* 20);
     if(FileSelectPopup ("", "*.mcs", "", "", VAL_SAVE_BUTTON, 0, 1, 1, 0, path))
     {
+		printf("opening file, press any key to continue\n");
+		getchar();
+		printf("OpenFile() parameters:\n");
+		printf("path: %s\n", path);
+		printf("press any key to continue\n");
+		getchar();
         fileHandle.analysis = OpenFile (path, VAL_WRITE_ONLY, VAL_OPEN_AS_IS, VAL_ASCII);
+		printf("file opened, now saving. Press a key to continue\n");
+		getchar();
         save(dev);
     }
+	free(path);
 }
 
 void boards_Load(void *dev, void (*load) (MCCdevPtr))

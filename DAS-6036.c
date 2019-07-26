@@ -390,10 +390,12 @@ void das6036_UpdateReadings (int panel, void *ptr)
 
 void das6036_Save (MCCdevPtr dev)
 {
+	printf("saving\n");
     int i;
     das6036Ptr das = dev->device;
     for(i = 0; i < 10; i++)
         port_Save(das->Achannels[i]);
+	printf("starting port_Save()\n");
     port_Save(das->Dchannels[0]);
 }
 
