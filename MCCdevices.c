@@ -533,7 +533,7 @@ void port_Load (void *dev, portPtr port)
 /**************************vv boards vv ***************************/
 void boards_Save(void *dev, void (*save) (MCCdevPtr))
 {
-	char* path = malloc(512 * sizeof(char));
+	char* path = malloc(MAX_PATHNAME_LEN * sizeof(char));
 	// 20 characters is not nearly enough space. How did this ever work?
 	// Also modified to use malloc rather than alloca since its now a 
 	// reasonably large array.
