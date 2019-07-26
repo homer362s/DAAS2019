@@ -534,10 +534,6 @@ void port_Load (void *dev, portPtr port)
 void boards_Save(void *dev, void (*save) (MCCdevPtr))
 {
 	char* path = malloc(MAX_PATHNAME_LEN * sizeof(char));
-	// 20 characters is not nearly enough space. How did this ever work?
-	// Also modified to use malloc rather than alloca since its now a 
-	// reasonably large array.
-    //char* path = alloca(sizeof(char)* 20);
     if(FileSelectPopup ("", "*.mcs", "", "", VAL_SAVE_BUTTON, 0, 1, 1, 0, path))
     {
         fileHandle.analysis = OpenFile (path, VAL_WRITE_ONLY, VAL_OPEN_AS_IS, VAL_ASCII);
@@ -548,12 +544,13 @@ void boards_Save(void *dev, void (*save) (MCCdevPtr))
 
 void boards_Load(void *dev, void (*load) (MCCdevPtr))
 {
-    char* path = alloca(sizeof(char)* 20);
+	char* path = malloc(MAX_PATHNAME_LEN * sizeof(char));
     if(FileSelectPopup ("", "*.mcs", "", "", VAL_LOAD_BUTTON, 0, 1, 1, 0, path))
     {
         fileHandle.analysis = OpenFile (path, VAL_READ_ONLY, VAL_OPEN_AS_IS, VAL_ASCII);
         load(dev);
     }
+	free(path);
 }
 
 void boards_MenuCallback(int menubar, int menuItem, void *callbackData, int panel)
