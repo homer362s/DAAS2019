@@ -540,15 +540,7 @@ void boards_Save(void *dev, void (*save) (MCCdevPtr))
     //char* path = alloca(sizeof(char)* 20);
     if(FileSelectPopup ("", "*.mcs", "", "", VAL_SAVE_BUTTON, 0, 1, 1, 0, path))
     {
-		printf("opening file, press any key to continue\n");
-		getchar();
-		printf("OpenFile() parameters:\n");
-		printf("path: %s\n", path);
-		printf("press any key to continue\n");
-		getchar();
         fileHandle.analysis = OpenFile (path, VAL_WRITE_ONLY, VAL_OPEN_AS_IS, VAL_ASCII);
-		printf("file opened, now saving. Press a key to continue\n");
-		getchar();
         save(dev);
     }
 	free(path);
