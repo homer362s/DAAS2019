@@ -533,22 +533,24 @@ void port_Load (void *dev, portPtr port)
 /**************************vv boards vv ***************************/
 void boards_Save(void *dev, void (*save) (MCCdevPtr))
 {
-    char* path = alloca(sizeof(char)* 20);
+	char* path = malloc(MAX_PATHNAME_LEN * sizeof(char));
     if(FileSelectPopup ("", "*.mcs", "", "", VAL_SAVE_BUTTON, 0, 1, 1, 0, path))
     {
         fileHandle.analysis = OpenFile (path, VAL_WRITE_ONLY, VAL_OPEN_AS_IS, VAL_ASCII);
         save(dev);
     }
+	free(path);
 }
 
 void boards_Load(void *dev, void (*load) (MCCdevPtr))
 {
-    char* path = alloca(sizeof(char)* 20);
+	char* path = malloc(MAX_PATHNAME_LEN * sizeof(char));
     if(FileSelectPopup ("", "*.mcs", "", "", VAL_LOAD_BUTTON, 0, 1, 1, 0, path))
     {
         fileHandle.analysis = OpenFile (path, VAL_READ_ONLY, VAL_OPEN_AS_IS, VAL_ASCII);
         load(dev);
     }
+	free(path);
 }
 
 void boards_MenuCallback(int menubar, int menuItem, void *callbackData, int panel)

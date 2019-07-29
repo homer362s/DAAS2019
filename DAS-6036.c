@@ -382,7 +382,7 @@ void das6036_UpdateReadings (int panel, void *ptr)
         if(das->Achannels[i]->control)  
         {
             SetCtrlVal (das->panel, DAS_CTRL_ANALOGUE_IN, acqchan->reading);
-            SetCtrlVal (das->panel, DAS_CTRL_RANGE, das->Achannels[i]->port.analogueIOport.range);
+            SetCtrlVal (das->panel, DAS_CTRL_RANGE, das->Achannels[i]->port.analogueIOport.range);  
             SetCtrlVal (das->panel, DAS_CTRL_ACQ, acqchan->acquire);
         }
     }

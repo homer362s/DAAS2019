@@ -50,3 +50,5 @@ Temporary Items
 
 
 *.exe
+# DAAS save files
+*.mcs
