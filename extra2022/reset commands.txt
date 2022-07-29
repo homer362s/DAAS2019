@@ -1,0 +1,25 @@
+*STB       // reads data from status byte register
+*CLS       // clears registers
+*PSC       // controls if a query is set when reset
+*RST       // resets power supply to default
+*SAV       // saves power supply setup to memory
+*RCL       // can recall previous setups
+
+
+
+
+
+// BK9201_RESET:
+           // if (event == EVENT_COMMIT) {
+             //   GetCtrlVal (panel, control, &smu->operate);
+			//	BK9201_Out (dev, "*RST", .008); //  resets power supply to default settings
+              //  BK9201_In (dev, cmd);
+                //Fmt (cmd, "SOURce:OUTPut:STATe %i", smu->operate);
+                 //if (smu->operate==1) BK9201_Out (dev,   "SOURce:OUTPut:STATe 0" , .02); 
+				  //else   BK9201_Out (dev,   "SOURce:OUTPut:STATe 1" , .02);
+				//BK9201_Out (dev, cmd, .02);
+				
+				
+			//	smu->source->sourceOn = !smu->source->sourceOn;
+           // }
+           // break;

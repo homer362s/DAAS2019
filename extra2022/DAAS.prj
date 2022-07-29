@@ -1,0 +1,2367 @@
+[Project Header]
+Version = 1700
+Pathname = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAAS.prj"
+Project Label = "DAAS_Soft"
+CVI Dir = "/c/program files (x86)/national instruments/cvi2017"
+CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
+CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2017"
+CVI Pub Global Dir = "/C/ProgramData/National Instruments/CVI"
+IVI Standard Root Dir = "/C/Program Files (x86)/IVI Foundation/IVI"
+VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
+IVI Standard Root 64-bit Dir = "/C/Program Files/IVI Foundation/IVI"
+VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
+Number of Files = 152
+Target Type = "Executable"
+Flags = 2064
+Copied From Locked InstrDrv Directory = False
+Copied from VXIPNP Directory = False
+Locked InstrDrv Name = ""
+Don't Display Deploy InstrDrv Dialog = False
+
+[Folders]
+Instrument Files Folder Not Added Yet = True
+Folder 0 = "Source Files"
+FolderEx 0 = "Source Files"
+Folder 1 = "Include Files"
+FolderEx 1 = "Include Files"
+Folder 2 = "User Interface Files"
+FolderEx 2 = "User Interface Files"
+Folder 3 = "Library Files"
+FolderEx 3 = "Library Files"
+
+[File 0001]
+File Type = "CSource"
+Res Id = 1
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acqchan.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acqchan.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0002]
+File Type = "CSource"
+Res Id = 2
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acqcrv.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acqcrv.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0003]
+File Type = "CSource"
+Res Id = 3
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "acquire.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/acquire.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0004]
+File Type = "CSource"
+Res Id = 4
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "BK9201.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/BK9201.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0005]
+File Type = "CSource"
+Res Id = 5
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "chanfnc.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/chanfnc.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0006]
+File Type = "CSource"
+Res Id = 6
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "changen.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/changen.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0007]
+File Type = "CSource"
+Res Id = 7
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Channel.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Channel.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0008]
+File Type = "CSource"
+Res Id = 8
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "chanops.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/chanops.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0009]
+File Type = "CSource"
+Res Id = 9
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "curve.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/curve.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0010]
+File Type = "CSource"
+Res Id = 10
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "curveop.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/curveop.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0011]
+File Type = "CSource"
+Res Id = 11
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DAAS_main.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAAS_main.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0012]
+File Type = "CSource"
+Res Id = 12
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DAS-1602.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAS-1602.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0013]
+File Type = "CSource"
+Res Id = 13
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DAS-6036.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAS-6036.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0014]
+File Type = "CSource"
+Res Id = 14
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DDA08.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DDA08.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0015]
+File Type = "CSource"
+Res Id = 15
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DEMO-BOARD.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DEMO-BOARD.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0016]
+File Type = "CSource"
+Res Id = 16
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "digitalSource.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/digitalSource.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0017]
+File Type = "CSource"
+Res Id = 17
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "gpibio.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/gpibio.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0018]
+File Type = "CSource"
+Res Id = 18
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "graph.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/graph.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0019]
+File Type = "CSource"
+Res Id = 19
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP3245A.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP3245A.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0020]
+File Type = "CSource"
+Res Id = 20
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP33120A.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP33120A.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0021]
+File Type = "CSource"
+Res Id = 21
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP4156.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP4156.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0022]
+File Type = "CSource"
+Res Id = 22
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP8657B.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP8657B.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0023]
+File Type = "CSource"
+Res Id = 23
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "itc4.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/itc4.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0024]
+File Type = "CSource"
+Res Id = 24
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K2000.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K2000.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0025]
+File Type = "CSource"
+Res Id = 25
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K213.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K213.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0026]
+File Type = "CSource"
+Res Id = 26
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K236.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K236.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0027]
+File Type = "CSource"
+Res Id = 27
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K2400.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K2400.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0028]
+File Type = "CSource"
+Res Id = 28
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "List.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/List.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0029]
+File Type = "CSource"
+Res Id = 29
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "LS335.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/LS335.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0030]
+File Type = "CSource"
+Res Id = 30
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "LS340.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/LS340.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0031]
+File Type = "CSource"
+Res Id = 31
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "MCCdevices.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/MCCdevices.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0032]
+File Type = "CSource"
+Res Id = 32
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "rs232.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/rs232.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0033]
+File Type = "CSource"
+Res Id = 33
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Source.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Source.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0034]
+File Type = "CSource"
+Res Id = 34
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Sr830.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Sr830.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0035]
+File Type = "CSource"
+Res Id = 35
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Sr844.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Sr844.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0036]
+File Type = "CSource"
+Res Id = 36
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-1808.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-1808.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0037]
+File Type = "CSource"
+Res Id = 37
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-234.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-234.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0038]
+File Type = "CSource"
+Res Id = 38
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-PMD1208LS.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-PMD1208LS.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0039]
+File Type = "CSource"
+Res Id = 39
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "util.c"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/util.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Source Files"
+Folder Id = 0
+
+[File 0040]
+File Type = "Include"
+Res Id = 40
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acqchan.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acqchan.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0041]
+File Type = "Include"
+Res Id = 41
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acqchanu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acqchanu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0042]
+File Type = "Include"
+Res Id = 42
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acqcrv.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acqcrv.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0043]
+File Type = "Include"
+Res Id = 43
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acqcrvu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acqcrvu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0044]
+File Type = "Include"
+Res Id = 44
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acquire.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acquire.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0045]
+File Type = "Include"
+Res Id = 45
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acquireu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acquireu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0046]
+File Type = "Include"
+Res Id = 46
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "BK9201u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/BK9201u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0047]
+File Type = "Include"
+Res Id = 47
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "cbw.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/cbw.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0048]
+File Type = "Include"
+Res Id = 48
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Chanfnc.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Chanfnc.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0049]
+File Type = "Include"
+Res Id = 49
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Chanfncu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Chanfncu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0050]
+File Type = "Include"
+Res Id = 50
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Changen.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Changen.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0051]
+File Type = "Include"
+Res Id = 51
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Changenu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Changenu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0052]
+File Type = "Include"
+Res Id = 52
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Channel.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Channel.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0053]
+File Type = "Include"
+Res Id = 53
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Channelu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Channelu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0054]
+File Type = "Include"
+Res Id = 54
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Chanops.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Chanops.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0055]
+File Type = "Include"
+Res Id = 55
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Chanopsu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Chanopsu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0056]
+File Type = "Include"
+Res Id = 56
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Curve.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Curve.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0057]
+File Type = "Include"
+Res Id = 57
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Curveop.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Curveop.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0058]
+File Type = "Include"
+Res Id = 58
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Curveopu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Curveopu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0059]
+File Type = "Include"
+Res Id = 59
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Curveu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Curveu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0060]
+File Type = "Include"
+Res Id = 60
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DAS-1602.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAS-1602.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0061]
+File Type = "Include"
+Res Id = 61
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DAS-1602u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAS-1602u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0062]
+File Type = "Include"
+Res Id = 62
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DAS-6036.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAS-6036.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0063]
+File Type = "Include"
+Res Id = 63
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DAS-6036u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAS-6036u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0064]
+File Type = "Include"
+Res Id = 64
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DDA08.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DDA08.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0065]
+File Type = "Include"
+Res Id = 65
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DDA08u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DDA08u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0066]
+File Type = "Include"
+Res Id = 66
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DEMO-BOARD.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DEMO-BOARD.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0067]
+File Type = "Include"
+Res Id = 67
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DEMO-BOARDu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DEMO-BOARDu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0068]
+File Type = "Include"
+Res Id = 68
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "digitalSource.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/digitalSource.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0069]
+File Type = "Include"
+Res Id = 69
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "digitalSourceu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/digitalSourceu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0070]
+File Type = "Include"
+Res Id = 70
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "gpibio.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/gpibio.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0071]
+File Type = "Include"
+Res Id = 71
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Gpibiou.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Gpibiou.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0072]
+File Type = "Include"
+Res Id = 72
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Graph.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Graph.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0073]
+File Type = "Include"
+Res Id = 73
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Graphu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Graphu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0074]
+File Type = "Include"
+Res Id = 74
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP3245A.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP3245A.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0075]
+File Type = "Include"
+Res Id = 75
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP33120A.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP33120A.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0076]
+File Type = "Include"
+Res Id = 76
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP33120Au.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP33120Au.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0077]
+File Type = "Include"
+Res Id = 77
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP4156.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP4156.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0078]
+File Type = "Include"
+Res Id = 78
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP4156u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP4156u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0079]
+File Type = "Include"
+Res Id = 79
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP8657B.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP8657B.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0080]
+File Type = "Include"
+Res Id = 80
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "itc4.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/itc4.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0081]
+File Type = "Include"
+Res Id = 81
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "ITC4u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/ITC4u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0082]
+File Type = "Include"
+Res Id = 82
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K2000.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K2000.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0083]
+File Type = "Include"
+Res Id = 83
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K2000u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K2000u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0084]
+File Type = "Include"
+Res Id = 84
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K213.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K213.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0085]
+File Type = "Include"
+Res Id = 85
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K213u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K213u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0086]
+File Type = "Include"
+Res Id = 86
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K236.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K236.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0087]
+File Type = "Include"
+Res Id = 87
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K236u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K236u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0088]
+File Type = "Include"
+Res Id = 88
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K2400.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K2400.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0089]
+File Type = "Include"
+Res Id = 89
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K2400u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K2400u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0090]
+File Type = "Include"
+Res Id = 90
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "List.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/List.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0091]
+File Type = "Include"
+Res Id = 91
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Listu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Listu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0092]
+File Type = "Include"
+Res Id = 92
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "LS335.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/LS335.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0093]
+File Type = "Include"
+Res Id = 93
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "LS335u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/LS335u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0094]
+File Type = "Include"
+Res Id = 94
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "LS340.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/LS340.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0095]
+File Type = "Include"
+Res Id = 95
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "LS340u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/LS340u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0096]
+File Type = "Include"
+Res Id = 96
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "MCCdevices.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/MCCdevices.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0097]
+File Type = "Include"
+Res Id = 97
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "rs232u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/rs232u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0098]
+File Type = "Include"
+Res Id = 98
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "rs232util.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/rs232util.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0099]
+File Type = "Include"
+Res Id = 99
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "RUO_HIGH.H"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/RUO_HIGH.H"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0100]
+File Type = "Include"
+Res Id = 100
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "RUO_LOW.H"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/RUO_LOW.H"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0101]
+File Type = "Include"
+Res Id = 101
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Source.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Source.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0102]
+File Type = "Include"
+Res Id = 102
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "sourceu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/sourceu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0103]
+File Type = "Include"
+Res Id = 103
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Sr830.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Sr830.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0104]
+File Type = "Include"
+Res Id = 104
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Sr830u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Sr830u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0105]
+File Type = "Include"
+Res Id = 105
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Sr844.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Sr844.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0106]
+File Type = "Include"
+Res Id = 106
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "sr844u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/sr844u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0107]
+File Type = "Include"
+Res Id = 107
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-1808.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-1808.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0108]
+File Type = "Include"
+Res Id = 108
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-1808u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-1808u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0109]
+File Type = "Include"
+Res Id = 109
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-234.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-234.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0110]
+File Type = "Include"
+Res Id = 110
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-234u.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-234u.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0111]
+File Type = "Include"
+Res Id = 111
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-PMD1208LS.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-PMD1208LS.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0112]
+File Type = "Include"
+Res Id = 112
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Util.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Util.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0113]
+File Type = "Include"
+Res Id = 113
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "utilu.h"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/utilu.h"
+Exclude = False
+Project Flags = 0
+Folder = "Include Files"
+Folder Id = 1
+
+[File 0114]
+File Type = "User Interface Resource"
+Res Id = 114
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acqchanu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acqchanu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0115]
+File Type = "User Interface Resource"
+Res Id = 115
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acqcrvu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acqcrvu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0116]
+File Type = "User Interface Resource"
+Res Id = 116
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Acquireu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Acquireu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0117]
+File Type = "User Interface Resource"
+Res Id = 117
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "BK9201u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/BK9201u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0118]
+File Type = "User Interface Resource"
+Res Id = 118
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Chanfncu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Chanfncu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0119]
+File Type = "User Interface Resource"
+Res Id = 119
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Changenu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Changenu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0120]
+File Type = "User Interface Resource"
+Res Id = 120
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Channelu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Channelu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0121]
+File Type = "User Interface Resource"
+Res Id = 121
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Chanopsu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Chanopsu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0122]
+File Type = "User Interface Resource"
+Res Id = 122
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Curveopu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Curveopu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0123]
+File Type = "User Interface Resource"
+Res Id = 123
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Curveu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Curveu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0124]
+File Type = "User Interface Resource"
+Res Id = 124
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DAS-1602u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAS-1602u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0125]
+File Type = "User Interface Resource"
+Res Id = 125
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DAS-6036u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAS-6036u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0126]
+File Type = "User Interface Resource"
+Res Id = 126
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DDA08u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DDA08u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0127]
+File Type = "User Interface Resource"
+Res Id = 127
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "DEMO-BOARDu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DEMO-BOARDu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0128]
+File Type = "User Interface Resource"
+Res Id = 128
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "digitalSourceu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/digitalSourceu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0129]
+File Type = "User Interface Resource"
+Res Id = 129
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Gpibiou.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Gpibiou.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0130]
+File Type = "User Interface Resource"
+Res Id = 130
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Graphu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Graphu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0131]
+File Type = "User Interface Resource"
+Res Id = 131
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP3245Au.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP3245Au.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0132]
+File Type = "User Interface Resource"
+Res Id = 132
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP33120Au.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP33120Au.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0133]
+File Type = "User Interface Resource"
+Res Id = 133
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP4156u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP4156u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0134]
+File Type = "User Interface Resource"
+Res Id = 134
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "HP8657Bu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/HP8657Bu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0135]
+File Type = "User Interface Resource"
+Res Id = 135
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "ITC4u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/ITC4u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0136]
+File Type = "User Interface Resource"
+Res Id = 136
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K2000u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K2000u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0137]
+File Type = "User Interface Resource"
+Res Id = 137
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K213u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K213u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0138]
+File Type = "User Interface Resource"
+Res Id = 138
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K236u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K236u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0139]
+File Type = "User Interface Resource"
+Res Id = 139
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "K2400u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/K2400u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0140]
+File Type = "User Interface Resource"
+Res Id = 140
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Listu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Listu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0141]
+File Type = "User Interface Resource"
+Res Id = 141
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "LS335u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/LS335u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0142]
+File Type = "User Interface Resource"
+Res Id = 142
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "LS340u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/LS340u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0143]
+File Type = "User Interface Resource"
+Res Id = 143
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "rs232u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/rs232u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0144]
+File Type = "User Interface Resource"
+Res Id = 144
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "sourceu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/sourceu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0145]
+File Type = "User Interface Resource"
+Res Id = 145
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Sr830u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/Sr830u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0146]
+File Type = "User Interface Resource"
+Res Id = 146
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "sr844u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/sr844u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0147]
+File Type = "User Interface Resource"
+Res Id = 147
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-1208LSu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-1208LSu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0148]
+File Type = "User Interface Resource"
+Res Id = 148
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-1808u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-1808u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0149]
+File Type = "User Interface Resource"
+Res Id = 149
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "USB-234u.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/USB-234u.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0150]
+File Type = "User Interface Resource"
+Res Id = 150
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "utilu.uir"
+Path = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/utilu.uir"
+Exclude = False
+Project Flags = 0
+Folder = "User Interface Files"
+Folder Id = 2
+
+[File 0151]
+File Type = "Library"
+Res Id = 151
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "../../../../Public/Documents/Measurement Computing/DAQ/C/cbw32.lib"
+Path = "/c/Users/Public/Documents/Measurement Computing/DAQ/C/cbw32.lib"
+Exclude = False
+Project Flags = 0
+Folder = "Library Files"
+Folder Id = 3
+
+[File 0152]
+File Type = "Library"
+Res Id = 152
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "../../../../Public/Documents/Measurement Computing/DAQ/C/cbw64.lib"
+Path = "/c/Users/Public/Documents/Measurement Computing/DAQ/C/cbw64.lib"
+Exclude = False
+Project Flags = 0
+Folder = "Library Files"
+Folder Id = 3
+
+[Custom Build Configs]
+Num Custom Build Configs = 0
+
+[Default Build Config Debug]
+Config Name = "Debug"
+Is 64-Bit = False
+Is Release = False
+Default Calling Convention = "cdecl"
+Optimization Level = "No optimizations"
+Require Prototypes = True
+Show Warning IDs in Build Output = False
+Selected Warning Level = "None"
+Warning List None = "0,1,4,9,84,105,106,107,108,109,110,111"
+Warning List Common = ""
+Warning List Extended = ""
+Warning List All = ""
+Warning Mode = 0
+Enable Unreferenced Identifiers Warning = False
+Enable Pointer Mismatch Warning = True
+Enable Unreachable Code Warning = True
+Enable Assignment In Conditional Warning = False
+Uninitialized Locals Compile Warning = "Aggressive"
+Require Return Values = True
+Enable C99 Extensions = False
+Enable OpenMP Extensions = False
+Stack Size = 100000
+Stack Reserve = 131072
+Stack Commit = 4096
+Image Base Address = 4194304
+Image Base Address x64 = 4194304
+Compiler Defines = ""
+Sign = False
+Sign Store = ""
+Sign Certificate = ""
+Sign Timestamp URL = ""
+Sign URL = ""
+Manifest Embed = False
+Icon File Is Rel = True
+Icon File Rel To = "Project"
+Icon File Rel Path = "DAAS.ico"
+Icon File = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAAS.ico"
+Application Title = "DAAS2018"
+Use IVI Subdirectories for Import Libraries = False
+Use VXIPNP Subdirectories for Import Libraries = False
+Use Dflt Import Lib Base Name = True
+Where to Copy DLL = "Do not copy"
+Custom Directory to Copy DLL Is Rel = False
+Custom Directory to Copy DLL = ""
+Generate Source Documentation = "None"
+Runtime Support = "Full Runtime Support"
+Runtime Binding = "Shared"
+Embed Project .UIRs = True
+Generate Map File = True
+Embed Timestamp = True
+Create Console Application = False
+Using LoadExternalModule = False
+DLL Exports = "Include File Symbols"
+Register ActiveX Server = False
+Numeric File Version = "1,0,0,0"
+Numeric Prod Version = "5,1,0,6"
+Comments = ""
+Comments Ex = ""
+Company Name = "University of Notre Dame"
+Company Name Ex = "%company"
+File Description = "DAAS2018 (Debug x86)"
+File Description Ex = "%application (%rel_dbg %arch)"
+File Version = "1.0"
+File Version Ex = "%f1.%f2"
+Internal Name = "DAASdbg"
+Internal Name Ex = "%basename"
+Legal Copyright = "Copyright © 2015, University of Notre Dame"
+Legal Copyright Ex = "Copyright © 2015, University of Notre Dame"
+Legal Trademarks = ""
+Legal Trademarks Ex = ""
+Original Filename = "DAASdbg.exe"
+Original Filename Ex = "%filename"
+Private Build = ""
+Private Build Ex = ""
+Product Name = "DAAS"
+Product Name Ex = "DAAS"
+Product Version = "5.1.0.6"
+Product Version Ex = "%p1.%p2.%p3.%p4"
+Special Build = ""
+Special Build Ex = ""
+Add Type Lib To DLL = False
+Include Type Lib Help Links = False
+TLB Help Style = "HLP"
+Type Lib FP File Is Rel = False
+Type Lib FP File = ""
+
+[Default Build Config Release]
+Config Name = "Release"
+Is 64-Bit = False
+Is Release = True
+Default Calling Convention = "cdecl"
+Optimization Level = "No optimizations"
+Require Prototypes = True
+Show Warning IDs in Build Output = False
+Selected Warning Level = "None"
+Warning List None = "0,1,4,9,84,105,106,107,108,109,110,111"
+Warning List Common = ""
+Warning List Extended = ""
+Warning List All = ""
+Warning Mode = 0
+Enable Unreferenced Identifiers Warning = False
+Enable Pointer Mismatch Warning = True
+Enable Unreachable Code Warning = True
+Enable Assignment In Conditional Warning = False
+Uninitialized Locals Compile Warning = "Aggressive"
+Require Return Values = True
+Enable C99 Extensions = False
+Enable OpenMP Extensions = False
+Stack Size = 100000
+Stack Reserve = 131072
+Stack Commit = 4096
+Image Base Address = 4194304
+Image Base Address x64 = 4194304
+Compiler Defines = ""
+Sign = False
+Sign Store = ""
+Sign Certificate = ""
+Sign Timestamp URL = ""
+Sign URL = ""
+Manifest Embed = False
+Icon File Is Rel = True
+Icon File Rel To = "Project"
+Icon File Rel Path = "DAAS.ico"
+Icon File = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAAS.ico"
+Application Title = "DAAS"
+Use IVI Subdirectories for Import Libraries = False
+Use VXIPNP Subdirectories for Import Libraries = False
+Use Dflt Import Lib Base Name = True
+Where to Copy DLL = "Do not copy"
+Custom Directory to Copy DLL Is Rel = False
+Custom Directory to Copy DLL = ""
+Generate Source Documentation = "None"
+Runtime Support = "Full Runtime Support"
+Runtime Binding = "Shared"
+Embed Project .UIRs = True
+Generate Map File = True
+Embed Timestamp = True
+Create Console Application = False
+Using LoadExternalModule = False
+DLL Exports = "Include File Symbols"
+Register ActiveX Server = False
+Numeric File Version = "1,0,0,0"
+Numeric Prod Version = "5,1,0,4"
+Comments = ""
+Comments Ex = ""
+Company Name = "University of Notre Dame"
+Company Name Ex = "%company"
+File Description = "DAAS (Release x86)"
+File Description Ex = "%application (%rel_dbg %arch)"
+File Version = "1.0"
+File Version Ex = "%f1.%f2"
+Internal Name = "DAAS"
+Internal Name Ex = "%basename"
+Legal Copyright = "Copyright © 2015, University of Notre Dame"
+Legal Copyright Ex = "Copyright © 2015, University of Notre Dame"
+Legal Trademarks = ""
+Legal Trademarks Ex = ""
+Original Filename = "DAAS.exe"
+Original Filename Ex = "%filename"
+Private Build = ""
+Private Build Ex = ""
+Product Name = "DAAS"
+Product Name Ex = "DAAS"
+Product Version = "5.1.0.4"
+Product Version Ex = "%p1.%p2.%p3.%p4"
+Special Build = ""
+Special Build Ex = ""
+Add Type Lib To DLL = False
+Include Type Lib Help Links = False
+TLB Help Style = "HLP"
+Type Lib FP File Is Rel = False
+Type Lib FP File = ""
+
+[Default Build Config Debug64]
+Config Name = "Debug64"
+Is 64-Bit = True
+Is Release = False
+Default Calling Convention = "cdecl"
+Optimization Level = "No optimizations"
+Require Prototypes = True
+Show Warning IDs in Build Output = False
+Selected Warning Level = "None"
+Warning List None = "0,1,4,9,84,105,106,107,108,109,110,111"
+Warning List Common = ""
+Warning List Extended = ""
+Warning List All = ""
+Warning Mode = 0
+Enable Unreferenced Identifiers Warning = False
+Enable Pointer Mismatch Warning = True
+Enable Unreachable Code Warning = True
+Enable Assignment In Conditional Warning = False
+Uninitialized Locals Compile Warning = "Aggressive"
+Require Return Values = True
+Enable C99 Extensions = False
+Enable OpenMP Extensions = False
+Stack Size = 100000
+Stack Reserve = 131072
+Stack Commit = 4096
+Image Base Address = 4194304
+Image Base Address x64 = 4194304
+Compiler Defines = ""
+Sign = False
+Sign Store = ""
+Sign Certificate = ""
+Sign Timestamp URL = ""
+Sign URL = ""
+Manifest Embed = False
+Icon File Is Rel = True
+Icon File Rel To = "Project"
+Icon File Rel Path = "DAAS.ico"
+Icon File = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAAS.ico"
+Application Title = "DAAS"
+Use IVI Subdirectories for Import Libraries = False
+Use VXIPNP Subdirectories for Import Libraries = False
+Use Dflt Import Lib Base Name = True
+Where to Copy DLL = "Do not copy"
+Custom Directory to Copy DLL Is Rel = False
+Custom Directory to Copy DLL = ""
+Generate Source Documentation = "None"
+Runtime Support = "Full Runtime Support"
+Runtime Binding = "Shared"
+Embed Project .UIRs = True
+Generate Map File = True
+Embed Timestamp = True
+Create Console Application = False
+Using LoadExternalModule = False
+DLL Exports = "Include File Symbols"
+Register ActiveX Server = False
+Numeric File Version = "1,0,0,0"
+Numeric Prod Version = "5,1,0,4"
+Comments = ""
+Comments Ex = ""
+Company Name = "University of Notre Dame"
+Company Name Ex = "%company"
+File Description = "DAAS (Debug x64)"
+File Description Ex = "%application (%rel_dbg %arch)"
+File Version = "1.0"
+File Version Ex = "%f1.%f2"
+Internal Name = "DAASdbg"
+Internal Name Ex = "%basename"
+Legal Copyright = "Copyright © 2015, University of Notre Dame"
+Legal Copyright Ex = "Copyright © 2015, University of Notre Dame"
+Legal Trademarks = ""
+Legal Trademarks Ex = ""
+Original Filename = "DAASdbg.exe"
+Original Filename Ex = "%filename"
+Private Build = ""
+Private Build Ex = ""
+Product Name = "DAAS"
+Product Name Ex = "DAAS"
+Product Version = "5.1.0.4"
+Product Version Ex = "%p1.%p2.%p3.%p4"
+Special Build = ""
+Special Build Ex = ""
+Add Type Lib To DLL = False
+Include Type Lib Help Links = False
+TLB Help Style = "HLP"
+Type Lib FP File Is Rel = False
+Type Lib FP File = ""
+
+[Default Build Config Release64]
+Config Name = "Release64"
+Is 64-Bit = True
+Is Release = True
+Default Calling Convention = "cdecl"
+Optimization Level = "No optimizations"
+Require Prototypes = True
+Show Warning IDs in Build Output = False
+Selected Warning Level = "None"
+Warning List None = "0,1,4,9,84,105,106,107,108,109,110,111"
+Warning List Common = ""
+Warning List Extended = ""
+Warning List All = ""
+Warning Mode = 0
+Enable Unreferenced Identifiers Warning = False
+Enable Pointer Mismatch Warning = True
+Enable Unreachable Code Warning = True
+Enable Assignment In Conditional Warning = False
+Uninitialized Locals Compile Warning = "Aggressive"
+Require Return Values = True
+Enable C99 Extensions = False
+Enable OpenMP Extensions = False
+Stack Size = 100000
+Stack Reserve = 131072
+Stack Commit = 4096
+Image Base Address = 4194304
+Image Base Address x64 = 4194304
+Compiler Defines = ""
+Sign = False
+Sign Store = ""
+Sign Certificate = ""
+Sign Timestamp URL = ""
+Sign URL = ""
+Manifest Embed = False
+Icon File Is Rel = True
+Icon File Rel To = "Project"
+Icon File Rel Path = "DAAS.ico"
+Icon File = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAAS.ico"
+Application Title = "DAAS"
+Use IVI Subdirectories for Import Libraries = False
+Use VXIPNP Subdirectories for Import Libraries = False
+Use Dflt Import Lib Base Name = True
+Where to Copy DLL = "Do not copy"
+Custom Directory to Copy DLL Is Rel = False
+Custom Directory to Copy DLL = ""
+Generate Source Documentation = "None"
+Runtime Support = "Full Runtime Support"
+Runtime Binding = "Shared"
+Embed Project .UIRs = True
+Generate Map File = True
+Embed Timestamp = True
+Create Console Application = False
+Using LoadExternalModule = False
+DLL Exports = "Include File Symbols"
+Register ActiveX Server = False
+Numeric File Version = "1,0,0,0"
+Numeric Prod Version = "5,1,0,4"
+Comments = ""
+Comments Ex = ""
+Company Name = "University of Notre Dame"
+Company Name Ex = "%company"
+File Version = "1.0"
+File Version Ex = "%f1.%f2"
+Legal Copyright = "Copyright © 2015, University of Notre Dame"
+Legal Copyright Ex = "Copyright © 2015, University of Notre Dame"
+Legal Trademarks = ""
+Legal Trademarks Ex = ""
+Private Build = ""
+Private Build Ex = ""
+Product Name = "DAAS"
+Product Name Ex = "DAAS"
+Product Version = "5.1.0.4"
+Product Version Ex = "%p1.%p2.%p3.%p4"
+Special Build = ""
+Special Build Ex = ""
+Add Type Lib To DLL = False
+Include Type Lib Help Links = False
+TLB Help Style = "HLP"
+Type Lib FP File Is Rel = False
+Type Lib FP File = ""
+
+[Compiler Options]
+Default Calling Convention = "cdecl"
+Require Prototypes = True
+Require Return Values = True
+Enable Pointer Mismatch Warning = True
+Enable Unreachable Code Warning = True
+Enable Unreferenced Identifiers Warning = False
+Enable Assignment In Conditional Warning = False
+Enable C99 Extensions = False
+Uninitialized Locals Compile Warning = "Aggressive"
+Precompile Prefix Header = False
+Prefix Header File = ""
+
+[Run Options]
+Stack Size = 100000
+Stack Commit = 4096
+Image Base Address = 4194304
+Image Base Address x64 = 4194304
+
+[Compiler Defines]
+Compiler Defines = ""
+
+[Create Executable]
+Executable File_Debug Is Rel = True
+Executable File_Debug Rel To = "Project"
+Executable File_Debug Rel Path = "DAASdbg.exe"
+Executable File_Debug = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAASdbg.exe"
+Executable File_Release Is Rel = True
+Executable File_Release Rel To = "Project"
+Executable File_Release Rel Path = "DAAS.exe"
+Executable File_Release = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAAS.exe"
+Executable File_Debug64 Is Rel = True
+Executable File_Debug64 Rel To = "Project"
+Executable File_Debug64 Rel Path = "DAASdbg.exe"
+Executable File_Debug64 = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAASdbg.exe"
+Executable File_Release64 Is Rel = True
+Executable File_Release64 Rel To = "Project"
+Executable File_Release64 Rel Path = "DAAS.exe"
+Executable File_Release64 = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAAS.exe"
+Icon File Is Rel = True
+Icon File Rel To = "Project"
+Icon File Rel Path = "DAAS.ico"
+Icon File = "/c/Users/user/Desktop/DAAS-AM2022/DAAS2019/DAAS.ico"
+Application Title = "DAAS"
+Numeric File Version = "1,0,0,0"
+Numeric Prod Version = "5,1,0,4"
+Comments = ""
+Comments Ex = ""
+Company Name = "University of Notre Dame"
+Company Name Ex = "%company"
+File Description = "DAAS (Release x86)"
+File Description Ex = "%application (%rel_dbg %arch)"
+File Version = "1.0"
+File Version Ex = "%f1.%f2"
+Internal Name = "DAAS"
+Internal Name Ex = "%basename"
+Legal Copyright = "Copyright © 2015, University of Notre Dame"
+Legal Copyright Ex = "Copyright © 2015, University of Notre Dame"
+Legal Trademarks = ""
+Legal Trademarks Ex = ""
+Original Filename = "DAAS.exe"
+Original Filename Ex = "%filename"
+Private Build = ""
+Private Build Ex = ""
+Product Name = "DAAS"
+Product Name Ex = "DAAS"
+Product Version = "5.1.0.4"
+Product Version Ex = "%p1.%p2.%p3.%p4"
+Special Build = ""
+Special Build Ex = ""
+DLL Exports = "Include File Symbols"
+Use IVI Subdirectories for Import Libraries = False
+Use VXIPNP Subdirectories for Import Libraries = False
+Use Dflt Import Lib Base Name = True
+Where to Copy DLL = "Do not copy"
+Custom Directory to Copy DLL Is Rel = False
+Custom Directory to Copy DLL = ""
+Generate Source Documentation = "None"
+Add Type Lib To DLL = False
+Include Type Lib Help Links = False
+TLB Help Style = "HLP"
+Type Lib FP File Is Rel = False
+Type Lib FP File = ""
+Type Lib Guid = ""
+Runtime Support = "Full Runtime Support"
+Instrument Driver Support Only = False
+Embed Project .UIRs = True
+Generate Map File = True
+
+[External Compiler Support]
+UIR Callbacks File Option = 0
+Using LoadExternalModule = False
+Create Project Symbols File = True
+UIR Callbacks Obj File Is Rel = False
+UIR Callbacks Obj File = ""
+Project Symbols H File Is Rel = False
+Project Symbols H File = ""
+Project Symbols Obj File Is Rel = False
+Project Symbols Obj File = ""
+
+[ActiveX Server Options]
+Specification File Is Rel = False
+Specification File = ""
+Source File Is Rel = False
+Source File = ""
+Include File Is Rel = False
+Include File = ""
+IDL File Is Rel = False
+IDL File = ""
+Register ActiveX Server = False
+
+[Signing Info]
+Sign = False
+Sign Debug Build = False
+Store = ""
+Certificate = ""
+Timestamp URL = ""
+URL = ""
+
+[Manifest Info]
+Embed = False
+
+[tpcSection]
+tpcEnabled = 0
+tpcOverrideEnvironment = 0
+tpcEnabled x64 = 0
+tpcOverrideEnvironment x64 = 0
+

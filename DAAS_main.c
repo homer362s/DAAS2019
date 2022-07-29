@@ -25,7 +25,8 @@
 #include "sr844.h"
 #include "k2400.h"
 #include "k2000.h"
-#include "k213.h"
+//#include "k213.h"
+#include "k236.h"  
 #include "HP33120A.h"
 #include "HP3245A.h"   
 #include "LS335.h"
@@ -68,7 +69,8 @@ main (void)
 /*Don't change the order of these because the load function will not work properly*/
     k2400_Init();
     k2000_Init();
-    k213_Init();
+    //k213_Init();
+	k236_Init(); 
     sr844_Init();
     sr830_Init();
     hp33120a_Init();

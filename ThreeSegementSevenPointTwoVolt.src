@@ -1,0 +1,10 @@
+BINARY
+#SOURCEDATA
+Vg: 1, -1, -4.00000e+00
+In list  : 1
+Segments : 3
+Frequency: 1
+segment0: 1, 0.00000e+00, 7.20000e+00, 201,0.3, 0, 0, 10.0
+segment1: 1, 7.20000e+00, -7.20000e+00, 401,0.3, 0, 0, 10.0
+segment2: 1, -7.20000e+00, 0.00000e+00, 201,0.3, 0, 0, 10.0
+#ENDSOURCEDATA

@@ -635,7 +635,7 @@ static double k236_GetSupLevel (gpibioPtr dev)
     char msg[256];
     double level;
 
-    k236_Out (dev, "U6X", .008);
+    k236_Out (dev, "U6X", .05);
     k236_In (dev, msg);
 
     Scan (msg, "%s[i3]>%f", &level);
@@ -647,7 +647,7 @@ static double k236_GetCompLevel (gpibioPtr dev)
     char msg[256];
     double level;
 
-    k236_Out (dev, "U5X", .008);
+    k236_Out (dev, "U5X", .05);
     k236_In (dev, msg);
 
     Scan (msg, "%s[i3]>%f", &level);
@@ -660,7 +660,7 @@ static void k236_GetMeasurementParameters (gpibioPtr dev)
     int srctype;
     k236Ptr smu = dev->device;
 
-    k236_Out (dev, "U4X", .008);
+    k236_Out (dev, "U4X", .05);
     k236_In (dev, msg);
 
     Scan (msg, "%s[i3]>L,%i", &smu->meas.range);
@@ -689,7 +689,7 @@ static void k236_SetLevel (sourcePtr src)
     gpibioPtr dev = src->acqchan->dev;
 
     Fmt (cmd, "%s<B%f[e2p4],,0H0X", src->biaslevel); /* trigger new source value */
-    k236_Out (dev, cmd, .02);
+    k236_Out (dev, cmd, .05);
     util_Delay (src->segments[src->seg]->delay);
 }
 
@@ -712,12 +712,12 @@ static void k236_GetLevels (gpibioPtr dev)
     while (!(statusbyte & K236_SRE_READINGDONE)) 
 	{
         if (statusbyte & K236_SRE_READYFORTRIGGER)
-			k236_Out (dev, "H0X", .02);
+			k236_Out (dev, "H0X", .05);
 		ProcessSystemEvents();
 		util_Delay(.05);
         gpibio_GetStatusByte (dev, &statusbyte);
     }
-	k236_Out (dev, "H0X", .02);
+	k236_Out (dev, "H0X", .05);
 	k236_In (dev, msg);
     Scan (msg, "%s>%f,%f", &smu->source->acqchan->reading, &smu->measure->reading);
     smu->source->acqchan->newreading = TRUE;
@@ -749,7 +749,7 @@ static void k236_Out (gpibioPtr dev, char *cmd, double delay)
 static void k236_In (gpibioPtr dev, char *msg)
 {
 	gpibio_In (dev, msg);
-	Delay(.02);
+	Delay(.05);
 }
 
 static void k236_GetWarningStatus (gpibioPtr dev)
@@ -805,7 +805,7 @@ static void k236_GetErrorStatus (gpibioPtr dev)
     int i, byte;
     char msg[256], rsp[256];
 
-    k236_Out (dev, "U1X", .008);
+    k236_Out (dev, "U1X", .05);
     k236_In (dev, rsp);
 
     Scan (rsp, "%s>ERS%s", msg);
