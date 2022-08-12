@@ -763,7 +763,7 @@ static void k2400_SetLevel (sourcePtr src)
 	gpibioPtr dev = src->acqchan->dev;
 	
 	if(k2400_GetMode(dev))
-   		Fmt(cmd, ":SOURce:CURRent:LEVel %f", src->biaslevel); /* trigger new source value */
+   		Fmt(cmd, ":SOURce:CURRent:LEVel %f", src->biaslevel); /* outputs new current value */
 	else
 		Fmt(cmd, ":SOURce:VOLTage:LEVel %f", src->biaslevel);
     k2400_Out (dev, cmd, .02);

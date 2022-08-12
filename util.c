@@ -245,7 +245,7 @@ void utilG_Init (void (*DiscardPanels)(void))
     SetPanelAttribute(utilG.p, ATTR_TITLE, strVersion );
     SetSystemAttribute (ATTR_TASKBAR_BUTTON_TEXT, strVersion);
     SetCtrlAttribute (initP, INIT_TEXT, ATTR_VISIBLE, FALSE);
-	SetCtrlVal(initP,INIT_AUTHORS,"G.Bazán(1995),G.Orlov(2008),A.Chaney(2013),S.Rebrik(2015),M.Filmer (2017),A.Orlov(2018)");            
+	SetCtrlVal(initP,INIT_AUTHORS,"G.Bazán(1995),G.Orlov(2008),A.Chaney(2013),S.Rebrik(2015),M.Filmer (2017),A.Orlov(2018), A. Behn (2022)");            
     DisplayPanel (initP);
 	
 

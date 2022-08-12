@@ -24,6 +24,7 @@
 #include "sr830.h"
 #include "sr844.h"
 #include "k2400.h"
+#include "BK9201.h" 
 #include "k2000.h"
 //#include "k213.h"
 #include "k236.h"  
@@ -67,6 +68,8 @@ main (void)
     source_Init();
     
 /*Don't change the order of these because the load function will not work properly*/
+
+	BK9201_Init();
     k2400_Init();
     k2000_Init();
     //k213_Init();
