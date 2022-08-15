@@ -26,6 +26,7 @@
 #include "k2400.h"
 #include "BK9201.h" 
 #include "k2000.h"
+#include "k6485.h"
 //#include "k213.h"
 #include "k236.h"  
 #include "HP33120A.h"
@@ -72,6 +73,7 @@ main (void)
 	BK9201_Init();
     k2400_Init();
     k2000_Init();
+	k6485_Init();
     //k213_Init();
 	k236_Init(); 
     sr844_Init();

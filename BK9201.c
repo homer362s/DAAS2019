@@ -125,7 +125,7 @@ static void BK9201_UpdateReadings (int panel, void *dev)
             if (statusbyte & BK9201_SRE_READINGDONE) 
 			{
 				
-				BK9201_Out(dev, "MEASure:SCALar:VOLTage?", .002);   // request to read applied current  
+				BK9201_Out(dev, "MEASure:SCALar:VOLTage?", .001);   // request to read applied current  
 	            BK9201_In (dev, rsp);
                 Scan (rsp, "%f",  &smu->source->acqchan->reading); 
 	
