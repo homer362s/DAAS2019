@@ -68,12 +68,9 @@ main (void)
    // rs232_Init();
     source_Init();
     
-/*Don't change the order of these because the load function will not work properly*/
-
-	BK9201_Init();
+/*Don't change the order of these because the "load GPIB setup" function will not work properly*/
     k2400_Init();
     k2000_Init();
-	k6485_Init();
     //k213_Init();
 	k236_Init(); 
     sr844_Init();
@@ -83,6 +80,8 @@ main (void)
     LS335_Init();
     LS340_Init();
     hp4156_Init();
+    BK9201_Init();
+	K6485_Init();
 	//hp8657b_Init();		// Isnt ready for master yet
 	//afg3252_Init();		// I believe some needed files arent in the git repo for this to work
 /*rs232 instruments init*/

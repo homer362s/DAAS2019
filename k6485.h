@@ -1,1 +1,1 @@
-extern void k6485_Init (void);
+extern void K6485_Init (void);
